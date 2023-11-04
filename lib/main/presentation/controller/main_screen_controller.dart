@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 
 import '../../../features/diet/presentation/widget/diet_screen.dart';
@@ -28,5 +30,10 @@ class MainScreenController extends ChangeNotifier {
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOut,
     );
+  }
+
+  void onPageSwiped(int index)
+  {
+    currentIndex = index;
   }
 }
