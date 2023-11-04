@@ -18,6 +18,7 @@ class MainScreenState extends State<MainScreen> {
       ),
       body: PageView(
         controller: controller.pageController,
+        onPageChanged: controller.onPageSwiped,
         children: controller.views,
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -37,9 +38,7 @@ class MainScreenState extends State<MainScreen> {
             label: 'Exercises',
           ),
         ],
-        onTap: (index) {
-          controller.onTabTapped(index);
-        },
+        onTap: controller.onTabTapped,
       ),
     );
   }
