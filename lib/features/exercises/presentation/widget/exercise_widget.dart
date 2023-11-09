@@ -23,7 +23,10 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16.0),
-      color: Colors.red,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40),
+        color: Colors.red,
+        ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -67,9 +70,9 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: const CircleBorder(),
-                        elevation: 0,
+                      backgroundColor: Colors.white,
+                      shape: const CircleBorder(),
+                      elevation: 0,
                     ),
                     child: const Center(
                       child: Text(
@@ -78,14 +81,15 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8.0,),
+                  const SizedBox(
+                    width: 8.0,
+                  ),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      shape: const CircleBorder(),
-                      elevation: 0
-                    ),
+                        backgroundColor: Colors.white,
+                        shape: const CircleBorder(),
+                        elevation: 0),
                     child: const Center(
                       child: Text(
                         '-',
@@ -96,16 +100,15 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
                 ],
               ),
               ElevatedButton(
-                  onPressed: (){
-                    
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     shape: const StadiumBorder(),
                   ),
-                  child: const Icon(Icons.check, color: Colors.red,)
-              )
-              
+                  child: const Icon(
+                    Icons.check,
+                    color: Colors.red,
+                  ))
             ],
           ),
         ],
