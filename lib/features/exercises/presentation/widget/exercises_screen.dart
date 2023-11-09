@@ -14,13 +14,23 @@ class ExercisesScreenState extends State<ExercisesScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          ListView(children: const [
-            ExerciseWidget(
-                exerciseName: "Podciąganie",
-                series: "1/3",
-                repetitions: "5",
-                weight: "-15kg"),
-          ]),
+          ListView(
+            children: const [
+              ExerciseWidget(
+                  exerciseName: "Podciąganie",
+                  series: "1/3",
+                  repetitions: "5",
+                  weight: "-15kg"),
+              SizedBox(
+                height: 10,
+              ),
+              ExerciseWidget(
+                  exerciseName: "Brzuszki",
+                  series: "3/7",
+                  repetitions: "15",
+                  weight: "+5kg")
+            ],
+          ),
           Positioned(
             bottom: 20,
             right: 30,
