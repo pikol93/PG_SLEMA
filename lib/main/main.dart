@@ -3,12 +3,17 @@ import 'package:pg_slema/main/presentation/controller/main_screen_controller.dar
 import 'package:pg_slema/main/presentation/widget/main_screen.dart';
 import 'package:provider/provider.dart';
 
+import '../features/motivation/controller/motivation_screen_controller.dart';
+
 void main() {
   runApp(
-    MaterialApp(
-      home: ChangeNotifierProvider(
-        create: (context) => MainScreenController(),
-        child: MainScreen(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MainScreenController()),
+        ChangeNotifierProvider(create: (context) => MotivationScreenController()),
+      ],
+      child: MaterialApp(
+        home: MainScreen(),
       ),
     ),
   );
