@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
 
-class DietScreen extends StatelessWidget {
-  const DietScreen({super.key});
+class MedicineScreen extends StatelessWidget {
+  const MedicineScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Diet Screen'),
+      child: Text('Medicine Screen'),
     );
   }
 }

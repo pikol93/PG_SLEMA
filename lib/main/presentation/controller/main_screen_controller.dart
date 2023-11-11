@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/medicine_screen.dart';
 
 import '../../../features/diet/presentation/widget/diet_screen.dart';
 import '../../../features/exercises/presentation/widget/exercises_screen.dart';
@@ -19,6 +20,7 @@ class MainScreenController extends ChangeNotifier {
 
   final List<Widget> views = [
     MotivationScreen(),
+    MedicineScreen(),
     DietScreen(),
     ExercisesScreen(),
   ];
@@ -27,8 +29,8 @@ class MainScreenController extends ChangeNotifier {
     currentIndex = index;
     pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeInOut,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
     );
   }
 

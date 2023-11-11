@@ -21,25 +21,34 @@ class MainScreenState extends State<MainScreen> {
         onPageChanged: controller.onPageSwiped,
         children: controller.views,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: controller.currentIndex,
-        iconSize: 40,
-        items: const [
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        selectedIndex: controller.currentIndex,
+        onDestinationSelected: controller.onTabTapped,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.lightbulb_outlined),
             icon: Icon(Icons.lightbulb),
-            label: 'Motivation',
+            label: 'Motywacja',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
+            selectedIcon: Icon(Icons.medication_outlined),
+            icon: Icon(Icons.medication),
+            label: 'Leki',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.restaurant_menu_outlined),
             icon: Icon(Icons.restaurant_menu),
-            label: 'Diet',
+            label: 'Dieta',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
+            selectedIcon: Icon(Icons.fitness_center_outlined),
             icon: Icon(Icons.fitness_center),
-            label: 'Exercises',
+            label: 'Ćwiczenia',
           ),
         ],
-        onTap: controller.onTabTapped,
       ),
     );
   }
+
 }
