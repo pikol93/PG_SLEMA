@@ -11,7 +11,7 @@ class AddMedicineButton extends StatelessWidget {
       onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(
-                builder: (context) => const AddMedicineScreen(),
+                builder: (context) => AddMedicineScreen(),
               ));},
       child: const Icon(Icons.add),
     );
