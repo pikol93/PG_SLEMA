@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'add_medicine.dart';
+import 'add_medicine_button.dart';
 import 'medicine_calendar.dart';
 
 class MedicineScreen extends StatelessWidget {
@@ -8,8 +8,8 @@ class MedicineScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Column(
+    return const Scaffold(
+      body: Column(
         children: [
           MedicineCalendar(),
           SizedBox(height: 20.0),
@@ -18,9 +18,7 @@ class MedicineScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: AddMedicineButton(onPressed: () {
-        //TODO Stworzyc kontroler i dodac tutaj obsluge tworzenia leku
-      }),
+      floatingActionButton: AddMedicineButton(),
     );
   }
 }
