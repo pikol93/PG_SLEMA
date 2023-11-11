@@ -33,9 +33,4 @@ class MainScreenController extends ChangeNotifier {
       curve: Curves.ease,
     );
   }
-
-  void onPageSwiped(int index)
-  {
-    currentIndex = index;
-  }
 }

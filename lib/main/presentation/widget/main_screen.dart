@@ -18,7 +18,7 @@ class MainScreenState extends State<MainScreen> {
       ),
       body: PageView(
         controller: controller.pageController,
-        onPageChanged: controller.onPageSwiped,
+        physics: const NeverScrollableScrollPhysics(),
         children: controller.views,
       ),
       bottomNavigationBar: NavigationBar(
