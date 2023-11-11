@@ -8,6 +8,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
@@ -25,15 +26,16 @@ class MainScreenState extends State<MainScreen> {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         selectedIndex: controller.currentIndex,
         onDestinationSelected: controller.onTabTapped,
+        height: 70,
         destinations: const <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.lightbulb_outlined),
-            icon: Icon(Icons.lightbulb),
+            selectedIcon: Icon(Icons.lightbulb),
+            icon: Icon(Icons.lightbulb_outlined),
             label: 'Motywacja',
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.medication_outlined),
-            icon: Icon(Icons.medication),
+            selectedIcon: Icon(Icons.medication),
+            icon: Icon(Icons.medication_outlined),
             label: 'Leki',
           ),
           NavigationDestination(

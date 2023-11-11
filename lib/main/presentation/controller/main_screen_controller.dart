@@ -29,7 +29,7 @@ class MainScreenController extends ChangeNotifier {
     currentIndex = index;
     pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 150),
       curve: Curves.ease,
     );
   }
