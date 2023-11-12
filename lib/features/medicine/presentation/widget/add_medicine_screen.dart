@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/date_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/repeat_radio_input_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/time_input.dart';
 
@@ -33,6 +34,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
               CustomDatePicker(controller: _controller, label: "Data przyjęcia leku"),
               const SizedBox(height: 20),
               CustomTimePicker(controller: _controller, label: "Godzina przyjęcia leku",),
+              const SizedBox(height: 20),
+              CustomDropdownMedicineInput(controller: _controller,),
               const SizedBox(height: 20),
               SizedBox(
                 width: double.infinity,
