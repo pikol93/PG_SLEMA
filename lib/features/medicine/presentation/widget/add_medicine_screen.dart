@@ -6,6 +6,8 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/repea
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/time_input.dart';
 
+import 'formWidgets/type_radio_input.dart';
+
 class AddMedicineScreen extends StatefulWidget {
 
   const AddMedicineScreen({super.key});
@@ -30,6 +32,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
           child: Column(
             children: [
               const CustomTextFormField(label: "Nazwa", icon: Icons.create,),
+              const SizedBox(height: 10),
+              TypeSelection(controller: _controller,),
               const SizedBox(height: 20),
               CustomDatePicker(controller: _controller, label: "Data przyjęcia leku"),
               const SizedBox(height: 20),

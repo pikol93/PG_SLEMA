@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum MedicineRepeat { none, daily, everyTwoDays, weekly }
+enum MedicineType { pill, liquid, other }
 
 class AddMedicineController extends ChangeNotifier {
   MedicineRepeat medicineRepeat = MedicineRepeat.none;
+  MedicineType medicineType = MedicineType.other;
   final TimeOfDay todayTime = TimeOfDay.now();
   TimeOfDay? pickedMedicineIntakeTime = TimeOfDay.now();
   final DateTime allowedFirstDate = DateTime(2000);
