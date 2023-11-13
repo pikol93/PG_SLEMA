@@ -7,6 +7,8 @@ enum MedicineRepeat { none, daily, everyTwoDays, weekly }
 enum MedicineType { pill, liquid, other }
 
 class Medicine{
+  static List<String> repeatTextList = ['Jednorazowo', 'Codziennie', 'Co dwa dni', 'Co tydzień'];
+  static String medicineListSharedPrefKey = 'medicines';
   final String name;
   final MedicineRepeat repeat;
   final MedicineType type;
@@ -21,7 +23,7 @@ class Medicine{
       _parseEnum<MedicineRepeat>(json['repeat'], MedicineRepeat.values),
       _parseEnum<MedicineType>(json['type'], MedicineType.values),
       DateTime.parse(json['intakeDate']),
-      TimeOfDay.fromDateTime(DateTime.parse(json['intakeTime'])),
+      _parseTimeOfDay(json['intakeTime'])
     );
   }
 
@@ -30,12 +32,35 @@ class Medicine{
     return values.firstWhere((e) => e.toString() == value, orElse: () => values[0]);
   }
 
+  //String to TimeOfDay
+  static TimeOfDay _parseTimeOfDay(String value) {
+    List<String> parts = value.split(":");
+    return TimeOfDay(
+      hour: int.parse(parts[0]),
+      minute: int.parse(parts[1]),
+    );
+  }
+
   Map<String, dynamic> toJson() => {
     'name': name,
     'type': type.toString(),
     'repeat': repeat.toString(),
     'intakeDate': intakeDate.toString(),
-    'intakeTime': intakeTime.toString(),
+    'intakeTime': '${intakeTime.hour}:${intakeTime.minute.toString().padLeft(2, '0')}', //default .toString return useless value
   };
 
+  static String getRepeatToText(MedicineRepeat repeat) {
+    switch (repeat) {
+      case MedicineRepeat.none:
+        return 'Jednorazowo';
+      case MedicineRepeat.daily:
+        return 'Codziennie';
+      case MedicineRepeat.everyTwoDays:
+        return 'Co dwa dni';
+      case MedicineRepeat.weekly:
+        return 'Co tydzień';
+      default:
+        return '';
+    }
+  }
 }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'add_medicine_screen.dart';
 
 class AddMedicineButton extends StatelessWidget {
-  const AddMedicineButton({super.key});
+  final VoidCallback onAddedMedicine;
+  const AddMedicineButton({super.key, required this.onAddedMedicine});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class AddMedicineButton extends StatelessWidget {
       onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(
-                builder: (context) => AddMedicineScreen(),
+                builder: (context) => AddMedicineScreen(onAddedMedicine: onAddedMedicine,),
               ));},
       child: const Icon(Icons.add),
     );

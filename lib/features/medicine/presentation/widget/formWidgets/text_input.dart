@@ -27,12 +27,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
         return null;
       },
-      onSaved: (String? value){
-        if (value != null) {
-          setState(() {
-            widget.controller.pickedMedicineName = value;
-          });
-        }
+      onChanged: (value) {
+        widget.controller.pickedMedicineName = value;
       },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(

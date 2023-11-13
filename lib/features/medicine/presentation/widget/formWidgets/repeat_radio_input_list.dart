@@ -7,9 +7,7 @@ import '../../entity/medicine.dart';
 class CustomDropdownMedicineInput extends StatefulWidget {
   final AddMedicineController controller;
 
-  final List<String> optionsTitles = ["Nie potwarza się", "Codziennie", "Co dwa dni", "Co tydzień"];
-
-  CustomDropdownMedicineInput({
+  const CustomDropdownMedicineInput({
     super.key,
     required this.controller,
   });
@@ -35,10 +33,10 @@ class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInpu
           widget.controller.pickedMedicineRepeat = value as MedicineRepeat;
         });
       },
-      items: widget.optionsTitles.map((String title) {
+      items: Medicine.repeatTextList.map((String title) {
         return DropdownMenuItem(
           value: MedicineRepeat.values.elementAt(
-            widget.optionsTitles.indexOf(title)
+              Medicine.repeatTextList.indexOf(title)
                 //option title index = option enum index
           ),
           child: Text(title),

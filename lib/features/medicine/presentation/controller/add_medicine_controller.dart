@@ -27,13 +27,13 @@ class AddMedicineController extends ChangeNotifier {
   Future<void> encodeMedicineAndSaveToSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    List<String>? medicinesList = prefs.getStringList('medicines');
+    List<String>? medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey);
     medicinesList ??= []; //If medicines == null, then create it
 
     Medicine medicine = Medicine(pickedMedicineName, pickedMedicineRepeat, pickedMedicineType, pickedMedicineIntakeDate,  pickedMedicineIntakeTime);
     medicinesList.add(jsonEncode(medicine.toJson()));
 
-    prefs.setStringList('medicines', medicinesList);
+    prefs.setStringList(Medicine.medicineListSharedPrefKey, medicinesList);
   }
 
 }

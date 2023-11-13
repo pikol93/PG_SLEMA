@@ -4,10 +4,10 @@ import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_
 
 class CustomSaveButton extends StatelessWidget {
   final AddMedicineController controller;
-
   final GlobalKey<FormState> formKey;
+  final VoidCallback onAddedMedicine;
 
-  const CustomSaveButton({super.key, required this.controller, required this.formKey});
+  const CustomSaveButton({super.key, required this.controller, required this.formKey, required this.onAddedMedicine});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +18,9 @@ class CustomSaveButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
+              // Call callback down the three of widgets down to medicine_screen
+              // to update list of medicines
+              onAddedMedicine.call();
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(

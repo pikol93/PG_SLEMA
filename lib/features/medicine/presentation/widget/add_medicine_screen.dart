@@ -12,7 +12,8 @@ import 'formWidgets/type_radio_input.dart';
 
 class AddMedicineScreen extends StatefulWidget {
 
-  const AddMedicineScreen({super.key});
+  final VoidCallback onAddedMedicine;
+  const AddMedicineScreen({super.key, required this.onAddedMedicine});
 
   @override
   State<AddMedicineScreen> createState() => _AddMedicineScreenState();
@@ -54,7 +55,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 const SizedBox(height: 20),
                 CustomDropdownMedicineInput(controller: _controller,),
                 const SizedBox(height: 20),
-                CustomSaveButton(controller: _controller, formKey: _formKey),
+                CustomSaveButton(controller: _controller, formKey: _formKey, onAddedMedicine: widget.onAddedMedicine,),
               ],
             ),
           ),
