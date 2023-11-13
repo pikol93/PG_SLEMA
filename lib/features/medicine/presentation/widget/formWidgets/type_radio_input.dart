@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../controller/add_medicine_controller.dart';
+import '../../entity/medicine.dart';
 
 class TypeSelection extends StatefulWidget {
   final AddMedicineController controller;
@@ -27,10 +28,10 @@ class _TypeSelectionState extends State<TypeSelection> {
               child: Text(widget.optionsTitles[index]),
             ),
             value: MedicineType.values[index],
-            groupValue: widget.controller.medicineType,
+            groupValue: widget.controller.pickedMedicineType,
             onChanged: (value) {
               setState(() {
-                widget.controller.medicineType = value as MedicineType;
+                widget.controller.pickedMedicineType = value as MedicineType;
               });
             },
           ),

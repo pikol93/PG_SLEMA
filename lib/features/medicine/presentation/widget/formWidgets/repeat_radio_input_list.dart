@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controller/add_medicine_controller.dart';
+import '../../entity/medicine.dart';
 
 
 class CustomDropdownMedicineInput extends StatefulWidget {
@@ -22,16 +23,16 @@ class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInpu
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-      value: widget.controller.medicineRepeat,
+      value: widget.controller.pickedMedicineRepeat,
       isExpanded: true,
       onChanged: (value) {
         setState(() {
-          widget.controller.medicineRepeat = value as MedicineRepeat;
+          widget.controller.pickedMedicineRepeat = value as MedicineRepeat;
         });
       },
       onSaved: (value) {
         setState(() {
-          widget.controller.medicineRepeat = value as MedicineRepeat;
+          widget.controller.pickedMedicineRepeat = value as MedicineRepeat;
         });
       },
       items: widget.optionsTitles.map((String title) {

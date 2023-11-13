@@ -49,7 +49,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.dateTimeToString(widget.controller.pickedMedicineIntakeDate)),
+            Text(AddMedicineController.dateTimeToString(widget.controller.pickedMedicineIntakeDate)),
             const Icon(Icons.arrow_drop_down),
           ],
         ),
