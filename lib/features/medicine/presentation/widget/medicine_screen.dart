@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../controller/medicine_screen_controller.dart';
 import '../entity/medicine.dart';
 import 'add_medicine_button.dart';
-import 'medicine_calendar.dart';
 
 class MedicineScreen extends StatefulWidget {
   final MedicineScreenController controller = MedicineScreenController();
@@ -61,18 +60,25 @@ class _MedicineScreenState extends State<MedicineScreen> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            const SliverAppBar(
-              collapsedHeight: 80,
-              pinned: true,
-              flexibleSpace: MedicineCalendar(),
-            ),
-          ];
+          // Remove the MedicineCalendar from the headerSliverBuilder
+          return [];
         },
-        body: ListView(
-          children: widget.controller.medicines
-              .map((medicine) => buildMedicineWidget(medicine, context))
-              .toList(),
+        body: Builder(
+          builder: (BuildContext context) {
+            return CustomScrollView(
+              slivers: [
+                // Remove the SliverOverlapAbsorber and SliverOverlapInjector as well if not needed
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                      return buildMedicineWidget(widget.controller.medicines[index], context);
+                    },
+                    childCount: widget.controller.medicines.length,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
       floatingActionButton: AddMedicineButton(onAddedMedicine: refreshMedicinesData),
