@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import '../../controller/add_medicine_controller.dart';
 import '../../entity/medicine.dart';
 
-class TypeSelection extends StatefulWidget {
+class MedicineTypeSelection extends StatefulWidget {
   final AddMedicineController controller;
   final List<String> optionsTitles = ["Tabletka", "Ciecz", "Inne"];
-  TypeSelection({super.key, required this.controller});
+  MedicineTypeSelection({super.key, required this.controller});
 
   @override
-  State<TypeSelection> createState() => _TypeSelectionState();
+  State<MedicineTypeSelection> createState() => _MedicineTypeSelectionState();
 }
 
-class _TypeSelectionState extends State<TypeSelection> {
+class _MedicineTypeSelectionState extends State<MedicineTypeSelection> {
   //TODO: Zmiana tego widgetu, jest brzydko i się nie skaluje
   @override
   Widget build(BuildContext context) {

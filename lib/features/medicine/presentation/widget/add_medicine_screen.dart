@@ -47,7 +47,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
               children: [
                 CustomTextFormField(label: "Nazwa", icon: Icons.create, controller: _controller,),
                 const SizedBox(height: 10),
-                TypeSelection(controller: _controller,),
+                MedicineTypeSelection(controller: _controller,),
                 const SizedBox(height: 20),
                 CustomDatePicker(controller: _controller, label: "Data przyjęcia leku"),
                 const SizedBox(height: 20),
