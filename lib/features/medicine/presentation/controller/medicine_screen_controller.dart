@@ -13,15 +13,12 @@ class MedicineScreenController {
 
     List<String>? medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey);
 
-    if(medicinesList==null)
-      {
-        return;
-      }
-
     //Mapping json from shared preferences to list of objects
-    medicines = medicinesList.map((jsonString) {
-      Map<String, dynamic> jsonMap = jsonDecode(jsonString);
-      return Medicine.fromJson(jsonMap);
-    }).toList();
+    if (medicinesList != null) {
+      medicines = medicinesList.map((jsonString) {
+        Map<String, dynamic> jsonMap = jsonDecode(jsonString);
+        return Medicine.fromJson(jsonMap);
+      }).toList();
+    }
   }
 }
