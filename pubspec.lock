@@ -75,14 +75,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  lint:
-    dependency: "direct dev"
-    description:
-      name: lint
-      sha256: "77b3777e8e9adca8e942da1e835882ae3248dfa00488a2ebbdbc1f1a4aa3f4a7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.0"
   lints:
     dependency: transitive
     description:
