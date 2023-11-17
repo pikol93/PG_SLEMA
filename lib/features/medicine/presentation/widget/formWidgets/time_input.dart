@@ -18,24 +18,26 @@ class CustomTimePicker extends StatefulWidget {
 }
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
+
+  Future<void> _onTap() async{
+    final selectedTime = await showTimePicker(
+      context: context,
+      initialTime: widget.controller.todayTime,
+    );
+    if (selectedTime != null &&
+        selectedTime!=widget.controller.pickedMedicineIntakeTime) {
+      // calling setState notifies widget that the state has changed,
+      // so the widget can update
+      setState(() {
+        widget.controller.pickedMedicineIntakeTime = selectedTime;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        final selectedTime = await showTimePicker(
-          context: context,
-          initialTime: widget.controller.todayTime,
-        );
-
-        if (selectedTime != null &&
-            selectedTime!=widget.controller.pickedMedicineIntakeTime) {
-          // calling setState notifies widget that the state has changed,
-          // so the widget can update
-          setState(() {
-            widget.controller.pickedMedicineIntakeTime = selectedTime;
-          });
-        }
-      },
+      onTap: _onTap,
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: widget.label,
