@@ -30,8 +30,7 @@ class MainScreenController extends ChangeNotifier {
     );
   }
 
-  void onPageSwiped(int index)
-  {
+  void onPageSwiped(int index) {
     currentIndex = index;
   }
 }

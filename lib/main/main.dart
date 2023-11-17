@@ -9,7 +9,8 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MainScreenController()),
-        ChangeNotifierProvider(create: (context) => MotivationScreenController()),
+        ChangeNotifierProvider(
+            create: (context) => MotivationScreenController()),
       ],
       child: const MaterialApp(
         home: MainScreen(),
