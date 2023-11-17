@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controller/motivation_screen_controller.dart';
+import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
 
 class MotivationScreen extends StatefulWidget {
   const MotivationScreen({super.key});
