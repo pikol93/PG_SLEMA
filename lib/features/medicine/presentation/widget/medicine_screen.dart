@@ -60,14 +60,12 @@ class _MedicineScreenState extends State<MedicineScreen> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          // Remove the MedicineCalendar from the headerSliverBuilder
           return [];
         },
         body: Builder(
           builder: (BuildContext context) {
             return CustomScrollView(
               slivers: [
-                // Remove the SliverOverlapAbsorber and SliverOverlapInjector as well if not needed
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
