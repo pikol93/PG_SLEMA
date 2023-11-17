@@ -20,19 +20,17 @@ class AddMedicineController extends ChangeNotifier {
 
   static String dateTimeToString(DateTime? dateTime)
   {
-    if(dateTime != null)
-      {
-        return "${dateTime.day}.${dateTime.month}.${dateTime.year}";
-      }
+    if(dateTime != null) return "${dateTime.day}.${dateTime.month}.${dateTime.year}";
     return "";
   }
 
   Future<void> encodeMedicineAndSaveToSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    final medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey) ?? [];
+    List<String>? medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey);
+    medicinesList ??= []; //If medicines == null, then create it
 
-    final medicine = Medicine(pickedMedicineName, pickedMedicineRepeat, pickedMedicineType, pickedMedicineIntakeDate,  pickedMedicineIntakeTime);
+    Medicine medicine = Medicine(pickedMedicineName, pickedMedicineRepeat, pickedMedicineType, pickedMedicineIntakeDate,  pickedMedicineIntakeTime);
     medicinesList.add(jsonEncode(medicine.toJson()));
 
     prefs.setStringList(Medicine.medicineListSharedPrefKey, medicinesList);
