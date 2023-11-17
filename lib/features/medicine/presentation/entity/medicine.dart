@@ -52,13 +52,13 @@ class Medicine{
   static String getRepeatToText(MedicineRepeat repeat) {
     switch (repeat) {
       case MedicineRepeat.none:
-        return repeatTextList[MedicineRepeat.none.index];
+        return 'Jednorazowo';
       case MedicineRepeat.daily:
-        return repeatTextList[MedicineRepeat.daily.index];
+        return 'Codziennie';
       case MedicineRepeat.everyTwoDays:
-        return repeatTextList[MedicineRepeat.everyTwoDays.index];
+        return 'Co dwa dni';
       case MedicineRepeat.weekly:
-        return repeatTextList[MedicineRepeat.weekly.index];
+        return 'Co tydzień';
       default:
         return '';
     }
