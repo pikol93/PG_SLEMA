@@ -22,7 +22,7 @@ class AddMedicineController extends ChangeNotifier {
   {
     if(dateTime != null)
       {
-        return "${dateTime.day}.${dateTime.month}.${dateTime.year}"
+        return "${dateTime.day}.${dateTime.month}.${dateTime.year}";
       }
     return "";
   }
@@ -33,7 +33,7 @@ class AddMedicineController extends ChangeNotifier {
     final medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey) ?? [];
 
     final medicine = Medicine(pickedMedicineName, pickedMedicineRepeat, pickedMedicineType, pickedMedicineIntakeDate,  pickedMedicineIntakeTime);
-    medicinesList.add(jsonEncode(medicine.toJson()));()));
+    medicinesList.add(jsonEncode(medicine.toJson()));
 
     prefs.setStringList(Medicine.medicineListSharedPrefKey, medicinesList);
   }
