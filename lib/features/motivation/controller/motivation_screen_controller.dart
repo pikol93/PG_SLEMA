@@ -14,7 +14,7 @@ class MotivationScreenController extends ChangeNotifier {
       quotes = response.split('\n');
       currentQuote = quotes.isNotEmpty ? quotes[0] : '';
     } catch (e) {
-      // TODO: Log this event
+      print('Error loading quotes: $e');
     }
   }
 
