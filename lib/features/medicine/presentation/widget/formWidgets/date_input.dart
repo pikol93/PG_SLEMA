@@ -31,7 +31,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         );
 
         if (selectedDate != null &&
-            selectedDate!=widget.controller.pickedMedicineIntakeDate) {
+            selectedDate != widget.controller.pickedMedicineIntakeDate) {
           // calling setState notifies widget that the state has changed,
           // so the widget can update
           setState(() {
@@ -48,7 +48,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(AddMedicineController.dateTimeToString(widget.controller.pickedMedicineIntakeDate)),
+            Text(AddMedicineController.dateTimeToString(
+                widget.controller.pickedMedicineIntakeDate)),
             const Icon(Icons.arrow_drop_down),
           ],
         ),

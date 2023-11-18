@@ -17,14 +17,13 @@ class CustomTimePicker extends StatefulWidget {
 }
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
-
-  Future<void> _onTap() async{
+  Future<void> _onTap() async {
     final selectedTime = await showTimePicker(
       context: context,
       initialTime: widget.controller.todayTime,
     );
     if (selectedTime != null &&
-        selectedTime!=widget.controller.pickedMedicineIntakeTime) {
+        selectedTime != widget.controller.pickedMedicineIntakeTime) {
       // calling setState notifies widget that the state has changed,
       // so the widget can update
       setState(() {

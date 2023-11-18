@@ -8,10 +8,10 @@ class MedicineScreenController {
   Future<void> loadMedicinesFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    List<String>? medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey);
+    List<String>? medicinesList =
+        prefs.getStringList(Medicine.medicineListSharedPrefKey);
 
-    if(medicinesList==null)
-    {
+    if (medicinesList == null) {
       return;
     }
 

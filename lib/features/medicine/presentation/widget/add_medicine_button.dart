@@ -9,10 +9,14 @@ class AddMedicineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(
-                builder: (context) => AddMedicineScreen(onAddedMedicine: onAddedMedicine,),
-              ));},
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddMedicineScreen(
+                onAddedMedicine: onAddedMedicine,
+              ),
+            ));
+      },
       child: const Icon(Icons.add),
     );
   }

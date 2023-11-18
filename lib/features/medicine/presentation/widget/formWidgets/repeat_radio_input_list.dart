@@ -11,11 +11,12 @@ class CustomDropdownMedicineInput extends StatefulWidget {
   });
 
   @override
-  State<CustomDropdownMedicineInput> createState() => _CustomDropdownMedicineInputState();
+  State<CustomDropdownMedicineInput> createState() =>
+      _CustomDropdownMedicineInputState();
 }
 
-class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInput> {
-
+class _CustomDropdownMedicineInputState
+    extends State<CustomDropdownMedicineInput> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -33,10 +34,10 @@ class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInpu
       },
       items: Medicine.repeatTextList.map((String title) {
         return DropdownMenuItem(
-          value: MedicineRepeat.values.elementAt(
-              Medicine.repeatTextList.indexOf(title)
-                //option title index = option enum index
-          ),
+          value: MedicineRepeat.values
+              .elementAt(Medicine.repeatTextList.indexOf(title)
+                  //option title index = option enum index
+                  ),
           child: Text(title),
         );
       }).toList(),

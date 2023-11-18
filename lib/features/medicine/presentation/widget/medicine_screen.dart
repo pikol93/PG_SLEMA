@@ -68,8 +68,9 @@ class _MedicineScreenState extends State<MedicineScreen> {
               slivers: [
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                      return buildMedicineWidget(widget.controller.medicines[index], context);
+                    (BuildContext context, int index) {
+                      return buildMedicineWidget(
+                          widget.controller.medicines[index], context);
                     },
                     childCount: widget.controller.medicines.length,
                   ),
@@ -79,7 +80,8 @@ class _MedicineScreenState extends State<MedicineScreen> {
           },
         ),
       ),
-      floatingActionButton: AddMedicineButton(onAddedMedicine: refreshMedicinesData),
+      floatingActionButton:
+          AddMedicineButton(onAddedMedicine: refreshMedicinesData),
     );
   }
 }

@@ -17,9 +17,9 @@ class _MedicineTypeSelectionState extends State<MedicineTypeSelection> {
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(
-        widget.optionsTitles.length, (index) => Flexible(
-        child:
-          RadioListTile(
+        widget.optionsTitles.length,
+        (index) => Flexible(
+          child: RadioListTile(
             contentPadding: EdgeInsets.zero,
             title: Transform.translate(
               offset: const Offset(-15, 0),
@@ -33,14 +33,8 @@ class _MedicineTypeSelectionState extends State<MedicineTypeSelection> {
               });
             },
           ),
-      ),
+        ),
       ),
     );
   }
 }
-
-
-
-
-
-

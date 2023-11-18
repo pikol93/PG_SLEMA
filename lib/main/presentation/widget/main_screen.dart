@@ -10,7 +10,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
@@ -54,5 +53,4 @@ class MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
 }
