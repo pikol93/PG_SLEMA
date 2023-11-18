@@ -28,7 +28,7 @@ Po utworzeniu gałęzi, ale przed dodaniem jakichkolwiek zmian, zadaniem program
 
 Po utworzeniu kodu realizującego zadanie (w części lub w całości), zadaniem osoby odpowiedzialnej za dane zadanie jest utworzenie PR zawierającego wszystkie zmiany. Kod oddany do przeglądu musi być poprawnie zformatowany, a analiza statyczna nie może wykazywać żadnych błędów. Przeglądający zoobowiązani są do przeprowadzenia analizy statycznej, a w przypadku gdzie okaże się, że istnieją błędy należy dodać je jako komentarz do PR wraz z prośbą o ich naprawę przed dołączeniem zmian do głównej gałęzi.
 
-PR można dołączyć do gałęzi głównej dopiero po akceptacji przez co najmniej jednego programisty. Jeżeli kod jest mocno skomplikowany lub obejmuje duże części repozytorium wskazane jest, aby w procesie przeglądania uczestniczyła więcej niż jedna osoba jednak nie jest to obowiązkowe.
+PR można dołączyć do gałęzi głównej dopiero po akceptacji przez co najmniej jednego programistę. Jeżeli kod jest mocno skomplikowany lub obejmuje duże części repozytorium wskazane jest, aby w procesie przeglądania uczestniczyła więcej niż jedna osoba jednak nie jest to obowiązkowe.
 
 Po otrzymaniu potwierdzenia od przeglądających, osoba odpowiedzialna za gałąź musi upewnić się, że aplikacja po dołączeniu do głównej gałęzi będzie działać prawidłowo. W tym celu należy zmergować główną gałąź do tej, na której obecnie pracuje i przetestować wypracowane przez siebie rozwiązanie.
 
