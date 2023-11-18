@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
 class CustomTimePicker extends StatefulWidget {
   final AddMedicineController controller;
@@ -18,14 +17,13 @@ class CustomTimePicker extends StatefulWidget {
 }
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
-
-  Future<void> _onTap() async{
+  Future<void> _onTap() async {
     final selectedTime = await showTimePicker(
       context: context,
       initialTime: widget.controller.todayTime,
     );
     if (selectedTime != null &&
-        selectedTime!=widget.controller.pickedMedicineIntakeTime) {
+        selectedTime != widget.controller.pickedMedicineIntakeTime) {
       // calling setState notifies widget that the state has changed,
       // so the widget can update
       setState(() {
@@ -47,7 +45,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.pickedMedicineIntakeTime!.format(context)),
+            Text(widget.controller.pickedMedicineIntakeTime.format(context)),
             const Icon(Icons.arrow_drop_down),
           ],
         ),

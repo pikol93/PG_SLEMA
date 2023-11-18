@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'add_medicine_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen.dart';
 
 class AddMedicineButton extends StatelessWidget {
   final VoidCallback onAddedMedicine;
@@ -10,10 +9,14 @@ class AddMedicineButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(
-                builder: (context) => AddMedicineScreen(onAddedMedicine: onAddedMedicine,),
-              ));},
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddMedicineScreen(
+                onAddedMedicine: onAddedMedicine,
+              ),
+            ));
+      },
       child: const Icon(Icons.add),
     );
   }

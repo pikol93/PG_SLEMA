@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/date_input.dart';
@@ -7,11 +5,9 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/repea
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/time_input.dart';
-
-import 'formWidgets/type_radio_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/type_radio_input.dart';
 
 class AddMedicineScreen extends StatefulWidget {
-
   final VoidCallback onAddedMedicine;
   const AddMedicineScreen({super.key, required this.onAddedMedicine});
 
@@ -39,23 +35,39 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       ),
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
-        child:  Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                CustomTextFormField(label: "Nazwa", icon: Icons.create, controller: _controller,),
+                CustomTextFormField(
+                  label: "Nazwa",
+                  icon: Icons.create,
+                  controller: _controller,
+                ),
                 const SizedBox(height: 10),
-                MedicineTypeSelection(controller: _controller,),
+                MedicineTypeSelection(
+                  controller: _controller,
+                ),
                 const SizedBox(height: 20),
-                CustomDatePicker(controller: _controller, label: "Data przyjęcia leku"),
+                CustomDatePicker(
+                    controller: _controller, label: "Data przyjęcia leku"),
                 const SizedBox(height: 20),
-                CustomTimePicker(controller: _controller, label: "Godzina przyjęcia leku",),
+                CustomTimePicker(
+                  controller: _controller,
+                  label: "Godzina przyjęcia leku",
+                ),
                 const SizedBox(height: 20),
-                CustomDropdownMedicineInput(controller: _controller,),
+                CustomDropdownMedicineInput(
+                  controller: _controller,
+                ),
                 const SizedBox(height: 20),
-                CustomSaveButton(controller: _controller, formKey: _formKey, onAddedMedicine: widget.onAddedMedicine,),
+                CustomSaveButton(
+                  controller: _controller,
+                  formKey: _formKey,
+                  onAddedMedicine: widget.onAddedMedicine,
+                ),
               ],
             ),
           ),

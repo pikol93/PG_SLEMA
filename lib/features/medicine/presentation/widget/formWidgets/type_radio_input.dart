@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
-import '../../entity/medicine.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
 
 class MedicineTypeSelection extends StatefulWidget {
   final AddMedicineController controller;
@@ -19,9 +17,9 @@ class _MedicineTypeSelectionState extends State<MedicineTypeSelection> {
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(
-        widget.optionsTitles.length, (index) => Flexible(
-        child:
-          RadioListTile(
+        widget.optionsTitles.length,
+        (index) => Flexible(
+          child: RadioListTile(
             contentPadding: EdgeInsets.zero,
             title: Transform.translate(
               offset: const Offset(-15, 0),
@@ -35,14 +33,8 @@ class _MedicineTypeSelectionState extends State<MedicineTypeSelection> {
               });
             },
           ),
-      ),
+        ),
       ),
     );
   }
 }
-
-
-
-
-
-

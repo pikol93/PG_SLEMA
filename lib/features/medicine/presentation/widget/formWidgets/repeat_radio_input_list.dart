@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
-import '../../entity/medicine.dart';
-
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
 
 class CustomDropdownMedicineInput extends StatefulWidget {
   final AddMedicineController controller;
@@ -13,11 +11,12 @@ class CustomDropdownMedicineInput extends StatefulWidget {
   });
 
   @override
-  State<CustomDropdownMedicineInput> createState() => _CustomDropdownMedicineInputState();
+  State<CustomDropdownMedicineInput> createState() =>
+      _CustomDropdownMedicineInputState();
 }
 
-class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInput> {
-
+class _CustomDropdownMedicineInputState
+    extends State<CustomDropdownMedicineInput> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
@@ -35,10 +34,10 @@ class _CustomDropdownMedicineInputState extends State<CustomDropdownMedicineInpu
       },
       items: Medicine.repeatTextList.map((String title) {
         return DropdownMenuItem(
-          value: MedicineRepeat.values.elementAt(
-              Medicine.repeatTextList.indexOf(title)
-                //option title index = option enum index
-          ),
+          value: MedicineRepeat.values
+              .elementAt(Medicine.repeatTextList.indexOf(title)
+                  //option title index = option enum index
+                  ),
           child: Text(title),
         );
       }).toList(),

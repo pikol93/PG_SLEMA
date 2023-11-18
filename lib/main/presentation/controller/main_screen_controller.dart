@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
-
-import '../../../features/diet/presentation/widget/diet_screen.dart';
-import '../../../features/exercises/presentation/widget/exercises_screen.dart';
-import '../../../features/medicine/presentation/widget/medicine_screen.dart';
-import '../../../features/motivation/presentation/widget/motivation_screen.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_screen.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/exercises_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/medicine_screen.dart';
+import 'package:pg_slema/features/motivation/presentation/widget/motivation_screen.dart';
 
 class MainScreenController extends ChangeNotifier {
   int _currentIndex = 0;
@@ -19,10 +16,10 @@ class MainScreenController extends ChangeNotifier {
   final PageController pageController = PageController();
 
   final List<Widget> views = [
-    MotivationScreen(),
+    const MotivationScreen(),
     MedicineScreen(),
-    DietScreen(),
-    ExercisesScreen(),
+    const DietScreen(),
+    const ExercisesScreen(),
   ];
 
   void onTabTapped(int index) {

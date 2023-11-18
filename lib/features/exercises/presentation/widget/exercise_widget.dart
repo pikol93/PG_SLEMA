@@ -24,9 +24,9 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(40),
+        borderRadius: BorderRadius.circular(40),
         color: Colors.red,
-        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

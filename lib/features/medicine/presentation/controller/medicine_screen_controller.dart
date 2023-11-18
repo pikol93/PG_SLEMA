@@ -1,9 +1,6 @@
-
 import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../entity/medicine.dart';
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
 
 class MedicineScreenController {
   List<Medicine> medicines = [];
@@ -11,10 +8,10 @@ class MedicineScreenController {
   Future<void> loadMedicinesFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    List<String>? medicinesList = prefs.getStringList(Medicine.medicineListSharedPrefKey);
+    List<String>? medicinesList =
+        prefs.getStringList(Medicine.medicineListSharedPrefKey);
 
-    if(medicinesList==null)
-    {
+    if (medicinesList == null) {
       return;
     }
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
@@ -7,7 +6,11 @@ class CustomSaveButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final VoidCallback onAddedMedicine;
 
-  const CustomSaveButton({super.key, required this.controller, required this.formKey, required this.onAddedMedicine});
+  const CustomSaveButton(
+      {super.key,
+      required this.controller,
+      required this.formKey,
+      required this.onAddedMedicine});
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +42,16 @@ class CustomSaveButton extends StatelessWidget {
           }
         },
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+          backgroundColor:
+              MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
         ),
         child: const Text(
           "Zapisz",
           style: TextStyle(
             fontSize: 20.0,
             color: Colors.white,
-          ),),
+          ),
+        ),
       ),
     );
   }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../controller/medicine_screen_controller.dart';
-import '../entity/medicine.dart';
-import 'add_medicine_button.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 
 class MedicineScreen extends StatefulWidget {
   final MedicineScreenController controller = MedicineScreenController();
 
-  MedicineScreen({Key? key}) : super(key: key) {
+  MedicineScreen({super.key}) {
     controller.loadMedicinesFromSharedPreferences();
   }
 
@@ -68,8 +68,9 @@ class _MedicineScreenState extends State<MedicineScreen> {
               slivers: [
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                      return buildMedicineWidget(widget.controller.medicines[index], context);
+                    (BuildContext context, int index) {
+                      return buildMedicineWidget(
+                          widget.controller.medicines[index], context);
                     },
                     childCount: widget.controller.medicines.length,
                   ),
@@ -79,7 +80,8 @@ class _MedicineScreenState extends State<MedicineScreen> {
           },
         ),
       ),
-      floatingActionButton: AddMedicineButton(onAddedMedicine: refreshMedicinesData),
+      floatingActionButton:
+          AddMedicineButton(onAddedMedicine: refreshMedicinesData),
     );
   }
 }

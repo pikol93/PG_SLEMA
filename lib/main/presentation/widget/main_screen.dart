@@ -3,12 +3,13 @@ import 'package:pg_slema/main/presentation/controller/main_screen_controller.dar
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   MainScreenState createState() => MainScreenState();
 }
 
 class MainScreenState extends State<MainScreen> {
-
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
@@ -52,5 +53,4 @@ class MainScreenState extends State<MainScreen> {
       ),
     );
   }
-
 }
