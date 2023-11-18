@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/main_screen.dart';
 import 'package:provider/provider.dart';
+
 
 import '../features/motivation/controller/motivation_screen_controller.dart';
 
@@ -14,6 +16,14 @@ void main() {
             create: (context) => MotivationScreenController()),
       ],
       child: MaterialApp(
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('pl', 'PL'),
+        ],
         home: MainScreen(),
       ),
     ),

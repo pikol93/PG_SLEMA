@@ -8,6 +8,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
+
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
@@ -18,28 +19,38 @@ class MainScreenState extends State<MainScreen> {
       ),
       body: PageView(
         controller: controller.pageController,
-        onPageChanged: controller.onPageSwiped,
+        physics: const NeverScrollableScrollPhysics(),
         children: controller.views,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: controller.currentIndex,
-        iconSize: 40,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.lightbulb),
-            label: 'Motivation',
+      bottomNavigationBar: NavigationBar(
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+        selectedIndex: controller.currentIndex,
+        onDestinationSelected: controller.onTabTapped,
+        height: 70,
+        destinations: const <Widget>[
+          NavigationDestination(
+            selectedIcon: Icon(Icons.lightbulb),
+            icon: Icon(Icons.lightbulb_outlined),
+            label: 'Motywacja',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
+            selectedIcon: Icon(Icons.medication),
+            icon: Icon(Icons.medication_outlined),
+            label: 'Leki',
+          ),
+          NavigationDestination(
+            selectedIcon: Icon(Icons.restaurant_menu_outlined),
             icon: Icon(Icons.restaurant_menu),
-            label: 'Diet',
+            label: 'Dieta',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
+            selectedIcon: Icon(Icons.fitness_center_outlined),
             icon: Icon(Icons.fitness_center),
-            label: 'Exercises',
+            label: 'Ćwiczenia',
           ),
         ],
-        onTap: controller.onTabTapped,
       ),
     );
   }
+
 }
