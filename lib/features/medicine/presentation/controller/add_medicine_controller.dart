@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../entity/medicine.dart';
-
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
 
 class AddMedicineController extends ChangeNotifier {
   MedicineRepeat pickedMedicineRepeat = MedicineRepeat.none;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final AddMedicineController controller;

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
-import '../../entity/medicine.dart';
-
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
 
 class CustomDropdownMedicineInput extends StatefulWidget {
   final AddMedicineController controller;

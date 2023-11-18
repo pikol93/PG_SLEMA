@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/date_input.dart';
@@ -7,8 +5,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/repea
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/time_input.dart';
-
-import 'formWidgets/type_radio_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/type_radio_input.dart';
 
 class AddMedicineScreen extends StatefulWidget {
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'add_medicine_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen.dart';
 
 class AddMedicineButton extends StatelessWidget {
   final VoidCallback onAddedMedicine;

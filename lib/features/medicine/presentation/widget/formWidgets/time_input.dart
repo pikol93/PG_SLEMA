@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
 class CustomTimePicker extends StatefulWidget {
   final AddMedicineController controller;
@@ -47,7 +46,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.pickedMedicineIntakeTime!.format(context)),
+            Text(widget.controller.pickedMedicineIntakeTime.format(context)),
             const Icon(Icons.arrow_drop_down),
           ],
         ),
