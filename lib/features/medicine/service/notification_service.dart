@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:async';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationService {
   static final FlutterLocalNotificationsPlugin
@@ -37,5 +38,21 @@ class NotificationService {
       {int id = 0, String? title, String? body, String? payload}) async {
     return _flutterLocalNotificationsPlugin.show(
         id, title, body, await notificationDetails());
+  }
+
+  Future scheduleNotification(
+      {int id = 0,
+      String? title,
+      String? body,
+      String? payload,
+      required DateTime scheduledNotificationDateTime}) async {
+    return _flutterLocalNotificationsPlugin.zonedSchedule(
+        id,
+        title,
+        body,
+        tz.TZDateTime.from(scheduledNotificationDateTime, tz.local),
+        await notificationDetails(),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 }

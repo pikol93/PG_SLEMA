@@ -19,6 +19,7 @@ class CustomSaveButton extends StatelessWidget {
       height: 50.0,
       child: ElevatedButton(
         onPressed: () {
+          controller.scheduleNotification();
           if (formKey.currentState!.validate()) {
             controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
               // Call callback down the three of widgets down to medicine_screen

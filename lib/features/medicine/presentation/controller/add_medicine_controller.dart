@@ -40,4 +40,17 @@ class AddMedicineController extends ChangeNotifier {
 
     prefs.setStringList(Medicine.medicineListSharedPrefKey, medicinesList);
   }
+
+  Future<void> scheduleNotification() async {
+    DateTime notificationDateTime = DateTime(
+        pickedMedicineIntakeDate.year,
+        pickedMedicineIntakeDate.month,
+        pickedMedicineIntakeDate.day,
+        pickedMedicineIntakeTime.hour,
+        pickedMedicineIntakeTime.minute);
+    notificationService.scheduleNotification(
+        title: "Ważna sprawa!",
+        body: "Nastała pora na przyjęcie $pickedMedicineName",
+        scheduledNotificationDateTime: notificationDateTime);
+  }
 }
