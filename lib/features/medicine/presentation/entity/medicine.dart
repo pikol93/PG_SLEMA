@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/utils/string/string_casing_extension.dart';
 
 enum MedicineRepeat { none, daily, everyTwoDays, weekly }
 
@@ -54,17 +55,10 @@ class Medicine {
       };
 
   static String getRepeatToText(MedicineRepeat repeat) {
-    switch (repeat) {
-      case MedicineRepeat.none:
-        return repeatTextList[MedicineRepeat.none.index];
-      case MedicineRepeat.daily:
-        return repeatTextList[MedicineRepeat.daily.index];
-      case MedicineRepeat.everyTwoDays:
-        return repeatTextList[MedicineRepeat.everyTwoDays.index];
-      case MedicineRepeat.weekly:
-        return repeatTextList[MedicineRepeat.weekly.index];
-      default:
-        return '';
+    try {
+      return repeatTextList[repeat.index];
+    } on RangeError catch (_) {
+      return repeat.name.toCapitalized();
     }
   }
 }
