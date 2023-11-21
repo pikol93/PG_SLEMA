@@ -8,15 +8,15 @@ class MedicineScreenController {
   Future<void> loadMedicinesFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
 
-    List<String>? medicinesList =
+    List<String>? jsonMedicinesList =
         prefs.getStringList(Medicine.medicineListSharedPrefKey);
 
-    if (medicinesList == null) {
+    if (jsonMedicinesList == null) {
       return;
     }
 
     //Mapping json from shared preferences to list of objects
-    medicines = medicinesList.map((jsonString) {
+    medicines = jsonMedicinesList.map((jsonString) {
       Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       return Medicine.fromJson(jsonMap);
     }).toList();
