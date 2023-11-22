@@ -5,9 +5,11 @@ import 'package:pg_slema/main/presentation/widget/main_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 void main() {
   tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Poland'));
   runApp(
     MultiProvider(
       providers: [
