@@ -48,6 +48,7 @@ class AddMedicineController extends ChangeNotifier {
         pickedMedicineIntakeDate.day,
         pickedMedicineIntakeTime.hour,
         pickedMedicineIntakeTime.minute);
+
     notificationService.scheduleNotification(
         title: "Ważna sprawa!",
         body: "Nastała pora na przyjęcie $pickedMedicineName",
