@@ -15,8 +15,7 @@ def main():
     version = get_project_version(args.path)
     if args.build:
         build_project(args.path)
-    if not args.ignore_vcs:
-        print_task_list(args.path, args.commitish1, args.commitish2)
+    print_task_list(args.path, args.commitish1, args.commitish2)
     if args.add_tag:
         add_git_tag(args.path, version)
     increment_project_version(args.path, version)
