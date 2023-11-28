@@ -12,17 +12,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", help="Path to the project.", default="../..")
     args = parser.parse_args()
-    print(args)
 
     version = get_project_version(args.path)
-    print("got version", version)
-    subprocess.run(["flutter", "build", "apk", "--split-per-abi", "lib/main/main.dart"], cwd=args.path, check=True)
-
+    build_project(args.path)
     increment_project_version(args.path, version)
 
 
 def get_project_version(project_path):
-    print("Getting the version tuple")
     with open(project_path + "/pubspec.yaml", "r") as stream:
         data = yaml.safe_load(stream)
 
@@ -42,6 +38,10 @@ def get_project_version(project_path):
         "minor": minor,
         "patch": patch,
     }
+
+
+def build_project(project_path):
+    subprocess.run(["flutter", "build", "apk", "--split-per-abi", "lib/main/main.dart"], cwd=project_path, check=True)
 
 
 def increment_project_version(project_path, version):
