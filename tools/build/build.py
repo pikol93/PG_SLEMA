@@ -40,8 +40,8 @@ def get_args():
                         action="store_true", dest="add_tag")
     parser.add_argument("-c", "--commit-version", help="Commits version change in pubspec.yaml.",
                         action="store_true", dest="commit_version")
-    parser.add_argument("-b", "--build", help="Builds the project", action="store_true", dest="build",
-                        default=True)
+    parser.add_argument("-n", "--no-build", help="Makes the script not build the project",
+                        action="store_false", dest="build")
     parser.add_argument("-c1", "--commitish1", help="Starting commitish used to fetch completed tasks.",
                         default="", dest="commitish1")
     parser.add_argument("-c2", "--commitish2", help="Ending commitish used to fetch completed tasks.",
