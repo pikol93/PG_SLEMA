@@ -20,6 +20,7 @@ class CustomSaveButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
+            controller.scheduleNotification();
             controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
               // Call callback down the three of widgets down to medicine_screen
               // to update list of medicines
