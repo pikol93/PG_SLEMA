@@ -9,13 +9,45 @@ import fileinput
 
 
 def main():
+    args = get_args()
+    if not args.ignore_dirty_tree:
+        validate_vcs_tree(args.path)
+    version = get_project_version(args.path)
+    if args.build:
+        build_project(args.path)
+    if not args.ignore_vcs:
+        print_task_list(args.path, args.commitish1, args.commitish2)
+    if args.add_tag:
+        add_git_tag(args.path, version)
+    increment_project_version(args.path, version)
+    if args.commit_version:
+        commit_incremented_version(args.path)
+
+
+def validate_vcs_tree(project_path):
+    # The VCS tree should be empty, since this script modifies its state
+    process_not_staged = subprocess.run(["git", "diff"], cwd=project_path, capture_output=True)
+    process_staged = subprocess.run(["git", "diff", "--staged"], cwd=project_path, capture_output=True)
+    if len(process_not_staged.stdout) > 0 or len(process_staged.stdout) > 0:
+        raise RuntimeError("The script cannot work with a dirty tree")
+
+
+def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("-p", "--path", help="Path to the project.", default="../..")
-    args = parser.parse_args()
-
-    version = get_project_version(args.path)
-    build_project(args.path)
-    increment_project_version(args.path, version)
+    parser.add_argument("-i", "--ignore-dirty-tree", help="Ignore dirty VCS tree.", action="store_true",
+                        dest="ignore_dirty_tree")
+    parser.add_argument("-t", "--add-tag", help="Adds a new tag based on the current version.",
+                        action="store_true", dest="add_tag")
+    parser.add_argument("-c", "--commit-version", help="Commits version change in pubspec.yaml.",
+                        action="store_true", dest="commit_version")
+    parser.add_argument("-b", "--build", help="Builds the project", action="store_true", dest="build",
+                        default=True)
+    parser.add_argument("-c1", "--commitish1", help="Starting commitish used to fetch completed tasks.",
+                        default="", dest="commitish1")
+    parser.add_argument("-c2", "--commitish2", help="Ending commitish used to fetch completed tasks.",
+                        default="HEAD", dest="commitish2")
+    return parser.parse_args()
 
 
 def get_project_version(project_path):
@@ -64,6 +96,49 @@ def increment_project_version(project_path, version):
         print("Incremented project version successfully", version["full_version"], "->", new_version_string)
     else:
         raise RuntimeError("Could not increment project version")
+
+
+def print_task_list(project_path, commitish1, commitish2):
+    if not commitish1:
+        last_tag_output = subprocess.run(
+            ["git", "describe", "--tags", "--abbrev=0"], cwd=project_path, check=True, capture_output=True
+        )
+
+        commitish1 = last_tag_output.stdout.decode("utf-8").split("\n")[0]
+
+    commits_output = subprocess.run(
+        ["git", "log", commitish1 + ".." + commitish2, "--pretty=format:%s", "--no-merges"], cwd=project_path,
+        check=True, capture_output=True,
+    )
+
+    commits_list_string = commits_output.stdout.decode("utf-8")
+    task_list = []
+    for commit_message in commits_list_string.split("\n"):
+        first_word = commit_message.split(" ", 1)[0]
+        if "SLEMA-" not in first_word:
+            continue
+
+        if first_word in task_list:
+            continue
+
+        task_list.append(first_word)
+    task_list.sort()
+
+    print("PRINTING TASK LIST:")
+    for task in task_list:
+        print(task)
+    print("FINISHED PRINTING TASK LIST")
+
+
+def add_git_tag(project_path, version):
+    subprocess.run(
+        ["git", "tag", "-a", version["full_version"], "-m", "Increased version from " + version["full_version"]],
+        cwd=project_path, check=True
+    )
+
+
+def commit_incremented_version(project_path):
+    subprocess.run(["git", "commit", "-am", "Incremented version"], cwd=project_path, check=True)
 
 
 if __name__ == '__main__':
