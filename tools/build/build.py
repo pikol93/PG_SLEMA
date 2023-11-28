@@ -131,7 +131,7 @@ def print_task_list(project_path, commitish1, commitish2):
 
 def add_git_tag(project_path, version):
     subprocess.run(
-        ["git", "tag", "-a", version["full_version"], "-m", "Increased version from " + version["full_version"]],
+        ["git", "tag", "-a", version["full_version"], "-m", "Version " + version["full_version"] + " finished"],
         cwd=project_path, check=True
     )
 
