@@ -4,6 +4,5 @@ mixin Logger implements LoggyType {
   Loggy<Logger> get logger => loggy;
 
   @override
-  Loggy<Logger> get loggy =>
-      Loggy<Logger>(runtimeType.toString());
+  Loggy<Logger> get loggy => Loggy<Logger>(runtimeType.toString());
 }

@@ -4,7 +4,7 @@ import 'package:loggy/loggy.dart';
 class LoggerPrinter extends LoggyPrinter {
   const LoggerPrinter();
 
-  static final Map<LogLevel, String> _levelStrings = <LogLevel, String> {
+  static final Map<LogLevel, String> _levelStrings = <LogLevel, String>{
     LogLevel.debug: 'DEBUG',
     LogLevel.info: 'INFO ',
     LogLevel.warning: 'WARN ',
