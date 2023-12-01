@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/service/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import '../../application/service/notification_service.dart';
 
 class AddMedicineController extends ChangeNotifier {
   final NotificationService notificationService = NotificationService();

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineScreenController {
   List<Medicine> medicines = [];
