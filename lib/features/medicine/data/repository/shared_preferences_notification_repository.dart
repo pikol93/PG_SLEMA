@@ -23,7 +23,7 @@ class SharedPreferencesNotificationRepository
     if (jsonNotificationsList == null) {
       return;
     }
-    
+
     jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
         .where((element) => element["id"] != notification.id.toString())
@@ -40,6 +40,7 @@ class SharedPreferencesNotificationRepository
 
   @override
   void updateNotification(Notification notification) {
-    // TODO: implement updateNotification
+    deleteNotification(notification);
+    addNotification(notification);
   }
-}
+} 
