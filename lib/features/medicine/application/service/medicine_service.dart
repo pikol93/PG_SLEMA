@@ -1,4 +1,1 @@
-
-class MedicineService {
-
-}
+class MedicineService {}

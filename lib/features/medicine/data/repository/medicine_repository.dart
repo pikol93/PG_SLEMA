@@ -1,3 +1,1 @@
-abstract class MedicineRepository {
-
-}
+abstract class MedicineRepository {}
