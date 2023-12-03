@@ -3,10 +3,10 @@ import 'package:pg_slema/features/medicine/data/repository/notification_reposito
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class NotificationService {
-
   final NotificationRepository repository;
 
-  final NotificationSchedulingService schedulingService = NotificationSchedulingService();
+  final NotificationSchedulingService schedulingService =
+      NotificationSchedulingService();
 
   NotificationService(this.repository) {
     schedulingService.initNotifications();

@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
+import 'package:pg_slema/features/medicine/data/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
 
 class AddMedicineController extends ChangeNotifier {
-  final NotificationService notificationService;
+  late NotificationService notificationService;
   MedicineRepeat pickedMedicineRepeat = MedicineRepeat.none;
   MedicineType pickedMedicineType = MedicineType.other;
   final TimeOfDay todayTime = TimeOfDay.now();
@@ -19,7 +20,11 @@ class AddMedicineController extends ChangeNotifier {
   DateTime pickedMedicineIntakeDate = DateTime.now();
   String pickedMedicineName = "";
 
-  AddMedicineController(this.notificationService);
+  AddMedicineController() : super() {
+    SharedPreferencesNotificationRepository repository = SharedPreferencesNotificationRepository();
+    repository.initializeRepository();
+    notificationService = NotificationService(repository);
+  }
 
   static String dateTimeToString(DateTime? dateTime) {
     if (dateTime != null) {
@@ -42,7 +47,8 @@ class AddMedicineController extends ChangeNotifier {
   }
 
   Future<void> addNotification() async {
-    var notification = nt.Notification("",
+    var notification = nt.Notification(
+        "",
         "Ważna sprawa!",
         "Nastała pora na przyjęcie $pickedMedicineName",
         pickedMedicineIntakeTime,

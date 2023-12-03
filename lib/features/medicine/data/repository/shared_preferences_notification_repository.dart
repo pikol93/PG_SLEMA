@@ -8,9 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
-  final SharedPreferences prefs;
+  late SharedPreferences prefs;
 
-  SharedPreferencesNotificationRepository(this.prefs);
+  void initializeRepository() async {
+    prefs = await SharedPreferences.getInstance();
+  }
 
   @override
   List<Notification> getAllNotificationsOfMedicine(Medicine medicine) {
@@ -21,7 +23,6 @@ class SharedPreferencesNotificationRepository
   @override
   Future deleteNotification(Notification notification) async {
     List<String> jsonNotificationsList = await _getJsonNotificationsList();
-    //print(notification.id.compareTo(NotificationToJsonConverter.fromJson(jsonDecode(jsonNotificationsList[0])).id));
     jsonNotificationsList = jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => NotificationToJsonConverter.fromJson(json))
@@ -39,6 +40,8 @@ class SharedPreferencesNotificationRepository
     final json = NotificationToJsonConverter.toJson(notification);
     jsonNotificationsList.add(jsonEncode(json));
     _updateNotificationsList(jsonNotificationsList);
+    print(jsonNotificationsList);
+    getAllNotifications().asStream().forEach((element) {print(element);});
   }
 
   @override
