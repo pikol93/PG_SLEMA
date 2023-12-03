@@ -8,14 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
-
   final SharedPreferences prefs;
 
   SharedPreferencesNotificationRepository(this.prefs);
 
   @override
   List<Notification> getAllNotificationsOfMedicine(Medicine medicine) {
-    return List<Notification>.empty();
+    return List<Notification>.empty(growable: true);
     // TODO: implement getAllNotificationsOfMedicine
   }
 
@@ -59,7 +58,7 @@ class SharedPreferencesNotificationRepository
   Future<List<String>> _getJsonNotificationsList() async {
     List<String>? jsonNotificationsList =
         prefs.getStringList(Notification.notificationListSharedPrefKey);
-    return jsonNotificationsList ?? List<String>.empty();
+    return jsonNotificationsList ?? List<String>.empty(growable: true);
   }
 
   void _updateNotificationsList(List<String> jsonNotificationsList) async {

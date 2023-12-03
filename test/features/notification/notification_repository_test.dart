@@ -1,10 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
+
+@GenerateNiceMocks([MockSpec<SharedPreferences>()])
+import 'notification_repository_test.mocks.dart';
 
 class NotificationRepositoryTest {
   final NotificationRepository repository;
@@ -37,13 +42,16 @@ class NotificationRepositoryTest {
   }
 }
 
-void main() async {
-  NotificationRepository repo = SharedPreferencesNotificationRepository(await SharedPreferences.getInstance());
+void main() {
+  SharedPreferences preferences = MockSharedPreferences();
+  NotificationRepository repo =
+      SharedPreferencesNotificationRepository(preferences);
   final repositoryTest = NotificationRepositoryTest(repo);
-  test(
-      "shouldDeleteNotificationWhenDeletedNotificationExists",
-      () => repositoryTest
-          .shouldDeleteNotificationWhenDeletedNotificationExists());
+  test("shouldDeleteNotificationWhenDeletedNotificationExists", () {
+    when(preferences.getStringList(Notification.notificationListSharedPrefKey))
+        .thenReturn(List<String>.empty(growable: true));
+    repositoryTest.shouldDeleteNotificationWhenDeletedNotificationExists();
+  });
   test(
       "shouldNotDoAnythingWhenDeletedNotificationDoesNotExist",
       () => repositoryTest
