@@ -3,13 +3,15 @@ import 'package:pg_slema/features/medicine/data/repository/notification_reposito
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:flutter/material.dart' as mat;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class NotificationRepositoryTest {
-  final NotificationRepository repository =
-      SharedPreferencesNotificationRepository();
+  final NotificationRepository repository;
 
-  void shouldDeleteNotificationWhenDeletedNotificationExists() {
+  NotificationRepositoryTest(this.repository);
+
+  void shouldDeleteNotificationWhenDeletedNotificationExists() async {
     const uuid = Uuid();
     var notification = Notification(
         uuid.v4(),
@@ -17,9 +19,10 @@ class NotificationRepositoryTest {
         DateTime(2000),
         DateTime(2000),
         Frequency.daily);
-    repository.addNotification(notification)
+    repository.addNotification(notification);
     repository.deleteNotification(notification);
-    expect(0, repository.getAllNotifications().length);
+    final notifications = await repository.getAllNotifications();
+    expect(0, notifications.length);
   }
 
   void shouldNotDoAnythingWhenDeletedNotificationDoesNotExist() {
@@ -34,8 +37,15 @@ class NotificationRepositoryTest {
   }
 }
 
-void main() {
-  final repositoryTest = NotificationRepositoryTest();
-  test("", () => repositoryTest.shouldDeleteNotificationWhenDeletedNotificationExists());
-  test("", () => repositoryTest.shouldNotDoAnythingWhenDeletedNotificationDoesNotExist());
+void main() async {
+  NotificationRepository repo = SharedPreferencesNotificationRepository(await SharedPreferences.getInstance());
+  final repositoryTest = NotificationRepositoryTest(repo);
+  test(
+      "shouldDeleteNotificationWhenDeletedNotificationExists",
+      () => repositoryTest
+          .shouldDeleteNotificationWhenDeletedNotificationExists());
+  test(
+      "shouldNotDoAnythingWhenDeletedNotificationDoesNotExist",
+      () => repositoryTest
+          .shouldNotDoAnythingWhenDeletedNotificationDoesNotExist());
 }
