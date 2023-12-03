@@ -7,9 +7,9 @@ abstract class NotificationRepository {
 
   Future<List<Notification>> getAllNotifications();
 
-  void addNotification(Notification notification);
+  Future addNotification(Notification notification);
 
-  void updateNotification(Notification notification);
+  Future updateNotification(Notification notification);
 
-  void deleteNotification(Notification notification);
+  Future deleteNotification(Notification notification);
 }

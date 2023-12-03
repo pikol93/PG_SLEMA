@@ -24,13 +24,13 @@ class NotificationRepositoryTest {
         DateTime(2000),
         DateTime(2000),
         Frequency.daily);
-    repository.addNotification(notification);
-    repository.deleteNotification(notification);
+    await repository.addNotification(notification);
+    await repository.deleteNotification(notification);
     final notifications = await repository.getAllNotifications();
-    expect(0, notifications.length);
+    expect(notifications.length, 0);
   }
 
-  void shouldNotDoAnythingWhenDeletedNotificationDoesNotExist() {
+  void shouldNotDoAnythingWhenDeletedNotificationDoesNotExist() async {
     const uuid = Uuid();
     var notification = Notification(
         uuid.v4(),
@@ -38,7 +38,9 @@ class NotificationRepositoryTest {
         DateTime(2000),
         DateTime(2000),
         Frequency.daily);
-    repository.deleteNotification(notification);
+    await repository.deleteNotification(notification);
+    final notifications = await repository.getAllNotifications();
+    expect(notifications.length, 0);
   }
 }
 
@@ -48,12 +50,15 @@ void main() {
       SharedPreferencesNotificationRepository(preferences);
   final repositoryTest = NotificationRepositoryTest(repo);
   test("shouldDeleteNotificationWhenDeletedNotificationExists", () {
+    List<String> notificationsList = List<String>.empty(growable: true);
     when(preferences.getStringList(Notification.notificationListSharedPrefKey))
-        .thenReturn(List<String>.empty(growable: true));
+        .thenReturn(notificationsList);
     repositoryTest.shouldDeleteNotificationWhenDeletedNotificationExists();
   });
-  test(
-      "shouldNotDoAnythingWhenDeletedNotificationDoesNotExist",
-      () => repositoryTest
-          .shouldNotDoAnythingWhenDeletedNotificationDoesNotExist());
+  test("shouldNotDoAnythingWhenDeletedNotificationDoesNotExist", () {
+    reset(preferences);
+    when(preferences.getStringList(Notification.notificationListSharedPrefKey))
+        .thenReturn(List<String>.empty(growable: true));
+    repositoryTest.shouldNotDoAnythingWhenDeletedNotificationDoesNotExist();
+  });
 }

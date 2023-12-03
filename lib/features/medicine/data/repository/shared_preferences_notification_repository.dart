@@ -19,21 +19,20 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  void deleteNotification(Notification notification) async {
+  Future deleteNotification(Notification notification) async {
     List<String> jsonNotificationsList = await _getJsonNotificationsList();
-
-    jsonNotificationsList
+    //print(notification.id.compareTo(NotificationToJsonConverter.fromJson(jsonDecode(jsonNotificationsList[0])).id));
+    jsonNotificationsList = jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => NotificationToJsonConverter.fromJson(json))
-        .where((element) => element.id != notification.id)
+        .where((element) => element.id.compareTo(notification.id) == 0 ? false : true)
         .map((element) => NotificationToJsonConverter.toJson(element))
-        .map((json) => jsonEncode(json));
-
+        .map((json) => jsonEncode(json)).toList();
     _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
-  void addNotification(Notification notification) async {
+  Future addNotification(Notification notification) async {
     List<String> jsonNotificationsList = await _getJsonNotificationsList();
     final json = NotificationToJsonConverter.toJson(notification);
     jsonNotificationsList.add(jsonEncode(json));
@@ -41,8 +40,8 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  void updateNotification(Notification notification) {
-    deleteNotification(notification);
+  Future updateNotification(Notification notification) async {
+    await deleteNotification(notification);
     addNotification(notification);
   }
 
