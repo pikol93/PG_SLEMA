@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
+import 'package:pg_slema/features/medicine/domain/converter/notification_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,24 +16,23 @@ class SharedPreferencesNotificationRepository
 
   @override
   void deleteNotification(Notification notification) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    List<String> jsonNotificationsList = await _getNotificationsJsonStrings();
+    List<String> jsonNotificationsList = await _getJsonNotificationsList();
 
     jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
-        .where((element) => element["id"] != notification.id.toString())
-        .map((element) => jsonEncode(element));
+        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .where((element) => element.id != notification.id)
+        .map((element) => NotificationToJsonConverter.toJson(element))
+        .map((json) => jsonEncode(json));
 
     _updateNotificationsList(jsonNotificationsList);
-    prefs.setStringList(
-        Notification.notificationListSharedPrefKey, jsonNotificationsList);
   }
 
   @override
   void addNotification(Notification notification) async {
-    List<String> jsonNotificationsList = await _getNotificationsJsonStrings();
-    jsonNotificationsList.add(jsonEncode(notification));
+    List<String> jsonNotificationsList = await _getJsonNotificationsList();
+    final json = NotificationToJsonConverter.toJson(notification);
+    jsonNotificationsList.add(jsonEncode(json));
     _updateNotificationsList(jsonNotificationsList);
   }
 
@@ -43,15 +43,19 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  List<Notification> getAllNotifications() {
-    throw UnimplementedError();
+  Future<List<Notification>> getAllNotifications() async {
+    List<String> jsonNotificationsList = await _getJsonNotificationsList();
+    return jsonNotificationsList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .toList();
   }
 
-  Future<List<String>> _getNotificationsJsonStrings() async {
+  Future<List<String>> _getJsonNotificationsList() async {
     final prefs = await SharedPreferences.getInstance();
 
     List<String>? jsonNotificationsList =
-    prefs.getStringList(Notification.notificationListSharedPrefKey);
+        prefs.getStringList(Notification.notificationListSharedPrefKey);
     return jsonNotificationsList ?? List<String>.empty();
   }
 
