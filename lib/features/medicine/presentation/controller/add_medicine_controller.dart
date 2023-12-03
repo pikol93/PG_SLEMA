@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
+import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
-import 'package:pg_slema/features/medicine/application/service/notification_scheduling_service.dart';
+import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
 
 class AddMedicineController extends ChangeNotifier {
-  final NotificationSchedulingService notificationService =
-      NotificationSchedulingService();
+  final NotificationService notificationService;
   MedicineRepeat pickedMedicineRepeat = MedicineRepeat.none;
   MedicineType pickedMedicineType = MedicineType.other;
   final TimeOfDay todayTime = TimeOfDay.now();
@@ -18,9 +19,7 @@ class AddMedicineController extends ChangeNotifier {
   DateTime pickedMedicineIntakeDate = DateTime.now();
   String pickedMedicineName = "";
 
-  AddMedicineController() : super() {
-    notificationService.initNotifications();
-  }
+  AddMedicineController(this.notificationService);
 
   static String dateTimeToString(DateTime? dateTime) {
     if (dateTime != null) {
@@ -42,17 +41,15 @@ class AddMedicineController extends ChangeNotifier {
     prefs.setStringList(Medicine.medicineListSharedPrefKey, medicinesList);
   }
 
-  Future<void> scheduleNotification() async {
-    DateTime notificationDateTime = DateTime(
-        pickedMedicineIntakeDate.year,
-        pickedMedicineIntakeDate.month,
-        pickedMedicineIntakeDate.day,
-        pickedMedicineIntakeTime.hour,
-        pickedMedicineIntakeTime.minute);
+  Future<void> addNotification() async {
+    var notification = nt.Notification("",
+        "Ważna sprawa!",
+        "Nastała pora na przyjęcie $pickedMedicineName",
+        pickedMedicineIntakeTime,
+        pickedMedicineIntakeDate,
+        pickedMedicineIntakeDate,
+        Frequency.singular);
 
-    notificationService.scheduleNotification(
-        title: "Ważna sprawa!",
-        body: "Nastała pora na przyjęcie $pickedMedicineName",
-        scheduledNotificationDateTime: notificationDateTime);
+    notificationService.addNotification(notification);
   }
 }

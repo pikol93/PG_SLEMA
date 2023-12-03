@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum Frequency { daily, everyTwoDays, everyThreeDays }
+enum Frequency { singular, daily, everyTwoDays, everyThreeDays }
 
 class Notification {
   static String notificationListSharedPrefKey = 'notifications';

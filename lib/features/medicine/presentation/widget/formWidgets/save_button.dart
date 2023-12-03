@@ -43,7 +43,7 @@ class CustomSaveButton extends StatelessWidget {
               displayMessageAboutIncorrectIntakeDate(context);
               return;
             }
-            controller.scheduleNotification();
+            controller.addNotification();
             controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
               // Call callback down the three of widgets down to medicine_screen
               // to update list of medicines
