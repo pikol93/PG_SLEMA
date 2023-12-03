@@ -5,6 +5,7 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+//TODO: unit tests!
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
   @override
@@ -34,8 +35,20 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  void addNotification(Notification notification) {
-    // TODO: implement addNotification
+  void addNotification(Notification notification) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    List<String>? jsonNotificationsList =
+    prefs.getStringList(Notification.notificationListSharedPrefKey);
+
+    if (jsonNotificationsList == null) {
+      return;
+    }
+
+    jsonNotificationsList.add(jsonEncode(notification));
+
+    prefs.setStringList(
+        Notification.notificationListSharedPrefKey, jsonNotificationsList);
   }
 
   @override
@@ -43,4 +56,4 @@ class SharedPreferencesNotificationRepository
     deleteNotification(notification);
     addNotification(notification);
   }
-} 
+}
