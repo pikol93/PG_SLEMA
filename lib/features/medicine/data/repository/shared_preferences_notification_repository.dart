@@ -25,9 +25,11 @@ class SharedPreferencesNotificationRepository
     jsonNotificationsList = jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => NotificationToJsonConverter.fromJson(json))
-        .where((element) => element.id.compareTo(notification.id) == 0 ? false : true)
+        .where((element) =>
+            element.id.compareTo(notification.id) == 0 ? false : true)
         .map((element) => NotificationToJsonConverter.toJson(element))
-        .map((json) => jsonEncode(json)).toList();
+        .map((json) => jsonEncode(json))
+        .toList();
     _updateNotificationsList(jsonNotificationsList);
   }
 

@@ -5,7 +5,8 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import '../../application/service/notification_scheduling_service.dart';
 
 class AddMedicineController extends ChangeNotifier {
-  final NotificationSchedulingService notificationService = NotificationSchedulingService();
+  final NotificationSchedulingService notificationService =
+      NotificationSchedulingService();
   MedicineRepeat pickedMedicineRepeat = MedicineRepeat.none;
   MedicineType pickedMedicineType = MedicineType.other;
   final TimeOfDay todayTime = TimeOfDay.now();

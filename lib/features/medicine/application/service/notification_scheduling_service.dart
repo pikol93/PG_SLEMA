@@ -43,7 +43,6 @@ class NotificationSchedulingService {
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
-
   Future showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
     return _flutterLocalNotificationsPlugin.show(
