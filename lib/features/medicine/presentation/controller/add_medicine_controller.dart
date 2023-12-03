@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
-import '../../application/service/notification_scheduling_service.dart';
+import 'package:pg_slema/features/medicine/application/service/notification_scheduling_service.dart';
 
 class AddMedicineController extends ChangeNotifier {
   final NotificationSchedulingService notificationService =

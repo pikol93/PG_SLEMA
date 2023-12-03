@@ -20,6 +20,8 @@ class NotificationRepositoryTest {
     const uuid = Uuid();
     var notification = Notification(
         uuid.v4(),
+        '',
+        '',
         const mat.TimeOfDay(hour: 1, minute: 1),
         DateTime(2000),
         DateTime(2000),
@@ -34,6 +36,8 @@ class NotificationRepositoryTest {
     const uuid = Uuid();
     var notification = Notification(
         uuid.v4(),
+        '',
+        '',
         const mat.TimeOfDay(hour: 1, minute: 1),
         DateTime(2000),
         DateTime(2000),
@@ -47,6 +51,8 @@ class NotificationRepositoryTest {
     const uuid = Uuid();
     var notification = Notification(
         uuid.v4(),
+        '',
+        '',
         const mat.TimeOfDay(hour: 1, minute: 1),
         DateTime(2000),
         DateTime(2000),
@@ -60,11 +66,23 @@ class NotificationRepositoryTest {
       shouldOverrideNotificationWhenAddNotificationIsExecutedAndNotificationWithSameUUIDExists() async {
     const uuid = Uuid();
     String id = uuid.v4();
-    var notification = Notification(id, const mat.TimeOfDay(hour: 1, minute: 1),
-        DateTime(2000), DateTime(2000), Frequency.daily);
+    var notification = Notification(
+        id,
+        '',
+        '',
+        const mat.TimeOfDay(hour: 1, minute: 1),
+        DateTime(2000),
+        DateTime(2000),
+        Frequency.daily);
     await repository.addNotification(notification);
-    notification = Notification(id, const mat.TimeOfDay(hour: 1, minute: 1),
-        DateTime(2000), DateTime(2000), Frequency.everyTwoDays);
+    notification = Notification(
+        id,
+        '',
+        '',
+        const mat.TimeOfDay(hour: 1, minute: 1),
+        DateTime(2000),
+        DateTime(2000),
+        Frequency.everyTwoDays);
     await repository.addNotification(notification);
     final notifications = await repository.getAllNotifications();
     expect(notifications.length, 1);
