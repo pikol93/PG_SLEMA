@@ -42,6 +42,34 @@ class NotificationRepositoryTest {
     final notifications = await repository.getAllNotifications();
     expect(notifications.length, 0);
   }
+
+  void shouldAddNotificationWhenAddNotificationIsExecuted() async {
+    const uuid = Uuid();
+    var notification = Notification(
+        uuid.v4(),
+        const mat.TimeOfDay(hour: 1, minute: 1),
+        DateTime(2000),
+        DateTime(2000),
+        Frequency.daily);
+    await repository.addNotification(notification);
+    final notifications = await repository.getAllNotifications();
+    expect(notifications.length, 1);
+  }
+
+  void
+      shouldOverrideNotificationWhenAddNotificationIsExecutedAndNotificationWithSameUUIDExists() async {
+    const uuid = Uuid();
+    String id = uuid.v4();
+    var notification = Notification(id, const mat.TimeOfDay(hour: 1, minute: 1),
+        DateTime(2000), DateTime(2000), Frequency.daily);
+    await repository.addNotification(notification);
+    notification = Notification(id, const mat.TimeOfDay(hour: 1, minute: 1),
+        DateTime(2000), DateTime(2000), Frequency.everyTwoDays);
+    await repository.addNotification(notification);
+    final notifications = await repository.getAllNotifications();
+    expect(notifications.length, 1);
+    expect(notifications[0].notificationFrequency, Frequency.everyTwoDays);
+  }
 }
 
 void main() {
@@ -53,6 +81,7 @@ void main() {
     List<String> notificationsList = List<String>.empty(growable: true);
     when(preferences.getStringList(Notification.notificationListSharedPrefKey))
         .thenReturn(notificationsList);
+    //TODO: mock setter
     repositoryTest.shouldDeleteNotificationWhenDeletedNotificationExists();
   });
   test("shouldNotDoAnythingWhenDeletedNotificationDoesNotExist", () {
