@@ -21,15 +21,6 @@ class CustomSaveButton extends StatelessWidget {
     return selectedDateTime.isAfter(DateTime.now());
   }
 
-  void displayMessageAboutIncorrectIntakeDate(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Wybierz datę dotyczącą przyjęcia leku z przyszłości.'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -38,13 +29,7 @@ class CustomSaveButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            if (!isIntakeDateFromFuture(controller.pickedMedicineIntakeDate,
-                controller.pickedMedicineIntakeTime)) {
-              displayMessageAboutIncorrectIntakeDate(context);
-              return;
-            }
-            controller.addNotification();
-            controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
+            controller.saveMedicine().then((_) {
               // Call callback down the three of widgets down to medicine_screen
               // to update list of medicines
               onAddedMedicine.call();
