@@ -9,26 +9,28 @@ import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
 import 'package:uuid/uuid.dart';
 
 class AddMedicineController extends ChangeNotifier {
-  late NotificationService notificationService;
-  late MedicineService medicineService;
+  late NotificationService _notificationService;
+  late MedicineService _medicineService;
   final _medicineId = const Uuid().v4();
   String pickedMedicineName = "";
   String typedIntakeType = "";
-  List<nt.Notification> notifications = List<nt.Notification>.empty(growable: true);
+  List<nt.Notification> notifications =
+      List<nt.Notification>.empty(growable: true);
 
   AddMedicineController() : super() {
     SharedPreferencesNotificationRepository repository =
         SharedPreferencesNotificationRepository();
-    notificationService = NotificationService(repository);
+    _notificationService = NotificationService(repository);
     MedicineToJsonConverter converter =
-        MedicineToJsonConverter(notificationService);
+        MedicineToJsonConverter(_notificationService);
     SharedPreferencesMedicineRepository medicineRepository =
         SharedPreferencesMedicineRepository(converter);
-    medicineService = MedicineService(medicineRepository);
+    _medicineService = MedicineService(medicineRepository);
   }
 
   saveMedicine() {
-    Medicine medicine = Medicine(_medicineId, pickedMedicineName, pickedMedicineName, notifications);
-    medicineService.addMedicine(medicine);
+    Medicine medicine = Medicine(
+        _medicineId, pickedMedicineName, pickedMedicineName, notifications);
+    _medicineService.addMedicine(medicine);
   }
 }

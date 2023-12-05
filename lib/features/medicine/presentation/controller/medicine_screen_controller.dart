@@ -1,15 +1,13 @@
-import 'dart:convert';
 import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
 import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/converter/medicine_to_json_converter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineScreenController {
   List<Medicine> medicines = [];
-  late final MedicineService medicineService;
+  late final MedicineService _medicineService;
 
   MedicineScreenController() : super() {
     SharedPreferencesNotificationRepository repository =
@@ -19,11 +17,11 @@ class MedicineScreenController {
         MedicineToJsonConverter(notificationService);
     SharedPreferencesMedicineRepository medicineRepository =
         SharedPreferencesMedicineRepository(converter);
-    medicineService = MedicineService(medicineRepository);
-    medicines = medicineService.getAllMedicines();
+    _medicineService = MedicineService(medicineRepository);
+    medicines = _medicineService.getAllMedicines();
   }
 
   void reloadMedicines() {
-    medicines = medicineService.getAllMedicines();
+    medicines = _medicineService.getAllMedicines();
   }
 }
