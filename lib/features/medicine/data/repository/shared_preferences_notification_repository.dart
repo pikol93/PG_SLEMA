@@ -7,14 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
-  late SharedPreferences prefs;
-
-  void initializeRepository() async {
-    prefs = await SharedPreferences.getInstance();
-  }
 
   @override
-  List<Notification> getAllNotificationsOfMedicine(String medicineId) {
+  List<Notification> getAllNotificationsByMedicine(String medicineId) {
     return List<Notification>.empty(growable: true);
     // TODO: implement getAllNotificationsOfMedicine
   }
@@ -39,7 +34,6 @@ class SharedPreferencesNotificationRepository
     final json = NotificationToJsonConverter.toJson(notification);
     jsonNotificationsList.add(jsonEncode(json));
     _updateNotificationsList(jsonNotificationsList);
-    print(jsonNotificationsList);
     getAllNotifications().asStream().forEach((element) {print(element);});
   }
 
@@ -59,12 +53,16 @@ class SharedPreferencesNotificationRepository
   }
 
   Future<List<String>> _getJsonNotificationsList() async {
+    final prefs = await SharedPreferences.getInstance();
+
     List<String>? jsonNotificationsList =
         prefs.getStringList(Notification.notificationListSharedPrefKey);
     return jsonNotificationsList ?? List<String>.empty(growable: true);
   }
 
   void _updateNotificationsList(List<String> jsonNotificationsList) async {
+    final prefs = await SharedPreferences.getInstance();
+
     prefs.setStringList(
         Notification.notificationListSharedPrefKey, jsonNotificationsList);
   }
