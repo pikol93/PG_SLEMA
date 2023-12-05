@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class Medicine {
   static String medicineListSharedPrefKey = 'medicines';
@@ -7,5 +7,5 @@ class Medicine {
   final String intakeType;
   final List<Notification> notifications;
 
-  Medicine(this.name, this.intakeType, this.notifications, this.id);
+  Medicine(this.id, this.name, this.intakeType, this.notifications);
 }

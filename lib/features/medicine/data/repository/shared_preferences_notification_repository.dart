@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/converter/notification_to_json_converter.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

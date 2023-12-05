@@ -1,5 +1,3 @@
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
-
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 abstract class NotificationRepository {
