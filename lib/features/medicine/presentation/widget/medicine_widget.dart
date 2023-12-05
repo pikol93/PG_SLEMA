@@ -34,7 +34,7 @@ class MedicineWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8.0),
           Text(
-            '${Medicine.getRepeatToText(medicine.repeat)} - ${medicine.intakeTime.hour}:${medicine.intakeTime.minute.toString().padLeft(2, '0')}',
+            medicine.intakeType,
           ),
         ],
       ),
