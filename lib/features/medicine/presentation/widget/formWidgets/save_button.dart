@@ -11,15 +11,6 @@ class CustomSaveButton extends StatelessWidget {
       required this.controller,
       required this.formKey,
       required this.onAddedMedicine});
-  //TODO: move it into some utility called Interface
-  //  MedicineNotificationDateValidator and
-  //  SingleTimeNotificationMedicineDateValidator in task SLEMA-61
-  bool isIntakeDateFromFuture(DateTime date, TimeOfDay time) {
-    DateTime selectedDateTime =
-        DateTime(date.year, date.month, date.day, time.hour, time.minute);
-
-    return selectedDateTime.isAfter(DateTime.now());
-  }
 
   @override
   Widget build(BuildContext context) {

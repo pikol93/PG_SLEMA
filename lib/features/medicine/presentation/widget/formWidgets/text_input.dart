@@ -26,7 +26,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         return null;
       },
       onChanged: (value) {
-        widget.onChanged;
+        widget.onChanged(value);
       },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(

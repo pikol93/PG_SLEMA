@@ -28,9 +28,9 @@ class AddMedicineController extends ChangeNotifier {
     _medicineService = MedicineService(medicineRepository);
   }
 
-  saveMedicine() {
+  Future saveMedicine() async {
     Medicine medicine = Medicine(
-        _medicineId, pickedMedicineName, pickedMedicineName, notifications);
+        _medicineId, pickedMedicineName, typedIntakeType, notifications);
     _medicineService.addMedicine(medicine);
   }
 }
