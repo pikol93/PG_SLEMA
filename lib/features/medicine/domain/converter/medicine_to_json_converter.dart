@@ -1,11 +1,11 @@
-import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
+import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineToJsonConverter {
 
-  final NotificationRepository repository;
+  final NotificationService service;
 
-  MedicineToJsonConverter(this.repository);
+  MedicineToJsonConverter(this.service);
 
   Medicine fromJson(Map<String, dynamic> json) {
     String medicineId = json['id'];
@@ -13,7 +13,7 @@ class MedicineToJsonConverter {
         medicineId,
         json['name'],
         json['intakeType'],
-        repository.getAllNotificationsByMedicine(medicineId));
+        service.getAllNotificationsByMedicine(medicineId));
   }
 
   Map<String, dynamic> toJson(Medicine medicine) => {

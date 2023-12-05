@@ -7,49 +7,56 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
-
   @override
   List<Notification> getAllNotificationsByMedicine(String medicineId) {
+    _getJsonNotificationsList().then((jsonNotificationsList) {
+      return jsonNotificationsList
+          .map((jsonString) => jsonDecode(jsonString))
+          .map((json) => NotificationToJsonConverter.fromJson(json))
+          .where((element) => element.medicineId == medicineId)
+          .toList(growable: true);
+    });
     return List<Notification>.empty(growable: true);
-    // TODO: implement getAllNotificationsOfMedicine
   }
 
   @override
-  Future deleteNotification(Notification notification) async {
-    List<String> jsonNotificationsList = await _getJsonNotificationsList();
-    jsonNotificationsList = jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationToJsonConverter.fromJson(json))
-        .where((element) =>
-            element.id.compareTo(notification.id) == 0 ? false : true)
-        .map((element) => NotificationToJsonConverter.toJson(element))
-        .map((json) => jsonEncode(json))
-        .toList();
-    _updateNotificationsList(jsonNotificationsList);
+  void deleteNotification(Notification notification) {
+    _getJsonNotificationsList().then((jsonNotificationsList) {
+      jsonNotificationsList = jsonNotificationsList
+          .map((jsonString) => jsonDecode(jsonString))
+          .map((json) => NotificationToJsonConverter.fromJson(json))
+          .where((element) => element.id == notification.id)
+          .map((element) => NotificationToJsonConverter.toJson(element))
+          .map((json) => jsonEncode(json))
+          .toList(growable: true);
+      _updateNotificationsList(jsonNotificationsList);
+    });
   }
 
   @override
-  Future addNotification(Notification notification) async {
-    List<String> jsonNotificationsList = await _getJsonNotificationsList();
-    final json = NotificationToJsonConverter.toJson(notification);
-    jsonNotificationsList.add(jsonEncode(json));
-    _updateNotificationsList(jsonNotificationsList);
-    getAllNotifications().asStream().forEach((element) {print(element);});
+  void addNotification(Notification notification) {
+    _getJsonNotificationsList().then((jsonNotificationsList) {
+      final json = NotificationToJsonConverter.toJson(notification);
+      jsonNotificationsList.add(jsonEncode(json));
+      _updateNotificationsList(jsonNotificationsList);
+    });
   }
 
   @override
-  Future updateNotification(Notification notification) async {
-    await deleteNotification(notification);
+  void updateNotification(Notification notification) {
+    deleteNotification(notification);
     addNotification(notification);
   }
 
   @override
-  Future<List<Notification>> getAllNotifications() async {
-    List<String> jsonNotificationsList = await _getJsonNotificationsList();
-    return jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationToJsonConverter.fromJson(json))
-        .toList();
+  List<Notification> getAllNotifications() {
+    _getJsonNotificationsList().then((jsonNotificationsList) {
+      return jsonNotificationsList
+          .map((jsonString) => jsonDecode(jsonString))
+          .map((json) => NotificationToJsonConverter.fromJson(json))
+          .toList(growable: true);
+    });
+    return List<Notification>.empty(growable: true);
   }
 
   Future<List<String>> _getJsonNotificationsList() async {

@@ -27,4 +27,8 @@ class NotificationService {
     //TODO: remove scheduling it
     //TODO: make it schedulable again
   }
+
+  List<Notification> getAllNotificationsByMedicine(String medicineId) {
+    return repository.getAllNotificationsByMedicine(medicineId);
+  }
 }
