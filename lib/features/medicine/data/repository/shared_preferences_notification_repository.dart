@@ -7,7 +7,6 @@ import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
-
   final SharedPreferencesConnector connector = SharedPreferencesConnector();
 
   @override
@@ -67,6 +66,7 @@ class SharedPreferencesNotificationRepository
   }
 
   void _updateNotificationsList(List<String> jsonNotificationsList) {
-    connector.updateList(jsonNotificationsList, Notification.notificationListSharedPrefKey);
+    connector.updateList(
+        jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
 }

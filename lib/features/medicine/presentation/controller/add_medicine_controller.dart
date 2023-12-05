@@ -21,7 +21,8 @@ class AddMedicineController extends ChangeNotifier {
   String pickedMedicineName = "";
 
   AddMedicineController() : super() {
-    SharedPreferencesNotificationRepository repository = SharedPreferencesNotificationRepository();
+    SharedPreferencesNotificationRepository repository =
+        SharedPreferencesNotificationRepository();
     repository.initializeRepository();
     notificationService = NotificationService(repository);
   }
