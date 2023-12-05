@@ -32,7 +32,6 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
           .map((json) => jsonEncode(json))
           .toList(growable: true);
       _updateMedicinesList(jsonMedicinesList);
-      //TODO cascade delete
     });
   }
 
