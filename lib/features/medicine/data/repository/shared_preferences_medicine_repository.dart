@@ -23,7 +23,17 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
 
   @override
   void deleteMedicine(Medicine medicine) {
-    // TODO: implement deleteMedicine
+    _getJsonMedicinesList().then((jsonMedicinesList) {
+      jsonMedicinesList = jsonMedicinesList
+          .map((jsonString) => jsonDecode(jsonString))
+          .map((json) => converter.fromJson(json))
+          .where((element) => element.id == medicine.id)
+          .map((element) => converter.toJson(element))
+          .map((json) => jsonEncode(json))
+          .toList(growable: true);
+      _updateMedicinesList(jsonMedicinesList);
+      //TODO cascade delete
+    });
   }
 
   @override
