@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/converter/notification_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {
+
+  final SharedPreferencesConnector connector = SharedPreferencesConnector();
+
   @override
   List<Notification> getAllNotificationsByMedicine(String medicineId) {
     _getJsonNotificationsList().then((jsonNotificationsList) {
@@ -60,17 +63,10 @@ class SharedPreferencesNotificationRepository
   }
 
   Future<List<String>> _getJsonNotificationsList() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    List<String>? jsonNotificationsList =
-        prefs.getStringList(Notification.notificationListSharedPrefKey);
-    return jsonNotificationsList ?? List<String>.empty(growable: true);
+    return connector.getList(Notification.notificationListSharedPrefKey);
   }
 
-  void _updateNotificationsList(List<String> jsonNotificationsList) async {
-    final prefs = await SharedPreferences.getInstance();
-
-    prefs.setStringList(
-        Notification.notificationListSharedPrefKey, jsonNotificationsList);
+  void _updateNotificationsList(List<String> jsonNotificationsList) {
+    connector.updateList(jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
 }
