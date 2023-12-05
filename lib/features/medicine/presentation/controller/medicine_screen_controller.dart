@@ -18,10 +18,10 @@ class MedicineScreenController {
     SharedPreferencesMedicineRepository medicineRepository =
         SharedPreferencesMedicineRepository(converter);
     _medicineService = MedicineService(medicineRepository);
-    medicines = _medicineService.getAllMedicines();
+    _medicineService.getAllMedicines().then((value) => medicines = value);
   }
 
   void reloadMedicines() {
-    medicines = _medicineService.getAllMedicines();
+    _medicineService.getAllMedicines().then((value) => medicines = value);
   }
 }

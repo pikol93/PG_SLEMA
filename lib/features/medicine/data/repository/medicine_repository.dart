@@ -1,11 +1,11 @@
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 abstract class MedicineRepository {
-  List<Medicine> getAllMedicines();
+  Future<List<Medicine>> getAllMedicines();
 
-  void addMedicine(Medicine medicine);
+  Future addMedicine(Medicine medicine);
 
-  void updateMedicine(Medicine medicine);
+  Future updateMedicine(Medicine medicine);
 
-  void deleteMedicine(Medicine medicine);
+  Future deleteMedicine(Medicine medicine);
 }

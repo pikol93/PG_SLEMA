@@ -13,50 +13,46 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   SharedPreferencesMedicineRepository(this.converter);
 
   @override
-  void addMedicine(Medicine medicine) {
-    _getJsonMedicinesList().then((jsonMedicinesList) {
-      final json = converter.toJson(medicine);
-      jsonMedicinesList.add(jsonEncode(json));
-      _updateMedicinesList(jsonMedicinesList);
-    });
+  Future addMedicine(Medicine medicine) async {
+    var jsonMedicinesList = await _getJsonMedicinesList();
+    final json = converter.toJson(medicine);
+    jsonMedicinesList.add(jsonEncode(json));
+    _updateMedicinesList(jsonMedicinesList);
   }
 
   @override
-  void deleteMedicine(Medicine medicine) {
-    _getJsonMedicinesList().then((jsonMedicinesList) {
-      jsonMedicinesList = jsonMedicinesList
-          .map((jsonString) => jsonDecode(jsonString))
-          .map((json) => converter.fromJson(json))
-          .where((element) => element.id == medicine.id)
-          .map((element) => converter.toJson(element))
-          .map((json) => jsonEncode(json))
-          .toList(growable: true);
-      _updateMedicinesList(jsonMedicinesList);
-    });
+  Future deleteMedicine(Medicine medicine) async {
+    var jsonMedicinesList = await _getJsonMedicinesList();
+    jsonMedicinesList = jsonMedicinesList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => converter.fromJson(json))
+        .where((element) => element.id == medicine.id)
+        .map((element) => converter.toJson(element))
+        .map((json) => jsonEncode(json))
+        .toList(growable: true);
+    _updateMedicinesList(jsonMedicinesList);
   }
 
   @override
-  List<Medicine> getAllMedicines() {
-    _getJsonMedicinesList().then((jsonMedicinesList) {
-      return jsonMedicinesList
-          .map((jsonString) => jsonDecode(jsonString))
-          .map((json) => converter.fromJson(json))
-          .toList(growable: true);
-    });
-    return List<Medicine>.empty(growable: true);
+  Future<List<Medicine>> getAllMedicines() async {
+    var jsonMedicinesList = await _getJsonMedicinesList();
+    return jsonMedicinesList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => converter.fromJson(json))
+        .toList(growable: true);
   }
 
   @override
-  void updateMedicine(Medicine medicine) {
-    deleteMedicine(medicine);
+  Future updateMedicine(Medicine medicine) async {
+    await deleteMedicine(medicine);
     addMedicine(medicine);
   }
 
-  Future<List<String>> _getJsonMedicinesList() {
+  Future<List<String>> _getJsonMedicinesList() async {
     return connector.getList(Medicine.medicineListSharedPrefKey);
   }
 
-  void _updateMedicinesList(List<String> jsonMedicinesList) {
+  Future _updateMedicinesList(List<String> jsonMedicinesList) async {
     return connector.updateList(
         jsonMedicinesList, Medicine.medicineListSharedPrefKey);
   }
