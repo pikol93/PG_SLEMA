@@ -10,62 +10,57 @@ class SharedPreferencesNotificationRepository
   final SharedPreferencesConnector connector = SharedPreferencesConnector();
 
   @override
-  List<Notification> getAllNotificationsByMedicine(String medicineId) {
-    _getJsonNotificationsList().then((jsonNotificationsList) {
-      return jsonNotificationsList
-          .map((jsonString) => jsonDecode(jsonString))
-          .map((json) => NotificationToJsonConverter.fromJson(json))
-          .where((element) => element.medicineId == medicineId)
-          .toList(growable: true);
-    });
-    return List<Notification>.empty(growable: true);
+  Future<List<Notification>> getAllNotificationsByMedicine(
+      String medicineId) async {
+    var jsonNotificationsList = await _getJsonNotificationsList();
+    return jsonNotificationsList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .where((element) => element.medicineId == medicineId)
+        .toList(growable: true);
   }
 
   @override
-  void deleteNotification(Notification notification) {
-    _getJsonNotificationsList().then((jsonNotificationsList) {
-      jsonNotificationsList = jsonNotificationsList
-          .map((jsonString) => jsonDecode(jsonString))
-          .map((json) => NotificationToJsonConverter.fromJson(json))
-          .where((element) => element.id == notification.id)
-          .map((element) => NotificationToJsonConverter.toJson(element))
-          .map((json) => jsonEncode(json))
-          .toList(growable: true);
-      _updateNotificationsList(jsonNotificationsList);
-    });
+  Future deleteNotification(Notification notification) async {
+    var jsonNotificationsList = await _getJsonNotificationsList();
+    jsonNotificationsList = jsonNotificationsList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .where((element) => element.id == notification.id)
+        .map((element) => NotificationToJsonConverter.toJson(element))
+        .map((json) => jsonEncode(json))
+        .toList(growable: true);
+    _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
-  void addNotification(Notification notification) {
-    _getJsonNotificationsList().then((jsonNotificationsList) {
-      final json = NotificationToJsonConverter.toJson(notification);
-      jsonNotificationsList.add(jsonEncode(json));
-      _updateNotificationsList(jsonNotificationsList);
-    });
+  Future addNotification(Notification notification) async {
+    var jsonNotificationsList = await _getJsonNotificationsList();
+    final json = NotificationToJsonConverter.toJson(notification);
+    jsonNotificationsList.add(jsonEncode(json));
+    _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
-  void updateNotification(Notification notification) {
-    deleteNotification(notification);
+  Future updateNotification(Notification notification) async {
+    await deleteNotification(notification);
     addNotification(notification);
   }
 
   @override
-  List<Notification> getAllNotifications() {
-    _getJsonNotificationsList().then((jsonNotificationsList) {
-      return jsonNotificationsList
-          .map((jsonString) => jsonDecode(jsonString))
-          .map((json) => NotificationToJsonConverter.fromJson(json))
-          .toList(growable: true);
-    });
-    return List<Notification>.empty(growable: true);
+  Future<List<Notification>> getAllNotifications() async {
+    var jsonNotificationsList = await _getJsonNotificationsList();
+    return jsonNotificationsList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .toList(growable: true);
   }
 
   Future<List<String>> _getJsonNotificationsList() async {
     return connector.getList(Notification.notificationListSharedPrefKey);
   }
 
-  void _updateNotificationsList(List<String> jsonNotificationsList) {
+  Future _updateNotificationsList(List<String> jsonNotificationsList) async {
     connector.updateList(
         jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }

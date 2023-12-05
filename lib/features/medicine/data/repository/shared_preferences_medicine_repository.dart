@@ -23,9 +23,12 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future deleteMedicine(Medicine medicine) async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-    jsonMedicinesList = jsonMedicinesList
+    var medicinesList = await Future.wait(jsonMedicinesList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => converter.fromJson(json))
+        .toList());
+
+    medicinesList
         .where((element) => element.id == medicine.id)
         .map((element) => converter.toJson(element))
         .map((json) => jsonEncode(json))
@@ -36,10 +39,10 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future<List<Medicine>> getAllMedicines() async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-    return jsonMedicinesList
+    return Future.wait(jsonMedicinesList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => converter.fromJson(json))
-        .toList(growable: true);
+        .toList(growable: true));
   }
 
   @override

@@ -1,13 +1,13 @@
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 abstract class NotificationRepository {
-  List<Notification> getAllNotificationsByMedicine(String medicineId);
+  Future<List<Notification>> getAllNotificationsByMedicine(String medicineId);
 
-  List<Notification> getAllNotifications();
+  Future<List<Notification>> getAllNotifications();
 
-  void addNotification(Notification notification);
+  Future addNotification(Notification notification);
 
-  void updateNotification(Notification notification);
+  Future updateNotification(Notification notification);
 
-  void deleteNotification(Notification notification);
+  Future deleteNotification(Notification notification);
 }

@@ -8,18 +8,18 @@ class MedicineService {
   MedicineService(this.repository);
 
   Future<List<Medicine>> getAllMedicines() async {
-    return repository.getAllMedicines();
+    return await repository.getAllMedicines();
   }
 
-  Future addMedicine(Medicine medicine) async {
+  void addMedicine(Medicine medicine) {
     repository.addMedicine(medicine);
   }
 
-  Future updateMedicine(Medicine medicine) async {
+  void updateMedicine(Medicine medicine) {
     repository.updateMedicine(medicine);
   }
 
-  Future deleteMedicine(Medicine medicine) async {
+  void deleteMedicine(Medicine medicine) {
     repository.deleteMedicine(medicine);
     //TODO cascade delete -> onMedicineDeleted event? and observer NotificationService
     //  another approach -> notificationsRepository.deleteNotificationsByMedicine()

@@ -6,10 +6,10 @@ class MedicineToJsonConverter {
 
   MedicineToJsonConverter(this.service);
 
-  Medicine fromJson(Map<String, dynamic> json) {
+  Future<Medicine> fromJson(Map<String, dynamic> json) async {
     String medicineId = json['id'];
     return Medicine(medicineId, json['name'], json['intakeType'],
-        service.getAllNotificationsByMedicine(medicineId));
+        await service.getAllNotificationsByMedicine(medicineId));
   }
 
   Map<String, dynamic> toJson(Medicine medicine) => {

@@ -28,7 +28,8 @@ class NotificationService {
     //TODO: make it schedulable again
   }
 
-  List<Notification> getAllNotificationsByMedicine(String medicineId) {
-    return repository.getAllNotificationsByMedicine(medicineId);
+  Future<List<Notification>> getAllNotificationsByMedicine(
+      String medicineId) async {
+    return await repository.getAllNotificationsByMedicine(medicineId);
   }
 }
