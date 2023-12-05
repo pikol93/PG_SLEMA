@@ -15,7 +15,7 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  List<Notification> getAllNotificationsOfMedicine(Medicine medicine) {
+  List<Notification> getAllNotificationsOfMedicine(String medicineId) {
     return List<Notification>.empty(growable: true);
     // TODO: implement getAllNotificationsOfMedicine
   }
