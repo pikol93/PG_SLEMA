@@ -5,6 +5,7 @@ enum Frequency { singular, daily, everyTwoDays, everyThreeDays }
 class Notification {
   static String notificationListSharedPrefKey = 'notifications';
   final String id;
+  final String medicineId;
   final String title;
   final String body;
   final TimeOfDay notificationTime;
@@ -14,6 +15,7 @@ class Notification {
 
   Notification(
       this.id,
+      this.medicineId,
       this.title,
       this.body,
       this.notificationTime,

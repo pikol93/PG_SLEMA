@@ -5,6 +5,7 @@ class NotificationToJsonConverter {
   static Notification fromJson(Map<String, dynamic> json) {
     return Notification(
         json['id'],
+        json['medicineId'],
         json['title'],
         json['body'],
         JsonParser.parseTimeOfDayFromJson(json['notificationTime']),
@@ -16,6 +17,7 @@ class NotificationToJsonConverter {
 
   static Map<String, dynamic> toJson(Notification notification) => {
         'id': notification.id.toString(),
+        'medicineId': notification.id.toString(),
         'title': notification.title.toString(),
         'body': notification.body.toString(),
         'notificationTime':
