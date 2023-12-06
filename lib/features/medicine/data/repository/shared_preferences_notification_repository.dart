@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
+import 'package:pg_slema/features/medicine/data/dto/converter/notification_dto_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/notification_to_json_converter.dart';
+import 'package:pg_slema/features/medicine/domain/converter/notification_to_dto_converter.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class SharedPreferencesNotificationRepository
@@ -15,8 +16,9 @@ class SharedPreferencesNotificationRepository
     var jsonNotificationsList = await _getJsonNotificationsList();
     return jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .where((element) => element.medicineId == medicineId)
+        .map((dto) => NotificationToDtoConverter.fromDto(dto))
         .toList(growable: true);
   }
 
@@ -25,9 +27,9 @@ class SharedPreferencesNotificationRepository
     var jsonNotificationsList = await _getJsonNotificationsList();
     jsonNotificationsList = jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .where((element) => element.id == notification.id)
-        .map((element) => NotificationToJsonConverter.toJson(element))
+        .map((element) => NotificationDtoToJsonConverter.toJson(element))
         .map((json) => jsonEncode(json))
         .toList(growable: true);
     _updateNotificationsList(jsonNotificationsList);
@@ -36,7 +38,8 @@ class SharedPreferencesNotificationRepository
   @override
   Future addNotification(Notification notification) async {
     var jsonNotificationsList = await _getJsonNotificationsList();
-    final json = NotificationToJsonConverter.toJson(notification);
+    final dto = NotificationToDtoConverter.toDto(notification);
+    final json = NotificationDtoToJsonConverter.toJson(dto);
     jsonNotificationsList.add(jsonEncode(json));
     _updateNotificationsList(jsonNotificationsList);
   }
@@ -52,7 +55,8 @@ class SharedPreferencesNotificationRepository
     var jsonNotificationsList = await _getJsonNotificationsList();
     return jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationToJsonConverter.fromJson(json))
+        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
+        .map((dto) => NotificationToDtoConverter.fromDto(dto))
         .toList(growable: true);
   }
 
