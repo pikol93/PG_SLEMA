@@ -21,7 +21,8 @@ class AddMedicineController extends ChangeNotifier {
     _notificationService = NotificationService(notificationRepository);
     final converter = MedicineToDtoConverter(_notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService = MedicineService(medicineRepository, _notificationService);
+    _medicineService =
+        MedicineService(medicineRepository, _notificationService);
   }
 
   Future saveMedicine() async {
