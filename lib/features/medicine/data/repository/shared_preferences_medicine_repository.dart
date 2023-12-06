@@ -1,21 +1,23 @@
 import 'dart:convert';
 
 import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
+import 'package:pg_slema/features/medicine/data/dto/converter/medicine_dto_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
-import 'package:pg_slema/features/medicine/data/dto/converter/medicine_to_json_converter.dart';
+import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class SharedPreferencesMedicineRepository extends MedicineRepository {
   final SharedPreferencesConnector connector = SharedPreferencesConnector();
 
-  final MedicineToJsonConverter converter;
+  final MedicineToDtoConverter medicineConverter;
 
-  SharedPreferencesMedicineRepository(this.converter);
+  SharedPreferencesMedicineRepository(this.medicineConverter);
 
   @override
   Future addMedicine(Medicine medicine) async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-    final json = converter.toJson(medicine);
+    final dto = medicineConverter.toDto(medicine);
+    final json = MedicineDtoToJsonConverter.toJson(dto);
     jsonMedicinesList.add(jsonEncode(json));
     _updateMedicinesList(jsonMedicinesList);
   }
@@ -23,14 +25,12 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future deleteMedicine(Medicine medicine) async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-    var medicinesList = await Future.wait(jsonMedicinesList
+    
+    jsonMedicinesList
         .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => converter.fromJson(json))
-        .toList());
-
-    medicinesList
-        .where((element) => element.id == medicine.id)
-        .map((element) => converter.toJson(element))
+        .map((json) => MedicineDtoToJsonConverter.fromJson(json))
+        .where((dto) => dto.id == medicine.id)
+        .map((dto) => MedicineDtoToJsonConverter.toJson(dto))
         .map((json) => jsonEncode(json))
         .toList(growable: true);
     _updateMedicinesList(jsonMedicinesList);
@@ -41,7 +41,8 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
     var jsonMedicinesList = await _getJsonMedicinesList();
     return Future.wait(jsonMedicinesList
         .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => converter.fromJson(json))
+        .map((json) => MedicineDtoToJsonConverter.fromJson(json))
+        .map((dto) => medicineConverter.fromDto(dto))
         .toList(growable: true));
   }
 
