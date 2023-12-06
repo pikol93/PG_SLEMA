@@ -25,7 +25,7 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future deleteMedicine(Medicine medicine) async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-    
+
     jsonMedicinesList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => MedicineDtoToJsonConverter.fromJson(json))
