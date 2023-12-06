@@ -14,7 +14,7 @@ class MedicineScreenController {
     final notificationService = NotificationService(notificationRepository);
     final converter = MedicineToDtoConverter(notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService = MedicineService(medicineRepository);
+    _medicineService = MedicineService(medicineRepository, notificationService);
     _medicineService.getAllMedicines().then((value) => medicines = value);
   }
 

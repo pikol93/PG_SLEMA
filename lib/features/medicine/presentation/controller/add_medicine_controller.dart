@@ -21,12 +21,13 @@ class AddMedicineController extends ChangeNotifier {
     _notificationService = NotificationService(notificationRepository);
     final converter = MedicineToDtoConverter(_notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService = MedicineService(medicineRepository);
+    _medicineService = MedicineService(medicineRepository, _notificationService);
   }
 
   Future saveMedicine() async {
     Medicine medicine = Medicine(
         const Uuid().v4(), pickedMedicineName, typedIntakeType, notifications);
     _medicineService.addMedicine(medicine);
+    notifications.forEach(_notificationService.addNotification);
   }
 }
