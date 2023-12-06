@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
 import 'dart:async';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationSchedulingService {
+
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -27,32 +30,46 @@ class NotificationSchedulingService {
             (NotificationResponse notificationResponse) async {});
   }
 
-  Future scheduleNotification(
-      {int id = 0,
-      String? title,
-      String? body,
-      String? payload,
-      required DateTime scheduledNotificationDateTime}) async {
+  Future scheduleNotification(nt.Notification notification) async {
+    switch(notification.notificationFrequency) {
+      case nt.Frequency.singular:
+        _scheduleSingularNotification(notification);
+        break;
+        default:
+    }
+  }
+
+  Future cancelNotification(nt.Notification notification) async {
+    await _flutterLocalNotificationsPlugin.cancel(notification.scheduledId);
+  }
+
+  Future _scheduleSingularNotification(nt.Notification notification) async {
+    DateTime calculatedNotificationDateTime = _calculateSingularNotificationDateTime(notification);
     return _flutterLocalNotificationsPlugin.zonedSchedule(
-        id,
-        title,
-        body,
-        tz.TZDateTime.from(scheduledNotificationDateTime, tz.local),
+        notification.scheduledId,
+        notification.title,
+        notification.body,
+        tz.TZDateTime.from(calculatedNotificationDateTime, tz.local),
         await _notificationDetails(),
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
-  Future showNotification(
-      {int id = 0, String? title, String? body, String? payload}) async {
-    return _flutterLocalNotificationsPlugin.show(
-        id, title, body, await _notificationDetails());
-  }
+  // Shows notification when executed
+  // Future showNotification(
+  //     {int id = 0, String? title, String? body, String? payload}) async {
+  //   return _flutterLocalNotificationsPlugin.show(
+  //       id, title, body, await _notificationDetails());
+  // }
 
   _notificationDetails() {
     return const NotificationDetails(
         android: AndroidNotificationDetails('channelId', 'channelName',
             importance: Importance.max),
         iOS: DarwinNotificationDetails());
+  }
+
+  DateTime _calculateSingularNotificationDateTime(nt.Notification notification) {
+      return DateTime(notification.lastNotificationDate.year, notification.lastNotificationDate.month, notification.lastNotificationDate.day, notification.notificationTime.hour, notification.notificationTime.minute);
   }
 }

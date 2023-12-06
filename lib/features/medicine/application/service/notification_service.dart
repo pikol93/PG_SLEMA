@@ -14,18 +14,18 @@ class NotificationService {
 
   void addNotification(Notification notification) {
     repository.addNotification(notification);
-    //TODO: make it schedulable
+    schedulingService.scheduleNotification(notification);
   }
 
   void deleteNotification(Notification notification) {
+    schedulingService.cancelNotification(notification);
     repository.deleteNotification(notification);
-    //TODO: remove scheduling it
   }
 
   void updateNotification(Notification notification) {
+    schedulingService.cancelNotification(notification);
     repository.updateNotification(notification);
-    //TODO: remove scheduling it
-    //TODO: make it schedulable again
+    schedulingService.scheduleNotification(notification);
   }
 
   Future<List<Notification>> getAllNotificationsByMedicine(
