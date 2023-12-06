@@ -1,9 +1,10 @@
+import 'package:pg_slema/features/medicine/data/dto/notification_dto.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 import 'package:pg_slema/utils/json/json_parser.dart';
 
-class NotificationToJsonConverter {
-  static Notification fromJson(Map<String, dynamic> json) {
-    return Notification(
+class NotificationDtoToJsonConverter {
+  static NotificationDto fromJson(Map<String, dynamic> json) {
+    return NotificationDto(
         json['id'],
         json['medicineId'],
         json['title'],
@@ -15,7 +16,7 @@ class NotificationToJsonConverter {
             json['notificationFrequency'], Frequency.values));
   }
 
-  static Map<String, dynamic> toJson(Notification notification) => {
+  static Map<String, dynamic> toJson(NotificationDto notification) => {
         'id': notification.id.toString(),
         'medicineId': notification.id.toString(),
         'title': notification.title.toString(),

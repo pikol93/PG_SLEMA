@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/medicine/data/dto/medicineDto.dart';
+import 'package:pg_slema/features/medicine/data/dto/medicine_dto.dart';
 
 class MedicineDtoToJsonConverter {
 
