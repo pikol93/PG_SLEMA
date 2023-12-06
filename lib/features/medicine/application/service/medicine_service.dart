@@ -1,3 +1,4 @@
+import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
 
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
@@ -5,7 +6,9 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 class MedicineService {
   final MedicineRepository repository;
 
-  MedicineService(this.repository);
+  final NotificationService notificationService;
+
+  MedicineService(this.repository, this.notificationService);
 
   Future<List<Medicine>> getAllMedicines() async {
     return repository.getAllMedicines();
@@ -21,7 +24,6 @@ class MedicineService {
 
   void deleteMedicine(Medicine medicine) {
     repository.deleteMedicine(medicine);
-    //TODO cascade delete -> onMedicineDeleted event? and observer NotificationService
-    //  another approach -> notificationsRepository.deleteNotificationsByMedicine()
+    notificationService.deleteNotificationsByMedicine(medicine.id);
   }
 }

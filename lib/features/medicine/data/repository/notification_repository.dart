@@ -10,4 +10,6 @@ abstract class NotificationRepository {
   Future updateNotification(Notification notification);
 
   Future deleteNotification(Notification notification);
+
+  Future deleteAll(List<Notification> notifications);
 }

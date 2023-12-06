@@ -12,17 +12,17 @@ class NotificationService {
     schedulingService.initNotifications();
   }
 
-  void addNotification(Notification notification) {
+  void addNotification(Notification notification) async {
     repository.addNotification(notification);
     schedulingService.scheduleNotification(notification);
   }
 
-  void deleteNotification(Notification notification) {
+  void deleteNotification(Notification notification) async {
     schedulingService.cancelNotification(notification);
     repository.deleteNotification(notification);
   }
 
-  void updateNotification(Notification notification) {
+  void updateNotification(Notification notification) async {
     schedulingService.cancelNotification(notification);
     repository.updateNotification(notification);
     schedulingService.scheduleNotification(notification);
@@ -31,5 +31,11 @@ class NotificationService {
   Future<List<Notification>> getAllNotificationsByMedicine(
       String medicineId) async {
     return await repository.getAllNotificationsByMedicine(medicineId);
+  }
+
+  void deleteNotificationsByMedicine(String medicineId) async {
+    var notifications =
+        await repository.getAllNotificationsByMedicine(medicineId);
+    repository.deleteAll(notifications);
   }
 }

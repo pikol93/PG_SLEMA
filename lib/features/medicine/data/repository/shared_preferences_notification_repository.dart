@@ -68,4 +68,19 @@ class SharedPreferencesNotificationRepository
     connector.updateList(
         jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
+
+  @override
+  Future deleteAll(List<Notification> notifications) async {
+    var notificationsIds = notifications.map((e) => e.id).toList();
+
+    var jsonNotificationsList = await _getJsonNotificationsList();
+    jsonNotificationsList = jsonNotificationsList
+        .map((jsonString) => jsonDecode(jsonString))
+        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
+        .where((element) => !notificationsIds.contains(element.id))
+        .map((element) => NotificationDtoToJsonConverter.toJson(element))
+        .map((json) => jsonEncode(json))
+        .toList(growable: true);
+    _updateNotificationsList(jsonNotificationsList);
+  }
 }

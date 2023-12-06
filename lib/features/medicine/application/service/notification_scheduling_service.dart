@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
 import 'dart:async';
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationSchedulingService {
-
   static final FlutterLocalNotificationsPlugin
       _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
@@ -31,11 +29,11 @@ class NotificationSchedulingService {
   }
 
   Future scheduleNotification(nt.Notification notification) async {
-    switch(notification.notificationFrequency) {
+    switch (notification.notificationFrequency) {
       case nt.Frequency.singular:
         _scheduleSingularNotification(notification);
         break;
-        default:
+      default:
     }
   }
 
@@ -44,7 +42,8 @@ class NotificationSchedulingService {
   }
 
   Future _scheduleSingularNotification(nt.Notification notification) async {
-    DateTime calculatedNotificationDateTime = _calculateSingularNotificationDateTime(notification);
+    DateTime calculatedNotificationDateTime =
+        _calculateSingularNotificationDateTime(notification);
     return _flutterLocalNotificationsPlugin.zonedSchedule(
         notification.scheduledId,
         notification.title,
@@ -69,7 +68,13 @@ class NotificationSchedulingService {
         iOS: DarwinNotificationDetails());
   }
 
-  DateTime _calculateSingularNotificationDateTime(nt.Notification notification) {
-      return DateTime(notification.lastNotificationDate.year, notification.lastNotificationDate.month, notification.lastNotificationDate.day, notification.notificationTime.hour, notification.notificationTime.minute);
+  DateTime _calculateSingularNotificationDateTime(
+      nt.Notification notification) {
+    return DateTime(
+        notification.lastNotificationDate.year,
+        notification.lastNotificationDate.month,
+        notification.lastNotificationDate.day,
+        notification.notificationTime.hour,
+        notification.notificationTime.minute);
   }
 }
