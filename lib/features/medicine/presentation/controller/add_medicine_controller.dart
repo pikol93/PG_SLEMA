@@ -11,7 +11,6 @@ import 'package:uuid/uuid.dart';
 class AddMedicineController extends ChangeNotifier {
   late NotificationService _notificationService;
   late MedicineService _medicineService;
-  final _medicineId = const Uuid().v4();
   String pickedMedicineName = "";
   String typedIntakeType = "";
   List<nt.Notification> notifications =
@@ -27,7 +26,7 @@ class AddMedicineController extends ChangeNotifier {
 
   Future saveMedicine() async {
     Medicine medicine = Medicine(
-        _medicineId, pickedMedicineName, typedIntakeType, notifications);
+        const Uuid().v4(), pickedMedicineName, typedIntakeType, notifications);
     _medicineService.addMedicine(medicine);
   }
 }
