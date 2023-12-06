@@ -8,7 +8,7 @@ class MedicineService {
   MedicineService(this.repository);
 
   Future<List<Medicine>> getAllMedicines() async {
-    return await repository.getAllMedicines();
+    return repository.getAllMedicines();
   }
 
   void addMedicine(Medicine medicine) {

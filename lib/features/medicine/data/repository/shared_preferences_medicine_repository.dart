@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/medicine_to_json_converter.dart';
+import 'package:pg_slema/features/medicine/data/dto/converter/medicine_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class SharedPreferencesMedicineRepository extends MedicineRepository {
