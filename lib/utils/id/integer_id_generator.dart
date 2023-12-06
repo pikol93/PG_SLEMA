@@ -1,7 +1,6 @@
 import 'dart:math';
 
 class IntegerIdGenerator {
-
   static const maxInt = -1 >>> 1;
 
   static int generateRandomId() {
@@ -13,7 +12,7 @@ class IntegerIdGenerator {
     Random random = Random();
     int randomId;
     do {
-      randomId =  random.nextInt(maxInt);
+      randomId = random.nextInt(maxInt);
     } while (forbiddenIds.contains(randomId));
     return randomId;
   }

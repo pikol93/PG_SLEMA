@@ -12,6 +12,7 @@ class Notification {
   final DateTime firstNotificationDate;
   final DateTime lastNotificationDate;
   final Frequency notificationFrequency;
+  final int scheduledId;
 
   Notification(
       this.id,
@@ -21,5 +22,6 @@ class Notification {
       this.notificationTime,
       this.firstNotificationDate,
       this.lastNotificationDate,
-      this.notificationFrequency);
+      this.notificationFrequency,
+      this.scheduledId);
 }

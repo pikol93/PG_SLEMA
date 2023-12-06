@@ -13,7 +13,8 @@ class NotificationDtoToJsonConverter {
         DateTime.parse(json['firstNotificationDate']),
         DateTime.parse(json['lastNotificationDate']),
         JsonParser.parseEnumFromJson<Frequency>(
-            json['notificationFrequency'], Frequency.values));
+            json['notificationFrequency'], Frequency.values),
+        json['scheduledId']);
   }
 
   static Map<String, dynamic> toJson(NotificationDto notification) => {
@@ -26,6 +27,7 @@ class NotificationDtoToJsonConverter {
         'firstNotificationDate': notification.firstNotificationDate.toString(),
         'lastNotificationDate': notification.lastNotificationDate.toString(),
         'notificationFrequency':
-            JsonParser.parseEnumToJson(notification.notificationFrequency)
+            JsonParser.parseEnumToJson(notification.notificationFrequency),
+        'scheduledId': notification.scheduledId
       };
 }
