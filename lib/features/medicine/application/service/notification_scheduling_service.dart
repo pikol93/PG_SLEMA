@@ -16,8 +16,7 @@ class NotificationSchedulingService {
         requestAlertPermission: true,
         requestBadgePermission: true,
         requestSoundPermission: true,
-        onDidReceiveLocalNotification:
-            (int id, String? title, String? body, String? payload) async {});
+        onDidReceiveLocalNotification: _receiveLocalNotificationOnIOS);
 
     var initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
@@ -71,4 +70,7 @@ class NotificationSchedulingService {
             importance: Importance.max),
         iOS: DarwinNotificationDetails());
   }
+
+  void _receiveLocalNotificationOnIOS(
+      int id, String? title, String? body, String? payload) async {}
 }
