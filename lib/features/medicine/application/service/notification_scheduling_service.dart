@@ -49,16 +49,9 @@ class NotificationSchedulingService {
         notification.title,
         notification.body,
         tz.TZDateTime.from(calculatedNotificationDateTime, tz.local),
-        await _notificationDetails(),
+        await _generateDetails(),
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
-  }
-
-  _notificationDetails() {
-    return const NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName',
-            importance: Importance.max),
-        iOS: DarwinNotificationDetails());
   }
 
   DateTime _calculateSingularNotificationDateTime(
@@ -69,5 +62,12 @@ class NotificationSchedulingService {
         notification.lastNotificationDate.day,
         notification.notificationTime.hour,
         notification.notificationTime.minute);
+  }
+
+  NotificationDetails _generateDetails() {
+    return const NotificationDetails(
+        android: AndroidNotificationDetails('channelId', 'channelName',
+            importance: Importance.max),
+        iOS: DarwinNotificationDetails());
   }
 }

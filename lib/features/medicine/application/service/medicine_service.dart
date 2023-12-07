@@ -11,19 +11,19 @@ class MedicineService {
   MedicineService(this.repository, this.notificationService);
 
   Future<List<Medicine>> getAllMedicines() async {
-    return repository.getAllMedicines();
+    return await repository.getAllMedicines();
   }
 
-  void addMedicine(Medicine medicine) {
-    repository.addMedicine(medicine);
+  Future addMedicine(Medicine medicine) async {
+    await repository.addMedicine(medicine);
   }
 
-  void updateMedicine(Medicine medicine) {
-    repository.updateMedicine(medicine);
+  Future updateMedicine(Medicine medicine) async {
+    await repository.updateMedicine(medicine);
   }
 
-  void deleteMedicine(Medicine medicine) {
-    repository.deleteMedicine(medicine);
-    notificationService.deleteNotificationsByMedicine(medicine.id);
+  Future deleteMedicine(Medicine medicine) async {
+    await notificationService.deleteNotificationsByMedicine(medicine.id);
+    await repository.deleteMedicine(medicine);
   }
 }

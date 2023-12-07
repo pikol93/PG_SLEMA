@@ -12,20 +12,20 @@ class NotificationService {
     schedulingService.initNotifications();
   }
 
-  void addNotification(Notification notification) async {
-    repository.addNotification(notification);
-    schedulingService.scheduleNotification(notification);
+  Future addNotification(Notification notification) async {
+    await schedulingService.scheduleNotification(notification);
+    await repository.addNotification(notification);
   }
 
-  void deleteNotification(Notification notification) async {
-    schedulingService.cancelNotification(notification);
-    repository.deleteNotification(notification);
+  Future deleteNotification(Notification notification) async {
+    await repository.deleteNotification(notification);
+    await schedulingService.cancelNotification(notification);
   }
 
-  void updateNotification(Notification notification) async {
-    schedulingService.cancelNotification(notification);
-    repository.updateNotification(notification);
-    schedulingService.scheduleNotification(notification);
+  Future updateNotification(Notification notification) async {
+    await schedulingService.cancelNotification(notification);
+    await schedulingService.scheduleNotification(notification);
+    await repository.updateNotification(notification);
   }
 
   Future<List<Notification>> getAllNotificationsByMedicine(
@@ -33,9 +33,9 @@ class NotificationService {
     return await repository.getAllNotificationsByMedicine(medicineId);
   }
 
-  void deleteNotificationsByMedicine(String medicineId) async {
+  Future deleteNotificationsByMedicine(String medicineId) async {
     var notifications =
         await repository.getAllNotificationsByMedicine(medicineId);
-    repository.deleteAll(notifications);
+    await repository.deleteAll(notifications);
   }
 }
