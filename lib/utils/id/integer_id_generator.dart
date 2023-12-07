@@ -1,7 +1,7 @@
 import 'dart:math';
 
 class IntegerIdGenerator {
-  static const maxInt = -1 >>> 1;
+  static const maxInt = -1 >>> 1; //Works only when -1 is integer coded in U2
 
   static int generateRandomId() {
     Random random = Random();
