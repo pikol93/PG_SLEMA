@@ -1,7 +1,7 @@
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class Medicine {
-  static String medicineListSharedPrefKey = 'medicines';
+  static const String medicineListSharedPrefKey = 'medicines';
   final String id;
   final String name;
   final String intakeType;

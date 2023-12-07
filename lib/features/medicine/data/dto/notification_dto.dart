@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart';
 
 class NotificationDto {
-  static String notificationListSharedPrefKey = 'notifications';
   final String id;
   final String medicineId;
   final String title;
