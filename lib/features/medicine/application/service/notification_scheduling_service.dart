@@ -54,13 +54,6 @@ class NotificationSchedulingService {
             UILocalNotificationDateInterpretation.absoluteTime);
   }
 
-  // Shows notification when executed
-  // Future showNotification(
-  //     {int id = 0, String? title, String? body, String? payload}) async {
-  //   return _flutterLocalNotificationsPlugin.show(
-  //       id, title, body, await _notificationDetails());
-  // }
-
   _notificationDetails() {
     return const NotificationDetails(
         android: AndroidNotificationDetails('channelId', 'channelName',

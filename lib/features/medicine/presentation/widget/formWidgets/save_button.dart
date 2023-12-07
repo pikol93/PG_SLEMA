@@ -21,8 +21,6 @@ class CustomSaveButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState!.validate()) {
             controller.saveMedicine().then((_) {
-              // Call callback down the three of widgets down to medicine_screen
-              // to update list of medicines
               onAddedMedicine.call();
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
