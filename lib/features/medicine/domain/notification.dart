@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-enum Frequency { singular, daily, everyTwoDays, everyThreeDays }
+import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class Notification {
   static const String notificationListSharedPrefKey = 'notifications';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/domain/notification.dart';
+import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class NotificationDto {
   final String id;

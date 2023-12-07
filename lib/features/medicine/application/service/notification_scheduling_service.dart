@@ -1,5 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
+import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'dart:async';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -30,7 +31,7 @@ class NotificationSchedulingService {
 
   Future scheduleNotification(nt.Notification notification) async {
     switch (notification.notificationFrequency) {
-      case nt.Frequency.singular:
+      case Frequency.singular:
         _scheduleSingularNotification(notification);
         break;
       default:
@@ -49,7 +50,7 @@ class NotificationSchedulingService {
         notification.title,
         notification.body,
         tz.TZDateTime.from(calculatedNotificationDateTime, tz.local),
-        await _generateDetails(),
+        _generateDetails(),
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
