@@ -19,7 +19,7 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
     final dto = medicineConverter.toDto(medicine);
     final json = MedicineDtoToJsonConverter.toJson(dto);
     jsonMedicinesList.add(jsonEncode(json));
-    _updateMedicinesList(jsonMedicinesList);
+    await _updateMedicinesList(jsonMedicinesList);
   }
 
   @override
@@ -33,7 +33,7 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
         .map((dto) => MedicineDtoToJsonConverter.toJson(dto))
         .map((json) => jsonEncode(json))
         .toList(growable: true);
-    _updateMedicinesList(jsonMedicinesList);
+    await _updateMedicinesList(jsonMedicinesList);
   }
 
   @override
@@ -49,15 +49,15 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future updateMedicine(Medicine medicine) async {
     await deleteMedicine(medicine);
-    addMedicine(medicine);
+    await addMedicine(medicine);
   }
 
   Future<List<String>> _getJsonMedicinesList() async {
-    return connector.getList(Medicine.medicineListSharedPrefKey);
+    return await connector.getList(Medicine.medicineListSharedPrefKey);
   }
 
   Future _updateMedicinesList(List<String> jsonMedicinesList) async {
-    return connector.updateList(
+    return await connector.updateList(
         jsonMedicinesList, Medicine.medicineListSharedPrefKey);
   }
 }

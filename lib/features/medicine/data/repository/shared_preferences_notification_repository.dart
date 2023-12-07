@@ -32,7 +32,7 @@ class SharedPreferencesNotificationRepository
         .map((element) => NotificationDtoToJsonConverter.toJson(element))
         .map((json) => jsonEncode(json))
         .toList(growable: true);
-    _updateNotificationsList(jsonNotificationsList);
+    await _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
@@ -41,13 +41,13 @@ class SharedPreferencesNotificationRepository
     final dto = NotificationToDtoConverter.toDto(notification);
     final json = NotificationDtoToJsonConverter.toJson(dto);
     jsonNotificationsList.add(jsonEncode(json));
-    _updateNotificationsList(jsonNotificationsList);
+    await _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
   Future updateNotification(Notification notification) async {
     await deleteNotification(notification);
-    addNotification(notification);
+    await addNotification(notification);
   }
 
   @override
@@ -58,15 +58,6 @@ class SharedPreferencesNotificationRepository
         .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .map((dto) => NotificationToDtoConverter.fromDto(dto))
         .toList(growable: true);
-  }
-
-  Future<List<String>> _getJsonNotificationsList() async {
-    return connector.getList(Notification.notificationListSharedPrefKey);
-  }
-
-  Future _updateNotificationsList(List<String> jsonNotificationsList) async {
-    connector.updateList(
-        jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
 
   @override
@@ -81,6 +72,15 @@ class SharedPreferencesNotificationRepository
         .map((element) => NotificationDtoToJsonConverter.toJson(element))
         .map((json) => jsonEncode(json))
         .toList(growable: true);
-    _updateNotificationsList(jsonNotificationsList);
+    await _updateNotificationsList(jsonNotificationsList);
+  }
+
+  Future<List<String>> _getJsonNotificationsList() async {
+    return await connector.getList(Notification.notificationListSharedPrefKey);
+  }
+
+  Future _updateNotificationsList(List<String> jsonNotificationsList) async {
+    return await connector.updateList(
+        jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
 }

@@ -8,7 +8,7 @@ class SharedPreferencesConnector {
     return list ?? List<String>.empty(growable: true);
   }
 
-  void updateList(List<String> list, String listKey) async {
+  Future updateList(List<String> list, String listKey) async {
     final prefs = await SharedPreferences.getInstance();
 
     prefs.setStringList(listKey, list);
