@@ -1,6 +1,6 @@
-import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/data/dto/medicine_dto.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/notification/application/service/notification_service.dart';
 
 class MedicineToDtoConverter {
   final NotificationService service;

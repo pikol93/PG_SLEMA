@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
-import 'package:pg_slema/features/medicine/data/dto/converter/notification_dto_to_json_converter.dart';
-import 'package:pg_slema/features/medicine/data/repository/notification_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/notification_to_dto_converter.dart';
-import 'package:pg_slema/features/medicine/domain/notification.dart';
+import 'package:pg_slema/features/notification/data/converter/notification_dto_to_json_converter.dart';
+import 'package:pg_slema/features/notification/data/repository/notification_repository.dart';
+import 'package:pg_slema/features/notification/domain/converter/notification_to_dto_converter.dart';
+import 'package:pg_slema/features/notification/domain/notification.dart';
+import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 
 class SharedPreferencesNotificationRepository
     implements NotificationRepository {

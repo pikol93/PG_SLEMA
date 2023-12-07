@@ -1,5 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:pg_slema/features/medicine/domain/notification.dart' as nt;
+import 'package:pg_slema/features/notification/domain/notification.dart' as nt;
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'dart:async';
 import 'package:timezone/timezone.dart' as tz;

@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/medicine/data/dto/notification_dto.dart';
+import 'package:pg_slema/features/notification/data/notification_dto.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/json/json_parser.dart';
 

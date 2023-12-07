@@ -1,7 +1,7 @@
 import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
-import 'package:pg_slema/features/medicine/application/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
-import 'package:pg_slema/features/medicine/data/repository/shared_preferences_notification_repository.dart';
+import 'package:pg_slema/features/notification/application/service/notification_service.dart';
+import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 

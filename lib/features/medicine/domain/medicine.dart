@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/medicine/domain/notification.dart';
+import 'package:pg_slema/features/notification/domain/notification.dart';
 
 class Medicine {
   static const String medicineListSharedPrefKey = 'medicines';

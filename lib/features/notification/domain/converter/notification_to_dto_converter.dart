@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/medicine/data/dto/notification_dto.dart';
-import 'package:pg_slema/features/medicine/domain/notification.dart';
+import 'package:pg_slema/features/notification/data/notification_dto.dart';
+import 'package:pg_slema/features/notification/domain/notification.dart';
 
 class NotificationToDtoConverter {
   static Notification fromDto(NotificationDto dto) {

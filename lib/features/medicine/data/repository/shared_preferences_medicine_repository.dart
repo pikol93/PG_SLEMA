@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:pg_slema/features/medicine/data/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/features/medicine/data/dto/converter/medicine_dto_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
 import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 
 class SharedPreferencesMedicineRepository extends MedicineRepository {
   final SharedPreferencesConnector connector = SharedPreferencesConnector();
