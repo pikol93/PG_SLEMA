@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/controller/calendar_exact_date_picker_controller.dart';
+import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
 
 class CalendarExactDatePicker extends StatelessWidget {
-  final CalendarExactDatePickerController controller;
+  final CalendarController controller;
   final void Function(String) onPickedDate;
   const CalendarExactDatePicker(
       {super.key, required this.onPickedDate, required this.controller});

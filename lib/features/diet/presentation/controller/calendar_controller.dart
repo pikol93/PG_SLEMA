@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:pg_slema/utils/date/date.dart';
 
-class CalendarExactDatePickerController {
+class CalendarController {
   DateTime pickedDate = DateTime.now();
   late DateTime firstDate;
   final yearsAllowedToGoBack = 5;
   DateTime lastDate = DateTime.now();
   late String languageCode;
 
-  CalendarExactDatePickerController() {
+  CalendarController() {
     firstDate = DateTime.now().subtract(const Duration(days: 365 * 5));
   }
 
@@ -28,5 +28,17 @@ class CalendarExactDatePickerController {
 
   void setLanguage(BuildContext context) {
     languageCode = Localizations.localeOf(context).languageCode;
+  }
+
+  void subtractOneDayFromPickedDateIfPossible() {
+    DateTime newDay = pickedDate.subtract(const Duration(days: 1));
+    pickedDate = newDay.isAfter(firstDate.subtract(const Duration(days: 1)))
+        ? newDay
+        : pickedDate;
+  }
+
+  void addOneDayFromPickedDateIfPossible() {
+    DateTime newDay = pickedDate.add(const Duration(days: 1));
+    pickedDate = newDay.isBefore(DateTime.now()) ? newDay : pickedDate;
   }
 }

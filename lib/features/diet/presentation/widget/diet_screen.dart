@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/controller/calendar_exact_date_picker_controller.dart';
+import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/calendar_exact_date_picker.dart';
+import 'package:pg_slema/features/diet/presentation/widget/calendar_move_backward.dart';
+import 'package:pg_slema/features/diet/presentation/widget/calendar_move_forward.dart';
 
 class DietScreen extends StatefulWidget {
-  final CalendarExactDatePickerController exactDatePickerController =
-      CalendarExactDatePickerController();
+  final CalendarController exactDatePickerController = CalendarController();
   DietScreen({super.key});
 
   @override
@@ -39,12 +40,9 @@ class _DietScreenState extends State<DietScreen>
               controller: widget.exactDatePickerController,
             ),
             const Spacer(),
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: Colors.black,
-              ),
-              onPressed: () {},
+            CalendarMoveBackward(
+              onPickedDate: updatePickedDateStringRepresentation,
+              controller: widget.exactDatePickerController,
             ),
             Text(
               appBarDateText,
@@ -53,12 +51,9 @@ class _DietScreenState extends State<DietScreen>
                 fontWeight: FontWeight.bold,
               ),
             ),
-            IconButton(
-              icon: const Icon(
-                Icons.arrow_forward,
-                color: Colors.black,
-              ),
-              onPressed: () {},
+            CalendarMoveForward(
+              onPickedDate: updatePickedDateStringRepresentation,
+              controller: widget.exactDatePickerController,
             ),
             const Spacer(flex: 4),
           ],
