@@ -18,7 +18,7 @@ class MainScreenController extends ChangeNotifier {
   final List<Widget> views = [
     const MotivationScreen(),
     MedicineScreen(),
-    const DietScreen(),
+    DietScreen(),
     const ExercisesScreen(),
   ];
 

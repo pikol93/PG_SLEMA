@@ -1,12 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/diet/presentation/controller/calendar_exact_date_picker_controller.dart';
+import 'package:pg_slema/features/diet/presentation/widget/calendar_exact_date_picker.dart';
 
-class DietScreen extends StatelessWidget {
-  const DietScreen({super.key});
+class DietScreen extends StatefulWidget {
+  final CalendarExactDatePickerController exactDatePickerController =
+      CalendarExactDatePickerController();
+  DietScreen({super.key});
+
+  @override
+  State<DietScreen> createState() => _DietScreenState();
+}
+
+class _DietScreenState extends State<DietScreen> {
+  void updatePickedDateStringRepresentation(String value) {
+    setState(() {
+      widget.exactDatePickerController.appBarDateText = value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Diet Screen'),
+    return Scaffold(
+      appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.elliptical(15, 10),
+          ),
+        ),
+        elevation: 5,
+        toolbarHeight: 60,
+        title: Row(
+          children: [
+            CalendarExactDatePicker(
+              onPickedDate: updatePickedDateStringRepresentation,
+              controller: widget.exactDatePickerController,
+            ),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              onPressed: () {},
+            ),
+            Text(
+              widget.exactDatePickerController.appBarDateText,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_forward,
+                color: Colors.black,
+              ),
+              onPressed: () {},
+            ),
+            const Spacer(flex: 4),
+          ],
+        ),
+      ),
+      body: const Center(
+        child: Text("TODO"),
+      ),
     );
   }
 }
