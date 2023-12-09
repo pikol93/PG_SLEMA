@@ -11,15 +11,18 @@ class DietScreen extends StatefulWidget {
   State<DietScreen> createState() => _DietScreenState();
 }
 
-class _DietScreenState extends State<DietScreen> {
+class _DietScreenState extends State<DietScreen>
+    with AutomaticKeepAliveClientMixin {
+  String appBarDateText = "Dzisiaj";
   void updatePickedDateStringRepresentation(String value) {
     setState(() {
-      widget.exactDatePickerController.appBarDateText = value;
+      appBarDateText = value;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
@@ -44,7 +47,7 @@ class _DietScreenState extends State<DietScreen> {
               onPressed: () {},
             ),
             Text(
-              widget.exactDatePickerController.appBarDateText,
+              appBarDateText,
               style: const TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
@@ -66,4 +69,7 @@ class _DietScreenState extends State<DietScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -8,8 +8,6 @@ class CalendarExactDatePickerController {
   final yearsAllowedToGoBack = 5;
   DateTime lastDate = DateTime.now();
   late String languageCode;
-  String appBarDateText = "Dzisiaj";
-  // TODO localization issue + this variable doesnt belong here???
 
   CalendarExactDatePickerController() {
     firstDate = DateTime.now().subtract(const Duration(days: 365 * 5));
