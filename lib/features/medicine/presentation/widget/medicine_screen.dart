@@ -6,9 +6,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/medicine_widget.d
 class MedicineScreen extends StatefulWidget {
   final MedicineScreenController controller = MedicineScreenController();
 
-  MedicineScreen({super.key}) {
-    controller.loadMedicinesFromSharedPreferences();
-  }
+  MedicineScreen({super.key});
 
   @override
   State<MedicineScreen> createState() => _MedicineScreenState();
@@ -17,7 +15,7 @@ class MedicineScreen extends StatefulWidget {
 class _MedicineScreenState extends State<MedicineScreen> {
   void refreshMedicinesData() {
     setState(() {
-      widget.controller.loadMedicinesFromSharedPreferences();
+      widget.controller.reloadMedicines();
     });
   }
 

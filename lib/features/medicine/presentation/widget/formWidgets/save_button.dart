@@ -11,24 +11,6 @@ class CustomSaveButton extends StatelessWidget {
       required this.controller,
       required this.formKey,
       required this.onAddedMedicine});
-  //TODO: move it into some utility called Interface
-  //  MedicineNotificationDateValidator and
-  //  SingleTimeNotificationMedicineDateValidator in task SLEMA-61
-  bool isIntakeDateFromFuture(DateTime date, TimeOfDay time) {
-    DateTime selectedDateTime =
-        DateTime(date.year, date.month, date.day, time.hour, time.minute);
-
-    return selectedDateTime.isAfter(DateTime.now());
-  }
-
-  void displayMessageAboutIncorrectIntakeDate(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Wybierz datę dotyczącą przyjęcia leku z przyszłości.'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +20,7 @@ class CustomSaveButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            if (!isIntakeDateFromFuture(controller.pickedMedicineIntakeDate,
-                controller.pickedMedicineIntakeTime)) {
-              displayMessageAboutIncorrectIntakeDate(context);
-              return;
-            }
-            controller.scheduleNotification();
-            controller.encodeMedicineAndSaveToSharedPreferences().then((_) {
-              // Call callback down the three of widgets down to medicine_screen
-              // to update list of medicines
+            controller.saveMedicine().then((_) {
               onAddedMedicine.call();
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/presentation/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineWidget extends StatelessWidget {
   final Medicine medicine;
@@ -34,7 +34,7 @@ class MedicineWidget extends StatelessWidget {
           ),
           const SizedBox(height: 8.0),
           Text(
-            '${Medicine.getRepeatToText(medicine.repeat)} - ${medicine.intakeTime.hour}:${medicine.intakeTime.minute.toString().padLeft(2, '0')}',
+            medicine.intakeType,
           ),
         ],
       ),

@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/date_input.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/repeat_radio_input_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/time_input.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/type_radio_input.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final VoidCallback onAddedMedicine;
@@ -44,24 +40,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 CustomTextFormField(
                   label: "Nazwa",
                   icon: Icons.create,
-                  controller: _controller,
+                  onChanged: (value) => _controller.pickedMedicineName = value,
                 ),
                 const SizedBox(height: 10),
-                MedicineTypeSelection(
-                  controller: _controller,
+                CustomTextFormField(
+                  label: "Sposób aplikacji leku",
+                  icon: Icons.create,
+                  onChanged: (value) => _controller.typedIntakeType = value,
                 ),
-                const SizedBox(height: 20),
-                CustomDatePicker(
-                    controller: _controller, label: "Data przyjęcia leku"),
-                const SizedBox(height: 20),
-                CustomTimePicker(
-                  controller: _controller,
-                  label: "Godzina przyjęcia leku",
-                ),
-                const SizedBox(height: 20),
-                CustomDropdownMedicineInput(
-                  controller: _controller,
-                ),
+                //TODO notyfikacje!!
                 const SizedBox(height: 20),
                 CustomSaveButton(
                   controller: _controller,

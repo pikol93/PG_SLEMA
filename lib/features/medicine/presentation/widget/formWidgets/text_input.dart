@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String label;
   final IconData icon;
-  final AddMedicineController controller;
+  final ValueChanged<String> onChanged;
 
-  const CustomTextFormField({
-    super.key,
-    required this.label,
-    required this.icon,
-    required this.controller,
-  });
+  const CustomTextFormField(
+      {super.key,
+      required this.label,
+      required this.icon,
+      required this.onChanged});
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -28,7 +26,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         return null;
       },
       onChanged: (value) {
-        widget.controller.pickedMedicineName = value;
+        widget.onChanged(value);
       },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
