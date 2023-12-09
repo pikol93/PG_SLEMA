@@ -9,7 +9,7 @@ class DietAppBar extends StatefulWidget {
   DietAppBar({super.key});
 
   @override
-  _DietAppBarState createState() => _DietAppBarState();
+  State<DietAppBar> createState() => _DietAppBarState();
 }
 
 class _DietAppBarState extends State<DietAppBar>
