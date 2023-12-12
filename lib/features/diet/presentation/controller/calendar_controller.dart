@@ -5,12 +5,16 @@ import 'package:pg_slema/utils/date/date.dart';
 class CalendarController {
   DateTime pickedDate = DateTime.now();
   late DateTime firstDate;
-  final yearsAllowedToGoBack = 5;
+  final monthsAllowedToGoBack = 6;
   DateTime lastDate = DateTime.now();
   late String languageCode;
 
   CalendarController() {
-    firstDate = DateTime.now().subtract(const Duration(days: 365 * 5));
+    const daysInYearApprox = 365;
+    const monthsInYear = 12;
+    firstDate = DateTime.now().subtract(Duration(
+        days: (daysInYearApprox * 1.0 / monthsInYear * monthsAllowedToGoBack)
+            .round()));
   }
 
   String getPickedDateStringRepresentationForAppBar() {
