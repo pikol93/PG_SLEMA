@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});

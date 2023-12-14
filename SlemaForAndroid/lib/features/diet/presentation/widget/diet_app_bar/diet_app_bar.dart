@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
-import 'package:pg_slema/features/diet/presentation/widget/calendar_functionality_widgets/calendar_exact_date_picker.dart';
-import 'package:pg_slema/features/diet/presentation/widget/calendar_functionality_widgets/calendar_move_backward.dart';
-import 'package:pg_slema/features/diet/presentation/widget/calendar_functionality_widgets/calendar_move_forward.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_exact_date_picker.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_move_backward.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_move_forward.dart';
 
 class DietAppBar extends StatefulWidget {
   final CalendarController exactDatePickerController = CalendarController();
