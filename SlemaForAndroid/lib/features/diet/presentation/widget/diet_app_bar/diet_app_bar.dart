@@ -3,6 +3,7 @@ import 'package:pg_slema/features/diet/presentation/controller/calendar_controll
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_exact_date_picker.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_move_backward.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_functionality_widgets/calendar_move_forward.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/meal_idea_icon_button.dart';
 
 class DietAppBar extends StatefulWidget {
   final CalendarController exactDatePickerController = CalendarController();
@@ -52,7 +53,8 @@ class _DietAppBarState extends State<DietAppBar>
             onPickedDate: updatePickedDateStringRepresentation,
             controller: widget.exactDatePickerController,
           ),
-          const Spacer(flex: 4),
+          const Spacer(),
+          const MealIdeaIconButton(),
         ],
       ),
     );
