@@ -9,26 +9,37 @@ class MealIdeaIconButton extends StatelessWidget {
       builder: (BuildContext context) {
         return SizedBox(
           height: 200,
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon(Icons.cancel_outlined),
-                      color: Theme.of(context).primaryColor,
-                    ),
+          child: Row(
+            children: <Widget>[
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(Icons.cancel_outlined),
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
-                const Align(
+              ),
+              const Expanded(
+                child: Align(
                   alignment: Alignment.center,
                   child: Text("TODO projekt i implementacja"),
                 ),
-              ],
-            ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.refresh),
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
