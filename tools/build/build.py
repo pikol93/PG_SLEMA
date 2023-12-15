@@ -8,17 +8,28 @@ import argparse
 import fileinput
 
 
+MOBILE_APPLICATION_SUBDIRECTORY = "SlemaForAndroid"
+
+
 def main():
     args = get_args()
+    mobile_application_path = args.path + "/" + MOBILE_APPLICATION_SUBDIRECTORY
+
     if not args.ignore_dirty_tree:
         validate_vcs_tree(args.path)
-    version = get_project_version(args.path)
+
+    version = get_project_version(mobile_application_path)
+
     if args.build:
-        build_project(args.path)
+        build_flutter_project(mobile_application_path)
+
     print_task_list(args.path, args.commitish1, args.commitish2)
+
     if args.add_tag:
         add_git_tag(args.path, version)
-    increment_project_version(args.path, version)
+
+    increment_flutter_project_version(mobile_application_path, version)
+
     if args.commit_version:
         commit_incremented_version(args.path)
 
@@ -71,11 +82,11 @@ def get_project_version(project_path):
     }
 
 
-def build_project(project_path):
-    subprocess.run(["flutter", "build", "apk", "--split-per-abi", "lib/main/main.dart"], cwd=project_path, check=True)
+def build_flutter_project(project_path):
+    subprocess.run(["flutter", "build", "apk", "--split-per-abi", "lib/main.dart"], cwd=project_path, check=True)
 
 
-def increment_project_version(project_path, version):
+def increment_flutter_project_version(project_path, version):
     version["minor"] = version["minor"] + 1
     version["patch"] = 0
 
