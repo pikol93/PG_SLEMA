@@ -9,9 +9,9 @@ class JsonParser {
     );
   }
 
-  static T parseEnumFromJson<T>(String value, List<T> values) {
-    return values.firstWhere((e) => e.toString() == value,
-        orElse: () => throw Exception("Incorrect value"));
+  static T parseEnumFromJson<T>(String strValue, List<T> possibleValues) {
+    return possibleValues.firstWhere((e) => e.toString() == strValue,
+        orElse: () => throw Exception("Incorrect enum value"));
   }
 
   static String parseEnumToJson<T>(T value) {
