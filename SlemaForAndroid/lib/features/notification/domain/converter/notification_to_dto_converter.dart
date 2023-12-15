@@ -5,7 +5,7 @@ class NotificationToDtoConverter {
   static Notification fromDto(NotificationDto dto) {
     return Notification(
         dto.id,
-        dto.medicineId,
+        dto.ownerId,
         dto.title,
         dto.body,
         dto.notificationTime,
@@ -18,7 +18,7 @@ class NotificationToDtoConverter {
   static NotificationDto toDto(Notification notification) {
     return NotificationDto(
         notification.id,
-        notification.medicineId,
+        notification.ownerId,
         notification.title,
         notification.body,
         notification.notificationTime,

@@ -4,7 +4,7 @@ import 'package:pg_slema/utils/frequency/frequency.dart';
 class Notification {
   static const String notificationListSharedPrefKey = 'notifications';
   final String id;
-  final String medicineId;
+  final String ownerId;
   final String title;
   final String body;
   final TimeOfDay notificationTime;
@@ -15,7 +15,7 @@ class Notification {
 
   Notification(
       this.id,
-      this.medicineId,
+      this.ownerId,
       this.title,
       this.body,
       this.notificationTime,
