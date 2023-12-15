@@ -25,10 +25,12 @@ class AddMedicineController extends ChangeNotifier {
         MedicineService(medicineRepository, _notificationService);
   }
 
-  Future saveMedicine() async {
+  Future saveMedicine() async { /*
     Medicine medicine = Medicine(
         const Uuid().v4(), pickedMedicineName, typedIntakeType, notifications);
     _medicineService.addMedicine(medicine);
     notifications.forEach(_notificationService.addNotification);
+    */
+    //TODO: add missing fields to form
   }
 }
