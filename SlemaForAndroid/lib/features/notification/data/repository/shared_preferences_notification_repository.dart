@@ -17,7 +17,7 @@ class SharedPreferencesNotificationRepository
     return jsonNotificationsList
         .map((jsonString) => jsonDecode(jsonString))
         .map((json) => NotificationDtoToJsonConverter.fromJson(json))
-        .where((element) => element.medicineId == medicineId)
+        .where((element) => element.ownerId == medicineId)
         .map((dto) => NotificationToDtoConverter.fromDto(dto))
         .toList(growable: true);
   }
