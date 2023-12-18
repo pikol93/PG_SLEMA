@@ -42,7 +42,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                 CustomTextFormField(
                   label: "Nazwa",
                   icon: Icons.create,
-                  onChanged: (value) => _controller.pickedMedicineName = value,
+                  onChanged: (value) => _controller.typedMedicineName = value,
                 ),
                 const SizedBox(height: 10),
                 CustomTextFormField(
@@ -51,10 +51,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
-                //TODO: enum + date
-                ManageNotificationsWidget(onNotificationChanged: (notification) => logger.error("TODO notification changed"),
-                    onNotificationDeleted: (notification) => logger.error("TODO notification deleted"),
-                    onNotificationCreated: (notification) => logger.error("TODO notification created")),
+                //TODO: enum + end date
+                ManageNotificationsWidget(
+                    onNotificationChanged: (notification) =>
+                        logger.error("TODO notification changed"),
+                    onNotificationDeleted: (notification) =>
+                        logger.error("TODO notification deleted"),
+                    onNotificationCreated: (notification) =>
+                        logger.error("TODO notification created")),
                 const SizedBox(height: 20),
                 CustomSaveButton(
                   controller: _controller,
