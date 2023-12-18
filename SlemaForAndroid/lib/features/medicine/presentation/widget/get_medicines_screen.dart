@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/medicine_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
 
-class MedicineScreen extends StatefulWidget {
+class GetMedicinesScreen extends StatefulWidget {
   final MedicineScreenController controller = MedicineScreenController();
 
-  MedicineScreen({super.key});
+  GetMedicinesScreen({super.key});
 
   @override
-  State<MedicineScreen> createState() => _MedicineScreenState();
+  State<GetMedicinesScreen> createState() => _GetMedicinesScreenState();
 }
 
-class _MedicineScreenState extends State<MedicineScreen> {
+class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   void refreshMedicinesData() {
     setState(() {
       widget.controller.reloadMedicines();
@@ -33,7 +33,7 @@ class _MedicineScreenState extends State<MedicineScreen> {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      return MedicineWidget(
+                      return GetMedicineWidget(
                               medicine: widget.controller.medicines[index])
                           .build(context);
                     },

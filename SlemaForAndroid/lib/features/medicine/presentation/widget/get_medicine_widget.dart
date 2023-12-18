@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
-class MedicineWidget extends StatelessWidget {
+class GetMedicineWidget extends StatelessWidget {
   final Medicine medicine;
 
-  const MedicineWidget({super.key, required this.medicine});
+  const GetMedicineWidget({super.key, required this.medicine});
 
   @override
   Widget build(BuildContext context) {

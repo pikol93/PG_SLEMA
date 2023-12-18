@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
+import 'package:pg_slema/features/notification/presentation/manage_notifications_widget.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final VoidCallback onAddedMedicine;
@@ -11,7 +13,7 @@ class AddMedicineScreen extends StatefulWidget {
   State<AddMedicineScreen> createState() => _AddMedicineScreenState();
 }
 
-class _AddMedicineScreenState extends State<AddMedicineScreen> {
+class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
 
@@ -48,7 +50,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   icon: Icons.create,
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
-                //TODO notyfikacje!!
+                const SizedBox(height: 20),
+                ManageNotificationsWidget(onNotificationChanged: (notification) => logger.error("TODO notification changed"),
+                    onNotificationDeleted: (notification) => logger.error("TODO notification deleted"),
+                    onNotificationCreated: (notification) => logger.error("TODO notification created")),
                 const SizedBox(height: 20),
                 CustomSaveButton(
                   controller: _controller,
