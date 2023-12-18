@@ -8,8 +8,8 @@ class MedicineDtoToJsonConverter {
         json['id'],
         json['name'],
         json['intakeType'],
-        json['firstIntakeDate'],
-        json['lastIntakeDate'],
+        DateTime.parse(json['firstIntakeDate']),
+        DateTime.parse(json['lastIntakeDate']),
         JsonParser.parseEnumFromJson<Frequency>(
             json['intakeFrequency'], Frequency.values));
   }
