@@ -13,4 +13,11 @@ class Medicine {
 
   Medicine(this.id, this.name, this.intakeType, this.firstIntakeDate,
       this.lastIntakeDate, this.intakeFrequency, this.notifications);
+
+  @override
+  String toString() {
+    return 'Medicine{id: $id, name: $name, intakeType: $intakeType, '
+        'firstIntakeDate: $firstIntakeDate, lastIntakeDate: $lastIntakeDate, '
+        'intakeFrequency: $intakeFrequency}';
+  }
 }

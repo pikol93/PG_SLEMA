@@ -23,4 +23,12 @@ class Notification {
       this.lastNotificationDate,
       this.notificationFrequency,
       this.scheduledId);
+
+  @override
+  String toString() {
+    return 'Notification{id: $id, ownerId: $ownerId, title: $title, body: $body, '
+        'notificationTime: $notificationTime, firstNotificationDate: $firstNotificationDate, '
+        'lastNotificationDate: $lastNotificationDate, notificationFrequency: $notificationFrequency, '
+        'scheduledId: $scheduledId}';
+  }
 }
