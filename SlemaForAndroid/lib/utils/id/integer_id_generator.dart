@@ -12,11 +12,12 @@ class IntegerIdGenerator {
     return List<int>.generate(size, (index) => generateRandomId());
   }
 
-  static List<int> generateRandomIdsWhichAreNotForbidden(List<int> forbiddenIds, int size) {
+  static List<int> generateRandomIdsWhichAreNotForbidden(
+      List<int> forbiddenIds, int size) {
     List<int> ids = List<int>.empty(growable: true);
     while (size > 0) {
       int id = generateRandomIdWhichIsNotForbidden(forbiddenIds);
-      if(!ids.contains(id)) {
+      if (!ids.contains(id)) {
         ids.add(id);
         size--;
       }

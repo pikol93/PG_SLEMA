@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
@@ -14,6 +16,7 @@ import 'package:pg_slema/utils/time_of_day/time_of_day_comparing_extension.dart'
 import 'package:uuid/uuid.dart';
 
 class AddMedicineController extends ChangeNotifier with Logger {
+  final String medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   late final MedicineService _medicineService;
   String typedMedicineName = "";
@@ -22,6 +25,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
       List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
+  //TODO: add missing fields to form
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
@@ -33,35 +37,13 @@ class AddMedicineController extends ChangeNotifier with Logger {
   }
 
   Future saveMedicine() async {
-    var idGenerator = const Uuid();
-    var lastDate = _getLastNotificationDateTime();
-    //TODO generatre N random Ids instead of generating on map -> duplicates!.
-    //TODO: add missing fields to form
+    var lastMedicineDate = _getLastNotificationDateTime();
 
-    var medicineNotifications = notifications
-        .map((notification) => nt.Notification(
-            notification.id,
-            idGenerator.v4(),
-            'Przypomnienie',
-            'Trzeba przyjąć $typedIntakeType',
-            notification.notificationTime,
-            DateTime.now(),
-            lastDate,
-            frequency,
-            IntegerIdGenerator.generateRandomId()))
-        .toList(growable: true);
+    var medicineNotifications =
+        await _createNotificationsForMedicine(lastMedicineDate);
 
-    medicineNotifications
-        .forEach((element) => logger.debug(element.toString()));
-
-    Medicine medicine = Medicine(
-        idGenerator.v4(),
-        typedMedicineName,
-        typedIntakeType,
-        DateTime.now(),
-        lastDate,
-        frequency,
-        medicineNotifications);
+    Medicine medicine = Medicine(medicineId, typedMedicineName, typedIntakeType,
+        DateTime.now(), lastMedicineDate, frequency, medicineNotifications);
 
     logger.debug(medicine.toString());
 
@@ -85,5 +67,26 @@ class AddMedicineController extends ChangeNotifier with Logger {
             .isNotEmpty
         ? DateTime.now().add(const Duration(days: 1))
         : DateTime.now();
+  }
+
+  Future<List<nt.Notification>> _createNotificationsForMedicine(
+      DateTime lastNotificationDate) async {
+    var forbiddenIds = await _notificationService.getAllNotifications().then(
+        (notifications) => notifications.map((e) => e.scheduledId).toList());
+    var idsToSchedule =
+        IntegerIdGenerator.generateRandomIdsWhichAreNotForbidden(
+            forbiddenIds, notifications.length);
+    return notifications
+        .map((notification) => nt.Notification(
+            notification.id,
+            medicineId,
+            'Przypomnienie',
+            'Trzeba przyjąć $typedIntakeType',
+            notification.notificationTime,
+            DateTime.now(),
+            lastNotificationDate,
+            frequency,
+            idsToSchedule.removeLast()))
+        .toList(growable: true);
   }
 }
