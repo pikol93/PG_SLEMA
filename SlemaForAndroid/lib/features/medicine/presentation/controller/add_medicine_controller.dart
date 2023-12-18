@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
@@ -25,7 +23,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
       List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  //TODO: add missing fields to form
+  //TODO: add missing fields to form - select end intake , frequency , notifications manago
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();

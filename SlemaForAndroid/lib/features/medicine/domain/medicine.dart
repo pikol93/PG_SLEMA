@@ -18,6 +18,6 @@ class Medicine {
   String toString() {
     return 'Medicine{id: $id, name: $name, intakeType: $intakeType, '
         'firstIntakeDate: $firstIntakeDate, lastIntakeDate: $lastIntakeDate, '
-        'intakeFrequency: $intakeFrequency}';
+        'intakeFrequency: $intakeFrequency}, numberOfNotifications: ${notifications.length}';
   }
 }
