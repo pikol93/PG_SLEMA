@@ -38,4 +38,8 @@ class NotificationService {
         await repository.getAllNotificationsByMedicine(medicineId);
     await repository.deleteAll(notifications);
   }
+
+  Future<List<Notification>> getAllNotifications() async {
+    return await repository.getAllNotifications();
+  }
 }

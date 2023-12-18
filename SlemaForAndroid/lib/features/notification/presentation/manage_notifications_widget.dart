@@ -21,6 +21,6 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    return Text("todo");
   }
 }
