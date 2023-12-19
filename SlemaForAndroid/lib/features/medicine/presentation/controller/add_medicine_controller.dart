@@ -23,7 +23,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
       List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  //TODO: add missing fields to form - select end intake , frequency , notifications manago
+  //TODO: add missing fields to form - end intake , notifications manago
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
@@ -46,7 +46,8 @@ class AddMedicineController extends ChangeNotifier with Logger {
     logger.debug(medicine.toString());
 
     await _medicineService.addMedicine(medicine);
-    await Future.forEach(medicineNotifications, _notificationService.addNotification);
+    await Future.forEach(
+        medicineNotifications, _notificationService.addNotification);
   }
 
   DateTime _getLastNotificationDateTime() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/manage_notifications_widget.dart';
@@ -50,6 +51,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   icon: Icons.create,
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
+                const SizedBox(height: 20),
+                FrequencyList(
+                    initialValue: _controller.frequency,
+                    onChanged: (frequency) =>
+                        _controller.frequency = frequency),
                 const SizedBox(height: 20),
                 //TODO: enum + end date
                 ManageNotificationsWidget(
