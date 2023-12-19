@@ -45,8 +45,8 @@ class AddMedicineController extends ChangeNotifier with Logger {
 
     logger.debug(medicine.toString());
 
-    _medicineService.addMedicine(medicine);
-    medicineNotifications.forEach(_notificationService.addNotification);
+    await _medicineService.addMedicine(medicine);
+    await Future.forEach(medicineNotifications, _notificationService.addNotification);
   }
 
   DateTime _getLastNotificationDateTime() {
