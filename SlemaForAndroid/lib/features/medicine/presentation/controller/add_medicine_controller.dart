@@ -23,6 +23,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
       List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
+  bool canDateBePicked = false;
   //TODO: add missing fields notifications manago, visibility of date, displaying date properly
 
   AddMedicineController() : super() {

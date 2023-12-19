@@ -55,20 +55,23 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
-                CustomDatePicker(
-                    onDateSelected: (date) => _controller.endIntakeDate = date,
-                    controller: DatePickerController(
-                        DateTime.now().add(const Duration(days: 1)),
-                        DateTime.now().add(const Duration(days: 365)),
-                        DateTime.now().add(const Duration(days: 1))),
-                    label: "Data zakończenia przyjmowania"),
-                const SizedBox(height: 20),
+                Column(children: [
+                  if(_controller.canDateBePicked) ... [
+                    CustomDatePicker(
+                        onDateSelected: (date) => _controller.endIntakeDate = date,
+                        controller: DatePickerController(
+                            DateTime.now().add(const Duration(days: 1)),
+                            DateTime.now().add(const Duration(days: 365)),
+                            DateTime.now().add(const Duration(days: 1))),
+                        label: "Data zakończenia przyjmowania"),
+                    const SizedBox(height: 20),
+                  ]
+                ],),
                 FrequencyList(
                     initialValue: _controller.frequency,
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
-                //TODO: end date
                 ManageNotificationsWidget(
                     onNotificationChanged: (notification) =>
                         logger.error("TODO notification changed"),
@@ -90,8 +93,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
     );
   }
 
-  _handleFrequencyChange(Frequency frequency) {
+  void _handleFrequencyChange(Frequency frequency) {
     _controller.frequency = frequency;
-    //TODO check if date should be disabled and invisible
+    setState(() {
+      _controller.canDateBePicked = frequency == Frequency.singular ? false : true;
+    });
   }
 }
