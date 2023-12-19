@@ -17,4 +17,8 @@ extension DateUtils on DateTime {
         yesterday.month == month &&
         yesterday.year == year;
   }
+
+  String get toDateString {
+    return "$day-$month-$year";
+  }
 }

@@ -55,18 +55,21 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
-                Column(children: [
-                  if(_controller.canDateBePicked) ... [
-                    CustomDatePicker(
-                        onDateSelected: (date) => _controller.endIntakeDate = date,
-                        controller: DatePickerController(
-                            DateTime.now().add(const Duration(days: 1)),
-                            DateTime.now().add(const Duration(days: 365)),
-                            DateTime.now().add(const Duration(days: 1))),
-                        label: "Data zakończenia przyjmowania"),
-                    const SizedBox(height: 20),
-                  ]
-                ],),
+                Column(
+                  children: [
+                    if (_controller.canDateBePicked) ...[
+                      CustomDatePicker(
+                          onDateSelected: (date) =>
+                              _controller.endIntakeDate = date,
+                          controller: DatePickerController(
+                              DateTime.now().add(const Duration(days: 1)),
+                              DateTime.now().add(const Duration(days: 365)),
+                              DateTime.now().add(const Duration(days: 1))),
+                          label: "Data zakończenia przyjmowania"),
+                      const SizedBox(height: 20),
+                    ]
+                  ],
+                ),
                 FrequencyList(
                     initialValue: _controller.frequency,
                     onChanged: (frequency) =>
@@ -96,7 +99,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   void _handleFrequencyChange(Frequency frequency) {
     _controller.frequency = frequency;
     setState(() {
-      _controller.canDateBePicked = frequency == Frequency.singular ? false : true;
+      _controller.canDateBePicked =
+          frequency == Frequency.singular ? false : true;
     });
   }
 }

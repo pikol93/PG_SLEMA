@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
+import 'package:pg_slema/utils/date/date.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
@@ -47,7 +48,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.selectedDate.toString()),
+            Text(widget.controller.selectedDate.toDateString),
             const Icon(Icons.arrow_drop_down),
           ],
         ),

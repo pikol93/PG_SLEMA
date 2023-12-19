@@ -4,8 +4,8 @@ class DatePickerController {
   final DateTime initialDate;
   late DateTime selectedDate;
 
-  DatePickerController(this.allowedFirstDate, this.allowedLastDate,
-      this.initialDate) {
+  DatePickerController(
+      this.allowedFirstDate, this.allowedLastDate, this.initialDate) {
     selectedDate = initialDate;
   }
 }
