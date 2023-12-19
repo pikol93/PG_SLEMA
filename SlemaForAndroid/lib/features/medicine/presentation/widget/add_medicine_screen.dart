@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/manage_notifications_widget.dart';
+import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddMedicineScreen extends StatefulWidget {
@@ -52,12 +55,20 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   onChanged: (value) => _controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
+                CustomDatePicker(
+                    onDateSelected: (date) => _controller.endIntakeDate = date,
+                    controller: DatePickerController(
+                        DateTime.now().add(const Duration(days: 1)),
+                        DateTime.now().add(const Duration(days: 365)),
+                        DateTime.now().add(const Duration(days: 1))),
+                    label: "Data zakończenia przyjmowania"),
+                const SizedBox(height: 20),
                 FrequencyList(
                     initialValue: _controller.frequency,
                     onChanged: (frequency) =>
-                        _controller.frequency = frequency),
+                        _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
-                //TODO: enum + end date
+                //TODO: end date
                 ManageNotificationsWidget(
                     onNotificationChanged: (notification) =>
                         logger.error("TODO notification changed"),
@@ -77,5 +88,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
         ),
       ),
     );
+  }
+
+  _handleFrequencyChange(Frequency frequency) {
+    _controller.frequency = frequency;
+    //TODO check if date should be disabled and invisible
   }
 }

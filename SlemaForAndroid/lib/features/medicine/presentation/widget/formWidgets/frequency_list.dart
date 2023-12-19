@@ -6,7 +6,8 @@ class FrequencyList extends StatefulWidget {
   final ValueChanged<Frequency> onChanged;
   final Frequency initialValue;
 
-  const FrequencyList({super.key, required this.onChanged, required this.initialValue});
+  const FrequencyList(
+      {super.key, required this.onChanged, required this.initialValue});
 
   @override
   State<StatefulWidget> createState() => _FrequencyListState();

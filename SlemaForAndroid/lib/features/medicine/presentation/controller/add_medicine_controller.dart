@@ -23,7 +23,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
       List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  //TODO: add missing fields to form - end intake , notifications manago
+  //TODO: add missing fields notifications manago, visibility of date, displaying date properly
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
