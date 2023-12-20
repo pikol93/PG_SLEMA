@@ -39,21 +39,24 @@ class _DietAppBarState extends State<DietAppBar>
             onPickedDate: updatePickedDateStringRepresentation,
             controller: widget.exactDatePickerController,
           ),
-          const Spacer(),
           CalendarMoveBackward(
             onPickedDate: updatePickedDateStringRepresentation,
             controller: widget.exactDatePickerController,
           ),
-          Text(
-            appBarDateText,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+          Expanded(
+            child: Text(
+              appBarDateText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16),
+            ),
           ),
           CalendarMoveForward(
             onPickedDate: updatePickedDateStringRepresentation,
             controller: widget.exactDatePickerController,
           ),
-          const Spacer(),
           const MealIdeaIconButton(),
         ],
       ),
