@@ -5,4 +5,9 @@ class GetNotification {
   final TimeOfDay notificationTime;
 
   GetNotification(this.id, this.notificationTime);
+
+  @override
+  String toString() {
+    return 'Notification{id: $id, notificationTime: $notificationTime}';
+  }
 }

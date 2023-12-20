@@ -7,7 +7,6 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
-import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final VoidCallback onAddedMedicine;
@@ -17,7 +16,7 @@ class AddMedicineScreen extends StatefulWidget {
   State<AddMedicineScreen> createState() => _AddMedicineScreenState();
 }
 
-class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
+class _AddMedicineScreenState extends State<AddMedicineScreen> {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
 
@@ -76,12 +75,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
                 ManageNotificationsWidget(
-                    onNotificationChanged: (notification) =>
-                        logger.error("TODO notification changed"),
-                    onNotificationDeleted: (notification) =>
-                        logger.error("TODO notification deleted"),
-                    onNotificationCreated: (notification) =>
-                        logger.error("TODO notification created")),
+                    onNotificationChanged: _controller.onNotificationChanged,
+                    onNotificationDeleted: _controller.onNotificationDeleted,
+                    onNotificationCreated: _controller.onNotificationCreated),
                 const SizedBox(height: 20),
                 CustomSaveButton(
                   controller: _controller,

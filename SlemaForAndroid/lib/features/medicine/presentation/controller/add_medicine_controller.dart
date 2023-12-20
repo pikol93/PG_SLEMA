@@ -24,7 +24,7 @@ class AddMedicineController extends ChangeNotifier with Logger {
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
   bool canDateBePicked = false;
-  //TODO: add missing fields notifications manago, displaying date properly
+  //TODO: add missing notifications manago
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
@@ -44,11 +44,27 @@ class AddMedicineController extends ChangeNotifier with Logger {
     Medicine medicine = Medicine(medicineId, typedMedicineName, typedIntakeType,
         DateTime.now(), lastMedicineDate, frequency, medicineNotifications);
 
-    logger.debug(medicine.toString());
+    logger.debug(medicine);
 
     await _medicineService.addMedicine(medicine);
     await Future.forEach(
         medicineNotifications, _notificationService.addNotification);
+  }
+
+  void onNotificationDeleted(GetNotification notification) {
+    notifications.removeWhere((el) => el.id == notification.id);
+    notifications.forEach(logger.debug);
+  }
+
+  void onNotificationCreated(GetNotification notification) {
+    notifications.add(notification);
+    notifications.forEach(logger.debug);
+  }
+
+  void onNotificationChanged(GetNotification notification) {
+    notifications[notifications
+        .indexWhere((element) => element.id == notification.id)] = notification;
+    notifications.forEach(logger.debug);
   }
 
   DateTime _getLastNotificationDateTime() {
