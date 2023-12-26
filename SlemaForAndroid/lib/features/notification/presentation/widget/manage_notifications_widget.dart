@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/notification/domain/get_notification.dart';
+import 'package:pg_slema/features/notification/presentation/widget/get_notification_widget.dart';
 
 class ManageNotificationsWidget extends StatefulWidget {
   final ValueChanged<GetNotification> onNotificationChanged;
@@ -20,7 +21,10 @@ class ManageNotificationsWidget extends StatefulWidget {
 class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return const Text("todo");
+    return GetNotificationWidget(
+        onNotificationChanged: widget.onNotificationChanged,
+        onNotificationDeleted: widget.onNotificationDeleted,
+        onNotificationCreated: widget.onNotificationCreated);
+    // TODO: implement build -> list of notifications (changed / deleted) and button to add new(created)
   }
 }

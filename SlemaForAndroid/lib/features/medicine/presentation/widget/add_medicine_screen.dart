@@ -5,7 +5,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custo
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
-import 'package:pg_slema/features/notification/presentation/manage_notifications_widget.dart';
+import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class AddMedicineScreen extends StatefulWidget {

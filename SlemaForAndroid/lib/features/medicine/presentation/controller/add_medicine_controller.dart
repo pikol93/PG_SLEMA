@@ -52,16 +52,19 @@ class AddMedicineController extends ChangeNotifier with Logger {
   }
 
   void onNotificationDeleted(GetNotification notification) {
+    logger.debug("notification deleted: ${notification.id}");
     notifications.removeWhere((el) => el.id == notification.id);
     notifications.forEach(logger.debug);
   }
 
   void onNotificationCreated(GetNotification notification) {
+    logger.debug("notification created: ${notification.id}");
     notifications.add(notification);
     notifications.forEach(logger.debug);
   }
 
   void onNotificationChanged(GetNotification notification) {
+    logger.debug("notification changed: ${notification.id}");
     notifications[notifications
         .indexWhere((element) => element.id == notification.id)] = notification;
     notifications.forEach(logger.debug);
