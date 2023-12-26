@@ -1,4 +1,4 @@
-gimport 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:pg_slema/features/notification/domain/get_notification.dart';
 import 'package:pg_slema/features/notification/presentation/controller/get_notification_controller.dart';
 import 'package:pg_slema/features/notification/presentation/widget/time_picker.dart';
