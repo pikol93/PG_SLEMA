@@ -23,12 +23,30 @@ class GetNotificationWidget extends StatefulWidget {
 class _GetNotificationWidgetState extends State<GetNotificationWidget> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build : row with time picker(changed) and delete button(deleted)
-    return CustomTimePicker(onTimeChanged: onTimeChanged);
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(flex: 4, child: CustomTimePicker(onTimeChanged: onTimeChanged)),
+            Expanded(flex: 2, child:
+            FilledButton(
+              onPressed: onDeleteClicked,
+              style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(0),
+                  backgroundColor: Theme.of(context).primaryColor),
+              child:
+                  const Icon(Icons.remove_circle_outline, color: Colors.white),
+            ),)
+          ],
+        );
   }
 
   void onTimeChanged(TimeOfDay time) {
     widget.controller.onTimeChanged(time);
     widget.onNotificationChanged(widget.controller.notification);
+  }
+
+  void onDeleteClicked() {
+    widget.onNotificationDeleted(widget.controller.notification);
   }
 }
