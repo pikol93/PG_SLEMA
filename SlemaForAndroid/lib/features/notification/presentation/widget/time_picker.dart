@@ -3,11 +3,15 @@ import 'package:pg_slema/features/notification/presentation/controller/time_pick
 
 class CustomTimePicker extends StatefulWidget {
   final ValueChanged<TimeOfDay> onTimeChanged;
-  final TimePickerController controller = TimePickerController();
+  final TimePickerController controller;
 
   final String? label;
 
-  CustomTimePicker({super.key, this.label, required this.onTimeChanged});
+  const CustomTimePicker(
+      {super.key,
+      this.label,
+      required this.onTimeChanged,
+      required this.controller});
 
   @override
   State<CustomTimePicker> createState() => _CustomTimePickerState();

@@ -75,9 +75,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
                 ManageNotificationsWidget(
-                    onNotificationChanged: _controller.onNotificationChanged,
-                    onNotificationDeleted: _controller.onNotificationDeleted,
-                    onNotificationCreated: _controller.onNotificationCreated),
+                  controller: _controller,
+                ),
                 const SizedBox(height: 20),
                 CustomSaveButton(
                   controller: _controller,

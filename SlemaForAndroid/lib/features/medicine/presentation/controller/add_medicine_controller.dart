@@ -7,24 +7,29 @@ import 'package:pg_slema/features/notification/data/repository/shared_preference
 import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/notification/domain/get_notification.dart';
 import 'package:pg_slema/features/notification/domain/notification.dart' as nt;
+import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/time_of_day/time_of_day_comparing_extension.dart';
 import 'package:uuid/uuid.dart';
 
-class AddMedicineController extends ChangeNotifier with Logger {
+class AddMedicineController extends ChangeNotifier
+    with Logger, ManageNotificationsController {
   final String medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   late final MedicineService _medicineService;
   String typedMedicineName = "";
   String typedIntakeType = "";
-  List<GetNotification> notifications =
-      List<GetNotification>.empty(growable: true);
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
   bool canDateBePicked = false;
-  //TODO: add missing notifications manago
+  @override
+  List<GetNotification> notifications = List<GetNotification>.from([
+    GetNotification(const Uuid().v4(), TimeOfDay.now()),
+    GetNotification(const Uuid().v4(), TimeOfDay.now())
+  ]);
+  //List<GetNotification>.empty(growable: true);
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
@@ -51,18 +56,21 @@ class AddMedicineController extends ChangeNotifier with Logger {
         medicineNotifications, _notificationService.addNotification);
   }
 
+  @override
   void onNotificationDeleted(GetNotification notification) {
     logger.debug("notification deleted: ${notification.id}");
     notifications.removeWhere((el) => el.id == notification.id);
     notifications.forEach(logger.debug);
   }
 
+  @override
   void onNotificationCreated(GetNotification notification) {
     logger.debug("notification created: ${notification.id}");
     notifications.add(notification);
     notifications.forEach(logger.debug);
   }
 
+  @override
   void onNotificationChanged(GetNotification notification) {
     logger.debug("notification changed: ${notification.id}");
     notifications[notifications
