@@ -26,6 +26,7 @@ class _ManageNotificationsWidgetState extends State<ManageNotificationsWidget> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: widget.controller.notifications.length,
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             final notification = widget.controller.notifications[index];
             return GetNotificationWidget(

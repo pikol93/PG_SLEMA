@@ -35,7 +35,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Form(
