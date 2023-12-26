@@ -25,11 +25,7 @@ class AddMedicineController extends ChangeNotifier
   Frequency frequency = Frequency.singular;
   bool canDateBePicked = false;
   @override
-  List<GetNotification> notifications = List<GetNotification>.from([
-    GetNotification(const Uuid().v4(), TimeOfDay.now()),
-    GetNotification(const Uuid().v4(), TimeOfDay.now())
-  ]);
-  //List<GetNotification>.empty(growable: true);
+  List<GetNotification>.empty(growable: true);
 
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
