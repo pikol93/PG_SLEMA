@@ -21,4 +21,9 @@ class MedicineScreenController {
   void reloadMedicines() {
     _medicineService.getAllMedicines().then((value) => medicines = value);
   }
+
+  void deleteMedicine(Medicine medicine) {
+    _medicineService.deleteMedicine(medicine);
+    medicines.removeWhere((element) => element.id == medicine.id);
+  }
 }

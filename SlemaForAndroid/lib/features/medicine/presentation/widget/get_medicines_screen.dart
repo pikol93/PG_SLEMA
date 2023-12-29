@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
@@ -34,7 +35,8 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return GetMedicineWidget(
-                              medicine: widget.controller.medicines[index])
+                              medicine: widget.controller.medicines[index],
+                              onDeleteClicked: onDeleteMedicineClicked)
                           .build(context);
                     },
                     childCount: widget.controller.medicines.length,
@@ -48,5 +50,10 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
       floatingActionButton:
           AddMedicineButton(onAddedMedicine: refreshMedicinesData),
     );
+  }
+
+  void onDeleteMedicineClicked(Medicine medicine) {
+    widget.controller.deleteMedicine(medicine);
+    setState(() {});
   }
 }
