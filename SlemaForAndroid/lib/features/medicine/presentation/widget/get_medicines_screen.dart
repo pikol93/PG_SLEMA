@@ -29,9 +29,10 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return GetMedicineWidget(
-                              medicine: widget.controller.medicines[index],
-                              onDeleteClicked: onDeleteMedicineClicked)
-                          .build(context);
+                        medicine: widget.controller.medicines[index],
+                        onMedicineDeleted: onMedicineDeleted,
+                        onMedicineEdited: onMedicineEdited,
+                      ).build(context);
                     },
                     childCount: widget.controller.medicines.length,
                   ),
@@ -42,11 +43,11 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
         ),
       ),
       floatingActionButton:
-          AddMedicineButton(onAddedMedicine: onMedicineCreated),
+          AddMedicineButton(onMedicineAdded: onMedicineCreated),
     );
   }
 
-  void onDeleteMedicineClicked(Medicine medicine) {
+  void onMedicineDeleted(Medicine medicine) {
     widget.controller.deleteMedicine(medicine);
     setState(() {});
   }
@@ -55,4 +56,6 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
     widget.controller.addMedicine(medicine);
     setState(() {});
   }
+
+  void onMedicineEdited(Medicine medicine) {}
 }

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/edit_medicine_button.dart';
 
 class GetMedicineWidget extends StatelessWidget {
-  final ValueChanged<Medicine> onDeleteClicked;
+  final ValueChanged<Medicine> onMedicineDeleted;
+  final ValueChanged<Medicine> onMedicineEdited;
   final Medicine medicine;
 
   const GetMedicineWidget(
-      {super.key, required this.medicine, required this.onDeleteClicked});
+      {super.key,
+      required this.medicine,
+      required this.onMedicineDeleted,
+      required this.onMedicineEdited});
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +42,17 @@ class GetMedicineWidget extends StatelessWidget {
             medicine.intakeType,
           ),
           const SizedBox(height: 12.0),
-          FilledButton(
-            onPressed: () => onDeleteClicked(medicine),
-            style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(0),
-                backgroundColor: Theme.of(context).primaryColor),
-            child: const Icon(Icons.delete, color: Colors.white),
-          )
+          Row(children: [
+            FilledButton(
+              onPressed: () => onMedicineDeleted(medicine),
+              style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  padding: const EdgeInsets.all(0),
+                  backgroundColor: Theme.of(context).primaryColor),
+              child: const Icon(Icons.delete, color: Colors.white),
+            ),
+            EditMedicineButton(onMedicineChanged: onMedicineEdited)
+          ])
         ]));
   }
 }
