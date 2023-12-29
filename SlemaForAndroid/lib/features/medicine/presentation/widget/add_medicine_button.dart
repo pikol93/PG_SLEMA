@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen.dart';
 
 class AddMedicineButton extends StatelessWidget {
-  final VoidCallback onAddedMedicine;
+  final ValueSetter<Medicine> onAddedMedicine;
   const AddMedicineButton({super.key, required this.onAddedMedicine});
 
   @override

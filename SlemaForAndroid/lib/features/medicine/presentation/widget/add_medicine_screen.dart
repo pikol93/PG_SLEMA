@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
@@ -9,7 +10,7 @@ import 'package:pg_slema/features/notification/presentation/widget/manage_notifi
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class AddMedicineScreen extends StatefulWidget {
-  final VoidCallback onAddedMedicine;
+  final ValueSetter<Medicine> onAddedMedicine;
   const AddMedicineScreen({super.key, required this.onAddedMedicine});
 
   @override
@@ -22,7 +23,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
 
   @override
   void dispose() {
-    // Clean up the controller when the widget is disposed.
     _controller.dispose();
     super.dispose();
   }
@@ -78,10 +78,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 ),
                 const SizedBox(height: 20),
                 CustomSaveButton(
-                  controller: _controller,
-                  formKey: _formKey,
-                  onAddedMedicine: widget.onAddedMedicine,
-                ),
+                    controller: _controller,
+                    formKey: _formKey,
+                    onAddedMedicine: () => _controller
+                        .createMedicine()
+                        .then(widget.onAddedMedicine)),
               ],
             ),
           ),

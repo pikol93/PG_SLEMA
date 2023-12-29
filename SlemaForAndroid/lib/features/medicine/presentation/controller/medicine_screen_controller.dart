@@ -23,7 +23,12 @@ class MedicineScreenController {
   }
 
   void deleteMedicine(Medicine medicine) {
-    _medicineService.deleteMedicine(medicine);
     medicines.removeWhere((element) => element.id == medicine.id);
+    _medicineService.deleteMedicine(medicine);
+  }
+
+  void addMedicine(Medicine medicine) {
+    medicines.add(medicine);
+    _medicineService.addMedicine(medicine);
   }
 }

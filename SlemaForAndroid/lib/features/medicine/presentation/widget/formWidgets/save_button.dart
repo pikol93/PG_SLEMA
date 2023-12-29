@@ -20,23 +20,11 @@ class CustomSaveButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            controller.saveMedicine().then((_) {
-              onAddedMedicine.call();
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Zapisano pomyślnie!'),
-                  duration: Duration(seconds: 2),
-                ),
-              );
-            }).catchError((error) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Bląd podczas zapisywania: $error'),
-                  duration: const Duration(seconds: 10),
-                ),
-              );
-            });
+            try {
+              addNewMedicine(context);
+            } on Exception catch (_) {
+              showInfoAboutIncorrectSave(context);
+            }
           }
         },
         style: ButtonStyle(
@@ -50,6 +38,26 @@ class CustomSaveButton extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+      ),
+    );
+  }
+
+  void addNewMedicine(BuildContext context) {
+    onAddedMedicine.call();
+    Navigator.pop(context);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Zapisano pomyślnie!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void showInfoAboutIncorrectSave(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Błąd podczas zapisywania!'),
+        duration: Duration(seconds: 3),
       ),
     );
   }

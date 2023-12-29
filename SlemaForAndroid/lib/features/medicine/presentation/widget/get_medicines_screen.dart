@@ -14,12 +14,6 @@ class GetMedicinesScreen extends StatefulWidget {
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
-  void refreshMedicinesData() {
-    setState(() {
-      widget.controller.reloadMedicines();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,12 +42,17 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
         ),
       ),
       floatingActionButton:
-          AddMedicineButton(onAddedMedicine: refreshMedicinesData),
+          AddMedicineButton(onAddedMedicine: onMedicineCreated),
     );
   }
 
   void onDeleteMedicineClicked(Medicine medicine) {
     widget.controller.deleteMedicine(medicine);
+    setState(() {});
+  }
+
+  void onMedicineCreated(Medicine medicine) {
+    widget.controller.addMedicine(medicine);
     setState(() {});
   }
 }

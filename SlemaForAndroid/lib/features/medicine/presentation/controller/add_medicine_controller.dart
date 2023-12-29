@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
-import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/notification/application/service/notification_service.dart';
 import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/notification/domain/get_notification.dart';
 import 'package:pg_slema/features/notification/domain/notification.dart' as nt;
 import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
@@ -18,7 +15,6 @@ class AddMedicineController extends ChangeNotifier
     with Logger, ManageNotificationsController {
   final String medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
-  late final MedicineService _medicineService;
   String typedMedicineName = "";
   String typedIntakeType = "";
   DateTime endIntakeDate = DateTime.now();
@@ -31,13 +27,9 @@ class AddMedicineController extends ChangeNotifier
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
     _notificationService = NotificationService(notificationRepository);
-    final converter = MedicineToDtoConverter(_notificationService);
-    final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService =
-        MedicineService(medicineRepository, _notificationService);
   }
 
-  Future saveMedicine() async {
+  Future<Medicine> createMedicine() async {
     var lastMedicineDate = _getLastNotificationDateTime();
 
     var medicineNotifications =
@@ -47,10 +39,7 @@ class AddMedicineController extends ChangeNotifier
         DateTime.now(), lastMedicineDate, frequency, medicineNotifications);
 
     logger.debug(medicine);
-
-    await _medicineService.addMedicine(medicine);
-    await Future.forEach(
-        medicineNotifications, _notificationService.addNotification);
+    return medicine;
   }
 
   @override
