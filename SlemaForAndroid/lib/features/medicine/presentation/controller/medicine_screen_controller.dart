@@ -31,4 +31,10 @@ class MedicineScreenController {
     medicines.add(medicine);
     _medicineService.addMedicine(medicine);
   }
+
+  void editMedicine(Medicine medicine) {
+    final index = medicines.indexWhere((element) => element.id == medicine.id);
+    medicines[index] = medicine;
+    _medicineService.updateMedicine(medicine);
+  }
 }

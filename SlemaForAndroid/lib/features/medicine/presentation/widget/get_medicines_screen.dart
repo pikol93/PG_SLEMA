@@ -57,5 +57,8 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
     setState(() {});
   }
 
-  void onMedicineEdited(Medicine medicine) {}
+  void onMedicineEdited(Medicine medicine) {
+    widget.controller.editMedicine(medicine);
+    setState(() {});
+  }
 }
