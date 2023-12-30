@@ -46,8 +46,16 @@ class SharedPreferencesNotificationRepository
 
   @override
   Future updateNotification(Notification notification) async {
-    await deleteNotification(notification);
-    await addNotification(notification);
+    List<Notification> notifications = await getAllNotifications();
+    final index =
+        notifications.indexWhere((element) => element.id == notification.id);
+    notifications[index] = notification;
+    final jsonNotificationsList = notifications
+        .map((notification) => NotificationToDtoConverter.toDto(notification))
+        .map((dto) => NotificationDtoToJsonConverter.toJson(dto))
+        .map((json) => jsonEncode(json))
+        .toList(growable: true);
+    _updateNotificationsList(jsonNotificationsList);
   }
 
   @override

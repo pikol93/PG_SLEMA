@@ -48,8 +48,16 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
 
   @override
   Future updateMedicine(Medicine medicine) async {
-    await deleteMedicine(medicine);
-    await addMedicine(medicine);
+    List<Medicine> medicines = await getAllMedicines();
+    final index = medicines.indexWhere((element) => element.id == medicine.id);
+    medicines[index] = medicine;
+    final jsonMedicinesList = medicines
+        .map((medicine) => medicineConverter.toDto(medicine))
+        .map((dto) => MedicineDtoToJsonConverter.toJson(dto))
+        .map((json) => jsonEncode(json))
+        .toList(growable: true);
+
+    await _updateMedicinesList(jsonMedicinesList);
   }
 
   Future<List<String>> _getJsonMedicinesList() async {
