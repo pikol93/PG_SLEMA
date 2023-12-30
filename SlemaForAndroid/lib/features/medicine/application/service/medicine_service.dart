@@ -15,13 +15,15 @@ class MedicineService {
 
   Future addMedicine(Medicine medicine) async {
     await _repository.addMedicine(medicine);
-    Future.forEach(medicine.notifications, _notificationService.addNotification);
+    Future.forEach(
+        medicine.notifications, _notificationService.addNotification);
   }
 
   Future updateMedicine(Medicine medicine) async {
     await _notificationService.deleteNotificationsByMedicine(medicine.id);
     await _repository.updateMedicine(medicine);
-    Future.forEach(medicine.notifications, _notificationService.addNotification);
+    Future.forEach(
+        medicine.notifications, _notificationService.addNotification);
   }
 
   Future deleteMedicine(Medicine medicine) async {

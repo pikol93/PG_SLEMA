@@ -48,7 +48,8 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
 
   @override
   Future updateMedicine(Medicine medicine) async {
-    List<Medicine> medicines = await getAllMedicines(); //TODO: remove it and achieve it in faster way -> _getMedicinesDto, same in notifications
+    List<Medicine> medicines =
+        await getAllMedicines(); //TODO: remove it and achieve it in faster way -> _getMedicinesDto, same in notifications
     final index = medicines.indexWhere((element) => element.id == medicine.id);
     medicines[index] = medicine;
     final jsonMedicinesList = medicines
