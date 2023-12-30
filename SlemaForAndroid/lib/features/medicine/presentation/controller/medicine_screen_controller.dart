@@ -8,13 +8,14 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 class MedicineScreenController {
   List<Medicine> medicines = [];
   late final MedicineService _medicineService;
+  late final NotificationService _notificationService;
 
   MedicineScreenController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
-    final notificationService = NotificationService(notificationRepository);
-    final converter = MedicineToDtoConverter(notificationService);
+    _notificationService = NotificationService(notificationRepository);
+    final converter = MedicineToDtoConverter(_notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService = MedicineService(medicineRepository, notificationService);
+    _medicineService = MedicineService(medicineRepository);
     _medicineService.getAllMedicines().then((value) => medicines = value);
   }
 
@@ -25,16 +26,19 @@ class MedicineScreenController {
   void deleteMedicine(Medicine medicine) {
     medicines.removeWhere((element) => element.id == medicine.id);
     _medicineService.deleteMedicine(medicine);
+    medicine.notifications.forEach(_notificationService.deleteNotification);
   }
 
   void addMedicine(Medicine medicine) {
     medicines.add(medicine);
     _medicineService.addMedicine(medicine);
+    medicine.notifications.forEach(_notificationService.addNotification);
   }
 
   void editMedicine(Medicine medicine) {
     final index = medicines.indexWhere((element) => element.id == medicine.id);
     medicines[index] = medicine;
     _medicineService.updateMedicine(medicine);
+    medicine.notifications.forEach(_notificationService.updateNotification);
   }
 }
