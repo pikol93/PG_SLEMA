@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 
 class AddMedicineController extends ChangeNotifier
     with Logger, ManageNotificationsController {
-  final String medicineId = const Uuid().v4();
+  String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   String typedMedicineName = "";
   String typedIntakeType = "";
@@ -29,16 +29,33 @@ class AddMedicineController extends ChangeNotifier
     _notificationService = NotificationService(notificationRepository);
   }
 
+  void initFromMedicine(Medicine medicine) {
+    _medicineId = medicine.id;
+    typedMedicineName = medicine.name;
+    typedIntakeType = medicine.intakeType;
+    endIntakeDate = medicine.lastIntakeDate;
+    frequency = medicine.intakeFrequency;
+    notifications = medicine.notifications
+        .map((e) => GetNotification(e.id, e.notificationTime))
+        .toList(growable: true);
+    checkIfDateCanBePicked();
+  }
+
   Future<Medicine> createMedicine() async {
     var lastMedicineDate = _getLastNotificationDateTime();
 
     var medicineNotifications =
         await _createNotificationsForMedicine(lastMedicineDate);
 
-    Medicine medicine = Medicine(medicineId, typedMedicineName, typedIntakeType,
-        DateTime.now(), lastMedicineDate, frequency, medicineNotifications);
+    Medicine medicine = Medicine(
+        _medicineId,
+        typedMedicineName,
+        typedIntakeType,
+        DateTime.now(),
+        lastMedicineDate,
+        frequency,
+        medicineNotifications);
 
-    logger.debug(medicine);
     return medicine;
   }
 
@@ -89,14 +106,18 @@ class AddMedicineController extends ChangeNotifier
     return notifications
         .map((notification) => nt.Notification(
             notification.id,
-            medicineId,
+            _medicineId,
             'Przypomnienie',
-            'Trzeba przyjąć $typedIntakeType',
+            'Trzeba przyjąć $typedMedicineName',
             notification.notificationTime,
             DateTime.now(),
             lastNotificationDate,
             frequency,
             idsToSchedule.removeLast()))
         .toList(growable: true);
+  }
+
+  void checkIfDateCanBePicked() {
+    canDateBePicked = frequency == Frequency.singular ? false : true;
   }
 }

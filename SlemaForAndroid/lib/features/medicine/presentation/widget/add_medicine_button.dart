@@ -14,7 +14,7 @@ class AddMedicineButton extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => AddMedicineScreen(
-                onAddedMedicine: onMedicineAdded,
+                onMedicineAdded: onMedicineAdded,
               ),
             ));
       },

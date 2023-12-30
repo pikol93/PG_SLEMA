@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/edit_medicine_screen.dart';
 
 class EditMedicineButton extends StatelessWidget {
   final ValueChanged<Medicine> onMedicineChanged;
-  const EditMedicineButton({super.key, required this.onMedicineChanged});
+  final ValueGetter<Medicine> medicineProvider;
+  const EditMedicineButton(
+      {super.key,
+      required this.onMedicineChanged,
+      required this.medicineProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +26,9 @@ class EditMedicineButton extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => AddMedicineScreen(
-            //TODO:
-            onAddedMedicine: onMedicineChanged,
+          builder: (context) => EditMedicineScreen(
+            onMedicineChanged: onMedicineChanged,
+            medicine: medicineProvider(),
           ),
         ));
   }

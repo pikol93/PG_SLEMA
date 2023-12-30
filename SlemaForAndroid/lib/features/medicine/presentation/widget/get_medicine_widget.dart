@@ -44,7 +44,10 @@ class GetMedicineWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12.0),
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-            EditMedicineButton(onMedicineChanged: onMedicineEdited),
+            EditMedicineButton(
+              onMedicineChanged: onMedicineEdited,
+              medicineProvider: () => medicine,
+            ),
             DeleteMedicineButton(onPressed: () => onMedicineDeleted(medicine)),
           ])
         ]));
