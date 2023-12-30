@@ -9,11 +9,23 @@ class MedicineToDtoConverter {
 
   Future<Medicine> fromDto(MedicineDto dto) async {
     String medicineId = dto.id;
-    return Medicine(medicineId, dto.name, dto.intakeType,
+    return Medicine(
+        medicineId,
+        dto.name,
+        dto.intakeType,
+        dto.firstIntakeDate,
+        dto.lastIntakeDate,
+        dto.intakeFrequency,
         await service.getAllNotificationsByMedicine(medicineId));
   }
 
   MedicineDto toDto(Medicine medicine) {
-    return MedicineDto(medicine.id, medicine.name, medicine.intakeType);
+    return MedicineDto(
+        medicine.id,
+        medicine.name,
+        medicine.intakeType,
+        medicine.firstIntakeDate,
+        medicine.lastIntakeDate,
+        medicine.intakeFrequency);
   }
 }

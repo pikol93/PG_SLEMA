@@ -6,7 +6,7 @@ class NotificationDtoToJsonConverter {
   static NotificationDto fromJson(Map<String, dynamic> json) {
     return NotificationDto(
         json['id'],
-        json['medicineId'],
+        json['ownerId'],
         json['title'],
         json['body'],
         JsonParser.parseTimeOfDayFromJson(json['notificationTime']),
@@ -17,17 +17,17 @@ class NotificationDtoToJsonConverter {
         json['scheduledId']);
   }
 
-  static Map<String, dynamic> toJson(NotificationDto notification) => {
-        'id': notification.id.toString(),
-        'medicineId': notification.id.toString(),
-        'title': notification.title.toString(),
-        'body': notification.body.toString(),
+  static Map<String, dynamic> toJson(NotificationDto dto) => {
+        'id': dto.id.toString(),
+        'ownerId': dto.ownerId.toString(),
+        'title': dto.title.toString(),
+        'body': dto.body.toString(),
         'notificationTime':
-            JsonParser.parseTimeOfDayToJson(notification.notificationTime),
-        'firstNotificationDate': notification.firstNotificationDate.toString(),
-        'lastNotificationDate': notification.lastNotificationDate.toString(),
+            JsonParser.parseTimeOfDayToJson(dto.notificationTime),
+        'firstNotificationDate': dto.firstNotificationDate.toString(),
+        'lastNotificationDate': dto.lastNotificationDate.toString(),
         'notificationFrequency':
-            JsonParser.parseEnumToJson(notification.notificationFrequency),
-        'scheduledId': notification.scheduledId
+            JsonParser.parseEnumToJson(dto.notificationFrequency),
+        'scheduledId': dto.scheduledId
       };
 }
