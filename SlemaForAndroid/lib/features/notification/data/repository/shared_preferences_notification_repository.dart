@@ -15,10 +15,10 @@ class SharedPreferencesNotificationRepository
       String medicineId) async {
     var jsonNotificationsList = await _getJsonNotificationsList();
     return jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
+        .map(jsonDecode)
         .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .where((element) => element.ownerId == medicineId)
-        .map((dto) => NotificationToDtoConverter.fromDto(dto))
+        .map(NotificationToDtoConverter.fromDto)
         .toList(growable: true);
   }
 
@@ -26,11 +26,11 @@ class SharedPreferencesNotificationRepository
   Future deleteNotification(Notification notification) async {
     var jsonNotificationsList = await _getJsonNotificationsList();
     jsonNotificationsList = jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
+        .map(jsonDecode)
         .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .where((element) => element.id == notification.id)
-        .map((element) => NotificationDtoToJsonConverter.toJson(element))
-        .map((json) => jsonEncode(json))
+        .map(NotificationDtoToJsonConverter.toJson)
+        .map(jsonEncode)
         .toList(growable: true);
     await _updateNotificationsList(jsonNotificationsList);
   }
@@ -46,17 +46,25 @@ class SharedPreferencesNotificationRepository
 
   @override
   Future updateNotification(Notification notification) async {
-    await deleteNotification(notification);
-    await addNotification(notification);
+    List<Notification> notifications = await getAllNotifications();
+    final index =
+        notifications.indexWhere((element) => element.id == notification.id);
+    notifications[index] = notification;
+    final jsonNotificationsList = notifications
+        .map(NotificationToDtoConverter.toDto)
+        .map(NotificationDtoToJsonConverter.toJson)
+        .map(jsonEncode)
+        .toList(growable: true);
+    _updateNotificationsList(jsonNotificationsList);
   }
 
   @override
   Future<List<Notification>> getAllNotifications() async {
     var jsonNotificationsList = await _getJsonNotificationsList();
     return jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
+        .map(jsonDecode)
         .map((json) => NotificationDtoToJsonConverter.fromJson(json))
-        .map((dto) => NotificationToDtoConverter.fromDto(dto))
+        .map(NotificationToDtoConverter.fromDto)
         .toList(growable: true);
   }
 
@@ -84,3 +92,5 @@ class SharedPreferencesNotificationRepository
         jsonNotificationsList, Notification.notificationListSharedPrefKey);
   }
 }
+
+//TODO: add method replace notifications - remove if exists.. then add all, then call it on edit medicine

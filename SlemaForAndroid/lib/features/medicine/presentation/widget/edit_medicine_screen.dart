@@ -9,21 +9,26 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
-class AddMedicineScreen extends StatefulWidget {
-  final ValueSetter<Medicine> onMedicineAdded;
-  const AddMedicineScreen({super.key, required this.onMedicineAdded});
+class EditMedicineScreen extends StatefulWidget {
+  final ValueSetter<Medicine> onMedicineChanged;
+  final AddMedicineController controller = AddMedicineController();
+  EditMedicineScreen(
+      {super.key,
+      required this.onMedicineChanged,
+      required Medicine medicine}) {
+    controller.initFromMedicine(medicine);
+  }
 
   @override
-  State<AddMedicineScreen> createState() => _AddMedicineScreenState();
+  State<EditMedicineScreen> createState() => _EditMedicineScreen();
 }
 
-class _AddMedicineScreenState extends State<AddMedicineScreen> {
-  final _controller = AddMedicineController();
+class _EditMedicineScreen extends State<EditMedicineScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.controller.dispose();
     super.dispose();
   }
 
@@ -44,31 +49,35 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 CustomTextFormField(
                   label: "Nazwa",
                   icon: Icons.create,
-                  onChanged: (value) => _controller.typedMedicineName = value,
+                  initialValue: widget.controller.typedMedicineName,
+                  onChanged: (value) =>
+                      widget.controller.typedMedicineName = value,
                 ),
                 const SizedBox(height: 10),
                 CustomTextFormField(
                   label: "Sposób aplikacji leku",
                   icon: Icons.create,
-                  onChanged: (value) => _controller.typedIntakeType = value,
+                  initialValue: widget.controller.typedIntakeType,
+                  onChanged: (value) =>
+                      widget.controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
                 FrequencyList(
-                    initialValue: _controller.frequency,
+                    initialValue: widget.controller.frequency,
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
                 _createDataFieldIfPossible(),
                 ManageNotificationsWidget(
-                  controller: _controller,
+                  controller: widget.controller,
                 ),
                 const SizedBox(height: 20),
                 CustomSaveButton(
-                    controller: _controller,
+                    controller: widget.controller,
                     formKey: _formKey,
-                    onAddedMedicine: () => _controller
+                    onAddedMedicine: () => widget.controller
                         .createMedicine()
-                        .then(widget.onMedicineAdded)),
+                        .then(widget.onMedicineChanged)),
               ],
             ),
           ),
@@ -78,26 +87,35 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   }
 
   void _handleFrequencyChange(Frequency frequency) {
-    _controller.frequency = frequency;
+    widget.controller.frequency = frequency;
     setState(() {
-      _controller.checkIfDateCanBePicked();
+      widget.controller.canDateBePicked =
+          frequency == Frequency.singular ? false : true;
     });
   }
 
   Widget _createDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canDateBePicked) ...[
+        if (widget.controller.canDateBePicked) ...[
           CustomDatePicker(
-              onDateSelected: (date) => _controller.endIntakeDate = date,
+              onDateSelected: (date) => widget.controller.endIntakeDate = date,
               controller: DatePickerController(
                   DateTime.now().add(const Duration(days: 1)),
                   DateTime.now().add(const Duration(days: 365)),
-                  DateTime.now().add(const Duration(days: 1))),
+                  createInitialDateTime()),
               label: "Data zakończenia przyjmowania"),
           const SizedBox(height: 20),
         ]
       ],
     );
+  }
+
+  DateTime createInitialDateTime() {
+    return widget.controller.endIntakeDate
+                .compareTo(DateTime.now().add(const Duration(days: 1))) >
+            -1
+        ? widget.controller.endIntakeDate
+        : DateTime.now().add(const Duration(days: 1));
   }
 }

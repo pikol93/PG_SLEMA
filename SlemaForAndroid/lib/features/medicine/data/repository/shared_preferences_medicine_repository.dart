@@ -25,14 +25,14 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   @override
   Future deleteMedicine(Medicine medicine) async {
     var jsonMedicinesList = await _getJsonMedicinesList();
-
-    jsonMedicinesList
-        .map((jsonString) => jsonDecode(jsonString))
+    jsonMedicinesList = jsonMedicinesList
+        .map(jsonDecode)
         .map((json) => MedicineDtoToJsonConverter.fromJson(json))
-        .where((dto) => dto.id == medicine.id)
-        .map((dto) => MedicineDtoToJsonConverter.toJson(dto))
-        .map((json) => jsonEncode(json))
+        .where((dto) => dto.id != medicine.id)
+        .map(MedicineDtoToJsonConverter.toJson)
+        .map(jsonEncode)
         .toList(growable: true);
+
     await _updateMedicinesList(jsonMedicinesList);
   }
 
@@ -40,16 +40,25 @@ class SharedPreferencesMedicineRepository extends MedicineRepository {
   Future<List<Medicine>> getAllMedicines() async {
     var jsonMedicinesList = await _getJsonMedicinesList();
     return Future.wait(jsonMedicinesList
-        .map((jsonString) => jsonDecode(jsonString))
+        .map(jsonDecode)
         .map((json) => MedicineDtoToJsonConverter.fromJson(json))
-        .map((dto) => medicineConverter.fromDto(dto))
+        .map(medicineConverter.fromDto)
         .toList(growable: true));
   }
 
   @override
   Future updateMedicine(Medicine medicine) async {
-    await deleteMedicine(medicine);
-    await addMedicine(medicine);
+    List<Medicine> medicines =
+        await getAllMedicines(); //TODO: remove it and achieve it in faster way -> _getMedicinesDto, same in notifications
+    final index = medicines.indexWhere((element) => element.id == medicine.id);
+    medicines[index] = medicine;
+    final jsonMedicinesList = medicines
+        .map(medicineConverter.toDto)
+        .map(MedicineDtoToJsonConverter.toJson)
+        .map(jsonEncode)
+        .toList(growable: true);
+
+    await _updateMedicinesList(jsonMedicinesList);
   }
 
   Future<List<String>> _getJsonMedicinesList() async {

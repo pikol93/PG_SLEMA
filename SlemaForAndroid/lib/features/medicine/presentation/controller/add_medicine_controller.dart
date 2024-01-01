@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
-import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/notification/application/service/notification_service.dart';
 import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
 import 'package:pg_slema/features/notification/domain/get_notification.dart';
 import 'package:pg_slema/features/notification/domain/notification.dart' as nt;
 import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
@@ -16,9 +13,8 @@ import 'package:uuid/uuid.dart';
 
 class AddMedicineController extends ChangeNotifier
     with Logger, ManageNotificationsController {
-  final String medicineId = const Uuid().v4();
+  String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
-  late final MedicineService _medicineService;
   String typedMedicineName = "";
   String typedIntakeType = "";
   DateTime endIntakeDate = DateTime.now();
@@ -31,26 +27,36 @@ class AddMedicineController extends ChangeNotifier
   AddMedicineController() : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
     _notificationService = NotificationService(notificationRepository);
-    final converter = MedicineToDtoConverter(_notificationService);
-    final medicineRepository = SharedPreferencesMedicineRepository(converter);
-    _medicineService =
-        MedicineService(medicineRepository, _notificationService);
   }
 
-  Future saveMedicine() async {
+  void initFromMedicine(Medicine medicine) {
+    _medicineId = medicine.id;
+    typedMedicineName = medicine.name;
+    typedIntakeType = medicine.intakeType;
+    endIntakeDate = medicine.lastIntakeDate;
+    frequency = medicine.intakeFrequency;
+    notifications = medicine.notifications
+        .map((e) => GetNotification(e.id, e.notificationTime))
+        .toList(growable: true);
+    checkIfDateCanBePicked();
+  }
+
+  Future<Medicine> createMedicine() async {
     var lastMedicineDate = _getLastNotificationDateTime();
 
     var medicineNotifications =
         await _createNotificationsForMedicine(lastMedicineDate);
 
-    Medicine medicine = Medicine(medicineId, typedMedicineName, typedIntakeType,
-        DateTime.now(), lastMedicineDate, frequency, medicineNotifications);
+    Medicine medicine = Medicine(
+        _medicineId,
+        typedMedicineName,
+        typedIntakeType,
+        DateTime.now(),
+        lastMedicineDate,
+        frequency,
+        medicineNotifications);
 
-    logger.debug(medicine);
-
-    await _medicineService.addMedicine(medicine);
-    await Future.forEach(
-        medicineNotifications, _notificationService.addNotification);
+    return medicine;
   }
 
   @override
@@ -100,14 +106,18 @@ class AddMedicineController extends ChangeNotifier
     return notifications
         .map((notification) => nt.Notification(
             notification.id,
-            medicineId,
+            _medicineId,
             'Przypomnienie',
-            'Trzeba przyjąć $typedIntakeType',
+            'Trzeba przyjąć $typedMedicineName',
             notification.notificationTime,
             DateTime.now(),
             lastNotificationDate,
             frequency,
             idsToSchedule.removeLast()))
         .toList(growable: true);
+  }
+
+  void checkIfDateCanBePicked() {
+    canDateBePicked = frequency == Frequency.singular ? false : true;
   }
 }

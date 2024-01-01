@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
@@ -13,12 +14,6 @@ class GetMedicinesScreen extends StatefulWidget {
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
-  void refreshMedicinesData() {
-    setState(() {
-      widget.controller.reloadMedicines();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +29,10 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return GetMedicineWidget(
-                              medicine: widget.controller.medicines[index])
-                          .build(context);
+                        medicine: widget.controller.medicines[index],
+                        onMedicineDeleted: onMedicineDeleted,
+                        onMedicineEdited: onMedicineEdited,
+                      ).build(context);
                     },
                     childCount: widget.controller.medicines.length,
                   ),
@@ -46,7 +43,22 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
         ),
       ),
       floatingActionButton:
-          AddMedicineButton(onAddedMedicine: refreshMedicinesData),
+          AddMedicineButton(onMedicineAdded: onMedicineCreated),
     );
+  }
+
+  void onMedicineDeleted(Medicine medicine) {
+    widget.controller.deleteMedicine(medicine);
+    setState(() {});
+  }
+
+  void onMedicineCreated(Medicine medicine) {
+    widget.controller.addMedicine(medicine);
+    setState(() {});
+  }
+
+  void onMedicineEdited(Medicine medicine) {
+    widget.controller.editMedicine(medicine);
+    setState(() {});
   }
 }

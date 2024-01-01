@@ -37,6 +37,7 @@ class NotificationService {
     var notifications =
         await repository.getAllNotificationsByMedicine(medicineId);
     await repository.deleteAll(notifications);
+    Future.forEach(notifications, schedulingService.cancelNotification);
   }
 
   Future<List<Notification>> getAllNotifications() async {
