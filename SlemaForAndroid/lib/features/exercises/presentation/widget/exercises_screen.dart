@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/camera/presentation/controller/picture_controller.dart';
-import 'package:pg_slema/features/camera/presentation/widget/preview_picture.dart';
-import 'package:pg_slema/features/camera/presentation/widget/take_picture_button.dart';
+import 'package:pg_slema/features/picture/presentation/controller/picture_controller.dart';
+import 'package:pg_slema/features/picture/presentation/widget/pick_image.dart';
+import 'package:pg_slema/features/picture/presentation/widget/preview_picture.dart';
+import 'package:pg_slema/features/picture/presentation/widget/take_picture_button.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class ExercisesScreenState extends State<ExercisesScreen> {
                         series: "3/7",
                         repetitions: "15",
                         weight: "+5kg"),
-                    const TakePictureButton(),
+                    PickImage(),
                     PreviewPicture(
                       picture: pictureController.picture,
                     ),
