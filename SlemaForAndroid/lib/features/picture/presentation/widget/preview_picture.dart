@@ -21,7 +21,11 @@ class _PreviewPictureState extends State<PreviewPicture> {
         Text(widget.picture!.name)
       ]);
     } else {
-      return Container();
+      return Container(
+        height: 200,
+        margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+      );
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/camera/presentation/widget/take_picture_screen.dart';
+import 'package:pg_slema/features/picture/presentation/widget/take_picture_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pg_slema/features/camera/presentation/controller/picture_controller.dart';
+import 'package:pg_slema/features/picture/presentation/controller/picture_controller.dart';
 
 class TakePictureButton extends StatefulWidget {
   const TakePictureButton({super.key});

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-import 'package:pg_slema/features/camera/presentation/controller/picture_controller.dart';
+import 'package:pg_slema/features/picture/presentation/controller/picture_controller.dart';
 
 class TakePictureScreen extends StatefulWidget {
   final List<CameraDescription>? cameras;
