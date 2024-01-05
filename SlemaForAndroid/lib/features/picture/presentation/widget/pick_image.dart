@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
-import 'package:pg_slema/features/picture/domain/picture.dart';
+import 'package:pg_slema/features/picture/presentation/controller/log_SP_picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
-import 'package:uuid/uuid.dart';
+
+import 'package:pg_slema/features/picture/presentation/controller/pick_image_controller.dart';
 
 class PickImage extends StatefulWidget {
   const PickImage({super.key});
@@ -14,32 +14,19 @@ class PickImage extends StatefulWidget {
 }
 
 class _PickImageState extends State<PickImage> {
-  late PictureRepository repository;
-  late PictureService pictureService;
+  late PickImageController pickImageController;
+  late LogSharedPreferencesPictureController
+      logSharedPreferencesPictureController;
 
   @override
   void initState() {
     super.initState();
-    repository = PictureRepository(SharedPreferencesConnector());
-    pictureService = PictureService(repository);
-  }
-
-  Future<void> pickImage(BuildContext context) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      String imagePath = pickedFile.path;
-      String fileName = pickedFile.name;
-      String fileExtension = pickedFile.path.split('.').last;
-      int fileSize = await pickedFile.length();
-
-      pictureService.addPicture(Picture(
-          const Uuid().v4(), imagePath, fileName, fileExtension, fileSize));
-    } else {
-      print('Nie wybrano żadnego obrazu.');
-    }
+    PictureRepository repository =
+        PictureRepository(SharedPreferencesConnector());
+    PictureService pictureService = PictureService(repository);
+    pickImageController = PickImageController(repository, pictureService);
+    logSharedPreferencesPictureController =
+        LogSharedPreferencesPictureController(repository, pictureService);
   }
 
   @override
@@ -48,21 +35,13 @@ class _PickImageState extends State<PickImage> {
       children: [
         IconButton(
           onPressed: () {
-            pickImage(context);
+            pickImageController.pickImage();
           },
           icon: const Icon(Icons.image_search),
         ),
         IconButton(
           onPressed: () async {
-            try {
-              List<Picture> pictures =
-                  (await pictureService.getAllPictures()).cast<Picture>();
-              for (var p in pictures) {
-                print(p);
-              }
-            } catch (error) {
-              print("Error fetching pictures: $error");
-            }
+            logSharedPreferencesPictureController.printGetAllPictures();
           },
           icon: const Icon(Icons.question_mark),
         ),
