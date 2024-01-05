@@ -3,9 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
 import 'package:pg_slema/features/picture/domain/picture.dart';
-import 'package:pg_slema/features/picture/presentation/controller/picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class PickImage extends StatefulWidget {
@@ -16,8 +14,6 @@ class PickImage extends StatefulWidget {
 }
 
 class _PickImageState extends State<PickImage> {
-  late PictureController _pictureController;
-
   late PictureRepository repository;
   late PictureService pictureService;
 
@@ -34,7 +30,6 @@ class _PickImageState extends State<PickImage> {
         await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      _pictureController.setPictureFile(pickedFile);
       String imagePath = pickedFile.path;
       String fileName = pickedFile.name;
       String fileExtension = pickedFile.path.split('.').last;
@@ -49,7 +44,6 @@ class _PickImageState extends State<PickImage> {
 
   @override
   Widget build(BuildContext context) {
-    _pictureController = Provider.of<PictureController>(context);
     return Row(
       children: [
         IconButton(

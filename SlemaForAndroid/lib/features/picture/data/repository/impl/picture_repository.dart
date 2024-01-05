@@ -23,30 +23,51 @@ class PictureRepository implements PictureRepositoryAbs {
   }
 
   @override
-  Future deletePicture(Picture picture) {
-    // TODO: implement deletePicture
-    throw UnimplementedError();
+  Future deletePicture(Picture picture) async {
+    List<String> jsonPicturesList = await _getJsonPicturesList();
+
+    jsonPicturesList = jsonPicturesList
+        .map(jsonDecode)
+        .map((json) => PictureDTOToJSONConverter.fromJSON(json))
+        .where((dto) => dto.id != picture.id)
+        .map(PictureDTOToJSONConverter.toJSON)
+        .map(jsonEncode)
+        .toList(growable: true);
+
+    await _updatePicturesList(jsonPicturesList);
   }
 
   @override
   Future<List<Picture>> getAllPictures() async {
     List<String> jsonPicturesList = await _getJsonPicturesList();
-
-    List<Picture> allPictures = [];
-    for (String jsonString in jsonPicturesList) {
-      dynamic decoded = json.decode(jsonString);
-      PictureDTO pictureDTO = PictureDTOToJSONConverter.fromJSON(decoded);
-      Picture picture = PictureToDTOConverter.fromDTO(pictureDTO);
-      allPictures.add(picture);
-    }
-
-    return allPictures;
+    return jsonPicturesList
+        .map(jsonDecode)
+        .map((decoded) => PictureDTOToJSONConverter.fromJSON(decoded))
+        .map((dto) => PictureToDTOConverter.fromDTO(dto))
+        .toList(growable: true);
   }
 
   @override
-  Future updatePicture(Picture picture) {
-    // TODO: implement updatePicture
-    throw UnimplementedError();
+  Future updatePicture(Picture picture) async {
+    //TODO Nie wiem czy ten update ma w ogole sens.
+    //Co ma ciało Picture? Czy wszystkie pola na pewno sa uzupelnione?
+
+    List<String> jsonPicturesList = await _getJsonPicturesList();
+    List<PictureDTO> pictureDTOList = jsonPicturesList
+        .map(jsonDecode)
+        .map((decoded) => PictureDTOToJSONConverter.fromJSON(decoded))
+        .toList(growable: true);
+
+    PictureDTO dto = PictureToDTOConverter.toDTO(picture);
+    int updateIdx = pictureDTOList.indexOf(dto);
+    pictureDTOList[updateIdx] = dto;
+
+    jsonPicturesList = pictureDTOList
+        .map(PictureDTOToJSONConverter.toJSON)
+        .map(jsonEncode)
+        .toList(growable: true);
+
+    _updatePicturesList(jsonPicturesList);
   }
 
   Future<List<String>> _getJsonPicturesList() async {
