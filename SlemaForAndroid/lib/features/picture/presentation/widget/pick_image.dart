@@ -3,11 +3,11 @@ import 'package:pg_slema/features/picture/application/service/impl/picture_servi
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/log_SP_picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
-
 import 'package:pg_slema/features/picture/presentation/controller/pick_image_controller.dart';
 
 class PickImage extends StatefulWidget {
-  const PickImage({super.key});
+  final VoidCallback voidCallbackAfterAddedImage;
+  const PickImage({super.key, required this.voidCallbackAfterAddedImage});
 
   @override
   State<PickImage> createState() => _PickImageState();
@@ -24,9 +24,9 @@ class _PickImageState extends State<PickImage> {
     PictureRepository repository =
         PictureRepository(SharedPreferencesConnector());
     PictureService pictureService = PictureService(repository);
-    pickImageController = PickImageController(repository, pictureService);
+    pickImageController = PickImageController(pictureService);
     logSharedPreferencesPictureController =
-        LogSharedPreferencesPictureController(repository, pictureService);
+        LogSharedPreferencesPictureController(pictureService);
   }
 
   @override
@@ -36,6 +36,7 @@ class _PickImageState extends State<PickImage> {
         IconButton(
           onPressed: () {
             pickImageController.pickImage();
+            widget.voidCallbackAfterAddedImage();
           },
           icon: const Icon(Icons.image_search),
         ),

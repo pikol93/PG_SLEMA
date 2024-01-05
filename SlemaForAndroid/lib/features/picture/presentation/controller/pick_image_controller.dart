@@ -2,15 +2,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:pg_slema/features/picture/domain/picture.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
-import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
-
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class PickImageController with Logger {
-  late PictureRepository repository;
   late PictureService pictureService;
 
-  PickImageController(this.repository, this.pictureService);
+  PickImageController(this.pictureService);
 
   Future<void> pickImage() async {
     final ImagePicker picker = ImagePicker();

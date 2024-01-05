@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
+import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
+import 'package:pg_slema/features/picture/presentation/controller/picture_list_controller.dart';
 import 'package:pg_slema/features/picture/presentation/widget/pick_image.dart';
+import 'package:pg_slema/features/picture/presentation/widget/picture_list.dart';
+import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({super.key});
@@ -9,6 +14,18 @@ class ExercisesScreen extends StatefulWidget {
 }
 
 class ExercisesScreenState extends State<ExercisesScreen> {
+  late PictureListController _pictureListController;
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferencesConnector connector = SharedPreferencesConnector();
+    PictureRepository pictureRepository = PictureRepository(connector);
+    PictureService pictureService = PictureService(pictureRepository);
+    _pictureListController = PictureListController(
+      pictureService,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,26 +33,11 @@ class ExercisesScreenState extends State<ExercisesScreen> {
         children: [
           ListView(
             children: [
-              PickImage(),
+              PickImage(
+                  voidCallbackAfterAddedImage:
+                      _pictureListController.refreshPicturesData),
+              PictureList(pictureListController: _pictureListController)
             ],
-          ),
-          Positioned(
-            bottom: 20,
-            right: 30,
-            child: Container(
-              margin: const EdgeInsets.only(top: 16.0),
-              padding: const EdgeInsets.all(16.0),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(Icons.edit_calendar, color: Colors.white),
-                ],
-              ),
-            ),
           ),
         ],
       ),
