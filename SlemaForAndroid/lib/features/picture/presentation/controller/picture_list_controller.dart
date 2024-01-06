@@ -12,7 +12,7 @@ class PictureListController with Logger {
   final _refreshPictureListController = StreamController<void>.broadcast();
   Stream<void> get refreshStream => _refreshPictureListController.stream;
   PictureListController(this._pictureService) {
-    _reloadPicturesWithImages();
+    refreshPicturesData();
   }
 
   Future<List<Picture>> getAllPictures() async {
