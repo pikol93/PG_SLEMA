@@ -6,6 +6,8 @@
     <string>Tworzenie dokumnetacji w ramach dziennika.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Tworzenie dokumnetacji w ramach dziennika.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Wczytywanie zdjec z galerii.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
