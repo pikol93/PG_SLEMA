@@ -19,7 +19,7 @@ class MainScreenController extends ChangeNotifier {
     const MotivationScreen(),
     MedicineScreen(),
     const DietScreen(),
-    ExercisesScreen(),
+    const ExercisesScreen(),
   ];
 
   void onTabTapped(int index) {
