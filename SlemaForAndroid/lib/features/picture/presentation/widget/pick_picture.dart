@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
-import 'package:pg_slema/features/picture/presentation/controller/log_SP_picture_controller.dart';
+import 'package:pg_slema/features/picture/presentation/controller/log_shared_preferences_picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/features/picture/presentation/controller/pick_picture_controller.dart';
 

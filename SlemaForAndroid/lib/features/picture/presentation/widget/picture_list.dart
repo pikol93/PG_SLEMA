@@ -6,7 +6,7 @@ class PictureList extends StatefulWidget {
   const PictureList({super.key, required this.pictureListController});
 
   @override
-  _PictureListState createState() => _PictureListState();
+  State<PictureList> createState() => _PictureListState();
 }
 
 class _PictureListState extends State<PictureList> {

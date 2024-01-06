@@ -15,7 +15,7 @@ class TakePicture extends StatefulWidget {
       required this.takePictureController});
 
   @override
-  _TakePictureState createState() => _TakePictureState();
+  State<TakePicture> createState() => _TakePictureState();
 }
 
 class _TakePictureState extends State<TakePicture> {
