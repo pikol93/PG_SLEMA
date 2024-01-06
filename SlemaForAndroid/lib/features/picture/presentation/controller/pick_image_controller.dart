@@ -6,7 +6,6 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class PickImageController with Logger {
   late PictureService pictureService;
-
   PickImageController(this.pictureService);
 
   Future<void> pickImage() async {
@@ -20,10 +19,10 @@ class PickImageController with Logger {
       String fileExtension = pickedFile.path.split('.').last;
       int fileSize = await pickedFile.length();
 
-      pictureService.addPicture(Picture(
+      await pictureService.addPicture(Picture(
           const Uuid().v4(), imagePath, fileName, fileExtension, fileSize));
     } else {
-      logger.debug('Nie wybrano żadnego obrazu. Trzeba obsluzyc???');
+      logger.debug('Image not picked.');
     }
   }
 }

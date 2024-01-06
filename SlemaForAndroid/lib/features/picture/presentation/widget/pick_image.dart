@@ -34,8 +34,8 @@ class _PickImageState extends State<PickImage> {
     return Row(
       children: [
         IconButton(
-          onPressed: () {
-            pickImageController.pickImage();
+          onPressed: () async {
+            await pickImageController.pickImage();
             widget.voidCallbackAfterAddedImage();
           },
           icon: const Icon(Icons.image_search),
