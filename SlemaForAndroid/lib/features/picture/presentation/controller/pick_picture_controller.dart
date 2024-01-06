@@ -4,11 +4,11 @@ import 'package:pg_slema/features/picture/domain/picture.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class PickImageController with Logger {
+class PickPictureController with Logger {
   late PictureService pictureService;
-  PickImageController(this.pictureService);
+  PickPictureController(this.pictureService);
 
-  Future<void> pickImage() async {
+  Future<void> pickPicture() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.gallery);

@@ -3,7 +3,7 @@ import 'package:pg_slema/features/picture/application/service/impl/picture_servi
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/picture_list_controller.dart';
 import 'package:pg_slema/features/picture/presentation/controller/take_picture_controller.dart';
-import 'package:pg_slema/features/picture/presentation/widget/pick_image.dart';
+import 'package:pg_slema/features/picture/presentation/widget/pick_picture.dart';
 import 'package:pg_slema/features/picture/presentation/widget/picture_list.dart';
 import 'package:pg_slema/features/picture/presentation/widget/take_picture.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
@@ -37,7 +37,7 @@ class ExercisesScreenState extends State<ExercisesScreen> {
         children: [
           ListView(
             children: [
-              PickImage(
+              PickPicture(
                   voidCallbackAfterAddedImage:
                       _pictureListController.refreshPicturesData),
               TakePicture(

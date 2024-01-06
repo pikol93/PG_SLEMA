@@ -3,18 +3,18 @@ import 'package:pg_slema/features/picture/application/service/impl/picture_servi
 import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/log_SP_picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
-import 'package:pg_slema/features/picture/presentation/controller/pick_image_controller.dart';
+import 'package:pg_slema/features/picture/presentation/controller/pick_picture_controller.dart';
 
-class PickImage extends StatefulWidget {
+class PickPicture extends StatefulWidget {
   final VoidCallback voidCallbackAfterAddedImage;
-  const PickImage({super.key, required this.voidCallbackAfterAddedImage});
+  const PickPicture({super.key, required this.voidCallbackAfterAddedImage});
 
   @override
-  State<PickImage> createState() => _PickImageState();
+  State<PickPicture> createState() => _PickPictureState();
 }
 
-class _PickImageState extends State<PickImage> {
-  late PickImageController pickImageController;
+class _PickPictureState extends State<PickPicture> {
+  late PickPictureController pickImageController;
   late LogSharedPreferencesPictureController
       logSharedPreferencesPictureController;
 
@@ -24,7 +24,7 @@ class _PickImageState extends State<PickImage> {
     PictureRepository repository =
         PictureRepository(SharedPreferencesConnector());
     PictureService pictureService = PictureService(repository);
-    pickImageController = PickImageController(pictureService);
+    pickImageController = PickPictureController(pictureService);
     logSharedPreferencesPictureController =
         LogSharedPreferencesPictureController(pictureService);
   }
@@ -36,7 +36,7 @@ class _PickImageState extends State<PickImage> {
       children: [
         IconButton(
           onPressed: () async {
-            await pickImageController.pickImage();
+            await pickImageController.pickPicture();
             widget.voidCallbackAfterAddedImage();
           },
           icon: const Icon(Icons.image_search),
