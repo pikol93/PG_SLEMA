@@ -19,8 +19,9 @@ class PickPictureController with Logger {
       String fileExtension = pickedFile.path.split('.').last;
       int fileSize = await pickedFile.length();
 
-      await pictureService.addPicture(Picture(
-          const Uuid().v4(), imagePath, fileName, fileExtension, fileSize));
+      Picture p = Picture(
+          const Uuid().v4(), imagePath, fileName, fileExtension, fileSize);
+      await pictureService.addPicture(p);
     } else {
       logger.debug('Image not picked.');
     }
