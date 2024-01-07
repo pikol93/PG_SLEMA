@@ -1,12 +1,12 @@
 import 'package:pg_slema/features/picture/domain/picture.dart';
-import 'package:pg_slema/features/picture/application/service/api/picture_service_abs.dart';
+import 'package:pg_slema/features/picture/application/service/api/picture_service.dart';
 
-import 'package:pg_slema/features/picture/data/repository/impl/picture_repository.dart';
+import 'package:pg_slema/features/picture/data/repository/impl/picture_repository_impl.dart';
 
-class PictureService implements PictureServiceAbs {
-  final PictureRepository _repository;
+class PictureServiceImpl implements PictureService {
+  final PictureRepositoryImpl _repository;
 
-  PictureService(this._repository);
+  PictureServiceImpl(this._repository);
 
   @override
   Future<List<Picture>> getAllPictures() async {

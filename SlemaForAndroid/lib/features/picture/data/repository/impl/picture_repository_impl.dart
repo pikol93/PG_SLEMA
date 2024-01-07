@@ -8,10 +8,10 @@ import 'package:pg_slema/features/picture/data/dto/picture_dto.dart';
 
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 
-class PictureRepository implements PictureRepositoryAbs {
+class PictureRepositoryImpl implements PictureRepository {
   final SharedPreferencesConnector connector;
 
-  PictureRepository(this.connector);
+  PictureRepositoryImpl(this.connector);
 
   @override
   Future addPicture(Picture picture) async {

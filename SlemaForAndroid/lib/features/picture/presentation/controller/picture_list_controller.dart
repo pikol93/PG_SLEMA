@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:pg_slema/features/picture/application/service/impl/picture_service.dart';
+import 'package:pg_slema/features/picture/application/service/impl/picture_service_impl.dart';
 import 'package:pg_slema/features/picture/domain/picture.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class PictureListController with Logger {
   late List<Picture> pictures = [];
   late List<Uint8List?> picturesImages = [];
-  late final PictureService _pictureService;
+  late final PictureServiceImpl _pictureService;
   final _refreshPictureListController = StreamController<void>.broadcast();
   Stream<void> get refreshStream => _refreshPictureListController.stream;
   PictureListController(this._pictureService) {
