@@ -9,13 +9,15 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 import 'package:loggy/loggy.dart';
 
-void main() {
+Future<void> main() async {
   Loggy.initLoggy(
     logPrinter: const LoggerPrinter(),
   );
 
   tz.initializeTimeZones();
   tz.setLocalLocation(tz.getLocation('Poland'));
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [
