@@ -4,14 +4,22 @@ import 'package:pg_slema/utils/json/json_parser.dart';
 
 class MedicineDtoToJsonConverter {
   static MedicineDto fromJson(Map<String, dynamic> json) {
+    String firstIntakeDate = json.containsKey('firstIntakeDate')
+        ? json['firstIntakeDate']
+        : DateTime.now().toString();
+    String lastIntakeDate = json.containsKey('lastIntakeDate')
+        ? json['lastIntakeDate']
+        : DateTime.now().toString();
+    String frequency = json.containsKey('intakeFrequency')
+        ? json['intakeFrequency']
+        : JsonParser.parseEnumToJson(Frequency.singular);
     return MedicineDto(
         json['id'],
         json.containsKey('name') ? json['name'] : '',
         json.containsKey('intakeType') ? json['intakeType'] : '',
-        DateTime.parse(json['firstIntakeDate']),
-        DateTime.parse(json['lastIntakeDate']),
-        JsonParser.parseEnumFromJson<Frequency>(
-            json['intakeFrequency'], Frequency.values));
+        DateTime.parse(firstIntakeDate),
+        DateTime.parse(lastIntakeDate),
+        JsonParser.parseEnumFromJson<Frequency>(frequency, Frequency.values));
   }
 
   static Map<String, dynamic> toJson(MedicineDto dto) => {
