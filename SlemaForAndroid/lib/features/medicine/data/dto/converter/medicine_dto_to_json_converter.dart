@@ -6,8 +6,8 @@ class MedicineDtoToJsonConverter {
   static MedicineDto fromJson(Map<String, dynamic> json) {
     return MedicineDto(
         json['id'],
-        json['name'],
-        json['intakeType'],
+        json.containsKey('name') ? json['name'] : '',
+        json.containsKey('intakeType') ? json['intakeType'] : '',
         DateTime.parse(json['firstIntakeDate']),
         DateTime.parse(json['lastIntakeDate']),
         JsonParser.parseEnumFromJson<Frequency>(
