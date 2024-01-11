@@ -1,4 +1,4 @@
-abstract class Entity {
+mixin Entity {
   String get id;
   set id(String id);
 }

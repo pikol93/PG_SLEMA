@@ -3,52 +3,49 @@ import 'dart:convert';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 import 'package:pg_slema/utils/data/dto.dart';
-import 'package:pg_slema/utils/data/entity.dart';
 
-abstract class SharedPreferencesCrudRepository<T extends Entity, S extends Dto> {
+abstract class SharedPreferencesCrudRepository<T extends Dto> {
   final SharedPreferencesConnector connector = SharedPreferencesConnector();
 
-  final CustomConverter<T, S> entityToDtoConverter;
-  final CustomConverter<S, Map<String, dynamic>> dtoToJsonConverter;
+  final CustomConverter<T, Map<String, dynamic>> dtoToJsonConverter;
   final String tableKey;
 
-  SharedPreferencesCrudRepository(this.entityToDtoConverter, this.dtoToJsonConverter, this.tableKey);
+  SharedPreferencesCrudRepository(this.dtoToJsonConverter, this.tableKey);
 
-  Future addEntity(T entity) async {
+  Future addDto(T dto) async {
     var jsonItemsList = await _getJsonItemsList();
-    final dto = entityToDtoConverter.convertTo(entity);
-    final json = dtoToJsonConverter.convertTo(dto);
+    final json = dtoToJsonConverter.to(dto);
     jsonItemsList.add(jsonEncode(json));
     await _updateItemsList(jsonItemsList);
   }
 
-  Future deleteEntity(T entity) async {
+  Future deleteDto(T dto) async {
     var jsonItemsList = await _getJsonItemsList();
     jsonItemsList = jsonItemsList
         .map(jsonDecode)
-        .map((json) => dtoToJsonConverter.convertFrom(json))
-        .where((dto) => dto.id != entity.id)
-        .map(dtoToJsonConverter.convertTo)
+        .map((json) => dtoToJsonConverter.from(json))
+        .where((e) => e.id != dto.id)
+        .map(dtoToJsonConverter.to)
         .map(jsonEncode)
         .toList(growable: true);
 
     await _updateItemsList(jsonItemsList);
   }
 
-  Future<List<S>> getAllDto() async {
+  Future<List<T>> getAllDto() async {
     var jsonItemsList = await _getJsonItemsList();
     return jsonItemsList
         .map(jsonDecode)
-        .map((json) => dtoToJsonConverter.convertFrom(json))
+        .map((json) => dtoToJsonConverter.from(json))
         .toList(growable: true);
   }
 
-  Future updateEntity(T entity) async {
+  Future updateDto(T dto) async {
     var allDto = await getAllDto();
-    final index = allDto.indexWhere((element) => element.id == entity.id);
-    allDto[index] = entityToDtoConverter.convertTo(entity);
+    final index = allDto.indexWhere((e) => e.id == dto.id);
+    allDto[index] = dto;
     final jsonMedicinesList = allDto
-        .map(dtoToJsonConverter.convertTo)
+        .map(dtoToJsonConverter.to)
         .map(jsonEncode)
         .toList(growable: true);
     await _updateItemsList(jsonMedicinesList);
@@ -59,7 +56,6 @@ abstract class SharedPreferencesCrudRepository<T extends Entity, S extends Dto> 
   }
 
   Future _updateItemsList(List<String> jsonItemsList) async {
-    return await connector.updateList(
-        jsonItemsList, tableKey);
+    return await connector.updateList(jsonItemsList, tableKey);
   }
 }
