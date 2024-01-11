@@ -9,9 +9,8 @@ class SharedPreferencesMedicineRepository
     extends SharedPreferencesCrudRepository<MedicineDto>
     with MedicineRepository {
   final MedicineToDtoConverter medicineConverter;
-  final MedicineDtoToJsonConverter dtoConverter;
 
-  SharedPreferencesMedicineRepository(this.medicineConverter, this.dtoConverter)
+  SharedPreferencesMedicineRepository(this.medicineConverter, MedicineDtoToJsonConverter dtoConverter)
       : super(dtoConverter, Medicine.medicineListSharedPrefKey);
 
   @override

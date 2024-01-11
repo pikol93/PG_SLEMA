@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service_impl.dart';
-import 'package:pg_slema/features/picture/data/repository/impl/picture_repository_impl.dart';
+import 'package:pg_slema/features/picture/data/dto/converter/picture_dto_to_json_converter.dart';
+import 'package:pg_slema/features/picture/data/repository/impl/shared_preferences_picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/log_shared_preferences_picture_controller.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/features/picture/presentation/controller/pick_picture_controller.dart';
@@ -21,8 +22,8 @@ class _PickPictureState extends State<PickPicture> {
   @override
   void initState() {
     super.initState();
-    PictureRepositoryImpl repository =
-        PictureRepositoryImpl(SharedPreferencesConnector());
+    SharedPreferencesPictureRepository repository =
+        SharedPreferencesPictureRepository(PictureDtoToJsonConverter());
     PictureServiceImpl pictureService = PictureServiceImpl(repository);
     pickImageController = PickPictureController(pictureService);
     logSharedPreferencesPictureController =
