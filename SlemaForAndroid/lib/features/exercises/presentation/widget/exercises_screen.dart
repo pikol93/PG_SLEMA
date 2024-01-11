@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service_impl.dart';
+import 'package:pg_slema/features/picture/data/dto/converter/picture_dto_to_json_converter.dart';
 import 'package:pg_slema/features/picture/data/repository/impl/shared_preferences_picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/picture_list_controller.dart';
 import 'package:pg_slema/features/picture/presentation/controller/take_picture_controller.dart';
@@ -21,8 +22,7 @@ class ExercisesScreenState extends State<ExercisesScreen> {
   @override
   void initState() {
     super.initState();
-    SharedPreferencesConnector connector = SharedPreferencesConnector();
-    SharedPreferencesPictureRepository pictureRepository = SharedPreferencesPictureRepository(connector);
+    SharedPreferencesPictureRepository pictureRepository = SharedPreferencesPictureRepository(PictureDtoToJsonConverter());
     PictureServiceImpl pictureService = PictureServiceImpl(pictureRepository);
     _pictureListController = PictureListController(
       pictureService,
