@@ -1,4 +1,5 @@
 import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
+import 'package:pg_slema/features/medicine/data/dto/converter/medicine_dto_to_json_converter.dart';
 import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
 import 'package:pg_slema/features/notification/application/service/notification_service.dart';
 import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
@@ -13,7 +14,7 @@ class MedicineScreenController {
     final notificationRepository = SharedPreferencesNotificationRepository();
     final notificationService = NotificationService(notificationRepository);
     final converter = MedicineToDtoConverter(notificationService);
-    final medicineRepository = SharedPreferencesMedicineRepository(converter);
+    final medicineRepository = SharedPreferencesMedicineRepository(converter, MedicineDtoToJsonConverter());
     _medicineService = MedicineService(medicineRepository, notificationService);
     _medicineService.getAllMedicines().then((value) => medicines = value);
   }
