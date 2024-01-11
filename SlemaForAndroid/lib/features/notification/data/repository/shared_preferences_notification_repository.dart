@@ -1,22 +1,22 @@
-import 'dart:convert';
-
 import 'package:pg_slema/features/notification/data/converter/notification_dto_to_json_converter.dart';
+import 'package:pg_slema/features/notification/data/notification_dto.dart';
 import 'package:pg_slema/features/notification/data/repository/notification_repository.dart';
 import 'package:pg_slema/features/notification/domain/converter/notification_to_dto_converter.dart';
 import 'package:pg_slema/features/notification/domain/notification.dart';
-import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
+import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesNotificationRepository
-    implements NotificationRepository {
-  final SharedPreferencesConnector connector = SharedPreferencesConnector();
+    extends SharedPreferencesCrudRepository<NotificationDto>
+    with NotificationRepository {
+  SharedPreferencesNotificationRepository()
+      : super(NotificationDtoToJsonConverter(),
+            Notification.notificationListSharedPrefKey);
 
   @override
   Future<List<Notification>> getAllNotificationsByMedicine(
       String medicineId) async {
-    var jsonNotificationsList = await _getJsonNotificationsList();
+    var jsonNotificationsList = await getAllDto();
     return jsonNotificationsList
-        .map(jsonDecode)
-        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
         .where((element) => element.ownerId == medicineId)
         .map(NotificationToDtoConverter.fromDto)
         .toList(growable: true);
@@ -24,73 +24,33 @@ class SharedPreferencesNotificationRepository
 
   @override
   Future deleteNotification(Notification notification) async {
-    var jsonNotificationsList = await _getJsonNotificationsList();
-    jsonNotificationsList = jsonNotificationsList
-        .map(jsonDecode)
-        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
-        .where((element) => element.id == notification.id)
-        .map(NotificationDtoToJsonConverter.toJson)
-        .map(jsonEncode)
-        .toList(growable: true);
-    await _updateNotificationsList(jsonNotificationsList);
+    var dto = NotificationToDtoConverter.toDto(notification);
+    await deleteDto(dto);
   }
 
   @override
   Future addNotification(Notification notification) async {
-    var jsonNotificationsList = await _getJsonNotificationsList();
     final dto = NotificationToDtoConverter.toDto(notification);
-    final json = NotificationDtoToJsonConverter.toJson(dto);
-    jsonNotificationsList.add(jsonEncode(json));
-    await _updateNotificationsList(jsonNotificationsList);
+    await addDto(dto);
   }
 
   @override
   Future updateNotification(Notification notification) async {
-    List<Notification> notifications = await getAllNotifications();
-    final index =
-        notifications.indexWhere((element) => element.id == notification.id);
-    notifications[index] = notification;
-    final jsonNotificationsList = notifications
-        .map(NotificationToDtoConverter.toDto)
-        .map(NotificationDtoToJsonConverter.toJson)
-        .map(jsonEncode)
-        .toList(growable: true);
-    _updateNotificationsList(jsonNotificationsList);
+    var dto = NotificationToDtoConverter.toDto(notification);
+    await updateDto(dto);
   }
 
   @override
   Future<List<Notification>> getAllNotifications() async {
-    var jsonNotificationsList = await _getJsonNotificationsList();
-    return jsonNotificationsList
-        .map(jsonDecode)
-        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
-        .map(NotificationToDtoConverter.fromDto)
-        .toList(growable: true);
+    var dto = await getAllDto();
+    return dto.map(NotificationToDtoConverter.fromDto).toList(growable: true);
   }
 
   @override
   Future deleteAll(List<Notification> notifications) async {
-    var notificationsIds = notifications.map((e) => e.id).toList();
-
-    var jsonNotificationsList = await _getJsonNotificationsList();
-    jsonNotificationsList = jsonNotificationsList
-        .map((jsonString) => jsonDecode(jsonString))
-        .map((json) => NotificationDtoToJsonConverter.fromJson(json))
-        .where((element) => !notificationsIds.contains(element.id))
-        .map((element) => NotificationDtoToJsonConverter.toJson(element))
-        .map((json) => jsonEncode(json))
+    var dto = notifications
+        .map(NotificationToDtoConverter.toDto)
         .toList(growable: true);
-    await _updateNotificationsList(jsonNotificationsList);
-  }
-
-  Future<List<String>> _getJsonNotificationsList() async {
-    return await connector.getList(Notification.notificationListSharedPrefKey);
-  }
-
-  Future _updateNotificationsList(List<String> jsonNotificationsList) async {
-    return await connector.updateList(
-        jsonNotificationsList, Notification.notificationListSharedPrefKey);
+    await deleteAllFrom(dto);
   }
 }
-
-//TODO: add method replace notifications - remove if exists.. then add all, then call it on edit medicine

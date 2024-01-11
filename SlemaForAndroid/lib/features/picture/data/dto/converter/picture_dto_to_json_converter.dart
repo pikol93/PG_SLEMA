@@ -1,7 +1,8 @@
 import 'package:pg_slema/features/picture/data/dto/picture_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 
-class PictureDtoToJsonConverter with CustomConverter<PictureDto, Map<String, dynamic>> {
+class PictureDtoToJsonConverter
+    with CustomConverter<PictureDto, Map<String, dynamic>> {
   @override
   PictureDto from(Map<String, dynamic> s) {
     return _fromJson(s);

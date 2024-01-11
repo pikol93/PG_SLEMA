@@ -10,8 +10,8 @@ class SharedPreferencesMedicineRepository
     with MedicineRepository {
   final MedicineToDtoConverter medicineConverter;
 
-  SharedPreferencesMedicineRepository(this.medicineConverter, MedicineDtoToJsonConverter dtoConverter)
-      : super(dtoConverter, Medicine.medicineListSharedPrefKey);
+  SharedPreferencesMedicineRepository(this.medicineConverter)
+      : super(MedicineDtoToJsonConverter(), Medicine.medicineListSharedPrefKey);
 
   @override
   Future addMedicine(Medicine medicine) async {

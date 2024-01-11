@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:pg_slema/features/picture/data/repository/api/picture_repository_abs.dart';
 import 'package:pg_slema/features/picture/domain/converter/picture_to_dto_converter.dart';
 import 'package:pg_slema/features/picture/data/dto/converter/picture_dto_to_json_converter.dart';
@@ -8,9 +6,10 @@ import 'package:pg_slema/features/picture/data/dto/picture_dto.dart';
 
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
-class SharedPreferencesPictureRepository extends SharedPreferencesCrudRepository<PictureDto> with PictureRepository {
-
-  SharedPreferencesPictureRepository(PictureDtoToJsonConverter converter) : super(converter, Picture.pictureListSharedPrefKey);
+class SharedPreferencesPictureRepository
+    extends SharedPreferencesCrudRepository<PictureDto> with PictureRepository {
+  SharedPreferencesPictureRepository()
+      : super(PictureDtoToJsonConverter(), Picture.pictureListSharedPrefKey);
 
   @override
   Future addPicture(Picture picture) async {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/utils/data/dto.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
-class NotificationDto {
+class NotificationDto with Dto {
+  @override
   final String id;
   final String ownerId;
   final String title;
@@ -22,4 +24,9 @@ class NotificationDto {
       this.lastNotificationDate,
       this.notificationFrequency,
       this.scheduledId);
+
+  @override
+  set id(String id) {
+    this.id = id;
+  }
 }

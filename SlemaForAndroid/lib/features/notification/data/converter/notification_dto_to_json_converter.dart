@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/notification/data/notification_dto.dart';
+import 'package:pg_slema/utils/data/converter.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';
 import 'package:pg_slema/utils/json/json_parser.dart';
 
-class NotificationDtoToJsonConverter {
-  static NotificationDto fromJson(Map<String, dynamic> json) {
+class NotificationDtoToJsonConverter
+    with CustomConverter<NotificationDto, Map<String, dynamic>> {
+  @override
+  NotificationDto from(Map<String, dynamic> s) {
+    return _fromJson(s);
+  }
+
+  @override
+  Map<String, dynamic> to(NotificationDto t) {
+    return _toJson(t);
+  }
+
+  NotificationDto _fromJson(Map<String, dynamic> json) {
     String firstNotificationDate = json.containsKey('firstNotificationDate')
         ? json['firstNotificationDate']
         : DateTime.now().toString();
@@ -32,7 +44,7 @@ class NotificationDtoToJsonConverter {
             : IntegerIdGenerator.generateRandomId());
   }
 
-  static Map<String, dynamic> toJson(NotificationDto dto) => {
+  Map<String, dynamic> _toJson(NotificationDto dto) => {
         'id': dto.id.toString(),
         'ownerId': dto.ownerId.toString(),
         'title': dto.title.toString(),
