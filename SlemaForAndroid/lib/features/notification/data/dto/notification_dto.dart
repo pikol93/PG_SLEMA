@@ -24,9 +24,4 @@ class NotificationDto with Dto {
       this.lastNotificationDate,
       this.notificationFrequency,
       this.scheduledId);
-
-  @override
-  set id(String id) {
-    this.id = id;
-  }
 }

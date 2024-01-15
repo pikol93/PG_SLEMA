@@ -12,9 +12,4 @@ class MedicineDto with Dto {
 
   MedicineDto(this.id, this.name, this.intakeType, this.firstIntakeDate,
       this.lastIntakeDate, this.intakeFrequency);
-
-  @override
-  set id(String id) {
-    this.id = id;
-  }
 }

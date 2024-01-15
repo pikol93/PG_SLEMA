@@ -7,9 +7,4 @@ class DishDto with Dto {
   final String categoryId;
 
   DishDto(this.id, this.name, this.categoryId);
-
-  @override
-  set id(String id) {
-    this.id = id;
-  }
 }
