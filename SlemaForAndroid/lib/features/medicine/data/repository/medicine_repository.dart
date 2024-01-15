@@ -1,6 +1,6 @@
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
-abstract class MedicineRepository {
+mixin MedicineRepository {
   Future<List<Medicine>> getAllMedicines();
 
   Future addMedicine(Medicine medicine);

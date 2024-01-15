@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/picture/application/service/impl/picture_service_impl.dart';
-import 'package:pg_slema/features/picture/data/repository/impl/picture_repository_impl.dart';
+import 'package:pg_slema/features/picture/data/repository/impl/shared_preferences_picture_repository.dart';
 import 'package:pg_slema/features/picture/presentation/controller/picture_list_controller.dart';
 import 'package:pg_slema/features/picture/presentation/controller/take_picture_controller.dart';
 import 'package:pg_slema/features/picture/presentation/widget/pick_picture.dart';
 import 'package:pg_slema/features/picture/presentation/widget/picture_list.dart';
 import 'package:pg_slema/features/picture/presentation/widget/take_picture.dart';
-import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({super.key});
@@ -21,8 +20,8 @@ class ExercisesScreenState extends State<ExercisesScreen> {
   @override
   void initState() {
     super.initState();
-    SharedPreferencesConnector connector = SharedPreferencesConnector();
-    PictureRepositoryImpl pictureRepository = PictureRepositoryImpl(connector);
+    SharedPreferencesPictureRepository pictureRepository =
+        SharedPreferencesPictureRepository();
     PictureServiceImpl pictureService = PictureServiceImpl(pictureRepository);
     _pictureListController = PictureListController(
       pictureService,

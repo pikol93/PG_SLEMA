@@ -1,7 +1,19 @@
 import 'package:pg_slema/features/picture/data/dto/picture_dto.dart';
+import 'package:pg_slema/utils/data/converter.dart';
 
-class PictureDTOToJSONConverter {
-  static PictureDTO fromJSON(Map<String, dynamic> json) {
+class PictureDtoToJsonConverter
+    with CustomConverter<PictureDto, Map<String, dynamic>> {
+  @override
+  PictureDto from(Map<String, dynamic> s) {
+    return _fromJson(s);
+  }
+
+  @override
+  Map<String, dynamic> to(PictureDto t) {
+    return _toJson(t);
+  }
+
+  PictureDto _fromJson(Map<String, dynamic> json) {
     if (!json.containsKey('id')) {
       throw const FormatException("Missing 'id' key in JSON");
     }
@@ -13,10 +25,10 @@ class PictureDTOToJSONConverter {
     int byteSize =
         json.containsKey('byteSize') ? int.parse(json['byteSize']) : 0;
 
-    return PictureDTO(id, url, name, extension, byteSize);
+    return PictureDto(id, url, name, extension, byteSize);
   }
 
-  static Map<String, dynamic> toJSON(PictureDTO dto) => {
+  Map<String, dynamic> _toJson(PictureDto dto) => {
         'id': dto.id.toString(),
         'url': dto.url.toString(),
         'name': dto.name.toString(),

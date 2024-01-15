@@ -1,6 +1,6 @@
 import 'package:pg_slema/features/picture/domain/picture.dart';
 
-abstract class PictureRepository {
+mixin PictureRepository {
   Future<List<Picture>> getAllPictures();
 
   Future addPicture(Picture picture);

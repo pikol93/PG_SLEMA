@@ -1,6 +1,6 @@
 import 'package:pg_slema/features/notification/domain/notification.dart';
 
-abstract class NotificationRepository {
+mixin NotificationRepository {
   Future<List<Notification>> getAllNotificationsByMedicine(String medicineId);
 
   Future<List<Notification>> getAllNotifications();

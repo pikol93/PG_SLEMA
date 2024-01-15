@@ -1,10 +1,10 @@
 import 'package:pg_slema/features/picture/domain/picture.dart';
 import 'package:pg_slema/features/picture/application/service/api/picture_service.dart';
 
-import 'package:pg_slema/features/picture/data/repository/impl/picture_repository_impl.dart';
+import 'package:pg_slema/features/picture/data/repository/impl/shared_preferences_picture_repository.dart';
 
 class PictureServiceImpl implements PictureService {
-  final PictureRepositoryImpl _repository;
+  final SharedPreferencesPictureRepository _repository;
 
   PictureServiceImpl(this._repository);
 

@@ -1,6 +1,8 @@
+import 'package:pg_slema/utils/data/dto.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
-class MedicineDto {
+class MedicineDto with Dto {
+  @override
   final String id;
   final String name;
   final String intakeType;
@@ -10,4 +12,9 @@ class MedicineDto {
 
   MedicineDto(this.id, this.name, this.intakeType, this.firstIntakeDate,
       this.lastIntakeDate, this.intakeFrequency);
+
+  @override
+  set id(String id) {
+    this.id = id;
+  }
 }
