@@ -1,17 +1,17 @@
-enum DishTime { breakfast, lunch, snackTime, dinner, supper }
+enum MealTime { breakfast, lunch, snackTime, dinner, supper }
 
-extension DishTimeExtension on DishTime {
+extension DishTimeExtension on MealTime {
   String get name {
     switch (this) {
-      case DishTime.breakfast:
+      case MealTime.breakfast:
         return 'Śniadanie';
-      case DishTime.lunch:
+      case MealTime.lunch:
         return 'Drugie śniadanie';
-      case DishTime.snackTime:
+      case MealTime.snackTime:
         return 'Obiad';
-      case DishTime.dinner:
+      case MealTime.dinner:
         return 'Podwieczorek';
-      case DishTime.supper:
+      case MealTime.supper:
         return 'Kolacja';
     }
   }
