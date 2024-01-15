@@ -3,7 +3,6 @@ import 'package:pg_slema/features/diet/dish/data/dto/dish_dto.dart';
 import 'package:pg_slema/features/diet/dish/data/repository/dish_repository.dart';
 import 'package:pg_slema/features/diet/dish/domain/converter/dish_to_dto_converter.dart';
 import 'package:pg_slema/features/diet/dish/domain/dish.dart';
-import 'package:pg_slema/features/diet/dish_category/domain/dish_category.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesDishRepository
@@ -14,38 +13,41 @@ class SharedPreferencesDishRepository
       : super(DishDtoToJsonConverter(), Dish.dishListSharedPrefKey);
 
   @override
-  Future addDish(Dish dish) {
-    // TODO: implement addDish
-    throw UnimplementedError();
+  Future addDish(Dish dish) async {
+    var dto = converter.toDto(dish);
+    await addDto(dto);
   }
 
   @override
-  Future deleteDish(Dish dish) {
-    // TODO: implement deleteDish
-    throw UnimplementedError();
+  Future deleteDish(Dish dish) async {
+    var dto = converter.toDto(dish);
+    await deleteDto(dto);
   }
 
   @override
-  Future<List<Dish>> getAllDishes() {
-    // TODO: implement getAllDishes
-    throw UnimplementedError();
+  Future<List<Dish>> getAllDishes() async {
+    var dto = await getAllDto();
+    return dto.map((dto) => converter.fromDto(dto)).toList(growable: true);
   }
 
   @override
-  Future<List<Dish>> getAllDishesByCategory(DishCategory category) {
-    // TODO: implement getAllDishesByCategory
-    throw UnimplementedError();
+  Future<List<Dish>> getAllDishesByCategory(String categoryId) async {
+    var dto = await getAllDto();
+    return dto
+        .where((dto) => dto.categoryId == categoryId)
+        .map((dto) => converter.fromDto(dto))
+        .toList(growable: true);
   }
 
   @override
-  Future<Dish> getDish(String id) {
-    // TODO: implement getDish
-    throw UnimplementedError();
+  Future<Dish> getDish(String id) async {
+    var dto = await getDto(id);
+    return converter.fromDto(dto);
   }
 
   @override
-  Future updateDish(Dish dish) {
-    // TODO: implement updateDish
-    throw UnimplementedError();
+  Future updateDish(Dish dish) async {
+    var dto = converter.toDto(dish);
+    return await updateDto(dto);
   }
 }
