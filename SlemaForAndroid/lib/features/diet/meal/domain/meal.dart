@@ -2,6 +2,7 @@ import 'package:pg_slema/features/diet/dish/domain/dish.dart';
 import 'package:pg_slema/utils/meal_time/meal_time.dart';
 
 class Meal {
+  static const String pictureListSharedPrefKey = 'pictures';
   final String id;
   final Dish dish;
   final DateTime mealDate;
