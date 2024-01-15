@@ -1,5 +1,5 @@
 import 'package:pg_slema/features/diet/dish/domain/dish.dart';
-import 'package:pg_slema/utils/dish_times/dish_times.dart';
+import 'package:pg_slema/utils/dish_times/meal_time.dart';
 
 class Meal {
   final Dish dish;
