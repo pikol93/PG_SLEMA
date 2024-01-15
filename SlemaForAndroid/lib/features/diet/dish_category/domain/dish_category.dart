@@ -5,6 +5,7 @@ class DishCategory {
   final String? parentCategoryId;
   final List<DishCategory>? subcategories;
   final List<Dish>? dishes;
+
   DishCategory(this.id,
       {this.parentCategoryId, this.subcategories, this.dishes});
 }

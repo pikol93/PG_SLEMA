@@ -1,17 +1,17 @@
-enum MealTime { breakfast, lunch, snackTime, dinner, supper }
+enum MealTime { firstMeal, secondMeal, thirdMeal, fourthMeal, fifthMeal }
 
 extension MealTimeExtension on MealTime {
   String get name {
     switch (this) {
-      case MealTime.breakfast:
+      case MealTime.firstMeal:
         return 'Śniadanie';
-      case MealTime.lunch:
+      case MealTime.secondMeal:
         return 'Drugie śniadanie';
-      case MealTime.dinner:
+      case MealTime.fourthMeal:
         return 'Obiad';
-      case MealTime.snackTime:
+      case MealTime.thirdMeal:
         return 'Podwieczorek';
-      case MealTime.supper:
+      case MealTime.fifthMeal:
         return 'Kolacja';
     }
   }
