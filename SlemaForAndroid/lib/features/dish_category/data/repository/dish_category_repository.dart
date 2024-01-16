@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/dish_category/domain/dish_category.dart';
+import 'package:pg_slema/features/dish_category/domain/dish_category.dart';
 
 mixin DishCategoryRepository {
   Future addDishCategory(DishCategory dishCategory);
@@ -6,5 +6,5 @@ mixin DishCategoryRepository {
   Future deleteDishCategory(DishCategory dishCategory);
   Future<DishCategory> getCategory(String dishCategoryId);
   Future<List<DishCategory>> getSubcategoriesByDishCategory(
-      String dishCategoryId);
+      String? dishCategoryId);
 }

@@ -1,6 +1,6 @@
-import 'package:pg_slema/features/diet/dish/application/dish_service.dart';
-import 'package:pg_slema/features/diet/dish_category/data/repository/dish_category_repository.dart';
-import 'package:pg_slema/features/diet/dish_category/domain/dish_category.dart';
+import 'package:pg_slema/features/dish/application/dish_service.dart';
+import 'package:pg_slema/features/dish_category/data/repository/dish_category_repository.dart';
+import 'package:pg_slema/features/dish_category/domain/dish_category.dart';
 
 class DishCategoryService {
   final DishCategoryRepository repository;
@@ -27,5 +27,9 @@ class DishCategoryService {
     category.dishes =
         await dishService.getAllDishesByDishCategory(dishCategoryId);
     return category;
+  }
+
+  Future<List<DishCategory>> getMainCategories() async {
+    return await repository.getSubcategoriesByDishCategory(null);
   }
 }

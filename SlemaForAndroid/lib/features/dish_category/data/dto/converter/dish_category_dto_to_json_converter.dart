@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/dish_category/data/dto/dish_category_dto.dart';
+import 'package:pg_slema/features/dish_category/data/dto/dish_category_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 
 class DishCategoryDtoToJsonConverter
@@ -15,13 +15,12 @@ class DishCategoryDtoToJsonConverter
 
   DishCategoryDto _fromJson(Map<String, dynamic> json) {
     return DishCategoryDto(json['id'],
-        parentCategoryId: json.containsKey('parentCategoryId')
-            ? json['parentCategoryId']
-            : null);
+        parentCategoryId: json['parentCategoryId']);
   }
 
   Map<String, dynamic> _toJson(DishCategoryDto dto) => {
         'id': dto.id.toString(),
-        'parentCategoryId': dto.parentCategoryId?.toString(),
+        if(dto.parentCategoryId != null)
+          'parentCategoryId': dto.parentCategoryId.toString(),
       };
 }
