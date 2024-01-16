@@ -10,8 +10,8 @@ class DishService {
     return await repository.getAllDishes();
   }
 
-  Future<List<Dish>> getAllDishesByCategory(String categoryId) async {
-    return await repository.getAllDishesByCategory(categoryId);
+  Future<List<Dish>> getAllDishesByDishCategory(String dishCategoryId) async {
+    return await repository.getAllDishesByDishCategory(dishCategoryId);
   }
 
   Future<Dish> getDish(String id) async {

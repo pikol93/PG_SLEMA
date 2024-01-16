@@ -1,20 +1,31 @@
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/diet/dish/application/dish_service.dart';
+import 'package:pg_slema/features/diet/dish_category/data/repository/dish_category_repository.dart';
 import 'package:pg_slema/features/diet/dish_category/domain/dish_category.dart';
 
 class DishCategoryService {
-  Future addDishCategory(DishCategory category) async {
+  final DishCategoryRepository repository;
+  final DishService dishService;
 
+  DishCategoryService(this.repository, this.dishService);
+
+  Future addDishCategory(DishCategory category) async {
+    await repository.addDishCategory(category);
   }
 
   Future deleteDishCategory(DishCategory category) async {
-
+    await repository.deleteDishCategory(category);
   }
 
   Future updateDishCategory(DishCategory category) async {
-
+    await repository.updateDishCategory(category);
   }
 
   Future<DishCategory> getDishCategory(String dishCategoryId) async {
-//wez kategorie z repo, a potem jej dzieci tez z repo niech udostepnia
+    DishCategory category = await repository.getCategory(dishCategoryId);
+    category.subcategories =
+        await repository.getSubcategoriesByDishCategory(dishCategoryId);
+    category.dishes =
+        await dishService.getAllDishesByDishCategory(dishCategoryId);
+    return category;
   }
 }

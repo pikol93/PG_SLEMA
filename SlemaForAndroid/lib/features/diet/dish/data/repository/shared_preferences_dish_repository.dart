@@ -31,10 +31,10 @@ class SharedPreferencesDishRepository
   }
 
   @override
-  Future<List<Dish>> getAllDishesByCategory(String categoryId) async {
+  Future<List<Dish>> getAllDishesByDishCategory(String dishCategoryId) async {
     var dto = await getAllDto();
     return dto
-        .where((dto) => dto.categoryId == categoryId)
+        .where((dto) => dto.categoryId == dishCategoryId)
         .map((dto) => converter.fromDto(dto))
         .toList(growable: true);
   }

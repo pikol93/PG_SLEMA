@@ -3,7 +3,7 @@ import 'package:pg_slema/features/diet/dish/domain/dish.dart';
 mixin DishRepository {
   Future<List<Dish>> getAllDishes();
 
-  Future<List<Dish>> getAllDishesByCategory(String categoryId);
+  Future<List<Dish>> getAllDishesByDishCategory(String dishCategoryId);
 
   Future<Dish> getDish(String id);
 

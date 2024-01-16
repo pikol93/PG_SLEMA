@@ -1,10 +1,11 @@
 import 'package:pg_slema/features/diet/dish/domain/dish.dart';
 
 class DishCategory {
+  static String dishCategoryListSharedPrefKey = "dishcategories";
   final String id;
   final String? parentCategoryId;
-  final List<DishCategory>? subcategories;
-  final List<Dish>? dishes;
+  List<DishCategory>? subcategories;
+  List<Dish>? dishes;
 
   DishCategory(this.id,
       {this.parentCategoryId, this.subcategories, this.dishes});
