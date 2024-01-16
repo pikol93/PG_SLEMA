@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/meal/data/dto/meal_dto.dart';
+import 'package:pg_slema/features/meal/data/dto/meal_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 import 'package:pg_slema/utils/json/json_parser.dart';
 import 'package:pg_slema/utils/meal_time/meal_time.dart';

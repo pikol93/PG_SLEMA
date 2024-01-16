@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
 import 'package:pg_slema/utils/meal_time/meal_time.dart';
 
 class Meal {

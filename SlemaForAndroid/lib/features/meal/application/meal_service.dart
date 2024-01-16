@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/diet/meal/data/repository/meal_repository.dart';
-import 'package:pg_slema/features/diet/meal/domain/meal.dart';
+import 'package:pg_slema/features/meal/data/repository/meal_repository.dart';
+import 'package:pg_slema/features/meal/domain/meal.dart';
 
 class MealService {
   final MealRepository repository;
@@ -7,15 +7,15 @@ class MealService {
   MealService(this.repository);
 
   Future updateMeal(Meal meal) async {
-    return await repository.updateMeal(meal);
+    await repository.updateMeal(meal);
   }
 
   Future addMeal(Meal meal) async {
-    return await repository.addMeal(meal);
+    await repository.addMeal(meal);
   }
 
   Future deleteMeal(Meal meal) async {
-    return await repository.deleteMeal(meal);
+    await repository.deleteMeal(meal);
   }
 
   Future<List<Meal>> getAllMeals() async {

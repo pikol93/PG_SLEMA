@@ -1,8 +1,8 @@
-import 'package:pg_slema/features/diet/meal/data/dto/converter/meal_dto_to_json_converter.dart';
-import 'package:pg_slema/features/diet/meal/data/dto/meal_dto.dart';
-import 'package:pg_slema/features/diet/meal/data/repository/meal_repository.dart';
-import 'package:pg_slema/features/diet/meal/domain/converter/meal_to_dto_converter.dart';
-import 'package:pg_slema/features/diet/meal/domain/meal.dart';
+import 'package:pg_slema/features/meal/data/dto/converter/meal_dto_to_json_converter.dart';
+import 'package:pg_slema/features/meal/data/dto/meal_dto.dart';
+import 'package:pg_slema/features/meal/data/repository/meal_repository.dart';
+import 'package:pg_slema/features/meal/domain/converter/meal_to_dto_converter.dart';
+import 'package:pg_slema/features/meal/domain/meal.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesMealRepository
@@ -33,10 +33,11 @@ class SharedPreferencesMealRepository
 
   @override
   Future<List<Meal>> getAllMealsByDate(DateTime date) async {
-    var meals = await getAllMeals();
-    return meals
+    var dto = await getAllDto();
+    return Future.wait(dto
         .where((element) => element.mealDate == date)
-        .toList(growable: true);
+        .map((dto) => converter.fromDto(dto))
+        .toList(growable: true));
   }
 
   @override

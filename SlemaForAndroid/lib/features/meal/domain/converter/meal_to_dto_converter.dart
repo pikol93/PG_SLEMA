@@ -1,7 +1,7 @@
-import 'package:pg_slema/features/diet/dish/application/dish_service.dart';
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
-import 'package:pg_slema/features/diet/meal/data/dto/meal_dto.dart';
-import 'package:pg_slema/features/diet/meal/domain/meal.dart';
+import 'package:pg_slema/features/dish/application/dish_service.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
+import 'package:pg_slema/features/meal/data/dto/meal_dto.dart';
+import 'package:pg_slema/features/meal/domain/meal.dart';
 
 class MealToDtoConverter {
   final DishService service;

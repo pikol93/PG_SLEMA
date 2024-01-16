@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/meal/domain/meal.dart';
+import 'package:pg_slema/features/meal/domain/meal.dart';
 
 mixin MealRepository {
   Future updateMeal(Meal meal);

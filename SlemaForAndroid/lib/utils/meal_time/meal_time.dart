@@ -7,9 +7,9 @@ extension MealTimeExtension on MealTime {
         return 'Śniadanie';
       case MealTime.secondMeal:
         return 'Drugie śniadanie';
-      case MealTime.fourthMeal:
-        return 'Obiad';
       case MealTime.thirdMeal:
+        return 'Obiad';
+      case MealTime.fourthMeal:
         return 'Podwieczorek';
       case MealTime.fifthMeal:
         return 'Kolacja';

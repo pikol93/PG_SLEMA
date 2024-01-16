@@ -20,7 +20,7 @@ class DishCategoryDtoToJsonConverter
 
   Map<String, dynamic> _toJson(DishCategoryDto dto) => {
         'id': dto.id.toString(),
-        if(dto.parentCategoryId != null)
+        if (dto.parentCategoryId != null)
           'parentCategoryId': dto.parentCategoryId.toString(),
       };
 }
