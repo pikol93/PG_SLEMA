@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/dish/data/dto/dish_dto.dart';
+import 'package:pg_slema/features/dish/data/dto/dish_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 
 class DishDtoToJsonConverter

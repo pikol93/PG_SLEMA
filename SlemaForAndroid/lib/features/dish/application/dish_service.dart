@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/diet/dish/data/repository/dish_repository.dart';
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish/data/repository/dish_repository.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
 
 class DishService {
   final DishRepository repository;
@@ -19,14 +19,14 @@ class DishService {
   }
 
   Future addDish(Dish dish) async {
-    return await repository.addDish(dish);
+    await repository.addDish(dish);
   }
 
   Future updateDish(Dish dish) async {
-    return await repository.updateDish(dish);
+    await repository.updateDish(dish);
   }
 
   Future deleteDish(Dish dish) async {
-    return await repository.deleteDish(dish);
+    await repository.deleteDish(dish);
   }
 }

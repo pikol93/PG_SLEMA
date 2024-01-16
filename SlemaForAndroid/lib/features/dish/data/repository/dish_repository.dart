@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
 
 mixin DishRepository {
   Future<List<Dish>> getAllDishes();

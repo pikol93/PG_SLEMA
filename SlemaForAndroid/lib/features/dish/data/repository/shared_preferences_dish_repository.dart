@@ -1,8 +1,8 @@
-import 'package:pg_slema/features/diet/dish/data/dto/converter/dish_dto_to_json_converter.dart';
-import 'package:pg_slema/features/diet/dish/data/dto/dish_dto.dart';
-import 'package:pg_slema/features/diet/dish/data/repository/dish_repository.dart';
-import 'package:pg_slema/features/diet/dish/domain/converter/dish_to_dto_converter.dart';
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish/data/dto/converter/dish_dto_to_json_converter.dart';
+import 'package:pg_slema/features/dish/data/dto/dish_dto.dart';
+import 'package:pg_slema/features/dish/data/repository/dish_repository.dart';
+import 'package:pg_slema/features/dish/domain/converter/dish_to_dto_converter.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesDishRepository
@@ -48,6 +48,6 @@ class SharedPreferencesDishRepository
   @override
   Future updateDish(Dish dish) async {
     var dto = converter.toDto(dish);
-    return await updateDto(dto);
+    await updateDto(dto);
   }
 }

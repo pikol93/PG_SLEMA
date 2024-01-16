@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/diet/dish/data/dto/dish_dto.dart';
-import 'package:pg_slema/features/diet/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish/data/dto/dish_dto.dart';
+import 'package:pg_slema/features/dish/domain/dish.dart';
 
 class DishToDtoConverter {
   Dish fromDto(DishDto dto) {
