@@ -10,7 +10,7 @@ class SharedPreferencesMealRepository
   final MealToDtoConverter converter;
 
   SharedPreferencesMealRepository(this.converter)
-      : super(MealDtoToJsonConverter(), Meal.pictureListSharedPrefKey);
+      : super(MealDtoToJsonConverter(), Meal.mealListSharedPrefKey);
 
   @override
   Future addMeal(Meal meal) async {
