@@ -53,4 +53,12 @@ class SharedPreferencesNotificationRepository
         .toList(growable: true);
     await deleteAllFrom(dto);
   }
+
+  @override
+  Future addMultipleNotifications(List<Notification> notifications) async {
+    var dto = notifications
+        .map(NotificationToDtoConverter.toDto)
+        .toList(growable: true);
+    await addAllFrom(dto);
+  }
 }

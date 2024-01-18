@@ -70,6 +70,16 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
     await _updateItemsList(jsonItemsList);
   }
 
+  Future addAllFrom(List<T> dto) async {
+    var jsonItemsList = await _getJsonItemsList();
+    var newElements = dto
+        .map((dto) => dtoToJsonConverter.to(dto))
+        .map((e) => jsonEncode(e))
+        .toList(growable: true);
+    jsonItemsList.addAll(newElements);
+    await _updateItemsList(jsonItemsList);
+  }
+
   Future<List<String>> _getJsonItemsList() async {
     return await connector.getList(tableKey);
   }

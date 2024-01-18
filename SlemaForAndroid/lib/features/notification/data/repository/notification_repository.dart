@@ -12,4 +12,6 @@ mixin NotificationRepository {
   Future deleteNotification(Notification notification);
 
   Future deleteAll(List<Notification> notifications);
+
+  Future addMultipleNotifications(List<Notification> notifications);
 }
