@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/add_assessment_app_bar.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_symptoms_form.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_entry.dart';
 import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
@@ -19,13 +21,38 @@ class _AddAssessmentScreenState extends State<AddAssessmentScreen> with Logger {
     return Scaffold(
       appBar: AddAssessmentAppBar(currentDateString),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          child: Form(
-            key: _formKey,
-            child: const Column(
-              children: [],
-            ),
+        child: Form(
+          key: _formKey,
+          child: const Column(
+            children: [
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+              AssessmentFormContainer(
+                child: AssessmentSymptomsFormWidget(),
+              ),
+            ],
           ),
         ),
       ),
