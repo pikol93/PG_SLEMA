@@ -48,7 +48,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.selectedDate.toDateString),
+            Text(widget.controller.selectedDate.toDateString()),
             const Icon(Icons.arrow_drop_down),
           ],
         ),
