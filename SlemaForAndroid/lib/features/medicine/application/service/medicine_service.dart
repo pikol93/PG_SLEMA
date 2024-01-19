@@ -1,5 +1,4 @@
 import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
-
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/notification/application/service/notification_service.dart';
 
@@ -15,15 +14,13 @@ class MedicineService {
 
   Future addMedicine(Medicine medicine) async {
     await _repository.addMedicine(medicine);
-    Future.forEach(
-        medicine.notifications, _notificationService.addNotification);
+    await _notificationService.addMultipleNotifications(medicine.notifications);
   }
 
   Future updateMedicine(Medicine medicine) async {
     await _notificationService.deleteNotificationsByMedicine(medicine.id);
     await _repository.updateMedicine(medicine);
-    Future.forEach(
-        medicine.notifications, _notificationService.addNotification);
+    await _notificationService.addMultipleNotifications(medicine.notifications);
   }
 
   Future deleteMedicine(Medicine medicine) async {
