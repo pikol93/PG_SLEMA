@@ -40,6 +40,11 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
         .toList(growable: true);
   }
 
+  Future<T> getDto(String id) async {
+    var dto = await getAllDto();
+    return dto.firstWhere((dto) => dto.id == id);
+  }
+
   Future updateDto(T dto) async {
     var allDto = await getAllDto();
     final index = allDto.indexWhere((e) => e.id == dto.id);

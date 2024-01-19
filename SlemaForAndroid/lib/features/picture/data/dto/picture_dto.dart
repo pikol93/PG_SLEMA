@@ -9,9 +9,4 @@ class PictureDto with Dto {
   final int byteSize;
 
   PictureDto(this.id, this.url, this.name, this.extension, this.byteSize);
-
-  @override
-  set id(String id) {
-    this.id = id;
-  }
 }
