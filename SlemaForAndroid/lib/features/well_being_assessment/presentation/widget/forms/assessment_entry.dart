@@ -17,8 +17,8 @@ class AssessmentFormContainer extends StatelessWidget with Logger {
             child: Container(
                 decoration: BoxDecoration(
                     color: Colors.lightBlue[50],
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                    boxShadow: [
+                    borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.grey,
                         spreadRadius: 2,

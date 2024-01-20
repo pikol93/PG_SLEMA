@@ -8,10 +8,10 @@ class AssessmentSleepForm extends StatelessWidget with Logger {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
-        const AssessmentFormTitle(title: "Sen"),
-        const AssessmentFormDivider(),
+        AssessmentFormTitle(title: "Sen"),
+        AssessmentFormDivider(),
       ],
     );
   }
