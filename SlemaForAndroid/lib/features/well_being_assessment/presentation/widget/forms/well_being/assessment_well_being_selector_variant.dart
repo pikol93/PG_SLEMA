@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/well_being/well_being_variant.dart';
 
 class AssessmentWellBeingSelectorVariant extends StatelessWidget {
   const AssessmentWellBeingSelectorVariant(
-      {super.key, required this.icon, required this.onPressed});
+      {super.key,
+      required this.variant,
+      required this.pressed,
+      required this.isSelected});
 
-  final Widget icon;
-  final VoidCallback? onPressed;
+  final WellBeingVariant variant;
+  final Function(WellBeingVariant) pressed;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -14,22 +19,28 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Icon(Icons.arrow_drop_down)],
+          Visibility(
+            visible: isSelected,
+            child: const Icon(Icons.arrow_drop_down),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [icon],
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 2),
+              borderRadius: BorderRadius.circular(16),
+              color: variant.colorRepresentation,
+            ),
+            child: IconButton(onPressed: onPressed, icon: variant.icon),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.arrow_drop_up),
-            ],
+          Visibility(
+            visible: isSelected,
+            child: const Icon(Icons.arrow_drop_up),
           ),
         ],
       ),
     );
+  }
+
+  void onPressed() {
+    pressed(variant);
   }
 }

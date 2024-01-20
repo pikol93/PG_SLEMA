@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being_assessment/data/well_being.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/well_being/assessment_well_being_selector_variant.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/well_being/well_being_variant.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentWellBeingSelector extends StatelessWidget with Logger {
@@ -7,44 +9,31 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
 
   @override
   Widget build(BuildContext context) {
-    var icon = const Image(
-      height: 48,
-      image: AssetImage("assets/placeholder_smiley.png"),
-    );
+    // TODO: Keep this value in a state somewhere
+    const selectedValue = WellBeingVariant.neutral;
+
+    final children = WellBeingVariant.values
+        .map(
+          (e) => AssessmentWellBeingSelectorVariant(
+            variant: e,
+            pressed: onVariantPressed,
+            isSelected: e == selectedValue,
+          ),
+        )
+        .toList();
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AssessmentWellBeingSelectorVariant(
-              onPressed: onVariantWorstPressed,
-              icon: icon,
-            ),
-            AssessmentWellBeingSelectorVariant(
-              onPressed: onVariantBadPressed,
-              icon: icon,
-            ),
-            AssessmentWellBeingSelectorVariant(
-              onPressed: onVariantNeutralPressed,
-              icon: icon,
-            ),
-            AssessmentWellBeingSelectorVariant(
-              onPressed: onVariantGoodPressed,
-              icon: icon,
-            ),
-            AssessmentWellBeingSelectorVariant(
-              onPressed: onVariantBestPressed,
-              icon: icon,
-            ),
-          ],
+          children: children,
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Neutralny",
+              selectedValue.textRepresentation,
               textAlign: TextAlign.center,
             ),
           ],
@@ -53,23 +42,7 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
     );
   }
 
-  void onVariantWorstPressed() {
-    logger.debug("TODO: Implement me!");
-  }
-
-  void onVariantBadPressed() {
-    logger.debug("TODO: Implement me!");
-  }
-
-  void onVariantNeutralPressed() {
-    logger.debug("TODO: Implement me!");
-  }
-
-  void onVariantGoodPressed() {
-    logger.debug("TODO: Implement me!");
-  }
-
-  void onVariantBestPressed() {
-    logger.debug("TODO: Implement me!");
+  void onVariantPressed(WellBeingVariant variant) {
+    logger.debug("Pressed well being variant: $variant");
   }
 }
