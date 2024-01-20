@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_form_divider.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_form_title.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_sleep_form_duration_section.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_subtitle_text.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSleepForm extends StatelessWidget with Logger {
@@ -12,6 +14,9 @@ class AssessmentSleepForm extends StatelessWidget with Logger {
       children: [
         AssessmentFormTitle(title: "Sen"),
         AssessmentFormDivider(),
+        AssessmentSleepFormDurationSection(),
+        AssessmentFormDivider(),
+        AssessmentSubtitleText(text: "Ocena jakości snu"),
       ],
     );
   }
