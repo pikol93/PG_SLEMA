@@ -9,6 +9,7 @@ class AssessmentButton extends StatelessWidget {
     this.minimumSize = const Size(48, 16),
     this.textStyle = const TextStyle(
         color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
+    this.boxColor = Colors.grey,
   });
 
   final String text;
@@ -16,13 +17,14 @@ class AssessmentButton extends StatelessWidget {
   final EdgeInsets padding;
   final Size minimumSize;
   final TextStyle textStyle;
+  final Color boxColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey,
-        border: Border.all(color: Colors.black),
+        color: boxColor,
+        border: Border.all(color: Colors.black, width: 2),
         borderRadius: BorderRadius.circular(16),
       ),
       child: TextButton(
