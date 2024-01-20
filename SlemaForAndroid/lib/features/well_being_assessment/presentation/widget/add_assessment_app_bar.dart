@@ -55,6 +55,8 @@ class AddAssessmentAppBar extends AppBar {
                             minHeight: 16,
                           ),
                           child: const ClipRRect(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0)),
                             child: LinearProgressIndicator(
                               value: 0.5,
                               color: Colors.green,
