@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_subtitle_text.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptoms_change_value_button.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom.dart';
 
 class AssessmentSymptomEntry extends StatelessWidget {
-  const AssessmentSymptomEntry({super.key, required this.symptomName});
+  const AssessmentSymptomEntry(
+      {super.key,
+      required this.symptom,
+      required this.decreasePressed,
+      required this.increasePressed});
 
-  final String symptomName;
+  final Symptom symptom;
+  final Function(int) decreasePressed;
+  final Function(int) increasePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +21,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AssessmentSubtitleText(text: symptomName),
+            AssessmentSubtitleText(text: symptom.name),
           ],
         ),
         Row(
@@ -26,8 +33,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
             ),
             Expanded(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                    minHeight: 16, minWidth: 16, maxHeight: 64, maxWidth: 64),
+                constraints: const BoxConstraints(minHeight: 16),
                 child: const ClipRRect(
                   borderRadius: BorderRadius.all(Radius.elliptical(8, 8)),
                   child: LinearProgressIndicator(value: 0.5),
@@ -53,7 +59,11 @@ class AssessmentSymptomEntry extends StatelessWidget {
     );
   }
 
-  void onDecreasePressed() {}
+  void onDecreasePressed() {
+    decreasePressed(symptom.id);
+  }
 
-  void onIncreasePressed() {}
+  void onIncreasePressed() {
+    increasePressed(symptom.id);
+  }
 }

@@ -3,6 +3,7 @@ import 'package:pg_slema/features/well_being_assessment/presentation/widget/form
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_form_title.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_manage_symptoms_button.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
@@ -14,18 +15,51 @@ class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
       children: [
         AssessmentFormTitle(title: "Symptomy"),
         AssessmentFormDivider(),
-        AssessmentSymptomEntry(symptomName: "Zmiany skórne"),
-        AssessmentFormDivider(),
-        AssessmentSymptomEntry(
-          symptomName: "Ból stawów",
-        ),
-        AssessmentFormDivider(),
-        AssessmentSymptomEntry(
-          symptomName: "Mdłości",
-        ),
+        AssessmentSymptomsEntriesContainer(),
         AssessmentFormDivider(),
         AssessmentManageSymptomsButton(),
       ],
     );
+  }
+}
+
+class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
+  const AssessmentSymptomsEntriesContainer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: Make these values be stored somewhere in SharedPreferences instead of being hard-coded
+    const symptomsList = [
+      Symptom(id: 1, name: "Zmiany skórne"),
+      Symptom(id: 2, name: "Ból stawów"),
+      Symptom(id: 3, name: "Mdłości"),
+    ];
+
+    List<Widget> children = [];
+
+    // Insert a divider between every symptom entry
+    for (final (index, element) in symptomsList.indexed) {
+      children.add(AssessmentSymptomEntry(
+        symptom: element,
+        decreasePressed: onDecreasePressed,
+        increasePressed: onIncreasePressed,
+      ));
+
+      if (index < symptomsList.length - 1) {
+        children.add(const AssessmentFormDivider());
+      }
+    }
+
+    return Column(
+      children: children,
+    );
+  }
+
+  void onDecreasePressed(int symptomId) {
+    logger.debug("Decrease pressed on symptom $symptomId");
+  }
+
+  void onIncreasePressed(int symptomId) {
+    logger.debug("Increase pressed on symptom $symptomId");
   }
 }
