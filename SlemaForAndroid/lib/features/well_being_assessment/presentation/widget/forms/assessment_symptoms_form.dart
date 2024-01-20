@@ -24,31 +24,58 @@ class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
   }
 }
 
-class AssessmentManageSymptomsButton extends StatelessWidget {
+class AssessmentManageSymptomsButton extends StatelessWidget with Logger {
   const AssessmentManageSymptomsButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.grey,
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(15),
+    return AssessmentButton(text: "DODAJ/USUŃ", onPressed: onPressed);
+  }
+
+  void onPressed() {
+    logger.warning("I am not implemented yet.");
+  }
+}
+
+class AssessmentButton extends StatelessWidget {
+  const AssessmentButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    this.minimumSize = const Size(48, 16),
+    this.textStyle = const TextStyle(
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
+  });
+
+  final String text;
+  final VoidCallback onPressed;
+  final EdgeInsets padding;
+  final Size minimumSize;
+  final TextStyle textStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          padding: padding,
+          minimumSize: minimumSize,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          child: Text(
-            "DODAJ/USUŃ",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
+        onPressed: onPressed,
+        child: Text(
+          text,
+          style: textStyle,
         ),
       ),
     );
   }
-
-  void onPressed() {}
 }
 
 class AssessmentSymptomEntry extends StatelessWidget {
