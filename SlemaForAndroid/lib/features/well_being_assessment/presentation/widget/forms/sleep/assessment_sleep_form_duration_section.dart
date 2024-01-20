@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_sleep_duration_buttons_row.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_subtitle_text.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/sleep/assessment_sleep_duration_buttons_row.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_subtitle_text.dart';
 
 class AssessmentSleepFormDurationSection extends StatelessWidget {
   const AssessmentSleepFormDurationSection({super.key});

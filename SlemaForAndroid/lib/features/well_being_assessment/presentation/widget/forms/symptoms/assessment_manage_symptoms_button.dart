@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_button.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_button.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentManageSymptomsButton extends StatelessWidget with Logger {

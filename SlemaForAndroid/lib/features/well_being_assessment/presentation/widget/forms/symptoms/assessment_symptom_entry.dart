@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_subtitle_text.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_symptoms_change_value_button.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_subtitle_text.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptoms_change_value_button.dart';
 
 class AssessmentSymptomEntry extends StatelessWidget {
   const AssessmentSymptomEntry({super.key, required this.symptomName});
