@@ -3,7 +3,7 @@ import 'package:pg_slema/features/well_being_assessment/presentation/widget/form
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/common/assessment_form_title.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_manage_symptoms_button.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom_type.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
@@ -30,9 +30,9 @@ class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
   Widget build(BuildContext context) {
     // TODO: Make these values be stored somewhere in SharedPreferences instead of being hard-coded
     const symptomsList = [
-      Symptom(id: 1, name: "Zmiany skórne"),
-      Symptom(id: 2, name: "Ból stawów"),
-      Symptom(id: 3, name: "Mdłości"),
+      SymptomType(id: 1, name: "Zmiany skórne"),
+      SymptomType(id: 2, name: "Ból stawów"),
+      SymptomType(id: 3, name: "Mdłości"),
     ];
 
     List<Widget> children = [];
