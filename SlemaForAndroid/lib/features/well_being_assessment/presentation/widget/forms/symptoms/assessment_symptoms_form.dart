@@ -4,6 +4,7 @@ import 'package:pg_slema/features/well_being_assessment/presentation/widget/form
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_manage_symptoms_button.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom_type.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/symptom_value.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
@@ -40,7 +41,8 @@ class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
     // Insert a divider between every symptom entry
     for (final (index, element) in symptomsList.indexed) {
       children.add(AssessmentSymptomEntry(
-        symptom: element,
+        symptomType: element,
+        symptomValue: SymptomValue.mild,
         decreasePressed: onDecreasePressed,
         increasePressed: onIncreasePressed,
       ));
