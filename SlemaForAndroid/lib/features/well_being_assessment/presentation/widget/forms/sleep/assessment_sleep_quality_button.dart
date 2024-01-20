@@ -12,26 +12,23 @@ class AssessmentSleepQualityButton extends StatelessWidget with Logger {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AssessmentButton(
-            text: sleepQuality.buttonTextRepresentation,
-            onPressed: onButtonPressed,
-            minimumSize: const Size(48, 48),
-            boxColor: sleepQuality.colorRepresentation,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AssessmentButton(
+          text: sleepQuality.buttonTextRepresentation,
+          onPressed: onButtonPressed,
+          minimumSize: const Size(48, 48),
+          boxColor: sleepQuality.colorRepresentation,
+        ),
+        Text(
+          sleepQuality.buttonSubtitleTextRepresentation,
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            color: Colors.grey,
           ),
-          Text(
-            sleepQuality.buttonSubtitleTextRepresentation,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

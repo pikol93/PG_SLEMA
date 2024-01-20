@@ -13,8 +13,9 @@ class AssessmentSleepDurationButton extends StatelessWidget with Logger {
   @override
   Widget build(BuildContext context) {
     return AssessmentButton(
-        text: sleepDuration.buttonTextRepresentation,
-        onPressed: onButtonPressed);
+      text: sleepDuration.buttonTextRepresentation,
+      onPressed: onButtonPressed,
+    );
   }
 
   void onButtonPressed() {
