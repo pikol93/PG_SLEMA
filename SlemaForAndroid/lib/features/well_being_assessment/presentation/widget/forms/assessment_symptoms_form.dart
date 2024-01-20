@@ -14,11 +14,15 @@ class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
       children: [
         AssessmentFormTitle(title: "Symptomy"),
         AssessmentFormDivider(),
-        AssessmentSymptomEntry(),
+        AssessmentSymptomEntry(symptomName: "Zmiany skórne"),
         AssessmentFormDivider(),
-        AssessmentSymptomEntry(),
+        AssessmentSymptomEntry(
+          symptomName: "Ból stawów",
+        ),
         AssessmentFormDivider(),
-        AssessmentSymptomEntry(),
+        AssessmentSymptomEntry(
+          symptomName: "Mdłości",
+        ),
         AssessmentFormDivider(),
         AssessmentManageSymptomsButton(),
       ],

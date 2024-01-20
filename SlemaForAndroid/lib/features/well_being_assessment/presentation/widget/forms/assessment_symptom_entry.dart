@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_subtitle_text.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/assessment_symptoms_change_value_button.dart';
 
 class AssessmentSymptomEntry extends StatelessWidget {
-  const AssessmentSymptomEntry({super.key});
+  const AssessmentSymptomEntry({super.key, required this.symptomName});
+
+  final String symptomName;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "asd",
-              textAlign: TextAlign.center,
-            )
+            AssessmentSubtitleText(text: symptomName),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
+            AssessmentSymptomsChangeValueButton(
               onPressed: onDecreasePressed,
               icon: const Icon(Icons.remove_circle_outline),
             ),
@@ -33,7 +34,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
+            AssessmentSymptomsChangeValueButton(
               onPressed: onIncreasePressed,
               icon: const Icon(Icons.add_circle_outline),
             ),
