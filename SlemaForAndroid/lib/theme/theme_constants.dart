@@ -7,6 +7,7 @@ const colorNavigationBarBackground = Color(0xFF6793B3);
 const colorNavigationBarShadow = Color(0x1A000000);
 
 ThemeData lightTheme = ThemeData(
+    fontFamily: 'Dongle',
     useMaterial3: true,
     brightness: Brightness.light,
     colorSchemeSeed: colorSchemeSeed,
