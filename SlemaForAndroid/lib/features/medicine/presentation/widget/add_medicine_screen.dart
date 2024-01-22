@@ -31,8 +31,36 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dodaj lek"),
-        centerTitle: true,
+        toolbarHeight: 170,
+        automaticallyImplyLeading: false,
+        title: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back_rounded)),
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text("Dodaj"),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 14.0),
+              child: Text("lekarstwo"),
+            ),
+          ],
+        ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(
+                    'assets/medicine/add_medicine_appbar_background.png'),
+                fit: BoxFit.fill),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
