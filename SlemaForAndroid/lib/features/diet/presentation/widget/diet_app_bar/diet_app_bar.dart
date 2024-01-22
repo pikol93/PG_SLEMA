@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_with_arrows.dart';
+import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/meal_idea_icon_button.dart';
 
 class DietAppBar extends StatefulWidget {
   const DietAppBar({super.key});
@@ -28,7 +29,12 @@ class _DietAppBarState extends State<DietAppBar>
         ),
         elevation: 5,
         toolbarHeight: 100,
-        title: CalendarWithArrows());
+        title: Row(
+          children: [
+            Expanded(child: CalendarWithArrows()),
+            const MealIdeaIconButton()
+          ],
+        ));
   }
 
   @override
