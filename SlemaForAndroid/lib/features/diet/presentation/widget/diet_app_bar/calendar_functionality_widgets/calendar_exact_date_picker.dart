@@ -1,33 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 
 class CalendarExactDatePicker extends StatelessWidget {
-  final CalendarController controller;
-  final void Function(String) onPickedDate;
+  final DatePickerController controller;
+  final ValueSetter<DateTime> onDatePicked;
+
   const CalendarExactDatePicker(
-      {super.key, required this.onPickedDate, required this.controller});
+      {super.key, required this.onDatePicked, required this.controller});
 
   void Function()? handleDatePick(BuildContext context) {
     return () async {
       DateTime? pickedDate = await showDatePicker(
         context: context,
-        initialDate: controller.pickedDate,
-        firstDate: controller.firstDate,
-        lastDate: controller.lastDate,
+        initialDate: controller.selectedDate,
+        firstDate: controller.allowedFirstDate,
+        lastDate: controller.allowedLastDate,
         initialEntryMode: DatePickerEntryMode.calendarOnly,
       );
 
       if (pickedDate != null) {
-        controller.pickedDate = pickedDate;
-        onPickedDate(controller.getPickedDateStringRepresentationForAppBar());
+        controller.selectedDate = pickedDate;
+        onDatePicked(pickedDate);
       }
     };
   }
 
   @override
   Widget build(BuildContext context) {
-    controller.setLanguage(context);
-
     return OutlinedButton(
       onPressed: handleDatePick(context),
       style: OutlinedButton.styleFrom(
