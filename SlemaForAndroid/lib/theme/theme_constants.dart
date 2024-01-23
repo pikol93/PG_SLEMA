@@ -32,7 +32,7 @@ ThemeData lightTheme = ThemeData(
       titleTextStyle: TextStyle(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
-        fontSize: 50,
+        fontSize: 48,
         height: 0.52381,
         color: colorAppBarText,
         shadows: [
