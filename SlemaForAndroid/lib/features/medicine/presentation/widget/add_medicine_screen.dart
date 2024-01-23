@@ -69,16 +69,22 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
             key: _formKey,
             child: Column(
               children: [
-                CustomTextFormField(
-                  label: "Nazwa",
-                  icon: Icons.create,
-                  onChanged: (value) => _controller.typedMedicineName = value,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: CustomTextFormField(
+                    label: "Nazwa",
+                    icon: null,
+                    onChanged: (value) => _controller.typedMedicineName = value,
+                  ),
                 ),
                 const SizedBox(height: 10),
-                CustomTextFormField(
-                  label: "Sposób aplikacji leku",
-                  icon: Icons.create,
-                  onChanged: (value) => _controller.typedIntakeType = value,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: CustomTextFormField(
+                    label: "Sposób aplikacji leku",
+                    icon: Icons.create,
+                    onChanged: (value) => _controller.typedIntakeType = value,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 FrequencyList(

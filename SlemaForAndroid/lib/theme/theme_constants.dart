@@ -15,6 +15,7 @@ const colorAppBarTextShadow = Color(0x40000000);
 //CustomSaveButton
 const colorCustomSaveButtonBackground = Color(0xFF487ABC);
 const colorCustomSaveButtonText = Color(0xFFF2F1EB);
+const colorCustomInputTextBorder = Color(0xB2878787);
 
 ThemeData lightTheme = ThemeData(
     fontFamily: 'Dongle',
@@ -58,7 +59,8 @@ ThemeData lightTheme = ThemeData(
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
           formsButtonBackgroundColor: colorCustomSaveButtonBackground,
-          formsButtonTextColor: colorCustomSaveButtonText),
+          formsButtonTextColor: colorCustomSaveButtonText,
+          formsCustomTextInputBorderColor: colorCustomInputTextBorder),
     ]);
 
 ThemeData darkTheme =
