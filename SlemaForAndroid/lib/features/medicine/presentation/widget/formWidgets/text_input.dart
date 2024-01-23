@@ -21,7 +21,7 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   final double defaultTextBottomPadding = 0.0;
-  final double borderWidth = 2.0;
+  final double borderWidth = 2.5;
   final double borderRadius = 18.0;
   final double labelFontSize = 24.0;
   final double prefixIconSize = 38.0;
