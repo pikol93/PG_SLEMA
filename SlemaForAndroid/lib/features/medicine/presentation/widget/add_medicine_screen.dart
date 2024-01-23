@@ -3,12 +3,12 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
-import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
+import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -131,16 +131,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   ),
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
-                // TODO Notifications
-                // FrequencyList(
-                //     initialValue: _controller.frequency,
-                //     onChanged: (frequency) =>
-                //         _handleFrequencyChange(frequency)),
-                // SizedBox(height: _mainPaddingBetweenInputs),
-                // _createDataFieldIfPossible(),
-                // ManageNotificationsWidget(
-                //   controller: _controller,
-                // ),
+                FrequencyList(
+                    initialValue: _controller.frequency,
+                    onChanged: (frequency) =>
+                        _handleFrequencyChange(frequency)),
+                SizedBox(height: _mainPaddingBetweenInputs),
+                _createDataFieldIfPossible(),
+                ManageNotificationsWidget(
+                  controller: _controller,
+                ),
                 SizedBox(height: _mainPaddingBetweenInputs),
                 Padding(
                   padding: EdgeInsets.only(

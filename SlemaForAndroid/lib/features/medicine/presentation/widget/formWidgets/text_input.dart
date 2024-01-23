@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/theme/custom_colors.dart';
-import 'package:photo_manager/photo_manager.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String label;
