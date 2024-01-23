@@ -13,10 +13,12 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
 
     final children = WellBeingVariant.values
         .map(
-          (e) => AssessmentWellBeingSelectorVariant(
-            variant: e,
-            pressed: onVariantPressed,
-            isSelected: e == selectedValue,
+          (e) => Expanded(
+            child: AssessmentWellBeingSelectorVariant(
+              variant: e,
+              pressed: onVariantPressed,
+              isSelected: e == selectedValue,
+            ),
           ),
         )
         .toList();
