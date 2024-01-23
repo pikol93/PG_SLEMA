@@ -4,7 +4,7 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 class AssessmentFormContainer extends StatelessWidget with Logger {
   const AssessmentFormContainer({super.key, required this.child});
 
-  final Widget? child;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
