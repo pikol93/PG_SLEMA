@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/main_screen.dart';
+import 'package:pg_slema/theme/theme_constants.dart';
 import 'package:pg_slema/utils/log/logger_printer.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
@@ -25,16 +26,18 @@ Future<void> main() async {
         ChangeNotifierProvider(
             create: (context) => MotivationScreenController()),
       ],
-      child: const MaterialApp(
-        localizationsDelegates: [
+      child: MaterialApp(
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
+        supportedLocales: const [
           Locale('pl', 'PL'),
         ],
-        home: MainScreen(),
+        home: const MainScreen(),
       ),
     ),
   );
