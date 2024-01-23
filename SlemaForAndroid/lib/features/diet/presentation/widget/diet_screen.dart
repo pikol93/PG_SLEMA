@@ -11,12 +11,12 @@ class DietScreen extends StatefulWidget {
 class _DietScreenState extends State<DietScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
+        preferredSize: Size.fromHeight(60),
         child: DietAppBar(),
       ),
-      body: const Center(
+      body: Center(
         child: Text("TODO"),
       ),
     );
