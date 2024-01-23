@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
-import 'package:pg_slema/theme/theme_constants.dart';
+import 'package:pg_slema/theme/custom_colors.dart';
 
 class CustomSaveButton extends StatelessWidget {
   final AddMedicineController controller;
@@ -15,6 +15,8 @@ class CustomSaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MyColors? myColors = Theme.of(context).extension<MyColors>();
+
     return SizedBox(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -32,11 +34,11 @@ class CustomSaveButton extends StatelessWidget {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0))),
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(colorCustomSaveButton),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  myColors!.formsButtonBackgroundColor ?? Colors.black),
               elevation: MaterialStateProperty.all(6)),
-          child: const Padding(
-            padding: EdgeInsets.all(14.0),
+          child: Padding(
+            padding: const EdgeInsets.all(14.0),
             child: Center(
               child: Text(
                 "Zapisz",
@@ -44,7 +46,7 @@ class CustomSaveButton extends StatelessWidget {
                   fontFamily: 'Dongle',
                   fontSize: 46,
                   height: 0.52381,
-                  color: colorAppBarText,
+                  color: myColors.formsButtonTextColor ?? Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
