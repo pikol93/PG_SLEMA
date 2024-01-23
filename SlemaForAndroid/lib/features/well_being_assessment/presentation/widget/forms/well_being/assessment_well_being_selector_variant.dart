@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being_assessment/data/well_being_variant.dart';
 
 class AssessmentWellBeingSelectorVariant extends StatelessWidget {
+  final WellBeingVariant variant;
+  final Function(WellBeingVariant) pressed;
+  final bool isSelected;
+
   const AssessmentWellBeingSelectorVariant(
       {super.key,
       required this.variant,
       required this.pressed,
       required this.isSelected});
-
-  final WellBeingVariant variant;
-  final Function(WellBeingVariant) pressed;
-  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {

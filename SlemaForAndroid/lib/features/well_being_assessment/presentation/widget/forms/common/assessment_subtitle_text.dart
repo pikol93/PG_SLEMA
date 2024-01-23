@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class AssessmentSubtitleText extends StatelessWidget {
-  const AssessmentSubtitleText({super.key, required this.text});
-
   final String text;
+
+  const AssessmentSubtitleText({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

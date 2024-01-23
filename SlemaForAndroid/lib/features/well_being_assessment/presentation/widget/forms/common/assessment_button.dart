@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AssessmentButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final EdgeInsets margin;
+  final EdgeInsets padding;
+  final Size minimumSize;
+  final TextStyle textStyle;
+  final Color boxColor;
+
   const AssessmentButton({
     super.key,
     required this.text,
@@ -12,14 +20,6 @@ class AssessmentButton extends StatelessWidget {
         color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
     this.boxColor = Colors.grey,
   });
-
-  final String text;
-  final VoidCallback onPressed;
-  final EdgeInsets margin;
-  final EdgeInsets padding;
-  final Size minimumSize;
-  final TextStyle textStyle;
-  final Color boxColor;
 
   @override
   Widget build(BuildContext context) {

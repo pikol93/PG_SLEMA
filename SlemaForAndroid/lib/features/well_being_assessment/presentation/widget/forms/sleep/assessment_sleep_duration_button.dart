@@ -4,11 +4,11 @@ import 'package:pg_slema/features/well_being_assessment/data/sleep_duration.dart
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSleepDurationButton extends StatelessWidget with Logger {
-  const AssessmentSleepDurationButton(
-      {super.key, required this.sleepDuration, required this.onPressed});
-
   final SleepDuration sleepDuration;
   final Function(SleepDuration) onPressed;
+
+  const AssessmentSleepDurationButton(
+      {super.key, required this.sleepDuration, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

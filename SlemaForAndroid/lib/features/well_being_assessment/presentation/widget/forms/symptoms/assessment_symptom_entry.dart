@@ -5,17 +5,17 @@ import 'package:pg_slema/features/well_being_assessment/data/symptom_type.dart';
 import 'package:pg_slema/features/well_being_assessment/data/symptom_value.dart';
 
 class AssessmentSymptomEntry extends StatelessWidget {
+  final SymptomType symptomType;
+  final SymptomValue symptomValue;
+  final Function(int) decreasePressed;
+  final Function(int) increasePressed;
+
   const AssessmentSymptomEntry(
       {super.key,
       required this.symptomType,
       required this.symptomValue,
       required this.decreasePressed,
       required this.increasePressed});
-
-  final SymptomType symptomType;
-  final SymptomValue symptomValue;
-  final Function(int) decreasePressed;
-  final Function(int) increasePressed;
 
   @override
   Widget build(BuildContext context) {

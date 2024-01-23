@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AssessmentSymptomsChangeValueButton extends StatelessWidget {
-  const AssessmentSymptomsChangeValueButton(
-      {super.key, required this.onPressed, required this.icon});
-
   final VoidCallback onPressed;
   final Icon icon;
+
+  const AssessmentSymptomsChangeValueButton(
+      {super.key, required this.onPressed, required this.icon});
 
   @override
   Widget build(BuildContext context) {
