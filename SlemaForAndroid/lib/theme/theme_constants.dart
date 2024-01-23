@@ -11,6 +11,7 @@ const colorNavigationBarShadow = Color(0x1A000000);
 //AppBar
 const colorAppBarText = Color(0xFFF2F1EB);
 const colorAppBarTextShadow = Color(0x40000000);
+const colorAppBarBackground = Color(0xFF6793B3);
 
 //CustomSaveButton
 const colorCustomSaveButtonBackground = Color(0xFF487ABC);
@@ -55,6 +56,7 @@ ThemeData lightTheme = ThemeData(
           ),
         ],
       ),
+      backgroundColor: colorAppBarBackground,
     ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
