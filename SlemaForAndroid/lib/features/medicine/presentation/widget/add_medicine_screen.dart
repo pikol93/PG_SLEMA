@@ -25,6 +25,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
+  final double _toolbarHeight = 170.0;
+  final double _spaceBetweenBackIconAndTitle = 10.0;
+  final double _titleHorizontalPadding = 14.0;
 
   @override
   void dispose() {
@@ -36,7 +39,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 170,
+        toolbarHeight: _toolbarHeight,
         automaticallyImplyLeading: false,
         title: Column(
           mainAxisSize: MainAxisSize.min,
@@ -47,14 +50,16 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back_rounded)),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14.0),
-              child: Text("Dodaj"),
+            SizedBox(height: _spaceBetweenBackIconAndTitle),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: _titleHorizontalPadding),
+              child: const Text("Dodaj"),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14.0),
-              child: Text("lekarstwo"),
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: _titleHorizontalPadding),
+              child: const Text("lekarstwo"),
             ),
           ],
         ),
