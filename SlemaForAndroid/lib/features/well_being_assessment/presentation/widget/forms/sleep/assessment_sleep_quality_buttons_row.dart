@@ -10,11 +10,11 @@ class AssessmentSleepQualityButtonsRow extends StatelessWidget with Logger {
   Widget build(BuildContext context) {
     var rowChildren = SleepQuality.values
         .map((sleepQuality) => Expanded(
-          child: AssessmentSleepQualityButton(
+              child: AssessmentSleepQualityButton(
                 sleepQuality: sleepQuality,
                 onPressed: onSleepQualityPressed,
               ),
-        ))
+            ))
         .toList();
 
     return Row(
