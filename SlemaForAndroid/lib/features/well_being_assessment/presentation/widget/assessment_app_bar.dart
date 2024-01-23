@@ -2,73 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_help_button.dart';
 
 class AssessmentAppBar extends AppBar {
-  static const edgeInsets =
-      EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0);
-
   AssessmentAppBar(currentDateString, {super.key})
       : super(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.elliptical(15, 10),
+              bottom: Radius.circular(16.0),
             ),
           ),
-          title: const Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              AssessmentHelpButton(),
-            ],
+          title: const Text(
+            "Raport zdrowotny",
+            textAlign: TextAlign.center,
           ),
+          actions: [
+            const AssessmentHelpButton(),
+          ],
           bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(64),
+            preferredSize: const Size.fromHeight(48),
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              child: Column(
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+              child: Stack(
                 children: [
-                  Padding(
-                    padding: edgeInsets,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text("Raport zdrowotny",
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Text(
-                            currentDateString,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.yellow,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ]),
-                  ),
-                  Padding(
-                    padding: edgeInsets,
-                    child: Stack(
-                      children: [
-                        ConstrainedBox(
-                          constraints: const BoxConstraints(
-                            minHeight: 16,
-                          ),
-                          child: const ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(8.0)),
-                            child: LinearProgressIndicator(
-                              value: 0.5,
-                              color: Colors.green,
-                            ),
-                          ),
-                        ),
-                        const Center(
-                          child: Text("1/3"),
-                        )
-                      ],
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minHeight: 24,
+                    ),
+                    child: const ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                      child: LinearProgressIndicator(
+                        value: 1 / 3,
+                        color: Colors.green,
+                      ),
                     ),
                   ),
+                  const Center(
+                    child: Text("1/3"),
+                  )
                 ],
               ),
             ),
