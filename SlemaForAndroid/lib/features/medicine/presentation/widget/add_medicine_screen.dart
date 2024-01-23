@@ -8,6 +8,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -17,9 +18,13 @@ class AddMedicineScreen extends StatefulWidget {
   State<AddMedicineScreen> createState() => _AddMedicineScreenState();
 }
 
-class _AddMedicineScreenState extends State<AddMedicineScreen> {
+class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
+
+  final double _mainWidgetsPaddingHorizontal = 12.0;
+  final double _mainPaddingBetweenInputs = 15.0;
+  final double _saveButtonAdditionalPaddingHorizontal = 30.0;
 
   @override
   void dispose() {
@@ -64,45 +69,85 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          padding: EdgeInsets.symmetric(
+              horizontal: _mainWidgetsPaddingHorizontal, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: _mainWidgetsPaddingHorizontal),
                   child: CustomTextFormField(
                     label: "Nazwa",
                     icon: null,
                     onChanged: (value) => _controller.typedMedicineName = value,
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: _mainPaddingBetweenInputs),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: _mainWidgetsPaddingHorizontal, right: 3.0),
+                        child: CustomTextFormField(
+                          label: "Dawka TODO",
+                          icon: Icons.vaccines,
+                          onChanged: (value) =>
+                              logger.warning("Not implemented yet - Dawka"),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 3.0,
+                          right: _mainWidgetsPaddingHorizontal,
+                        ),
+                        child: CustomTextFormField(
+                          label: "Rodzaj TODO",
+                          icon: Icons.medication_outlined,
+                          onChanged: (value) =>
+                              logger.warning("Not implemented yet - Rodzaj"),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: _mainPaddingBetweenInputs),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: _mainWidgetsPaddingHorizontal),
                   child: CustomTextFormField(
-                    label: "Sposób aplikacji leku",
-                    icon: Icons.create,
+                    label: "Jak używać",
+                    icon: Icons.water_drop_outlined,
                     onChanged: (value) => _controller.typedIntakeType = value,
                   ),
                 ),
-                const SizedBox(height: 20),
-                FrequencyList(
-                    initialValue: _controller.frequency,
-                    onChanged: (frequency) =>
-                        _handleFrequencyChange(frequency)),
-                const SizedBox(height: 20),
-                _createDataFieldIfPossible(),
-                ManageNotificationsWidget(
-                  controller: _controller,
+                SizedBox(height: _mainPaddingBetweenInputs),
+                // TODO Notifications
+                // FrequencyList(
+                //     initialValue: _controller.frequency,
+                //     onChanged: (frequency) =>
+                //         _handleFrequencyChange(frequency)),
+                // SizedBox(height: _mainPaddingBetweenInputs),
+                // _createDataFieldIfPossible(),
+                // ManageNotificationsWidget(
+                //   controller: _controller,
+                // ),
+                SizedBox(height: _mainPaddingBetweenInputs),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: _saveButtonAdditionalPaddingHorizontal,
+                      right: _saveButtonAdditionalPaddingHorizontal),
+                  child: CustomSaveButton(
+                      controller: _controller,
+                      formKey: _formKey,
+                      onAddedMedicine: () => _controller
+                          .createMedicine()
+                          .then(widget.onMedicineAdded)),
                 ),
-                const SizedBox(height: 20),
-                CustomSaveButton(
-                    controller: _controller,
-                    formKey: _formKey,
-                    onAddedMedicine: () => _controller
-                        .createMedicine()
-                        .then(widget.onMedicineAdded)),
               ],
             ),
           ),
