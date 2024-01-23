@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
 
 class CalendarMoveForward extends StatelessWidget {
-  final CalendarController controller;
-  final void Function(String) onPickedDate;
-  const CalendarMoveForward(
-      {super.key, required this.onPickedDate, required this.controller});
+  final VoidCallback onPressed;
 
-  void moveForward() {
-    controller.addOneDayFromPickedDateIfPossible();
-    onPickedDate(controller.getPickedDateStringRepresentationForAppBar());
-  }
+  const CalendarMoveForward({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +12,7 @@ class CalendarMoveForward extends StatelessWidget {
         Icons.arrow_forward,
         color: Colors.black,
       ),
-      onPressed: moveForward,
+      onPressed: onPressed,
     );
   }
 }
