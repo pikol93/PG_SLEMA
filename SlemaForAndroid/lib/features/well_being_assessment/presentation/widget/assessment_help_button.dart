@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class AddAssessmentHelpButton extends StatelessWidget with Logger {
-  const AddAssessmentHelpButton({super.key});
+class AssessmentHelpButton extends StatelessWidget with Logger {
+  const AssessmentHelpButton({super.key});
 
   @override
   Widget build(BuildContext context) {

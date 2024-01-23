@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/add_assessment_button.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_button.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
 

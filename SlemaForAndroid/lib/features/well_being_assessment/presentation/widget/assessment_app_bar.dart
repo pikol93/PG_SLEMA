@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/add_assessment_help_button.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_help_button.dart';
 
-class AddAssessmentAppBar extends AppBar {
+class AssessmentAppBar extends AppBar {
   static const edgeInsets =
       EdgeInsets.symmetric(vertical: 4.0, horizontal: 0.0);
 
-  AddAssessmentAppBar(currentDateString, {super.key})
+  AssessmentAppBar(currentDateString, {super.key})
       : super(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
@@ -15,7 +15,7 @@ class AddAssessmentAppBar extends AppBar {
           title: const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              AddAssessmentHelpButton(),
+              AssessmentHelpButton(),
             ],
           ),
           bottom: PreferredSize(
