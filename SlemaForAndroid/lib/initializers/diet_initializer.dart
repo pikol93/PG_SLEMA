@@ -27,23 +27,31 @@ class DietInitializer with Initializer {
       await initializeFruit();
     }
     categories = await dishCategoryService.getMainCategories();
-    var dishes = await dishService.getAllDishes();
-    dishes = await dishService.getAllDishesByDishCategory(categories[0].id);
-    await initializeFruit();
   }
 
   Future initializeFruit() async {
-    DishCategory fruit = DishCategory(idGenerator.v4(), 'Owoce');
-    Dish blueberry = Dish(idGenerator.v4(), 'Jagoda', fruit.id);
-    Dish banana = Dish(idGenerator.v4(), 'Banan', fruit.id);
-    Dish raspberry = Dish(idGenerator.v4(), 'Malina', fruit.id);
-    Dish orange = Dish(idGenerator.v4(), 'Pomarańcza', fruit.id);
+    DishCategory fruitCategory = DishCategory(idGenerator.v4(), 'Owoce');
+    var fruit = generateFruit(fruitCategory.id);
+    dishService.addDishes(fruit);
     await dishCategoryService.addDishCategory(fruit);
     await dishService.addDish(blueberry);
     await dishService.addDish(banana);
     await dishService.addDish(raspberry);
     await dishService.addDish(orange);
     //TODO: add to list and one await - upgrade
+  }
+
+  List<Dish> generateFruit(String categoryId) {
+    List<Dish> fruit = [];
+    Dish blueberry = Dish(idGenerator.v4(), 'Jagoda', categoryId);
+    Dish banana = Dish(idGenerator.v4(), 'Banan', categoryId);
+    Dish raspberry = Dish(idGenerator.v4(), 'Malina', categoryId);
+    Dish orange = Dish(idGenerator.v4(), 'Pomarańcza', categoryId);
+    fruit.add(blueberry);
+    fruit.add(banana);
+    fruit.add(raspberry);
+    fruit.add(orange);
+    return fruit;
   }
 
   void initializeVegetables(DishCategory vegetables) {}
