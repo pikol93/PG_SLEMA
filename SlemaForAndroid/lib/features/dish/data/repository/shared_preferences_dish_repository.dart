@@ -50,4 +50,10 @@ class SharedPreferencesDishRepository
     var dto = converter.toDto(dish);
     await updateDto(dto);
   }
+
+  @override
+  Future addMultipleDishes(List<Dish> dishes) async {
+    var dto = dishes.map((e) => converter.toDto(e)).toList(growable: true);
+    await addAllFrom(dto);
+  }
 }

@@ -12,4 +12,6 @@ mixin DishRepository {
   Future updateDish(Dish dish);
 
   Future deleteDish(Dish dish);
+
+  Future addMultipleDishes(List<Dish> dishes);
 }

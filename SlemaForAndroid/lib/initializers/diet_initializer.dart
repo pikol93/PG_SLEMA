@@ -1,5 +1,6 @@
 import 'package:pg_slema/features/dish/application/dish_service.dart';
 import 'package:pg_slema/features/dish/domain/dish.dart';
+import 'package:pg_slema/features/dish_category/application/dish_category_name.dart';
 import 'package:pg_slema/features/dish_category/application/dish_category_service.dart';
 import 'package:pg_slema/features/dish_category/data/repository/shared_preferences_dish_category_repository.dart';
 import 'package:pg_slema/features/dish_category/domain/converter/dish_category_to_dto.dart';
@@ -21,24 +22,30 @@ class DietInitializer with Initializer {
 
   @override
   Future initialize() async {
-    List<DishCategory> categories =
-        await dishCategoryService.getMainCategories();
-    if (!_isCategoryWithSpecifiedNamePresent(categories, 'Owoce')) {
-      await initializeFruit();
-    }
-    categories = await dishCategoryService.getMainCategories();
+    await initializeFruit();
   }
 
   Future initializeFruit() async {
-    DishCategory fruitCategory = DishCategory(idGenerator.v4(), 'Owoce');
-    var fruit = generateFruit(fruitCategory.id);
-    dishService.addDishes(fruit);
-    await dishCategoryService.addDishCategory(fruit);
-    await dishService.addDish(blueberry);
-    await dishService.addDish(banana);
-    await dishService.addDish(raspberry);
-    await dishService.addDish(orange);
-    //TODO: add to list and one await - upgrade
+    DishCategory fruitCategory = await getCategoryByName('Owoce');
+    var fruit = generateFruit(fruitCategory.id); //TODO: generate from array
+    var currentFruit =
+        await dishService.getAllDishesByDishCategory(fruitCategory.id);
+    var fruitToUpdate =
+        fruit.where((e) => currentFruit.contains(e)).toList(growable: true);
+    var fruitToAdd =
+        fruit.where((e) => !currentFruit.contains(e)).toList(growable: true);
+    //TODO; update multiple fruit
+    await dishService.addMultipleDishes(fruitToAdd);
+  }
+
+  Future<DishCategory> getCategoryByName(String name) async {
+    try {
+      var category = DishCategory(idGenerator.v4(), name);
+      await dishCategoryService.addDishCategory(category);
+      return category;
+    } on DishCategoryNameException {
+      return dishCategoryService.getDishCategoryByName(name);
+    }
   }
 
   List<Dish> generateFruit(String categoryId) {
