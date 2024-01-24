@@ -55,9 +55,4 @@ class DietInitializer with Initializer {
   }
 
   void initializeVegetables(DishCategory vegetables) {}
-
-  bool _isCategoryWithSpecifiedNamePresent(
-      List<DishCategory> categories, String name) {
-    return categories.where((element) => element.name == name).isNotEmpty;
-  }
 }
