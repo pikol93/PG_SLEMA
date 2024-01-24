@@ -20,7 +20,7 @@ class MealService {
   }
 
   Future addMultipleMeals(List<Meal> meals) async {
-    await repository.addMultipleMeals(meals);
+    await repository.addMealsFrom(meals);
   }
 
   Future<List<Meal>> getAllMeals() async {

@@ -40,7 +40,7 @@ class DishCategoryService {
   Future<DishCategory> getDishCategoryByName(String name) async {
     var categories = await repository.getAllCategories();
     return categories.firstWhere((element) => element.name == name,
-        orElse: throw DishCategoryNameException("Niepoprawna nazwa"));
+        orElse: () => throw DishCategoryNameException("Niepoprawna nazwa"));
   }
 
   Future<List<DishCategory>> getMainCategories() async {

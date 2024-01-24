@@ -22,17 +22,33 @@ class DietInitializer with Initializer {
 
   @override
   Future initialize() async {
-    await initializeFruit();
+    await initializeDishesForCategory(
+        'Owoce', ['Jagoda', 'Banan', 'Malina', 'Pomarańcza', 'Mandarynka']);
+    await initializeDishesForCategory(
+        'Warzywa', ['Ogórek', 'Brokuł', 'Kalafior', 'Marchew', 'Burak']);
+    await initializeDishesForCategory(
+        'Nabiał', ['Twaróg', 'Ser żółty', 'Mleko']);
+    await initializeDishesForCategory('Mięso', [
+      'Wieprzowina',
+      'Wołowina',
+      'Kurczak',
+      'Indyk',
+      'Cielęcina',
+      'Baranina'
+    ]);
   }
 
-  Future initializeFruit() async {
-    DishCategory fruitCategory = await getCategoryByName('Owoce');
-    var fruit = generateFruit(fruitCategory.id); //TODO: generate from array
-    var currentFruit =
-        await dishService.getAllDishesByDishCategory(fruitCategory.id);
-    var fruitToAdd =
-        fruit.where((e) => !currentFruit.contains(e)).toList(growable: true);
-    await dishService.addAllDishesFrom(fruitToAdd);
+  Future initializeDishesForCategory(
+      String categoryName, List<String> names) async {
+    DishCategory dishCategory = await getCategoryByName(categoryName);
+    var dish = generateDishes(names, dishCategory.id);
+    var currentDishes = await dishService
+        .getAllDishesByDishCategory(dishCategory.id)
+        .then((value) => value.map((e) => e.name));
+    var dishToAdd = dish
+        .where((e) => !currentDishes.contains(e.name))
+        .toList(growable: true);
+    await dishService.addAllDishesFrom(dishToAdd);
   }
 
   Future<DishCategory> getCategoryByName(String name) async {
@@ -45,18 +61,9 @@ class DietInitializer with Initializer {
     }
   }
 
-  List<Dish> generateFruit(String categoryId) {
-    List<Dish> fruit = [];
-    Dish blueberry = Dish(idGenerator.v4(), 'Jagoda', categoryId);
-    Dish banana = Dish(idGenerator.v4(), 'Banan', categoryId);
-    Dish raspberry = Dish(idGenerator.v4(), 'Malina', categoryId);
-    Dish orange = Dish(idGenerator.v4(), 'Pomarańcza', categoryId);
-    fruit.add(blueberry);
-    fruit.add(banana);
-    fruit.add(raspberry);
-    fruit.add(orange);
-    return fruit;
+  List<Dish> generateDishes(List<String> names, String categoryId) {
+    return names
+        .map((e) => Dish(idGenerator.v4(), e, categoryId))
+        .toList(growable: true);
   }
-
-  void initializeVegetables(DishCategory vegetables) {}
 }
