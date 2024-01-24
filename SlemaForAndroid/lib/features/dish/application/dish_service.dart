@@ -30,7 +30,11 @@ class DishService {
     await repository.deleteDish(dish);
   }
 
-  Future addMultipleDishes(List<Dish> dishes) async {
-    await repository.addMultipleDishes(dishes);
+  Future addAllDishesFrom(List<Dish> dishes) async {
+    await repository.addAllDishesFrom(dishes);
+  }
+
+  Future updateAllDishesFrom(List<Dish> dishes) async {
+    await repository.updateAllDishesFrom(dishes);
   }
 }

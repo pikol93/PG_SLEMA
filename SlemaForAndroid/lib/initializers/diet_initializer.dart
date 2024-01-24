@@ -30,12 +30,9 @@ class DietInitializer with Initializer {
     var fruit = generateFruit(fruitCategory.id); //TODO: generate from array
     var currentFruit =
         await dishService.getAllDishesByDishCategory(fruitCategory.id);
-    var fruitToUpdate =
-        fruit.where((e) => currentFruit.contains(e)).toList(growable: true);
     var fruitToAdd =
         fruit.where((e) => !currentFruit.contains(e)).toList(growable: true);
-    //TODO; update multiple fruit
-    await dishService.addMultipleDishes(fruitToAdd);
+    await dishService.addAllDishesFrom(fruitToAdd);
   }
 
   Future<DishCategory> getCategoryByName(String name) async {
