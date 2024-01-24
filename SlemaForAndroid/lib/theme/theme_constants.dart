@@ -11,6 +11,7 @@ const colorNavigationBarShadow = Color(0x1A000000);
 //AppBar
 const colorAppBarText = Color(0xFFF2F1EB);
 const colorAppBarTextShadow = Color(0x40000000);
+const colorAppBarBackground = Color(0xFF6793B3);
 
 //CustomSaveButton
 const colorCustomSaveButtonBackground = Color(0xFF487ABC);
@@ -19,6 +20,23 @@ const colorCustomInputTextBorder = Color(0xB2878787);
 
 ThemeData lightTheme = ThemeData(
     fontFamily: 'Dongle',
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 44,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 40,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 32,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 28,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 20,
+      ),
+    ),
     useMaterial3: true,
     brightness: Brightness.light,
     colorSchemeSeed: colorSchemeSeed,
@@ -32,7 +50,7 @@ ThemeData lightTheme = ThemeData(
       titleTextStyle: TextStyle(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
-        fontSize: 50,
+        fontSize: 48,
         height: 0.52381,
         color: colorAppBarText,
         shadows: [
@@ -55,6 +73,7 @@ ThemeData lightTheme = ThemeData(
           ),
         ],
       ),
+      backgroundColor: colorAppBarBackground,
     ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(

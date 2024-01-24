@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_button.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
 
@@ -64,6 +65,11 @@ class MotivationScreenState extends State<MotivationScreen> {
                 onPressed: _reloadQuote,
                 child: const Text('Odśwież'),
               ),
+            ),
+            const Positioned(
+              bottom: 20,
+              right: 20,
+              child: AddAssessmentButton(),
             ),
           ],
         ),

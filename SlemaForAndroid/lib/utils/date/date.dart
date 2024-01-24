@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 extension DateUtils on DateTime {
   bool get isToday {
     final now = DateTime.now();
@@ -18,7 +20,8 @@ extension DateUtils on DateTime {
         yesterday.year == year;
   }
 
-  String get toDateString {
-    return "$day-$month-$year";
+  String toDateString() {
+    final formatter = NumberFormat("00");
+    return "${formatter.format(day)}.${formatter.format(month)}.$year";
   }
 }
