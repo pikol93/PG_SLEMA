@@ -14,12 +14,14 @@ class DishCategoryDtoToJsonConverter
   }
 
   DishCategoryDto _fromJson(Map<String, dynamic> json) {
-    return DishCategoryDto(json['id'],
+    return DishCategoryDto(
+        json['id'], json.containsKey('name') ? json['name'] : "",
         parentCategoryId: json['parentCategoryId']);
   }
 
   Map<String, dynamic> _toJson(DishCategoryDto dto) => {
         'id': dto.id.toString(),
+        'name': dto.name.toString(),
         if (dto.parentCategoryId != null)
           'parentCategoryId': dto.parentCategoryId.toString(),
       };

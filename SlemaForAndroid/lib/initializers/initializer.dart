@@ -1,0 +1,3 @@
+mixin Initializer {
+  Future initialize();
+}

@@ -31,5 +31,6 @@ class DishCategoryService {
 
   Future<List<DishCategory>> getMainCategories() async {
     return await repository.getSubcategoriesByDishCategory(null);
+    //TODO: add dishes and subcategories
   }
 }
