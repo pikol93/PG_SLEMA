@@ -19,8 +19,8 @@ class MealService {
     await repository.deleteMeal(meal);
   }
 
-  Future addMultipleMeals(List<Meal> meals) async {
-    await repository.addMealsFrom(meals);
+  Future addAllFrom(List<Meal> meals) async {
+    await repository.addAllMealsFrom(meals);
   }
 
   Future<List<Meal>> getAllMeals() async {
@@ -31,6 +31,11 @@ class MealService {
     return await repository.getAllMealsByDate(date);
   }
 
+  Future<Map<MealTime, List<Meal>>> getGroupedMealsByDate(DateTime date) async {
+    var meals = await getAllMealsByDate(date);
+    return groupMealsByMealTime(meals);
+  }
+
   Future<Map<MealTime, List<Meal>>> groupMealsByMealTime(
       List<Meal> meals) async {
     Map<MealTime, List<Meal>> groupedMeals = {};
@@ -38,10 +43,5 @@ class MealService {
       groupedMeals.putIfAbsent(meal.mealTime, () => []).add(meal);
     }
     return groupedMeals;
-  }
-
-  Future<Map<MealTime, List<Meal>>> getGroupedMealsByDate(DateTime date) async {
-    var meals = await getAllMealsByDate(date);
-    return groupMealsByMealTime(meals);
   }
 }

@@ -47,7 +47,7 @@ class SharedPreferencesMealRepository
   }
 
   @override
-  Future addMealsFrom(List<Meal> meals) async {
+  Future addAllMealsFrom(List<Meal> meals) async {
     var dto = meals.map((e) => converter.toDto(e)).toList(growable: true);
     await addAllFrom(dto);
   }
