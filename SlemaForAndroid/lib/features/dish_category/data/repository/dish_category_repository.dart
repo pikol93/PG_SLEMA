@@ -5,6 +5,7 @@ mixin DishCategoryRepository {
   Future updateDishCategory(DishCategory dishCategory);
   Future deleteDishCategory(DishCategory dishCategory);
   Future<DishCategory> getCategory(String dishCategoryId);
+  Future<List<DishCategory>> getAllCategories();
   Future<List<DishCategory>> getSubcategoriesByDishCategory(
       String? dishCategoryId);
 }

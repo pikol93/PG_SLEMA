@@ -47,4 +47,10 @@ class SharedPreferencesDishCategoryRepository
     var dto = converter.toDto(dishCategory);
     await updateDto(dto);
   }
+
+  @override
+  Future<List<DishCategory>> getAllCategories() async {
+    var dto = await getAllDto();
+    return dto.map((e) => converter.fromDto(e)).toList(growable: true);
+  }
 }

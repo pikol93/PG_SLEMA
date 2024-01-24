@@ -45,4 +45,10 @@ class SharedPreferencesMealRepository
     var dto = converter.toDto(meal);
     await updateDto(dto);
   }
+
+  @override
+  Future addAllMealsFrom(List<Meal> meals) async {
+    var dto = meals.map((e) => converter.toDto(e)).toList(growable: true);
+    await addAllFrom(dto);
+  }
 }

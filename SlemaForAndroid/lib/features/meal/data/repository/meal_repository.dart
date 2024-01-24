@@ -5,6 +5,8 @@ mixin MealRepository {
 
   Future addMeal(Meal meal);
 
+  Future addAllMealsFrom(List<Meal> meals);
+
   Future deleteMeal(Meal meal);
 
   Future<List<Meal>> getAllMeals();
