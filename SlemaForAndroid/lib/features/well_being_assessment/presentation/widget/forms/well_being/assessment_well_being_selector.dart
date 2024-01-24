@@ -36,6 +36,7 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
             Text(
               selectedValue.textRepresentation,
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.labelSmall,
             ),
           ],
         ),

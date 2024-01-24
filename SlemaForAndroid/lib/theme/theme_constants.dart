@@ -20,6 +20,23 @@ const colorCustomInputTextBorder = Color(0xB2878787);
 
 ThemeData lightTheme = ThemeData(
     fontFamily: 'Dongle',
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 44,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 40,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 32,
+      ),
+      labelMedium: TextStyle(
+        fontSize: 28,
+      ),
+      labelSmall: TextStyle(
+        fontSize: 20,
+      ),
+    ),
     useMaterial3: true,
     brightness: Brightness.light,
     colorSchemeSeed: colorSchemeSeed,

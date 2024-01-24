@@ -6,7 +6,6 @@ class AssessmentButton extends StatelessWidget {
   final EdgeInsets margin;
   final EdgeInsets padding;
   final Size minimumSize;
-  final TextStyle textStyle;
   final Color boxColor;
 
   const AssessmentButton({
@@ -16,8 +15,6 @@ class AssessmentButton extends StatelessWidget {
     this.margin = const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0.0),
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
     this.minimumSize = const Size(48, 16),
-    this.textStyle = const TextStyle(
-        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 14),
     this.boxColor = Colors.grey,
   });
 
@@ -40,7 +37,7 @@ class AssessmentButton extends StatelessWidget {
           onPressed: onPressed,
           child: Text(
             text,
-            style: textStyle,
+            style: Theme.of(context).textTheme.labelSmall,
           ),
         ),
       ),

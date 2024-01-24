@@ -23,10 +23,9 @@ class AssessmentSleepQualityButton extends StatelessWidget with Logger {
         ),
         Text(
           sleepQuality.buttonSubtitleTextRepresentation,
-          style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            color: Colors.grey,
-          ),
+          style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                color: Colors.grey,
+              ),
         ),
       ],
     );

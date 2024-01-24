@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AssessmentSubtitleText extends StatelessWidget {
   final String text;
@@ -12,9 +12,7 @@ class AssessmentSubtitleText extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
     );
   }

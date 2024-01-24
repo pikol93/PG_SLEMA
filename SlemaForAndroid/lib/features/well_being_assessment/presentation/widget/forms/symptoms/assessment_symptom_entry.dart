@@ -58,6 +58,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
             Text(
               symptomValue.textRepresentation,
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.labelMedium,
             )
           ],
         ),
