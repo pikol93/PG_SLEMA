@@ -15,9 +15,6 @@ class MainScreenState extends State<MainScreen> {
     final controller = Provider.of<MainScreenController>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main screen app bar'),
-      ),
       body: PageView(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
