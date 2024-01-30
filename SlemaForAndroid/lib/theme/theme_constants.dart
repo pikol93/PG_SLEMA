@@ -7,6 +7,9 @@ const colorSchemeSeed = Color(0xFF1E81B0);
 //NavigationBar
 const colorNavigationBarBackground = Color(0xFF6793B3);
 const colorNavigationBarShadow = Color(0x1A000000);
+const colorNavigationBarIcon = Color(0xCCF2F1EB);
+const colorNavigationBarIconSelected = Color(0xCCF2F1EB);
+const colorNavigationBarText = Color(0xCCF2F1EB);
 
 //AppBar
 const colorAppBarText = Color(0xFFF2F1EB);
@@ -40,11 +43,32 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorSchemeSeed: colorSchemeSeed,
-    navigationBarTheme: const NavigationBarThemeData(
+    navigationBarTheme: NavigationBarThemeData(
       backgroundColor: colorNavigationBarBackground,
+      indicatorColor: const Color(0X00000000),
       elevation: 0,
-      height: 72,
+      height: 96,
       shadowColor: colorNavigationBarShadow,
+      labelTextStyle: MaterialStateProperty.resolveWith((states) {
+        return const TextStyle(
+          height: 1.0,
+          fontSize: 24.0,
+          fontWeight: FontWeight.w700,
+          color: colorNavigationBarText,
+        );
+      }),
+      iconTheme: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return const IconThemeData(
+            size: 36.0,
+            color: colorNavigationBarIconSelected,
+          );
+        }
+        return const IconThemeData(
+          size: 36.0,
+          color: colorNavigationBarIcon,
+        );
+      }),
     ),
     appBarTheme: const AppBarTheme(
       titleTextStyle: TextStyle(

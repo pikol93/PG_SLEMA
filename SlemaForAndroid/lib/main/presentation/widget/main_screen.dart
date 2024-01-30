@@ -24,7 +24,6 @@ class MainScreenState extends State<MainScreen> {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
         selectedIndex: controller.currentIndex,
         onDestinationSelected: controller.onTabTapped,
-        height: 70,
         destinations: const <Widget>[
           NavigationDestination(
             selectedIcon: Icon(Icons.lightbulb),
