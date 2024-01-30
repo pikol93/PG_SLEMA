@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/home/presentation/widget/home_screen.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
         children: [
-          const MotivationScreen(),
+          const HomeScreen(),
           GetMedicinesScreen(),
           const DietScreen(),
           const ExercisesScreen(),

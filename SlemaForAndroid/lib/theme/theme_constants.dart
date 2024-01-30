@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:pg_slema/theme/custom_colors.dart';
 
-const colorSchemeSeed = Color(0xFF1E81B0);
+const colorSchemeSeed = Color(0xFF6793B3);
 
 //NavigationBar
 const colorNavigationBarBackground = Color(0xFF6793B3);
@@ -20,6 +20,9 @@ const colorAppBarBackground = Color(0xFF6793B3);
 const colorCustomSaveButtonBackground = Color(0xFF487ABC);
 const colorCustomSaveButtonText = Color(0xFFF2F1EB);
 const colorCustomInputTextBorder = Color(0xB2878787);
+
+//Background
+const colorScaffoldBackgroundColor = Color(0xFFE7ECEF);
 
 ThemeData lightTheme = ThemeData(
     fontFamily: 'Dongle',
