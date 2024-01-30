@@ -35,6 +35,7 @@ ThemeData lightTheme = ThemeData(
       ),
       headlineSmall: TextStyle(
         fontSize: 32,
+        fontWeight: FontWeight.w700,
       ),
       labelMedium: TextStyle(
         fontSize: 28,

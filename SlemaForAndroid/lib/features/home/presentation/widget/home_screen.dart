@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/home/presentation/widget/home_app_bar.dart';
+import 'package:pg_slema/features/home/presentation/widget/labeled_divider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,6 +20,18 @@ class HomeScreenState extends State<HomeScreen> {
             height: 20.0,
           ),
           HomeAppBar(),
+          SizedBox(
+            height: 10.0,
+          ),
+          LabeledDivider(label: "Dzienny raport zdrowotny"),
+          SizedBox(
+            height: 10.0,
+          ),
+          LabeledDivider(label: "Nadchodzące wydarzenia"),
+          SizedBox(
+            height: 10.0,
+          ),
+          LabeledDivider(label: "Dla ciebie"),
         ],
       ),
     );
