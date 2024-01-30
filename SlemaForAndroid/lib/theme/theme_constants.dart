@@ -47,11 +47,10 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: colorNavigationBarBackground,
       indicatorColor: const Color(0X00000000),
       elevation: 0,
-      height: 96,
       shadowColor: colorNavigationBarShadow,
       labelTextStyle: MaterialStateProperty.resolveWith((states) {
         return const TextStyle(
-          height: 1.0,
+          height: 0.7,
           fontSize: 24.0,
           fontWeight: FontWeight.w700,
           color: colorNavigationBarText,
