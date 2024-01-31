@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercises_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicines_screen.dart';
-import 'package:pg_slema/features/motivation/presentation/widget/motivation_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
