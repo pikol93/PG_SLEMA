@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/home/presentation/widget/home_app_bar.dart';
+import 'package:pg_slema/features/home/presentation/widget/home_widget_custom_container.dart';
 import 'package:pg_slema/features/home/presentation/widget/labeled_divider.dart';
+import 'package:pg_slema/features/motivation/presentation/widget/motivation_daily.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,17 +23,21 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           HomeAppBar(),
           SizedBox(
-            height: 10.0,
+            height: 20.0,
           ),
           LabeledDivider(label: "Dzienny raport zdrowotny"),
           SizedBox(
-            height: 10.0,
+            height: 20.0,
           ),
           LabeledDivider(label: "Nadchodzące wydarzenia"),
           SizedBox(
-            height: 10.0,
+            height: 20.0,
           ),
           LabeledDivider(label: "Dla ciebie"),
+          SizedBox(
+            height: 20.0,
+          ),
+          HomeWidgetCustomContainer(child: MotivationDaily()),
         ],
       ),
     );
