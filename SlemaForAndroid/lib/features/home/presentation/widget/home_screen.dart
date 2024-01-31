@@ -47,7 +47,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           HomeWidgetCustomContainer(
               child: Text(
-            "---------Raport zdrowotny---------",
+            "-------------Kalendarz------------",
             style: Theme.of(context).textTheme.labelMedium!.copyWith(
                   height: 1.0,
                   fontWeight: FontWeight.w600,
