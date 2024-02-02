@@ -4,18 +4,28 @@ import 'package:pg_slema/features/dish/domain/converter/dish_to_dto_converter.da
 import 'package:pg_slema/features/meal/application/meal_service.dart';
 import 'package:pg_slema/features/meal/data/repository/shared_preferences_meal_repository.dart';
 import 'package:pg_slema/features/meal/domain/converter/meal_to_dto_converter.dart';
+import 'package:pg_slema/features/meal/domain/meal.dart';
+import 'package:pg_slema/utils/meal_time/meal_time.dart';
 
 class DietScreenController {
-  late final MealService service;
+  late final MealService mealService;
+  late Map<MealTime, List<Meal>> meals;
+  final Function onMealsChanged;
 
-  DietScreenController() : super() {
+  DietScreenController(this.onMealsChanged) : super() {
     var dishConverter = DishToDtoConverter();
     var dishRepository = SharedPreferencesDishRepository(dishConverter);
     var dishService = DishService(dishRepository);
     var converter = MealToDtoConverter(dishService);
     var repository = SharedPreferencesMealRepository(converter);
-    service = MealService(repository);
+    mealService = MealService(repository);
+    mealService
+        .getGroupedMealsByDate(DateTime.now())
+        .then((value) => meals = value)
+        .then((value) => onMealsChanged());
   }
 
-  void onDateChanged(DateTime date) {}
+  Future onDateChanged(DateTime date) async {
+    meals = await mealService.getGroupedMealsByDate(date);
+  }
 }

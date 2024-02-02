@@ -14,7 +14,7 @@ class _DietScreenState extends State<DietScreen> {
 
   @override
   void initState() {
-    controller = DietScreenController();
+    controller = DietScreenController(_onMealsChanged);
     super.initState();
   }
 
@@ -33,6 +33,9 @@ class _DietScreenState extends State<DietScreen> {
 
   void _onDateChanged(DateTime date) {
     controller.onDateChanged(date);
+  }
+
+  void _onMealsChanged() {
     setState(() {});
   }
 }
