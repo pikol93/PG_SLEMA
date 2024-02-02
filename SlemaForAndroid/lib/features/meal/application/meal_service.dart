@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:pg_slema/features/meal/data/repository/meal_repository.dart';
 import 'package:pg_slema/features/meal/domain/meal.dart';
 import 'package:pg_slema/utils/meal_time/meal_time.dart';
@@ -31,17 +33,23 @@ class MealService {
     return await repository.getAllMealsByDate(date);
   }
 
-  Future<Map<MealTime, List<Meal>>> getGroupedMealsByDate(DateTime date) async {
+  Future<LinkedHashMap<MealTime, List<Meal>>> getGroupedMealsByDate(
+      DateTime date) async {
     var meals = await getAllMealsByDate(date);
     return groupMealsByMealTime(meals);
   }
 
-  Future<Map<MealTime, List<Meal>>> groupMealsByMealTime(
+  Future<LinkedHashMap<MealTime, List<Meal>>> groupMealsByMealTime(
       List<Meal> meals) async {
-    Map<MealTime, List<Meal>> groupedMeals = {};
+    LinkedHashMap<MealTime, List<Meal>> groupedMeals = createEmptyMap();
     for (var meal in meals) {
-      groupedMeals.putIfAbsent(meal.mealTime, () => []).add(meal);
+      groupedMeals[meal.mealTime]?.add(meal);
     }
     return groupedMeals;
+  }
+
+  LinkedHashMap<MealTime, List<Meal>> createEmptyMap() {
+    return LinkedHashMap.fromIterable(MealTime.values,
+        key: (key) => key, value: (value) => []);
   }
 }

@@ -25,8 +25,21 @@ class _DietScreenState extends State<DietScreen> {
         preferredSize: const Size.fromHeight(60),
         child: DietAppBar(onDateChanged: _onDateChanged),
       ),
-      body: const Center(
-        child: Text("TODO"),
+      body: Builder(
+        builder: (BuildContext context) {
+          return CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    return const Text('TODO').build(context);
+                  },
+                  childCount: controller.meals.entries.length,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

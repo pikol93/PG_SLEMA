@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:pg_slema/features/dish/application/dish_service.dart';
 import 'package:pg_slema/features/dish/data/repository/shared_preferences_dish_repository.dart';
 import 'package:pg_slema/features/dish/domain/converter/dish_to_dto_converter.dart';
@@ -9,10 +11,11 @@ import 'package:pg_slema/utils/meal_time/meal_time.dart';
 
 class DietScreenController {
   late final MealService mealService;
-  late Map<MealTime, List<Meal>> meals;
+  late LinkedHashMap<MealTime, List<Meal>> meals;
   final Function onMealsChanged;
 
   DietScreenController(this.onMealsChanged) : super() {
+    meals = LinkedHashMap();
     var dishConverter = DishToDtoConverter();
     var dishRepository = SharedPreferencesDishRepository(dishConverter);
     var dishService = DishService(dishRepository);
