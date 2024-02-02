@@ -7,8 +7,9 @@ import 'package:pg_slema/features/medicine/presentation/controller/date_picker_c
 
 class CalendarWithArrows extends StatefulWidget {
   final CalendarController controller = CalendarController();
+  final ValueChanged<DateTime> onDateChanged;
 
-  CalendarWithArrows({super.key});
+  CalendarWithArrows({super.key, required this.onDateChanged});
 
   @override
   State<StatefulWidget> createState() => _CalendarWithArrowsState();
@@ -45,17 +46,29 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
   }
 
   void _onBackwardPressed() {
+    DateTime date = widget.controller.pickedDate;
     widget.controller.subtractOneDayFromPickedDateIfPossible();
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
   }
 
   void _onForwardPressed() {
+    DateTime date = widget.controller.pickedDate;
     widget.controller.addOneDayFromPickedDateIfPossible();
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
   }
 
   void _onDatePicked(DateTime value) {
+    DateTime date = widget.controller.pickedDate;
     widget.controller.pickedDate = value;
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
+  }
+
+  void _notifyAboutDateChangedIfItChanged(DateTime previousDate) {
+    if (previousDate != widget.controller.pickedDate) {
+      widget.onDateChanged(widget.controller.pickedDate);
+    }
   }
 }
