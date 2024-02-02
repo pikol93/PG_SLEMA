@@ -31,8 +31,10 @@ class _DietScreenState extends State<DietScreen> {
             slivers: [
               SliverList(
                 delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                    return const Text('TODO').build(context);
+                  (BuildContext context, int index) {
+                    return Text(
+                            controller.meals.entries.elementAt(index).key.name)
+                        .build(context);
                   },
                   childCount: controller.meals.entries.length,
                 ),
