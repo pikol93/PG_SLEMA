@@ -20,9 +20,8 @@ class SharedPreferencesMedicineRepository
   }
 
   @override
-  Future deleteMedicine(Medicine medicine) async {
-    final dto = medicineConverter.toDto(medicine);
-    await deleteDto(dto);
+  Future deleteMedicine(String id) async {
+    await deleteDto(id);
   }
 
   @override

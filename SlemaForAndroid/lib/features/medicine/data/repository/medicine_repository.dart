@@ -7,5 +7,5 @@ mixin MedicineRepository {
 
   Future updateMedicine(Medicine medicine);
 
-  Future deleteMedicine(Medicine medicine);
+  Future deleteMedicine(String id);
 }

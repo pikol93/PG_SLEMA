@@ -7,5 +7,5 @@ mixin PictureRepository {
 
   Future updatePicture(Picture picture);
 
-  Future deletePicture(Picture picture);
+  Future deletePicture(String id);
 }
