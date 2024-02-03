@@ -6,10 +6,11 @@ import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_conv
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineScreenController {
+  final Function onMedicinesChanged;
   List<Medicine> medicines = [];
   late final MedicineService _medicineService;
 
-  MedicineScreenController() : super() {
+  MedicineScreenController(this.onMedicinesChanged) : super() {
     final notificationRepository = SharedPreferencesNotificationRepository();
     final notificationService = NotificationService(notificationRepository);
     final converter = MedicineToDtoConverter(notificationService);
@@ -17,22 +18,26 @@ class MedicineScreenController {
     _medicineService = MedicineService(medicineRepository, notificationService);
     _medicineService
         .getAllMedicines()
-        .then((value) => medicines = value); //TODO: add callback
+        .then((value) => medicines = value)
+        .then(onMedicinesChanged());
   }
 
   void deleteMedicine(Medicine medicine) {
     medicines.removeWhere((element) => element.id == medicine.id);
     _medicineService.deleteMedicine(medicine.id);
+    onMedicinesChanged();
   }
 
   void addMedicine(Medicine medicine) {
     medicines.add(medicine);
     _medicineService.addMedicine(medicine);
+    onMedicinesChanged();
   }
 
   void editMedicine(Medicine medicine) {
     final index = medicines.indexWhere((element) => element.id == medicine.id);
     medicines[index] = medicine;
     _medicineService.updateMedicine(medicine);
+    onMedicinesChanged();
   }
 }

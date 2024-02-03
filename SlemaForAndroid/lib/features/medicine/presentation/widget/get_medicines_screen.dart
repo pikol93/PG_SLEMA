@@ -5,15 +5,21 @@ import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_butt
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
 
 class GetMedicinesScreen extends StatefulWidget {
-  final MedicineScreenController controller = MedicineScreenController();
-
-  GetMedicinesScreen({super.key});
+  const GetMedicinesScreen({super.key});
 
   @override
   State<GetMedicinesScreen> createState() => _GetMedicinesScreenState();
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
+  late MedicineScreenController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = MedicineScreenController(_onMedicinesChanged);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +35,12 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return GetMedicineWidget(
-                        medicine: widget.controller.medicines[index],
+                        medicine: controller.medicines[index],
                         onMedicineDeleted: onMedicineDeleted,
                         onMedicineEdited: onMedicineEdited,
                       ).build(context);
                     },
-                    childCount: widget.controller.medicines.length,
+                    childCount: controller.medicines.length,
                   ),
                 ),
               ],
@@ -48,17 +54,18 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   }
 
   void onMedicineDeleted(Medicine medicine) {
-    widget.controller.deleteMedicine(medicine);
-    setState(() {});
+    controller.deleteMedicine(medicine);
   }
 
   void onMedicineCreated(Medicine medicine) {
-    widget.controller.addMedicine(medicine);
-    setState(() {});
+    controller.addMedicine(medicine);
   }
 
   void onMedicineEdited(Medicine medicine) {
-    widget.controller.editMedicine(medicine);
+    controller.editMedicine(medicine);
+  }
+
+  void _onMedicinesChanged() {
     setState(() {});
   }
 }
