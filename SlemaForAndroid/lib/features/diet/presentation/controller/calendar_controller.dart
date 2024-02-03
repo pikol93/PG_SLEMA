@@ -3,13 +3,13 @@ import 'package:intl/intl.dart';
 import 'package:pg_slema/utils/date/date.dart';
 
 class CalendarController {
-  DateTime pickedDate;
+  DateTime pickedDate = DateTime.now();
   late DateTime firstDate;
   final monthsAllowedToGoBack = 6;
   DateTime lastDate = DateTime.now();
   late String languageCode;
 
-  CalendarController(this.pickedDate) {
+  CalendarController() {
     const daysInYearApprox = 365;
     const monthsInYear = 12;
     firstDate = DateTime.now().subtract(Duration(

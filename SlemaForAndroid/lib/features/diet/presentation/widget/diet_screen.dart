@@ -1,5 +1,6 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 import 'package:pg_slema/features/diet/presentation/widget/get_meals_widget.dart';
 
@@ -11,12 +12,12 @@ class DietScreen extends StatefulWidget {
 }
 
 class _DietScreenState extends State<DietScreen> {
-  late DietScreenController controller;
+  late StreamController<DateTime> controller;
 
   @override
   void initState() {
-    controller = DietScreenController(_onMealsChanged);
     super.initState();
+    controller = StreamController();
   }
 
   @override
@@ -26,38 +27,13 @@ class _DietScreenState extends State<DietScreen> {
         preferredSize: const Size.fromHeight(60),
         child: DietAppBar(
           onDateChanged: _onDateChanged,
-          initDate: controller.initDate,
         ),
       ),
-      body: Builder(
-        builder: (BuildContext context) {
-          return CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return GetMealsWidget(
-                            mealTime:
-                                controller.meals.entries.elementAt(index).key,
-                            meals:
-                                controller.meals.entries.elementAt(index).value)
-                        .build(context);
-                  },
-                  childCount: controller.meals.entries.length,
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+      body: GetMealsWidget(stream: controller.stream),
     );
   }
 
   void _onDateChanged(DateTime date) async {
-    controller.onDateChanged(date);
-  }
-
-  void _onMealsChanged() {
-    setState(() {});
+    controller.add(date);
   }
 }

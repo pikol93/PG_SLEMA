@@ -6,11 +6,9 @@ import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 
 class CalendarWithArrows extends StatefulWidget {
-  final DateTime initDate;
   final ValueChanged<DateTime> onDateChanged;
 
-  const CalendarWithArrows(
-      {super.key, required this.onDateChanged, required this.initDate});
+  const CalendarWithArrows({super.key, required this.onDateChanged});
 
   @override
   State<StatefulWidget> createState() => _CalendarWithArrowsState();
@@ -21,7 +19,7 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
 
   @override
   void initState() {
-    controller = CalendarController(widget.initDate);
+    controller = CalendarController();
     super.initState();
   }
 

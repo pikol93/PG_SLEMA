@@ -4,10 +4,8 @@ import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/meal_ide
 
 class DietAppBar extends StatefulWidget {
   final ValueChanged<DateTime> onDateChanged;
-  final DateTime initDate;
 
-  const DietAppBar(
-      {super.key, required this.onDateChanged, required this.initDate});
+  const DietAppBar({super.key, required this.onDateChanged});
 
   @override
   State<DietAppBar> createState() => _DietAppBarState();
@@ -36,10 +34,7 @@ class _DietAppBarState extends State<DietAppBar>
         title: Row(
           children: [
             Expanded(
-                child: CalendarWithArrows(
-              onDateChanged: widget.onDateChanged,
-              initDate: widget.initDate,
-            )),
+                child: CalendarWithArrows(onDateChanged: widget.onDateChanged)),
             const MealIdeaIconButton()
           ],
         ));
