@@ -19,12 +19,12 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
     await _updateItemsList(jsonItemsList);
   }
 
-  Future deleteDto(T dto) async {
+  Future deleteDto(String id) async {
     var jsonItemsList = await _getJsonItemsList();
     jsonItemsList = jsonItemsList
         .map(jsonDecode)
         .map((json) => dtoToJsonConverter.from(json))
-        .where((e) => e.id != dto.id)
+        .where((e) => e.id != id)
         .map(dtoToJsonConverter.to)
         .map(jsonEncode)
         .toList(growable: true);
@@ -56,9 +56,7 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
     await _updateItemsList(jsonMedicinesList);
   }
 
-  Future deleteAllFrom(List<T> dto) async {
-    var dtoIds = dto.map((e) => e.id).toList();
-
+  Future deleteAllFrom(List<String> dtoIds) async {
     var jsonItemsList = await _getJsonItemsList();
     jsonItemsList = jsonItemsList
         .map((jsonString) => jsonDecode(jsonString))
