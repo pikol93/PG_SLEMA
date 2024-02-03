@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
+import 'package:pg_slema/features/diet/presentation/widget/get_meals_widget.dart';
 
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
@@ -23,7 +24,10 @@ class _DietScreenState extends State<DietScreen> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
-        child: DietAppBar(onDateChanged: _onDateChanged),
+        child: DietAppBar(
+          onDateChanged: _onDateChanged,
+          initDate: controller.initDate,
+        ),
       ),
       body: Builder(
         builder: (BuildContext context) {
@@ -32,8 +36,11 @@ class _DietScreenState extends State<DietScreen> {
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return Text(
-                            controller.meals.entries.elementAt(index).key.name)
+                    return GetMealsWidget(
+                            mealTime:
+                                controller.meals.entries.elementAt(index).key,
+                            meals:
+                                controller.meals.entries.elementAt(index).value)
                         .build(context);
                   },
                   childCount: controller.meals.entries.length,
@@ -46,7 +53,7 @@ class _DietScreenState extends State<DietScreen> {
     );
   }
 
-  void _onDateChanged(DateTime date) {
+  void _onDateChanged(DateTime date) async {
     controller.onDateChanged(date);
   }
 

@@ -35,7 +35,8 @@ class MealService {
 
   Future<LinkedHashMap<MealTime, List<Meal>>> getGroupedMealsByDate(
       DateTime date) async {
-    var meals = await getAllMealsByDate(date);
+    var meals =
+        await getAllMealsByDate(DateTime(date.year, date.month, date.day));
     return groupMealsByMealTime(meals);
   }
 

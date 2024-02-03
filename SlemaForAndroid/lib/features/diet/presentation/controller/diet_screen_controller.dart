@@ -13,6 +13,7 @@ class DietScreenController {
   late final MealService mealService;
   late LinkedHashMap<MealTime, List<Meal>> meals;
   final Function onMealsChanged;
+  DateTime initDate = DateTime.now();
 
   DietScreenController(this.onMealsChanged) : super() {
     meals = LinkedHashMap();
@@ -29,6 +30,8 @@ class DietScreenController {
   }
 
   Future onDateChanged(DateTime date) async {
+    initDate = date;
     meals = await mealService.getGroupedMealsByDate(date);
+    onMealsChanged();
   }
 }

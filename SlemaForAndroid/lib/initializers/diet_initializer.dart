@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:pg_slema/features/dish/application/dish_service.dart';
 import 'package:pg_slema/features/dish/domain/dish.dart';
 import 'package:pg_slema/features/dish_category/application/dish_category_name.dart';
@@ -76,32 +74,34 @@ class DietInitializer with Initializer {
   }
 
   Future initializeMeals() async {
-    if (false) {
+    if (true) {
       var dishes = await dishService.getAllDishes();
       var mealService = MealService(
           SharedPreferencesMealRepository(MealToDtoConverter(dishService)));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(), dishes[0], DateTime.now(), MealTime.firstMeal));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(),
-          dishes[2],
-          DateTime.now().subtract(const Duration(days: 1)),
-          MealTime.thirdMeal));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(),
-          dishes[3],
-          DateTime.now().subtract(const Duration(days: 1)),
-          MealTime.fourthMeal));
-      await mealService.addMeal(Meal(
-          idGenerator.v4(),
-          dishes[4],
-          DateTime.now().subtract(const Duration(days: 1)),
-          MealTime.fourthMeal));
       var meals = await mealService.getAllMeals();
+      if (meals.isEmpty) {
+        await mealService.addMeal(Meal(
+            idGenerator.v4(), dishes[0], DateTime.now(), MealTime.firstMeal));
+        await mealService.addMeal(Meal(
+            idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
+        await mealService.addMeal(Meal(
+            idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
+        await mealService.addMeal(Meal(
+            idGenerator.v4(),
+            dishes[2],
+            DateTime.now().subtract(const Duration(days: 1)),
+            MealTime.thirdMeal));
+        await mealService.addMeal(Meal(
+            idGenerator.v4(),
+            dishes[3],
+            DateTime.now().subtract(const Duration(days: 1)),
+            MealTime.fourthMeal));
+        await mealService.addMeal(Meal(
+            idGenerator.v4(),
+            dishes[4],
+            DateTime.now().subtract(const Duration(days: 1)),
+            MealTime.fourthMeal));
+      }
     }
   }
 }
