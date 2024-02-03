@@ -12,13 +12,8 @@ class GetMedicinesScreen extends StatefulWidget {
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
-  late MedicineScreenController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = MedicineScreenController(_onMedicinesChanged);
-  }
+  late final MedicineScreenController _controller =
+      MedicineScreenController(_onMedicinesChanged);
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +30,12 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return GetMedicineWidget(
-                        medicine: controller.medicines[index],
+                        medicine: _controller.medicines[index],
                         onMedicineDeleted: onMedicineDeleted,
                         onMedicineEdited: onMedicineEdited,
                       ).build(context);
                     },
-                    childCount: controller.medicines.length,
+                    childCount: _controller.medicines.length,
                   ),
                 ),
               ],
@@ -54,15 +49,15 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   }
 
   void onMedicineDeleted(Medicine medicine) {
-    controller.deleteMedicine(medicine);
+    _controller.deleteMedicine(medicine);
   }
 
   void onMedicineCreated(Medicine medicine) {
-    controller.addMedicine(medicine);
+    _controller.addMedicine(medicine);
   }
 
   void onMedicineEdited(Medicine medicine) {
-    controller.editMedicine(medicine);
+    _controller.editMedicine(medicine);
   }
 
   void _onMedicinesChanged() {

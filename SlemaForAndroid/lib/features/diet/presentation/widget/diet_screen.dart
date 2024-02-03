@@ -12,12 +12,12 @@ class DietScreen extends StatefulWidget {
 }
 
 class _DietScreenState extends State<DietScreen> {
-  late StreamController<DateTime> controller;
+  late StreamController<DateTime> _controller;
 
   @override
   void initState() {
     super.initState();
-    controller = StreamController();
+    _controller = StreamController();
   }
 
   @override
@@ -29,11 +29,11 @@ class _DietScreenState extends State<DietScreen> {
           onDateChanged: _onDateChanged,
         ),
       ),
-      body: GetMealsWidget(stream: controller.stream),
+      body: GetMealsWidget(stream: _controller.stream),
     );
   }
 
   void _onDateChanged(DateTime date) async {
-    controller.add(date);
+    _controller.add(date);
   }
 }
