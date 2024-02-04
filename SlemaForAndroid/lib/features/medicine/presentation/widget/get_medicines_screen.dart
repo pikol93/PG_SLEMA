@@ -12,8 +12,14 @@ class GetMedicinesScreen extends StatefulWidget {
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
-  late final MedicineScreenController _controller =
-      MedicineScreenController(_onMedicinesChanged);
+  late final MedicineScreenController _controller;
+
+  @override
+  void initState() {
+    _controller = MedicineScreenController(_onMedicinesChanged);
+    super.initState();
+    _controller.initializeMedicines();
+  }
 
   @override
   Widget build(BuildContext context) {

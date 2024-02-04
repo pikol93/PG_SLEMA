@@ -18,6 +18,7 @@ class _GetMealsWidgetState extends State<GetMealsWidget> {
   void initState() {
     super.initState();
     controller = DietScreenController(_onMealsChanged);
+    controller.initializeMeals();
     widget.stream.listen((date) {
       controller.onDateChanged(date);
     });

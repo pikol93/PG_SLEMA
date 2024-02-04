@@ -7,7 +7,7 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 
 class MedicineScreenController {
   final Function onMedicinesChanged;
-  List<Medicine> medicines = [];
+  List<Medicine> medicines = List.empty(growable: true);
   late final MedicineService _medicineService;
 
   MedicineScreenController(this.onMedicinesChanged) : super() {
@@ -16,10 +16,11 @@ class MedicineScreenController {
     final converter = MedicineToDtoConverter(notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
     _medicineService = MedicineService(medicineRepository, notificationService);
-    _medicineService
-        .getAllMedicines()
-        .then((value) => medicines = value)
-        .then(onMedicinesChanged());
+  }
+
+  Future initializeMedicines() async {
+    medicines = await _medicineService.getAllMedicines();
+    onMedicinesChanged();
   }
 
   void deleteMedicine(Medicine medicine) {
