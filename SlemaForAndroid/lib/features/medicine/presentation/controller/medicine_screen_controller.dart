@@ -15,11 +15,9 @@ class MedicineScreenController {
     final converter = MedicineToDtoConverter(notificationService);
     final medicineRepository = SharedPreferencesMedicineRepository(converter);
     _medicineService = MedicineService(medicineRepository, notificationService);
-    _medicineService.getAllMedicines().then((value) => medicines = value);
-  }
-
-  void reloadMedicines() {
-    _medicineService.getAllMedicines().then((value) => medicines = value);
+    _medicineService
+        .getAllMedicines()
+        .then((value) => medicines = value); //TODO: add callback
   }
 
   void deleteMedicine(Medicine medicine) {

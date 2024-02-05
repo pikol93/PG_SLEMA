@@ -3,7 +3,9 @@ import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/meal_idea_icon_button.dart';
 
 class DietAppBar extends StatefulWidget {
-  const DietAppBar({super.key});
+  final ValueChanged<DateTime> onDateChanged;
+
+  const DietAppBar({super.key, required this.onDateChanged});
 
   @override
   State<DietAppBar> createState() => _DietAppBarState();
@@ -31,7 +33,8 @@ class _DietAppBarState extends State<DietAppBar>
         toolbarHeight: 100,
         title: Row(
           children: [
-            Expanded(child: CalendarWithArrows()),
+            Expanded(
+                child: CalendarWithArrows(onDateChanged: widget.onDateChanged)),
             const MealIdeaIconButton()
           ],
         ));
