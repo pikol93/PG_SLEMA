@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
-import 'package:pg_slema/features/diet/presentation/widget/get_meals_in_meal_time_widget.dart';
+import 'package:pg_slema/features/diet/presentation/widget/meals_in_meal_time_widget.dart';
 
-class GetMealsWidget extends StatefulWidget {
+class MealsInDayWidget extends StatefulWidget {
   final Stream<DateTime> stream;
 
-  const GetMealsWidget({super.key, required this.stream});
+  const MealsInDayWidget({super.key, required this.stream});
 
   @override
-  State<StatefulWidget> createState() => _GetMealsWidgetState();
+  State<StatefulWidget> createState() => _MealsInDayWidgetState();
 }
 
-class _GetMealsWidgetState extends State<GetMealsWidget> {
+class _MealsInDayWidgetState extends State<MealsInDayWidget> {
   late DietScreenController controller;
 
   @override
@@ -33,7 +33,7 @@ class _GetMealsWidgetState extends State<GetMealsWidget> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return GetMealsInMealTimeWidget(
+                  return MealsInMealTimeWidget(
                           mealTime:
                               controller.meals.entries.elementAt(index).key,
                           meals:
