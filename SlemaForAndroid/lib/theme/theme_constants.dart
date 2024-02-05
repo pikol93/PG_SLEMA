@@ -29,6 +29,7 @@ ThemeData lightTheme = ThemeData(
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
         fontSize: 44,
+        fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
         fontSize: 40,
