@@ -11,7 +11,7 @@ mixin DishRepository {
 
   Future updateDish(Dish dish);
 
-  Future deleteDish(Dish dish);
+  Future deleteDish(String id);
 
   Future addAllDishesFrom(List<Dish> dishes);
 

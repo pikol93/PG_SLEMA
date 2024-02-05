@@ -17,8 +17,8 @@ class MealService {
     await repository.addMeal(meal);
   }
 
-  Future deleteMeal(Meal meal) async {
-    await repository.deleteMeal(meal);
+  Future deleteMeal(String id) async {
+    await repository.deleteMeal(id);
   }
 
   Future addAllFrom(List<Meal> meals) async {

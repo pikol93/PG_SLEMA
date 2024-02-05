@@ -23,8 +23,8 @@ class MedicineService {
     await _notificationService.addMultipleNotifications(medicine.notifications);
   }
 
-  Future deleteMedicine(Medicine medicine) async {
-    await _repository.deleteMedicine(medicine);
-    await _notificationService.deleteNotificationsByMedicine(medicine.id);
+  Future deleteMedicine(String id) async {
+    await _repository.deleteMedicine(id);
+    await _notificationService.deleteNotificationsByMedicine(id);
   }
 }

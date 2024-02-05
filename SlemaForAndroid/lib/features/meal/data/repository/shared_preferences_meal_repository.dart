@@ -20,9 +20,8 @@ class SharedPreferencesMealRepository
   }
 
   @override
-  Future deleteMeal(Meal meal) async {
-    var dto = converter.toDto(meal);
-    await deleteDto(dto);
+  Future deleteMeal(String id) async {
+    await deleteDto(id);
   }
 
   @override

@@ -9,9 +9,9 @@ mixin NotificationRepository {
 
   Future updateNotification(Notification notification);
 
-  Future deleteNotification(Notification notification);
+  Future deleteNotification(String id);
 
-  Future deleteAll(List<Notification> notifications);
+  Future deleteAll(List<String> id);
 
   Future addMultipleNotifications(List<Notification> notifications);
 }

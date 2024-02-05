@@ -23,7 +23,7 @@ class NotificationService {
   }
 
   Future deleteNotification(Notification notification) async {
-    await repository.deleteNotification(notification);
+    await repository.deleteNotification(notification.id);
     await schedulingService.cancelNotification(notification);
   }
 
@@ -41,7 +41,7 @@ class NotificationService {
   Future deleteNotificationsByMedicine(String medicineId) async {
     var notifications =
         await repository.getAllNotificationsByMedicine(medicineId);
-    await repository.deleteAll(notifications);
+    await repository.deleteAll(notifications.map((e) => e.id).toList());
     await Future.forEach(notifications, schedulingService.cancelNotification);
   }
 

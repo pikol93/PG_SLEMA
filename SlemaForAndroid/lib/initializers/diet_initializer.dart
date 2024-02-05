@@ -1,6 +1,6 @@
 import 'package:pg_slema/features/dish/application/dish_service.dart';
 import 'package:pg_slema/features/dish/domain/dish.dart';
-import 'package:pg_slema/features/dish_category/application/dish_category_name.dart';
+import 'package:pg_slema/features/dish_category/application/dish_category_name_exception.dart';
 import 'package:pg_slema/features/dish_category/application/dish_category_service.dart';
 import 'package:pg_slema/features/dish_category/data/repository/shared_preferences_dish_category_repository.dart';
 import 'package:pg_slema/features/dish_category/domain/converter/dish_category_to_dto.dart';

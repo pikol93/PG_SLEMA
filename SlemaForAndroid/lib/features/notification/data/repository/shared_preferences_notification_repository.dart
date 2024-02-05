@@ -23,9 +23,8 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  Future deleteNotification(Notification notification) async {
-    var dto = NotificationToDtoConverter.toDto(notification);
-    await deleteDto(dto);
+  Future deleteNotification(String id) async {
+    await deleteDto(id);
   }
 
   @override
@@ -47,11 +46,8 @@ class SharedPreferencesNotificationRepository
   }
 
   @override
-  Future deleteAll(List<Notification> notifications) async {
-    var dto = notifications
-        .map(NotificationToDtoConverter.toDto)
-        .toList(growable: true);
-    await deleteAllFrom(dto);
+  Future deleteAll(List<String> id) async {
+    await deleteAllFrom(id);
   }
 
   @override
