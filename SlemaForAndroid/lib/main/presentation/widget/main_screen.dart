@@ -21,37 +21,77 @@ class MainScreenState extends State<MainScreen> {
     final controller = Provider.of<MainScreenController>(context);
 
     return Scaffold(
-      body: PageView(
-        controller: controller.pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const HomeScreen(),
-          const HomeScreen(),
-          const MenuScreen(),
-          GetMedicinesScreen(),
-          const DietScreen(),
-          const ExercisesScreen(),
-        ],
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              tooltip: 'Kalendarz',
+              icon: const Icon(Icons.calendar_month_outlined),
+              onPressed: () {
+                controller.currentIndex = 0;
+              },
+            ),
+            IconButton(
+              tooltip: 'Start',
+              icon: const Icon(Icons.home_outlined),
+              onPressed: () {
+                controller.currentIndex = 1;
+              },
+            ),
+            IconButton(
+              tooltip: 'Menu',
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                controller.currentIndex = 2;
+              },
+            ),
+          ],
+        ),
       ),
-      bottomNavigationBar: NavigationBar(
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        selectedIndex: controller.currentIndex,
-        onDestinationSelected: controller.onTabTapped,
-        destinations: const <Widget>[
-          CustomNavigationDestination(
-              icon: Icon(Icons.calendar_month_outlined),
-              selectedIcon: Icon(Icons.calendar_month),
-              label: 'Kalendarz'),
-          CustomNavigationDestination(
-              icon: Icon(Icons.home_outlined),
-              selectedIcon: Icon(Icons.home),
-              label: 'Start'),
-          CustomNavigationDestination(
-              icon: Icon(Icons.menu_outlined),
-              selectedIcon: Icon(Icons.menu),
-              label: 'Menu'),
-        ],
-      ),
+      body: <Widget>[
+        HomeScreen(),
+        HomeScreen(),
+        MenuScreen(),
+        GetMedicinesScreen(),
+        DietScreen(),
+        ExercisesScreen(),
+      ][controller.currentIndex],
     );
   }
 }
+
+// class MainScreenState extends State<MainScreen> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final controller = Provider.of<MainScreenController>(context);
+//
+//     return Scaffold(
+//       bottomNavigationBar: NavigationBar(
+//         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+//         selectedIndex: controller.currentIndex,
+//         onDestinationSelected: controller.onTabTapped,
+//         destinations: const <Widget>[
+//           CustomNavigationDestination(
+//               icon: Icon(Icons.calendar_month_outlined),
+//               selectedIcon: Icon(Icons.calendar_month),
+//               label: 'Kalendarz'),
+//           CustomNavigationDestination(
+//               icon: Icon(Icons.home_outlined),
+//               selectedIcon: Icon(Icons.home),
+//               label: 'Start'),
+//           CustomNavigationDestination(
+//               icon: Icon(Icons.menu_outlined),
+//               selectedIcon: Icon(Icons.menu),
+//               label: 'Menu'),
+//         ],
+//       ),
+//       body: <Widget>[
+//         HomeScreen(),
+//         HomeScreen(),
+//         MenuScreen(),
+//         GetMedicinesScreen(),
+//       ][controller.currentIndex],
+//     );
+//   }
+// }

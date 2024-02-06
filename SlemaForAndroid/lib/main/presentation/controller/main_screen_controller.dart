@@ -13,8 +13,5 @@ class MainScreenController extends ChangeNotifier {
 
   void onTabTapped(int index) {
     currentIndex = index;
-    pageController.jumpToPage(
-      index,
-    );
   }
 }
