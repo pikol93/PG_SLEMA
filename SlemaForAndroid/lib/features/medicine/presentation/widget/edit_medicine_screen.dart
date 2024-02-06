@@ -11,24 +11,27 @@ import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
-  final AddMedicineController controller = AddMedicineController();
-  EditMedicineScreen(
-      {super.key,
-      required this.onMedicineChanged,
-      required Medicine medicine}) {
-    controller.initFromMedicine(medicine);
-  }
+  final Medicine medicine;
+  const EditMedicineScreen(
+      {super.key, required this.onMedicineChanged, required this.medicine});
 
   @override
   State<EditMedicineScreen> createState() => _EditMedicineScreen();
 }
 
 class _EditMedicineScreen extends State<EditMedicineScreen> {
+  final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    _controller.initFromMedicine(widget.medicine);
+  }
+
+  @override
   void dispose() {
-    widget.controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -49,33 +52,31 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                 CustomTextFormField(
                   label: "Nazwa",
                   icon: Icons.create,
-                  initialValue: widget.controller.typedMedicineName,
-                  onChanged: (value) =>
-                      widget.controller.typedMedicineName = value,
+                  initialValue: _controller.typedMedicineName,
+                  onChanged: (value) => _controller.typedMedicineName = value,
                 ),
                 const SizedBox(height: 10),
                 CustomTextFormField(
                   label: "Sposób aplikacji leku",
                   icon: Icons.create,
-                  initialValue: widget.controller.typedIntakeType,
-                  onChanged: (value) =>
-                      widget.controller.typedIntakeType = value,
+                  initialValue: _controller.typedIntakeType,
+                  onChanged: (value) => _controller.typedIntakeType = value,
                 ),
                 const SizedBox(height: 20),
                 FrequencyList(
-                    initialValue: widget.controller.frequency,
+                    initialValue: _controller.frequency,
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
                 _createDataFieldIfPossible(),
                 ManageNotificationsWidget(
-                  controller: widget.controller,
+                  controller: _controller,
                 ),
                 const SizedBox(height: 20),
                 CustomSaveButton(
-                    controller: widget.controller,
+                    controller: _controller,
                     formKey: _formKey,
-                    onAddedMedicine: () => widget.controller
+                    onAddedMedicine: () => _controller
                         .createMedicine()
                         .then(widget.onMedicineChanged)),
               ],
@@ -87,9 +88,9 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   }
 
   void _handleFrequencyChange(Frequency frequency) {
-    widget.controller.frequency = frequency;
+    _controller.frequency = frequency;
     setState(() {
-      widget.controller.canDateBePicked =
+      _controller.canDateBePicked =
           frequency == Frequency.singular ? false : true;
     });
   }
@@ -97,9 +98,9 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   Widget _createDataFieldIfPossible() {
     return Column(
       children: [
-        if (widget.controller.canDateBePicked) ...[
+        if (_controller.canDateBePicked) ...[
           CustomDatePicker(
-              onDateSelected: (date) => widget.controller.endIntakeDate = date,
+              onDateSelected: (date) => _controller.endIntakeDate = date,
               controller: DatePickerController(
                   DateTime.now().add(const Duration(days: 1)),
                   DateTime.now().add(const Duration(days: 365)),
@@ -112,10 +113,10 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   }
 
   DateTime createInitialDateTime() {
-    return widget.controller.endIntakeDate
+    return _controller.endIntakeDate
                 .compareTo(DateTime.now().add(const Duration(days: 1))) >
             -1
-        ? widget.controller.endIntakeDate
+        ? _controller.endIntakeDate
         : DateTime.now().add(const Duration(days: 1));
   }
 }

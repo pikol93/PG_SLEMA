@@ -23,11 +23,11 @@ class MainScreenState extends State<MainScreen> {
       body: PageView(
         controller: controller.pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const HomeScreen(),
+        children: const [
+          HomeScreen(),
           GetMedicinesScreen(),
-          const DietScreen(),
-          const ExercisesScreen(),
+          DietScreen(),
+          ExercisesScreen(),
         ],
       ),
       bottomNavigationBar: NavigationBar(

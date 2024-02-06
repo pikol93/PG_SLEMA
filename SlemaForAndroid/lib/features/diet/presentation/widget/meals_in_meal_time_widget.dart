@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/meal/domain/meal.dart';
 import 'package:pg_slema/utils/meal_time/meal_time.dart';
 
-class GetMealsInMealTimeWidget extends StatelessWidget {
+class MealsInMealTimeWidget extends StatelessWidget {
   final MealTime mealTime;
   final List<Meal> meals;
 
-  const GetMealsInMealTimeWidget(
+  const MealsInMealTimeWidget(
       {super.key, required this.mealTime, required this.meals});
 
   @override
