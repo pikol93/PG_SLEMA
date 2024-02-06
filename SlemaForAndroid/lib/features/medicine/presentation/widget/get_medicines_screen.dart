@@ -25,32 +25,16 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            const GetMedicinesScreenAppBar(),
-          ];
+      appBar: const GetMedicinesScreenAppBar(),
+      body: ListView.builder(
+        itemCount: _controller.medicines.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GetMedicineWidget(
+            medicine: _controller.medicines[index],
+            onMedicineDeleted: onMedicineDeleted,
+            onMedicineEdited: onMedicineEdited,
+          ).build(context);
         },
-        body: Builder(
-          builder: (BuildContext context) {
-            return CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return GetMedicineWidget(
-                        medicine: _controller.medicines[index],
-                        onMedicineDeleted: onMedicineDeleted,
-                        onMedicineEdited: onMedicineEdited,
-                      ).build(context);
-                    },
-                    childCount: _controller.medicines.length,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
       ),
       floatingActionButton:
           AddMedicineButton(onMedicineAdded: onMedicineCreated),
