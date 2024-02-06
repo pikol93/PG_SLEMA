@@ -26,7 +26,24 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [];
+          return [
+            SliverAppBar(
+              title: const Padding(
+                padding: EdgeInsets.only(left: 8.0, top: 24.0),
+                child: Text('Lekarstwa'),
+              ),
+              floating: false,
+              pinned: false,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              titleTextStyle:
+                  Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
+                        color: const Color(0xFF133150),
+                        height: 0,
+                        fontSize: 86,
+                      ),
+              toolbarHeight: 120,
+            ),
+          ];
         },
         body: Builder(
           builder: (BuildContext context) {
