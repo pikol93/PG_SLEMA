@@ -17,7 +17,7 @@ class EditMedicineButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(0),
-          backgroundColor: Theme.of(context).primaryColor),
+          backgroundColor: Theme.of(context).primaryColorLight),
       child: const Icon(Icons.edit),
     );
   }
