@@ -3,6 +3,7 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/get_medicines_screen_app_bar.dart';
 
 class GetMedicinesScreen extends StatefulWidget {
   const GetMedicinesScreen({super.key});
@@ -27,22 +28,7 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return [
-            SliverAppBar(
-              title: const Padding(
-                padding: EdgeInsets.only(left: 8.0, top: 24.0),
-                child: Text('Lekarstwa'),
-              ),
-              floating: false,
-              pinned: false,
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              titleTextStyle:
-                  Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
-                        color: const Color(0xFF133150),
-                        height: 0,
-                        fontSize: 86,
-                      ),
-              toolbarHeight: 120,
-            ),
+            const GetMedicinesScreenAppBar(),
           ];
         },
         body: Builder(
