@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_label.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/popup_menu_edit_delete_button.dart';
 
 class GetMedicineWidget extends StatelessWidget {
@@ -54,21 +55,7 @@ class GetMedicineWidget extends StatelessWidget {
                   onDeletePressed: () => onMedicineDeleted(medicine)),
             ],
           ),
-          Card(
-            elevation: 4.0,
-            color: Colors.blueAccent,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 2.0, horizontal: 15.0),
-              child: Text(
-                medicine.intakeType,
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(color: Colors.white70),
-              ),
-            ),
-          ),
+          GetMedicineLabel(label: medicine.intakeType),
         ]));
   }
 }
