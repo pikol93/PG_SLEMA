@@ -3,16 +3,16 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/edit_medicine_screen.dart';
 
 class PopupMenuEditDeleteButton extends StatelessWidget {
-  final VoidCallback onPressedDelete;
+  final VoidCallback onDeletePressed;
   final ValueChanged<Medicine> onMedicineChanged;
   final ValueGetter<Medicine> medicineProvider;
   const PopupMenuEditDeleteButton(
       {super.key,
-      required this.onPressedDelete,
+      required this.onDeletePressed,
       required this.onMedicineChanged,
       required this.medicineProvider});
 
-  void onPressedEdit(BuildContext context) {
+  void onEditPressed(BuildContext context) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -30,7 +30,7 @@ class PopupMenuEditDeleteButton extends StatelessWidget {
         return [
           PopupMenuItem(
             value: () {
-              onPressedEdit(context);
+              onEditPressed(context);
             },
             child: Text(
               'Edytuj',
@@ -38,7 +38,7 @@ class PopupMenuEditDeleteButton extends StatelessWidget {
             ),
           ),
           PopupMenuItem(
-            value: onPressedDelete,
+            value: onDeletePressed,
             child: Text('Usuń',
                 style: Theme.of(context)
                     .textTheme

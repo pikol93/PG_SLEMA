@@ -51,7 +51,7 @@ class GetMedicineWidget extends StatelessWidget {
               PopupMenuEditDeleteButton(
                   onMedicineChanged: onMedicineEdited,
                   medicineProvider: () => medicine,
-                  onPressedDelete: () => onMedicineDeleted(medicine)),
+                  onDeletePressed: () => onMedicineDeleted(medicine)),
             ],
           ),
           Card(
