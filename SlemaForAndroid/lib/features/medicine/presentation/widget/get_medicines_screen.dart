@@ -3,6 +3,7 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/get_medicines_screen_app_bar.dart';
 
 class GetMedicinesScreen extends StatefulWidget {
   const GetMedicinesScreen({super.key});
@@ -24,30 +25,16 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [];
+      appBar: const GetMedicinesScreenAppBar(),
+      body: ListView.builder(
+        itemCount: _controller.medicines.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GetMedicineWidget(
+            medicine: _controller.medicines[index],
+            onMedicineDeleted: onMedicineDeleted,
+            onMedicineEdited: onMedicineEdited,
+          ).build(context);
         },
-        body: Builder(
-          builder: (BuildContext context) {
-            return CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return GetMedicineWidget(
-                        medicine: _controller.medicines[index],
-                        onMedicineDeleted: onMedicineDeleted,
-                        onMedicineEdited: onMedicineEdited,
-                      ).build(context);
-                    },
-                    childCount: _controller.medicines.length,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
       ),
       floatingActionButton:
           AddMedicineButton(onMedicineAdded: onMedicineCreated),
