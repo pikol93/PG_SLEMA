@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/notification/data/dto/notification_dto.dart';
-import 'package:pg_slema/features/notification/domain/notification.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification_dto.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification.dart';
 
 class NotificationToDtoConverter {
   static Notification fromDto(NotificationDto dto) {

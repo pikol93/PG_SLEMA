@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 
 mixin MedicineRepository {
   Future<List<Medicine>> getAllMedicines();

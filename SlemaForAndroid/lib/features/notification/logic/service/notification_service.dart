@@ -1,6 +1,6 @@
-import 'package:pg_slema/features/notification/application/service/notification_scheduling_service.dart';
-import 'package:pg_slema/features/notification/data/repository/notification_repository.dart';
-import 'package:pg_slema/features/notification/domain/notification.dart';
+import 'package:pg_slema/features/notification/logic/service/notification_scheduling_service.dart';
+import 'package:pg_slema/features/notification/logic/repository/notification_repository.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification.dart';
 
 class NotificationService {
   final NotificationRepository repository;

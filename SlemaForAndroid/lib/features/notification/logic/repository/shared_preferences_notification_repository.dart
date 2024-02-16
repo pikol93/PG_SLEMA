@@ -1,8 +1,8 @@
-import 'package:pg_slema/features/notification/data/dto/converter/notification_dto_to_json_converter.dart';
-import 'package:pg_slema/features/notification/data/dto/notification_dto.dart';
-import 'package:pg_slema/features/notification/data/repository/notification_repository.dart';
-import 'package:pg_slema/features/notification/domain/converter/notification_to_dto_converter.dart';
-import 'package:pg_slema/features/notification/domain/notification.dart';
+import 'package:pg_slema/features/notification/logic/converter/notification_dto_to_json_converter.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification_dto.dart';
+import 'package:pg_slema/features/notification/logic/repository/notification_repository.dart';
+import 'package:pg_slema/features/notification/logic/converter/notification_to_dto_converter.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesNotificationRepository

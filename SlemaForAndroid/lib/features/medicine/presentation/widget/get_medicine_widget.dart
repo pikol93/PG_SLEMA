@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_label.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/popup_menu_edit_delete_button.dart';
 

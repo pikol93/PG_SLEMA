@@ -1,6 +1,6 @@
-import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
-import 'package:pg_slema/features/notification/application/service/notification_service.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/repository/medicine_repository.dart';
+import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
 
 class MedicineService {
   final MedicineRepository _repository;

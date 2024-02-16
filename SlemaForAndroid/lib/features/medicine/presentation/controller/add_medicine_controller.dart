@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
-import 'package:pg_slema/features/notification/application/service/notification_service.dart';
-import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
-import 'package:pg_slema/features/notification/domain/get_notification.dart';
-import 'package:pg_slema/features/notification/domain/notification.dart' as nt;
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
+import 'package:pg_slema/features/notification/logic/repository/shared_preferences_notification_repository.dart';
+import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
+import 'package:pg_slema/features/notification/logic/entity/get_notification.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification.dart'
+    as nt;
 import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';

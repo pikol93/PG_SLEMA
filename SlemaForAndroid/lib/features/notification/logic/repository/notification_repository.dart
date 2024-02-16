@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/notification/domain/notification.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification.dart';
 
 mixin NotificationRepository {
   Future<List<Notification>> getAllNotificationsByMedicine(String medicineId);

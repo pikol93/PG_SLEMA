@@ -1,8 +1,8 @@
-import 'package:pg_slema/features/medicine/data/dto/converter/medicine_dto_to_json_converter.dart';
-import 'package:pg_slema/features/medicine/data/dto/medicine_dto.dart';
-import 'package:pg_slema/features/medicine/data/repository/medicine_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/converter/medicine_dto_to_json_converter.dart';
+import 'package:pg_slema/features/medicine/logic/converter/medicine_to_dto_converter.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine_dto.dart';
+import 'package:pg_slema/features/medicine/logic/repository/medicine_repository.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesMedicineRepository

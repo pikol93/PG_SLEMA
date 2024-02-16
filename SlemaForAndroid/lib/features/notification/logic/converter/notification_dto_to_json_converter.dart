@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/notification/data/dto/notification_dto.dart';
+import 'package:pg_slema/features/notification/logic/entity/notification_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';

@@ -1,5 +1,3 @@
-
-
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
 
 mixin DishRepository {
