@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/motivation/controller/motivation_screen_controller.dart';
+import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
 import 'package:provider/provider.dart';
 
 class MotivationDaily extends StatefulWidget {

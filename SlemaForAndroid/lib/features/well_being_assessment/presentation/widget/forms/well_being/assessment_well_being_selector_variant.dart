@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/data/well_being_variant.dart';
+import 'package:pg_slema/features/well_being_assessment/logic/entity/enum/well_being_variant.dart';
 
 class AssessmentWellBeingSelectorVariant extends StatelessWidget {
   final WellBeingVariant variant;

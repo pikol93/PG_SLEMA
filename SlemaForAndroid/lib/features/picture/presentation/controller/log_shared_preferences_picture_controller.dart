@@ -1,9 +1,9 @@
+import 'package:pg_slema/features/picture/logic/entity/picture.dart';
+import 'package:pg_slema/features/picture/logic/service/picture_service.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:pg_slema/features/picture/domain/picture.dart';
-import 'package:pg_slema/features/picture/application/service/impl/picture_service_impl.dart';
 
 class LogSharedPreferencesPictureController with Logger {
-  late PictureServiceImpl pictureService;
+  late PictureService pictureService;
 
   LogSharedPreferencesPictureController(this.pictureService);
 

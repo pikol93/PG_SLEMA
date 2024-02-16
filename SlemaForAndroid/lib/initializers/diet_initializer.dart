@@ -3,14 +3,14 @@ import 'package:pg_slema/features/dish/domain/dish.dart';
 import 'package:pg_slema/features/dish_category/application/dish_category_name_exception.dart';
 import 'package:pg_slema/features/dish_category/application/dish_category_service.dart';
 import 'package:pg_slema/features/dish_category/data/repository/shared_preferences_dish_category_repository.dart';
-import 'package:pg_slema/features/dish_category/domain/converter/dish_category_to_dto.dart';
+import 'package:pg_slema/features/dish_category/converter/dish_category_to_dto.dart';
 import 'package:pg_slema/features/dish_category/domain/dish_category.dart';
 import 'package:pg_slema/features/meal/application/meal_service.dart';
 import 'package:pg_slema/features/meal/data/repository/shared_preferences_meal_repository.dart';
 import 'package:pg_slema/features/meal/domain/converter/meal_to_dto_converter.dart';
 import 'package:pg_slema/features/meal/domain/meal.dart';
 import 'package:pg_slema/initializers/initializer.dart';
-import 'package:pg_slema/utils/meal_time/meal_time.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 import 'package:uuid/uuid.dart';
 
 class DietInitializer with Initializer {

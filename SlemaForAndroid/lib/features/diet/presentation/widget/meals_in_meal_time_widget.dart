@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/meal/domain/meal.dart';
-import 'package:pg_slema/utils/meal_time/meal_time.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class MealsInMealTimeWidget extends StatelessWidget {
   final MealTime mealTime;
