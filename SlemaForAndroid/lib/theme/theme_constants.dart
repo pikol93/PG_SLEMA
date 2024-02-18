@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pg_slema/theme/custom_colors.dart';
+import 'package:pg_slema/theme/color_schemes.g.dart';
 
 const colorSchemeSeed = Color(0xFF6793B3);
 
@@ -25,6 +26,7 @@ const colorCustomInputTextBorder = Color(0xB2878787);
 const colorScaffoldBackgroundColor = Color(0xFFE7ECEF);
 
 ThemeData lightTheme = ThemeData(
+    colorScheme: lightColorScheme,
     fontFamily: 'Dongle',
     textTheme: const TextTheme(
       headlineLarge: TextStyle(
@@ -113,5 +115,7 @@ ThemeData lightTheme = ThemeData(
           formsCustomTextInputBorderColor: colorCustomInputTextBorder),
     ]);
 
-ThemeData darkTheme =
-    ThemeData(useMaterial3: true, brightness: Brightness.dark);
+ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: darkColorScheme);
