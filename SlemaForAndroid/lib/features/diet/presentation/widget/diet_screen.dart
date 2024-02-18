@@ -1,12 +1,9 @@
-import 'dart:async';
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
 import 'package:pg_slema/features/diet/presentation/widget/select_dishes_button.dart';
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class DietScreen extends StatefulWidget {
@@ -17,13 +14,13 @@ class DietScreen extends StatefulWidget {
 }
 
 class _DietScreenState extends State<DietScreen> {
-  late StreamController<DateTime> _dateController;
-  late LinkedHashMap<MealTime, List<Meal>> _meals;
+  late DietScreenController _controller;
 
   @override
   void initState() {
     super.initState();
-    _dateController = StreamController();
+    _controller = DietScreenController(_onMealsChanged);
+    _controller.initializeMeals();
   }
 
   @override
@@ -33,11 +30,10 @@ class _DietScreenState extends State<DietScreen> {
         preferredSize: const Size.fromHeight(60),
         child: DietAppBar(
           onDateChanged: _onDateChanged,
+          initDate: _controller.date,
         ),
       ),
-      body: MealsInDayWidget(
-          dateStream: _dateController.stream,
-          onMealsChanged: (value) => (_meals = value)),
+      body: MealsInDayWidget(meals: _controller.meals),
       floatingActionButton: SelectDishesButton(
         onDishesSelected: (dishes) {},
         initDishesProvider: _mealsToDishes,
@@ -46,11 +42,16 @@ class _DietScreenState extends State<DietScreen> {
   }
 
   void _onDateChanged(DateTime date) async {
-    _dateController.add(date);
+    _controller.onDateChanged(date);
+    setState(() {});
+  }
+
+  void _onMealsChanged() {
+    setState(() {});
   }
 
   Map<MealTime, List<Dish>> _mealsToDishes() {
-    return _meals.map((key, value) {
+    return _controller.meals.map((key, value) {
       var dishes = value.map((e) => e.dish).toList(growable: true);
       return MapEntry(key, dishes);
     });

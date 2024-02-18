@@ -7,8 +7,10 @@ import 'package:pg_slema/features/medicine/presentation/controller/date_picker_c
 
 class CalendarWithArrows extends StatefulWidget {
   final ValueChanged<DateTime> onDateChanged;
+  final DateTime initDate;
 
-  const CalendarWithArrows({super.key, required this.onDateChanged});
+  const CalendarWithArrows(
+      {super.key, required this.onDateChanged, required this.initDate});
 
   @override
   State<StatefulWidget> createState() => _CalendarWithArrowsState();
@@ -19,7 +21,7 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
 
   @override
   void initState() {
-    controller = CalendarController();
+    controller = CalendarController(widget.initDate);
     super.initState();
   }
 

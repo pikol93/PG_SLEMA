@@ -24,8 +24,8 @@ class _SelectDishesScreenState extends State<SelectDishesScreen> {
   @override
   void initState() {
     super.initState();
-    _controller =
-        SelectDishesController(_onDishCategoriesChanged, widget.initDishesProvider());
+    _controller = SelectDishesController(
+        _onDishCategoriesChanged, widget.initDishesProvider());
     _controller.initialize();
   }
 
@@ -40,11 +40,13 @@ class _SelectDishesScreenState extends State<SelectDishesScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              MealTimeList(onMealTimeChanged: _onMealTimeChanged,
+              MealTimeList(
+                  onMealTimeChanged: _onMealTimeChanged,
                   initialValue: _controller.currentMealTime),
               const SizedBox(height: 20),
               CustomSaveButton(
-                  onSaveButtonClicked: () => widget.onDishesSelected(_controller.selectedDishes))
+                  onSaveButtonClicked: () =>
+                      widget.onDishesSelected(_controller.selectedDishes))
             ],
           ),
         ));

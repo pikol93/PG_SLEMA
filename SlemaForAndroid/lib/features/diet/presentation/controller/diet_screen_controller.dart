@@ -9,13 +9,15 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 import 'package:pg_slema/features/meal/logic/repository/shared_preferences_meal_repository.dart';
 import 'package:pg_slema/features/meal/logic/service/meal_service.dart';
 
-class MealsInDayController {
+class DietScreenController {
+  late DateTime date;
   late final MealService mealService;
   late LinkedHashMap<MealTime, List<Meal>> meals;
   final Function onMealsChanged;
 
-  MealsInDayController(this.onMealsChanged) : super() {
+  DietScreenController(this.onMealsChanged) : super() {
     meals = LinkedHashMap();
+    date = DateTime.now();
     var dishConverter = DishToDtoConverter();
     var dishRepository = SharedPreferencesDishRepository(dishConverter);
     var dishService = DishService(dishRepository);
