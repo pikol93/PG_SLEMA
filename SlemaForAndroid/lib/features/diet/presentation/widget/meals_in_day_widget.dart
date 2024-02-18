@@ -1,11 +1,17 @@
+import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_meal_time_widget.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class MealsInDayWidget extends StatefulWidget {
-  final Stream<DateTime> stream;
+  final Stream<DateTime> dateStream;
+  final ValueChanged<LinkedHashMap<MealTime, List<Meal>>> onMealsChanged;
 
-  const MealsInDayWidget({super.key, required this.stream});
+  const MealsInDayWidget(
+      {super.key, required this.dateStream, required this.onMealsChanged});
 
   @override
   State<StatefulWidget> createState() => _MealsInDayWidgetState();
@@ -19,7 +25,7 @@ class _MealsInDayWidgetState extends State<MealsInDayWidget> {
     super.initState();
     controller = DietScreenController(_onMealsChanged);
     controller.initializeMeals();
-    widget.stream.listen((date) {
+    widget.dateStream.listen((date) {
       controller.onDateChanged(date);
     });
   }
@@ -51,5 +57,6 @@ class _MealsInDayWidgetState extends State<MealsInDayWidget> {
 
   void _onMealsChanged() {
     setState(() {});
+    widget.onMealsChanged(controller.meals);
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:pg_slema/features/dish/logic/converter/dish_to_dto_converter.dart';
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
 import 'package:pg_slema/features/dish/logic/repository/shared_preferences_dish_repository.dart';
@@ -12,7 +10,7 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesController {
   final Function onDishCategoriesChanged;
-  final LinkedHashMap<MealTime, List<Dish>> selectedDishes;
+  final Map<MealTime, List<Dish>> selectedDishes;
   late final DishService dishService;
   late final List<DishCategory> mainCategories;
   late final DishCategoryService dishCategoryService;
@@ -26,6 +24,9 @@ class SelectDishesController {
     final converter = DishCategoryToDtoConverter();
     final repository = SharedPreferencesDishCategoryRepository(converter);
     dishCategoryService = DishCategoryService(repository, dishService);
+  }
+
+  void initialize() {
     dishCategoryService
         .getMainCategories()
         .then((value) => mainCategories = value)
