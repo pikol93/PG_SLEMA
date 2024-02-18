@@ -7,8 +7,6 @@ class LabeledDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyColors? myColors = Theme.of(context).extension<MyColors>();
-
     return Align(
       alignment: Alignment.topLeft,
       child: Material(
@@ -23,7 +21,7 @@ class LabeledDivider extends StatelessWidget {
           padding: const EdgeInsets.only(left: 20.0),
           width: MediaQuery.of(context).size.width * 0.75,
           decoration: BoxDecoration(
-            color: Theme.of(context).navigationBarTheme.backgroundColor,
+            color: Theme.of(context).primaryColor,
             borderRadius: const BorderRadius.only(
               topRight: Radius.circular(16.0),
               bottomRight: Radius.circular(16.0),
@@ -32,8 +30,7 @@ class LabeledDivider extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: myColors?.formsButtonTextColor ?? Colors.white, //TODO
-                height: 1.0),
+                color: Theme.of(context).colorScheme.onPrimary, height: 1.0),
           ),
         ),
       ),
