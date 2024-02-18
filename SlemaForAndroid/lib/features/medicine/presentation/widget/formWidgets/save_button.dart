@@ -15,8 +15,6 @@ class CustomSaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyColors? myColors = Theme.of(context).extension<MyColors>();
-
     return SizedBox(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -33,9 +31,9 @@ class CustomSaveButton extends StatelessWidget {
           style: ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0))),
+                      borderRadius: BorderRadius.circular(12.0))),
               backgroundColor: MaterialStateProperty.all<Color>(
-                  myColors!.colorPrimaryLighter ?? Colors.black),
+                  Theme.of(context).primaryColor),
               elevation: MaterialStateProperty.all(6)),
           child: Padding(
             padding: const EdgeInsets.all(14.0),
@@ -43,11 +41,11 @@ class CustomSaveButton extends StatelessWidget {
               child: Text(
                 "Zapisz",
                 style: TextStyle(
-                  fontFamily: 'Dongle',
-                  fontSize: 46,
-                  height: 0.52381,
-                  // color: myColors.formsButtonTextColor ?? Colors.white,
-                ),
+                    fontFamily: 'Dongle',
+                    fontSize: 46,
+                    height: 0.52381,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).colorScheme.onPrimary),
                 textAlign: TextAlign.center,
               ),
             ),
