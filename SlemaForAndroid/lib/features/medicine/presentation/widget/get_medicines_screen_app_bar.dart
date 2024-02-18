@@ -8,7 +8,7 @@ class GetMedicinesScreenAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       title: const Padding(
-        padding: EdgeInsets.only(left: 30.0, top: 24.0),
+        padding: EdgeInsets.only(left: 30.0, top: 30.0),
         child: Text('Lekarstwa'),
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,

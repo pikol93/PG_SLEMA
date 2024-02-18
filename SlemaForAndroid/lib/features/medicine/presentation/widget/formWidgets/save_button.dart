@@ -35,7 +35,7 @@ class CustomSaveButton extends StatelessWidget {
                   RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0))),
               backgroundColor: MaterialStateProperty.all<Color>(
-                  myColors!.formsButtonBackgroundColor ?? Colors.black),
+                  myColors!.colorPrimaryLighter ?? Colors.black),
               elevation: MaterialStateProperty.all(6)),
           child: Padding(
             padding: const EdgeInsets.all(14.0),
@@ -46,7 +46,7 @@ class CustomSaveButton extends StatelessWidget {
                   fontFamily: 'Dongle',
                   fontSize: 46,
                   height: 0.52381,
-                  color: myColors.formsButtonTextColor ?? Colors.white,
+                  // color: myColors.formsButtonTextColor ?? Colors.white,
                 ),
                 textAlign: TextAlign.center,
               ),

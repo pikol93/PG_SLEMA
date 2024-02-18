@@ -29,7 +29,8 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         HomeWidgetCustomContainer(
             child: Text(
-          "---------Raport zdrowotny---------",
+          "Raport zdrowotny",
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: Theme.of(context).primaryColor,
               ),
@@ -43,7 +44,8 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         HomeWidgetCustomContainer(
             child: Text(
-          "-------------Kalendarz------------",
+          "Kalendarz",
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.labelMedium!.copyWith(
                 color: Theme.of(context).primaryColor,
               ),

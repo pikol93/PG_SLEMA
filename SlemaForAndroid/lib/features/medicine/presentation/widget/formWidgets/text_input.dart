@@ -59,31 +59,31 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         labelStyle: TextStyle(
           fontSize: labelFontSize,
           fontWeight: FontWeight.w700,
-          color: myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
+          //color: myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
         ),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
+                //color:
+                //    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
                 width: borderWidth)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
+                //color:
+                //   myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
                 width: borderWidth)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
+                //color:
+                //   myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
                 width: borderWidth)),
         prefixIcon: widget.icon == null
             ? null
@@ -96,15 +96,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     ),
                     Icon(
                       widget.icon,
-                      color: myColors?.formsButtonBackgroundColor ??
-                          Colors.black12,
+                      color: myColors?.colorPrimaryLighter ?? Colors.black12,
                       size: prefixIconSize,
                     ),
                     SizedBox(
                       height: verticalDividerBoxHeight,
                       child: VerticalDivider(
-                        color: myColors?.formsCustomTextInputBorderColor ??
-                            Colors.black12,
+                        //color: myColors?.formsCustomTextInputBorderColor ??
+                        //Colors.black12,
                         thickness: verticalDividerWidth,
                       ),
                     ),
