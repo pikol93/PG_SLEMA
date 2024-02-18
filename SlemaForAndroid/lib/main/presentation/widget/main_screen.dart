@@ -95,3 +95,36 @@ class MainScreenState extends State<MainScreen> {
 //     );
 //   }
 // }
+
+// body: PageView(
+// controller: controller.pageController,
+// physics: const NeverScrollableScrollPhysics(),
+// children: const [
+// HomeScreen(),
+// GetMedicinesScreen(),
+// DietScreen(),
+// ExercisesScreen(),
+// ],
+// ),
+// bottomNavigationBar: NavigationBar(
+// labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+// selectedIndex: controller.currentIndex,
+// onDestinationSelected: controller.onTabTapped,
+// destinations: const <Widget>[
+// CustomNavigationDestination(
+// icon: Icon(Icons.home_outlined),
+// selectedIcon: Icon(Icons.home),
+// label: 'Start'),
+// CustomNavigationDestination(
+// icon: Icon(Icons.medication_outlined),
+// selectedIcon: Icon(Icons.medication),
+// label: 'Leki'),
+// CustomNavigationDestination(
+// icon: Icon(Icons.restaurant_menu_outlined),
+// selectedIcon: Icon(Icons.restaurant_menu),
+// label: 'Dieta'),
+// CustomNavigationDestination(
+// icon: Icon(Icons.fitness_center_outlined),
+// selectedIcon: Icon(Icons.fitness_center),
+// label: 'Ćwiczenia'),
+// ],

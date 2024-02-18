@@ -24,4 +24,10 @@ extension DateUtils on DateTime {
     final formatter = NumberFormat("00");
     return "${formatter.format(day)}.${formatter.format(month)}.$year";
   }
+
+  int compareDates(DateTime another) {
+    DateTime thisDate = DateTime(year, month, day);
+    DateTime anotherDate = DateTime(another.year, another.month, another.day);
+    return thisDate.compareTo(anotherDate);
+  }
 }

@@ -21,9 +21,8 @@ class SharedPreferencesDishCategoryRepository
   }
 
   @override
-  Future deleteDishCategory(DishCategory dishCategory) async {
-    var dto = converter.toDto(dishCategory);
-    await deleteDto(dto);
+  Future deleteDishCategory(String id) async {
+    await deleteDto(id);
   }
 
   @override

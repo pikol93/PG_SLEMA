@@ -6,31 +6,39 @@ import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 
 class CalendarWithArrows extends StatefulWidget {
-  final CalendarController controller = CalendarController();
+  final ValueChanged<DateTime> onDateChanged;
 
-  CalendarWithArrows({super.key});
+  const CalendarWithArrows({super.key, required this.onDateChanged});
 
   @override
   State<StatefulWidget> createState() => _CalendarWithArrowsState();
 }
 
 class _CalendarWithArrowsState extends State<CalendarWithArrows> {
+  late CalendarController controller;
+
+  @override
+  void initState() {
+    controller = CalendarController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    widget.controller.setLanguage(context);
+    controller.setLanguage(context);
     return Row(
       children: [
         CalendarExactDatePicker(
           onDatePicked: _onDatePicked,
-          controller: DatePickerController(widget.controller.firstDate,
-              widget.controller.lastDate, widget.controller.pickedDate),
+          controller: DatePickerController(
+              controller.firstDate, controller.lastDate, controller.pickedDate),
         ),
         CalendarMoveBackward(
           onPressed: _onBackwardPressed,
         ),
         Expanded(
           child: Text(
-            widget.controller.getPickedDateStringRepresentationForAppBar(),
+            controller.getPickedDateStringRepresentationForAppBar(),
             textAlign: TextAlign.center,
             style: const TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
@@ -45,17 +53,29 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
   }
 
   void _onBackwardPressed() {
-    widget.controller.subtractOneDayFromPickedDateIfPossible();
+    DateTime date = controller.pickedDate;
+    controller.subtractOneDayFromPickedDateIfPossible();
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
   }
 
   void _onForwardPressed() {
-    widget.controller.addOneDayFromPickedDateIfPossible();
+    DateTime date = controller.pickedDate;
+    controller.addOneDayFromPickedDateIfPossible();
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
   }
 
   void _onDatePicked(DateTime value) {
-    widget.controller.pickedDate = value;
+    DateTime date = controller.pickedDate;
+    controller.pickedDate = value;
+    _notifyAboutDateChangedIfItChanged(date);
     setState(() {});
+  }
+
+  void _notifyAboutDateChangedIfItChanged(DateTime previousDate) {
+    if (previousDate != controller.pickedDate) {
+      widget.onDateChanged(controller.pickedDate);
+    }
   }
 }

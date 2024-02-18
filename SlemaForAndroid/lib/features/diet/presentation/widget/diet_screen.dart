@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
+import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
 
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
@@ -9,16 +12,28 @@ class DietScreen extends StatefulWidget {
 }
 
 class _DietScreenState extends State<DietScreen> {
+  late StreamController<DateTime> _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = StreamController();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
-        child: DietAppBar(),
+        preferredSize: const Size.fromHeight(60),
+        child: DietAppBar(
+          onDateChanged: _onDateChanged,
+        ),
       ),
-      body: Center(
-        child: Text("TODO"),
-      ),
+      body: MealsInDayWidget(stream: _controller.stream),
     );
+  }
+
+  void _onDateChanged(DateTime date) async {
+    _controller.add(date);
   }
 }

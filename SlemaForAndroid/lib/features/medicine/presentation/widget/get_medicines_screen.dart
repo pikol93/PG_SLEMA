@@ -3,44 +3,38 @@ import 'package:pg_slema/features/medicine/domain/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/get_medicines_screen_app_bar.dart';
 
 class GetMedicinesScreen extends StatefulWidget {
-  final MedicineScreenController controller = MedicineScreenController();
-
-  GetMedicinesScreen({super.key});
+  const GetMedicinesScreen({super.key});
 
   @override
   State<GetMedicinesScreen> createState() => _GetMedicinesScreenState();
 }
 
 class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
+  late final MedicineScreenController _controller;
+
+  @override
+  void initState() {
+    _controller = MedicineScreenController(_onMedicinesChanged);
+    super.initState();
+    _controller.initializeMedicines();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [];
+      appBar: const GetMedicinesScreenAppBar(),
+      body: ListView.builder(
+        itemCount: _controller.medicines.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GetMedicineWidget(
+            medicine: _controller.medicines[index],
+            onMedicineDeleted: onMedicineDeleted,
+            onMedicineEdited: onMedicineEdited,
+          ).build(context);
         },
-        body: Builder(
-          builder: (BuildContext context) {
-            return CustomScrollView(
-              slivers: [
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return GetMedicineWidget(
-                        medicine: widget.controller.medicines[index],
-                        onMedicineDeleted: onMedicineDeleted,
-                        onMedicineEdited: onMedicineEdited,
-                      ).build(context);
-                    },
-                    childCount: widget.controller.medicines.length,
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
       ),
       floatingActionButton:
           AddMedicineButton(onMedicineAdded: onMedicineCreated),
@@ -48,17 +42,18 @@ class _GetMedicinesScreenState extends State<GetMedicinesScreen> {
   }
 
   void onMedicineDeleted(Medicine medicine) {
-    widget.controller.deleteMedicine(medicine);
-    setState(() {});
+    _controller.deleteMedicine(medicine);
   }
 
   void onMedicineCreated(Medicine medicine) {
-    widget.controller.addMedicine(medicine);
-    setState(() {});
+    _controller.addMedicine(medicine);
   }
 
   void onMedicineEdited(Medicine medicine) {
-    widget.controller.editMedicine(medicine);
+    _controller.editMedicine(medicine);
+  }
+
+  void _onMedicinesChanged() {
     setState(() {});
   }
 }

@@ -19,9 +19,8 @@ class SharedPreferencesDishRepository
   }
 
   @override
-  Future deleteDish(Dish dish) async {
-    var dto = converter.toDto(dish);
-    await deleteDto(dto);
+  Future deleteDish(String id) async {
+    await deleteDto(id);
   }
 
   @override

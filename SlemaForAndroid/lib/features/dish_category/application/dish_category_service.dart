@@ -1,5 +1,5 @@
 import 'package:pg_slema/features/dish/application/dish_service.dart';
-import 'package:pg_slema/features/dish_category/application/dish_category_name.dart';
+import 'package:pg_slema/features/dish_category/application/dish_category_name_exception.dart';
 import 'package:pg_slema/features/dish_category/data/repository/dish_category_repository.dart';
 import 'package:pg_slema/features/dish_category/domain/dish_category.dart';
 
@@ -17,8 +17,8 @@ class DishCategoryService {
     await repository.addDishCategory(category);
   }
 
-  Future deleteDishCategory(DishCategory category) async {
-    await repository.deleteDishCategory(category);
+  Future deleteDishCategory(String id) async {
+    await repository.deleteDishCategory(id);
   }
 
   Future updateDishCategory(DishCategory category) async {

@@ -24,7 +24,7 @@ class PictureServiceImpl implements PictureService {
   }
 
   @override
-  Future deletePicture(Picture picture) async {
-    await _repository.deletePicture(picture);
+  Future deletePicture(String id) async {
+    await _repository.deletePicture(id);
   }
 }

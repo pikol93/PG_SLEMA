@@ -26,8 +26,8 @@ class DishService {
     await repository.updateDish(dish);
   }
 
-  Future deleteDish(Dish dish) async {
-    await repository.deleteDish(dish);
+  Future deleteDish(String id) async {
+    await repository.deleteDish(id);
   }
 
   Future addAllDishesFrom(List<Dish> dishes) async {

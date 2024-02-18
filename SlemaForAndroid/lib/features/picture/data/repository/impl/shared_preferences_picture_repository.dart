@@ -18,9 +18,8 @@ class SharedPreferencesPictureRepository
   }
 
   @override
-  Future deletePicture(Picture picture) async {
-    PictureDto dto = PictureToDTOConverter.toDTO(picture);
-    await deleteDto(dto);
+  Future deletePicture(String id) async {
+    await deleteDto(id);
   }
 
   @override

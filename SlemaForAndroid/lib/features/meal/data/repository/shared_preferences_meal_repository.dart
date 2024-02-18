@@ -4,6 +4,7 @@ import 'package:pg_slema/features/meal/data/repository/meal_repository.dart';
 import 'package:pg_slema/features/meal/domain/converter/meal_to_dto_converter.dart';
 import 'package:pg_slema/features/meal/domain/meal.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
+import 'package:pg_slema/utils/date/date.dart';
 
 class SharedPreferencesMealRepository
     extends SharedPreferencesCrudRepository<MealDto> with MealRepository {
@@ -19,9 +20,8 @@ class SharedPreferencesMealRepository
   }
 
   @override
-  Future deleteMeal(Meal meal) async {
-    var dto = converter.toDto(meal);
-    await deleteDto(dto);
+  Future deleteMeal(String id) async {
+    await deleteDto(id);
   }
 
   @override
@@ -35,7 +35,7 @@ class SharedPreferencesMealRepository
   Future<List<Meal>> getAllMealsByDate(DateTime date) async {
     var dto = await getAllDto();
     return Future.wait(dto
-        .where((element) => element.mealDate == date)
+        .where((element) => element.mealDate.compareDates(date) == 0)
         .map((dto) => converter.fromDto(dto))
         .toList(growable: true));
   }
