@@ -16,7 +16,10 @@ class HomeWidgetCustomContainer extends StatelessWidget {
         elevation: 3.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
-          side: const BorderSide(width: 3.0),
+          side: BorderSide(
+            width: 3.0,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
