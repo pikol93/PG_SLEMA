@@ -54,81 +54,13 @@ class MainScreenState extends State<MainScreen> {
         ),
       ),
       body: <Widget>[
-        HomeScreen(),
-        HomeScreen(),
-        MenuScreen(),
-        GetMedicinesScreen(),
-        DietScreen(),
-        ExercisesScreen(),
+        const HomeScreen(),
+        const HomeScreen(),
+        const MenuScreen(),
+        const GetMedicinesScreen(),
+        const DietScreen(),
+        const ExercisesScreen(),
       ][controller.currentIndex],
     );
   }
 }
-
-// class MainScreenState extends State<MainScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     final controller = Provider.of<MainScreenController>(context);
-//
-//     return Scaffold(
-//       bottomNavigationBar: NavigationBar(
-//         labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-//         selectedIndex: controller.currentIndex,
-//         onDestinationSelected: controller.onTabTapped,
-//         destinations: const <Widget>[
-//           CustomNavigationDestination(
-//               icon: Icon(Icons.calendar_month_outlined),
-//               selectedIcon: Icon(Icons.calendar_month),
-//               label: 'Kalendarz'),
-//           CustomNavigationDestination(
-//               icon: Icon(Icons.home_outlined),
-//               selectedIcon: Icon(Icons.home),
-//               label: 'Start'),
-//           CustomNavigationDestination(
-//               icon: Icon(Icons.menu_outlined),
-//               selectedIcon: Icon(Icons.menu),
-//               label: 'Menu'),
-//         ],
-//       ),
-//       body: <Widget>[
-//         HomeScreen(),
-//         HomeScreen(),
-//         MenuScreen(),
-//         GetMedicinesScreen(),
-//       ][controller.currentIndex],
-//     );
-//   }
-// }
-
-// body: PageView(
-// controller: controller.pageController,
-// physics: const NeverScrollableScrollPhysics(),
-// children: const [
-// HomeScreen(),
-// GetMedicinesScreen(),
-// DietScreen(),
-// ExercisesScreen(),
-// ],
-// ),
-// bottomNavigationBar: NavigationBar(
-// labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-// selectedIndex: controller.currentIndex,
-// onDestinationSelected: controller.onTabTapped,
-// destinations: const <Widget>[
-// CustomNavigationDestination(
-// icon: Icon(Icons.home_outlined),
-// selectedIcon: Icon(Icons.home),
-// label: 'Start'),
-// CustomNavigationDestination(
-// icon: Icon(Icons.medication_outlined),
-// selectedIcon: Icon(Icons.medication),
-// label: 'Leki'),
-// CustomNavigationDestination(
-// icon: Icon(Icons.restaurant_menu_outlined),
-// selectedIcon: Icon(Icons.restaurant_menu),
-// label: 'Dieta'),
-// CustomNavigationDestination(
-// icon: Icon(Icons.fitness_center_outlined),
-// selectedIcon: Icon(Icons.fitness_center),
-// label: 'Ćwiczenia'),
-// ],

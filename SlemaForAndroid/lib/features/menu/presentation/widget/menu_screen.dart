@@ -10,7 +10,7 @@ class MenuScreen extends StatelessWidget {
       color: const Color(0xFFE7ECEF), //TODO
       child: Column(
         children: [
-          Container(
+          SizedBox(
             height: 100,
             child: Padding(
               padding: const EdgeInsets.only(top: 30.0),
@@ -20,25 +20,25 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
           ),
-          Divider(),
-          MenuScreenButton(
+          const Divider(),
+          const MenuScreenButton(
             iconData: Icons.medication_outlined,
             label: 'Leki',
             destinationIndex: 3,
           ),
-          Divider(),
-          MenuScreenButton(
+          const Divider(),
+          const MenuScreenButton(
             iconData: Icons.restaurant_menu_outlined,
             label: 'Dieta',
             destinationIndex: 4,
           ),
-          Divider(),
-          MenuScreenButton(
+          const Divider(),
+          const MenuScreenButton(
             iconData: Icons.fitness_center_outlined,
             label: 'Ćwiczenia',
             destinationIndex: 5,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );
