@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
+import 'package:pg_slema/features/diet/presentation/widget/select_dishes_button.dart';
 
 class DietScreen extends StatefulWidget {
   const DietScreen({super.key});
@@ -30,6 +31,8 @@ class _DietScreenState extends State<DietScreen> {
         ),
       ),
       body: MealsInDayWidget(stream: _controller.stream),
+      floatingActionButton:
+          SelectDishesButton(onDishesSelected: (dishes) {}), //TODO
     );
   }
 

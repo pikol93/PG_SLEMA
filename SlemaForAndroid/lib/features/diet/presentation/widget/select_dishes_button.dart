@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/diet/presentation/widget/select_dishes_screen.dart';
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
@@ -14,8 +15,7 @@ class SelectDishesButton extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => //TODO: selectDishesScreen
-            ));
+                builder: (context) => const SelectDishesScreen()));
       },
       child: const Icon(Icons.add),
     );
