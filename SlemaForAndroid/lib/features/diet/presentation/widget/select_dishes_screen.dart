@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/select_dishes_controller.dart';
+import 'package:pg_slema/features/diet/presentation/widget/form_widgets/dishes_in_dish_category.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_list.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/save_button.dart';
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesScreen extends StatefulWidget {
@@ -36,20 +38,35 @@ class _SelectDishesScreenState extends State<SelectDishesScreen> {
           title: const Text("Edytuj posiłki"),
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
+        body: Center(
+            child: SingleChildScrollView(
+          physics: const ScrollPhysics(),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 20),
               MealTimeList(
                   onMealTimeChanged: _onMealTimeChanged,
                   initialValue: _controller.currentMealTime),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: _controller.mainCategories.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return DishesInDishCategory(
+                      category: _controller.mainCategories[index],
+                      onDishAdded: _controller.onDishAdded,
+                      onDishRemoved: _controller.onDishRemoved,
+                      selectedDishesIds: getSelectedDishesIdsForCategory(
+                          _controller.mainCategories[index]));
+                },
+              ),
               const SizedBox(height: 20),
               CustomSaveButton(
                   onSaveButtonClicked: () =>
                       widget.onDishesSelected(_controller.selectedDishes))
             ],
           ),
-        ));
+        )));
   }
 
   void _onMealTimeChanged(MealTime mealTime) {
@@ -59,5 +76,12 @@ class _SelectDishesScreenState extends State<SelectDishesScreen> {
 
   void _onDishCategoriesChanged() {
     setState(() {});
+  }
+
+  List<String> getSelectedDishesIdsForCategory(DishCategory category) {
+    return _controller
+        .getSelectedDishesForCategory(category.id)
+        .map((e) => e.id)
+        .toList(growable: true);
   }
 }

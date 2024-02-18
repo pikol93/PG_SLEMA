@@ -5,7 +5,6 @@ import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart'
 
 class DishesInDishCategory extends StatefulWidget {
   final DishCategory category;
-  final List<bool> dishesToggles;
   final ValueChanged<Dish> onDishAdded;
   final ValueChanged<String> onDishRemoved;
   final List<String> selectedDishesIds;
@@ -15,7 +14,6 @@ class DishesInDishCategory extends StatefulWidget {
       required this.category,
       required this.onDishAdded,
       required this.onDishRemoved,
-      required this.dishesToggles,
       required this.selectedDishesIds});
 
   @override
@@ -36,12 +34,14 @@ class DishesInDishCategory extends StatefulWidget {
 class _DishesInDishCategoryState extends State<DishesInDishCategory> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: Column(
+    return Column(
       children: [
+        const SizedBox(
+          height: 10,
+        ),
         Text(widget.category.name),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         DishesList(
             dishes: widget.getDishes(),
@@ -49,7 +49,7 @@ class _DishesInDishCategoryState extends State<DishesInDishCategory> {
             onDishRemoved: _onDishRemoved,
             dishesToggles: widget.dishesToToggles())
       ],
-    ));
+    );
   }
 
   void _onDishAdded(Dish value) {

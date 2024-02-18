@@ -12,12 +12,13 @@ class SelectDishesController {
   final Function onDishCategoriesChanged;
   final Map<MealTime, List<Dish>> selectedDishes;
   late final DishService dishService;
-  late final List<DishCategory> mainCategories;
+  late List<DishCategory> mainCategories;
   late final DishCategoryService dishCategoryService;
   late MealTime currentMealTime;
 
   SelectDishesController(this.onDishCategoriesChanged, this.selectedDishes) {
     currentMealTime = MealTime.firstMeal;
+    mainCategories = List.empty();
     final dishConverter = DishToDtoConverter();
     final dishRepository = SharedPreferencesDishRepository(dishConverter);
     dishService = DishService(dishRepository);
@@ -38,10 +39,17 @@ class SelectDishesController {
   }
 
   void onDishAdded(Dish dish) {
-    selectedDishes[currentMealTime]?.add(dish);
+    selectedDishes[currentMealTime]!.add(dish);
   }
 
   void onDishRemoved(String dishId) {
-    selectedDishes[currentMealTime]?.removeWhere((e) => e.id == dishId);
+    selectedDishes[currentMealTime]!.removeWhere((e) => e.id == dishId);
+  }
+
+  List<Dish> getSelectedDishesForCategory(String categoryId) {
+    var dishes = selectedDishes[currentMealTime];
+    return dishes!
+        .where((element) => element.categoryId == categoryId)
+        .toList(growable: true);
   }
 }
