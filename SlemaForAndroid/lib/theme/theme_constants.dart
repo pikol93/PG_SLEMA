@@ -92,6 +92,11 @@ ThemeData lightTheme = ThemeData(
       ),
       //backgroundColor: colorAppBarBackground,
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: lightColorScheme.primary,
+      foregroundColor: lightColorScheme.onPrimary,
+      iconSize: 40,
+    ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
         colorPrimaryLighter: colorPrimaryLighter,
