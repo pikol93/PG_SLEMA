@@ -22,29 +22,33 @@ class MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
+        padding: const EdgeInsets.all(0.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            IconButton(
-              tooltip: 'Kalendarz',
-              icon: const Icon(Icons.calendar_month_outlined),
-              onPressed: () {
-                controller.currentIndex = 0;
-              },
+            CustomNavigationDestination(
+              icon: Icons.calendar_month_outlined,
+              selectedIcon: Icons.calendar_month,
+              label: 'Kalendarz',
+              onPressed: controller.onTabTapped,
+              currentSelectedIndex: controller.currentIndex,
+              destinationIndex: 0,
             ),
-            IconButton(
-              tooltip: 'Start',
-              icon: const Icon(Icons.home_outlined),
-              onPressed: () {
-                controller.currentIndex = 1;
-              },
+            CustomNavigationDestination(
+              icon: Icons.home_outlined,
+              selectedIcon: Icons.home,
+              label: 'Start',
+              onPressed: controller.onTabTapped,
+              currentSelectedIndex: controller.currentIndex,
+              destinationIndex: 1,
             ),
-            IconButton(
-              tooltip: 'Menu',
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                controller.currentIndex = 2;
-              },
+            CustomNavigationDestination(
+              icon: Icons.menu_outlined,
+              selectedIcon: Icons.menu,
+              label: 'Menu',
+              onPressed: controller.onTabTapped,
+              currentSelectedIndex: controller.currentIndex,
+              destinationIndex: 2,
             ),
           ],
         ),
