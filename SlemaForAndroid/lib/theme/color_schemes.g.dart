@@ -6,14 +6,14 @@ const lightColorScheme = ColorScheme(
   primary: Color(0xFF133150), // Top navigation color
   onPrimary: Color(0xFFFFFFFF), // Text color
   primaryContainer: Color(0xFFFFFEFD), // Main containers color
-  onPrimaryContainer: Color(0xFF133150),  // Text color in containers
+  onPrimaryContainer: Color(0xFF133150), // Text color in containers
   // Container within container
   secondary: Color(0xFFd0d5da), // Container within container color
   onSecondary: Color(0xFF133150), // Text color
   secondaryContainer: Color(0xFFD4E3FF), // ?
   onSecondaryContainer: Color(0xFF001C3A), // ?
   // ???
-  tertiary: Color(0xFF006A67), 
+  tertiary: Color(0xFF006A67),
   onTertiary: Color(0xFFFFFFFF),
   tertiaryContainer: Color(0xFF6FF7F2),
   onTertiaryContainer: Color(0xFF00201F),
@@ -23,8 +23,8 @@ const lightColorScheme = ColorScheme(
   onError: Color(0xFFFFFFFF),
   onErrorContainer: Color(0xFF410002),
   // Gotowe
-  background: Color(0xFFE7ECEF),  // App main background color
-  onBackground: Color(0xFF133150),  // Text color
+  background: Color(0xFFE7ECEF), // App main background color
+  onBackground: Color(0xFF133150), // Text color
   // ?
   surface: Color(0xFFFFFFFF),
   onSurface: Color(0xFF133150),
@@ -36,7 +36,7 @@ const lightColorScheme = ColorScheme(
   onInverseSurface: Color(0xFFE1F4FF),
   inverseSurface: Color(0xFF003547),
   inversePrimary: Color(0xFFA0C9FF),
-  shadow: Color(0xFF000000),
+  shadow: Color(0x40000000),
   surfaceTint: Color(0xFF0D61A4),
   outlineVariant: Color(0xFFC3C6CF),
   scrim: Color(0xFF000000),
