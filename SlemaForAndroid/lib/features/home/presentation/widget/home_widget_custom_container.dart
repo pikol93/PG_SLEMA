@@ -12,6 +12,7 @@ class HomeWidgetCustomContainer extends StatelessWidget {
       margin:
           EdgeInsets.only(left: screenWidthMargin, right: screenWidthMargin),
       child: Material(
+        color: Theme.of(context).colorScheme.primaryContainer,
         elevation: 3.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
