@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/theme/custom_colors.dart';
 
 class LabeledDivider extends StatelessWidget {
   final String label;
