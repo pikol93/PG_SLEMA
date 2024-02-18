@@ -68,6 +68,7 @@ ThemeData lightTheme = ThemeData(
       titleTextStyle: TextStyle(
         fontFamily: 'Dongle',
         fontWeight: FontWeight.w700,
+        fontSize: 64,
         height: 0.0,
         color: lightColorScheme.onPrimary,
         shadows: const [

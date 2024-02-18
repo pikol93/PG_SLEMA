@@ -9,6 +9,7 @@ import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen_app_bar.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -25,9 +26,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
-  final double _toolbarHeight = 170.0;
-  final double _spaceBetweenBackIconAndTitle = 10.0;
-  final double _titleHorizontalPadding = 14.0;
 
   @override
   void dispose() {
@@ -38,40 +36,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: _toolbarHeight,
-        automaticallyImplyLeading: false,
-        title: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back_rounded)),
-            SizedBox(height: _spaceBetweenBackIconAndTitle),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: _titleHorizontalPadding),
-              child: const Text("Dodaj"),
-            ),
-            Padding(
-              padding:
-                  EdgeInsets.symmetric(horizontal: _titleHorizontalPadding),
-              child: const Text("lekarstwo"),
-            ),
-          ],
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(
-                    'assets/medicine/add_medicine_appbar_background.png'),
-                fit: BoxFit.fill),
-          ),
-        ),
-      ),
+      appBar: const AddMedicineScreenAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
