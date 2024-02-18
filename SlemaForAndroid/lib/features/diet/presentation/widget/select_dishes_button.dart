@@ -4,7 +4,7 @@ import 'package:pg_slema/features/dish/logic/entity/dish.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesButton extends StatelessWidget {
-  final ValueSetter<Map<MealTime, List<Dish>>> onDishesSelected;
+  final ValueChanged<Map<MealTime, List<Dish>>> onDishesSelected;
 
   const SelectDishesButton({super.key, required this.onDishesSelected});
 
@@ -15,7 +15,8 @@ class SelectDishesButton extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const SelectDishesScreen()));
+                builder: (context) =>
+                    SelectDishesScreen(onDishesSelected: onDishesSelected)));
       },
       child: const Icon(Icons.add),
     );
