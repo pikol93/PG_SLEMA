@@ -33,7 +33,7 @@ class SelectDishesController {
         .then((value) => onDishCategoriesChanged());
   }
 
-  void onMealTimeSelected(MealTime mealTime) {
+  void onMealTimeChanged(MealTime mealTime) {
     currentMealTime = mealTime;
   }
 

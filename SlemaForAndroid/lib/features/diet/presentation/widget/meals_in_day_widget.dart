@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
-import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
+import 'package:pg_slema/features/diet/presentation/controller/meals_in_day_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_meal_time_widget.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
@@ -18,12 +18,12 @@ class MealsInDayWidget extends StatefulWidget {
 }
 
 class _MealsInDayWidgetState extends State<MealsInDayWidget> {
-  late DietScreenController controller;
+  late MealsInDayController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = DietScreenController(_onMealsChanged);
+    controller = MealsInDayController(_onMealsChanged);
     controller.initializeMeals();
     widget.dateStream.listen((date) {
       controller.onDateChanged(date);
