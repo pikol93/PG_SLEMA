@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class MainScreenController extends ChangeNotifier {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   int get currentIndex => _currentIndex;
   set currentIndex(int index) {
@@ -13,8 +13,5 @@ class MainScreenController extends ChangeNotifier {
 
   void onTabTapped(int index) {
     currentIndex = index;
-    pageController.jumpToPage(
-      index,
-    );
   }
 }

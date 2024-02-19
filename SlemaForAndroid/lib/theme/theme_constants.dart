@@ -19,6 +19,7 @@ ThemeData lightTheme = ThemeData(
       ),
       headlineLarge: TextStyle(
         fontSize: 44,
+        fontWeight: FontWeight.w700,
       ),
       headlineMedium: TextStyle(
         fontSize: 40,
@@ -39,31 +40,13 @@ ThemeData lightTheme = ThemeData(
         fontSize: 20,
       ),
     ),
-    navigationBarTheme: NavigationBarThemeData(
-      //indicatorColor: const Color(0X00000000),
-      elevation: 0,
-      shadowColor: colorNavigationBarShadow,
-      labelTextStyle: MaterialStateProperty.resolveWith((states) {
-        return const TextStyle(
-          height: 0.7,
-          fontSize: 24.0,
-          fontWeight: FontWeight.w700,
-          //color: colorNavigationBarText,
-        );
-      }),
-      iconTheme: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
-          return const IconThemeData(
-            size: 36.0,
-            //color: colorNavigationBarIconSelected,
-          );
-        }
-        return const IconThemeData(
-          size: 36.0,
-          //color: colorNavigationBarIcon,
-        );
-      }),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: lightColorScheme.onPrimaryContainer,
     ),
+    iconButtonTheme: const IconButtonThemeData(
+        style: ButtonStyle(
+      iconSize: MaterialStatePropertyAll(36),
+    )),
     appBarTheme: AppBarTheme(
       titleTextStyle: TextStyle(
         fontFamily: 'Dongle',
