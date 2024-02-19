@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class GetMedicineLabel extends StatelessWidget {
+class SingleMedicineLabel extends StatelessWidget {
   final String label;
-  const GetMedicineLabel({super.key, required this.label});
+  const SingleMedicineLabel({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {

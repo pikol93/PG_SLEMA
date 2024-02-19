@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class GetMedicinesScreenAppBar extends StatelessWidget
+class AllMedicinesScreenAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  const GetMedicinesScreenAppBar({super.key});
+  const AllMedicinesScreenAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

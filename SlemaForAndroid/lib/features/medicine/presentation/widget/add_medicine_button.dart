@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/screen/add_medicine_screen.dart';
 
 class AddMedicineButton extends StatelessWidget {
   final ValueSetter<Medicine> onMedicineAdded;

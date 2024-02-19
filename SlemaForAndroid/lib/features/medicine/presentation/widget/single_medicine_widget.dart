@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/get_medicine_label.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/single_medicine_label.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/popup_menu_edit_delete_button.dart';
 
-class GetMedicineWidget extends StatelessWidget {
+class SingleMedicineWidget extends StatelessWidget {
   final ValueChanged<Medicine> onMedicineDeleted;
   final ValueChanged<Medicine> onMedicineEdited;
   final Medicine medicine;
 
-  const GetMedicineWidget(
+  const SingleMedicineWidget(
       {super.key,
       required this.medicine,
       required this.onMedicineDeleted,
@@ -55,7 +55,7 @@ class GetMedicineWidget extends StatelessWidget {
                   onDeletePressed: () => onMedicineDeleted(medicine)),
             ],
           ),
-          GetMedicineLabel(label: medicine.intakeType),
+          SingleMedicineLabel(label: medicine.intakeType),
         ]));
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/home/presentation/widget/home_screen.dart';
+import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
-import 'package:pg_slema/features/diet/presentation/widget/diet_screen.dart';
-import 'package:pg_slema/features/exercises/presentation/widget/exercises_screen.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/get_medicines_screen.dart';
+import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
+import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -25,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           HomeScreen(),
-          GetMedicinesScreen(),
+          AllMedicinesScreen(),
           DietScreen(),
           ExercisesScreen(),
         ],

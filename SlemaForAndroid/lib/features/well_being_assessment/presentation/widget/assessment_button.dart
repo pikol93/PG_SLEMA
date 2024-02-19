@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_screen.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddAssessmentButton extends StatelessWidget with Logger {

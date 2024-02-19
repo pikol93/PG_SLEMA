@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/diet/presentation/widget/select_dishes_screen.dart';
+import 'package:pg_slema/features/diet/presentation/screen/select_dishes_screen.dart';
 import 'package:pg_slema/features/dish/logic/entity/dish.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
