@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/theme/custom_colors.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String label;
@@ -45,46 +44,40 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    final MyColors? myColors = Theme.of(context).extension<MyColors>();
     return TextFormField(
       initialValue: widget.initialValue,
       validator: validateInput,
       onChanged: widget.onChanged,
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.primaryContainer,
         label: Padding(
           padding: EdgeInsets.only(bottom: defaultTextBottomPadding),
           child: Text(widget.label),
         ),
         labelStyle: TextStyle(
-          fontSize: labelFontSize,
-          fontWeight: FontWeight.w700,
-          color: myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
-        ),
+            fontSize: labelFontSize,
+            fontWeight: FontWeight.w700,
+            color: Theme.of(context).primaryColor),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
-                width: borderWidth)),
+                color: Theme.of(context).primaryColor, width: borderWidth)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
-                width: borderWidth)),
+                color: Theme.of(context).primaryColor, width: borderWidth)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(borderRadius),
             ),
             borderSide: BorderSide(
-                color:
-                    myColors?.formsCustomTextInputBorderColor ?? Colors.black12,
-                width: borderWidth)),
+                color: Theme.of(context).primaryColor, width: borderWidth)),
         prefixIcon: widget.icon == null
             ? null
             : SizedBox(
@@ -96,15 +89,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     ),
                     Icon(
                       widget.icon,
-                      color: myColors?.formsButtonBackgroundColor ??
-                          Colors.black12,
+                      color: Theme.of(context).primaryColor,
                       size: prefixIconSize,
                     ),
                     SizedBox(
                       height: verticalDividerBoxHeight,
                       child: VerticalDivider(
-                        color: myColors?.formsCustomTextInputBorderColor ??
-                            Colors.black12,
+                        color: Theme.of(context).primaryColor,
                         thickness: verticalDividerWidth,
                       ),
                     ),

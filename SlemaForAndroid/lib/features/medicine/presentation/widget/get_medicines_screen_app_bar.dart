@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 
 class GetMedicinesScreenAppBar extends StatelessWidget
     implements PreferredSizeWidget {
+  final toolbarHeight = 80.0;
   const GetMedicinesScreenAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: toolbarHeight,
       title: const Padding(
-        padding: EdgeInsets.only(left: 30.0, top: 24.0),
+        padding: EdgeInsets.only(top: 15.0),
         child: Text('Lekarstwa'),
       ),
+      surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       titleTextStyle: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
-            color: const Color(0xFF133150), //TODO
-            height: 0,
-            fontSize: 86,
+            color: Theme.of(context).primaryColor,
+            fontSize: Theme.of(context).textTheme.displayLarge?.fontSize,
           ),
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(80);
+  Size get preferredSize => Size.fromHeight(toolbarHeight);
 }

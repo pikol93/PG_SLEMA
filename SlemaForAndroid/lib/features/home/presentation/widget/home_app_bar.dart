@@ -11,13 +11,11 @@ class HomeAppBar extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
-              color: const Color(0xFF133150),
-              size: 48.0,
+              color: Theme.of(context).primaryColor,
             ),
         titleTextStyle: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
-              color: const Color(0xFF133150),
-              height: 0.0,
-              fontSize: 64,
+              color: Theme.of(context).primaryColor,
+              fontSize: Theme.of(context).textTheme.displayLarge?.fontSize,
             ),
         title: const Text("Dzień dobry!"),
         actions: [
