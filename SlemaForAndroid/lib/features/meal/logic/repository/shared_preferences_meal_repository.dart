@@ -51,4 +51,9 @@ class SharedPreferencesMealRepository
     var dto = meals.map((e) => converter.toDto(e)).toList(growable: true);
     await addAllFrom(dto);
   }
+
+  @override
+  Future deleteMeals(List<String> idsToRemove) async {
+    return deleteAllFrom(idsToRemove);
+  }
 }

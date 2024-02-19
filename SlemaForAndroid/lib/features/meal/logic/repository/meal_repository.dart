@@ -12,4 +12,6 @@ mixin MealRepository {
   Future<List<Meal>> getAllMeals();
 
   Future<List<Meal>> getAllMealsByDate(DateTime date);
+
+  Future deleteMeals(List<String> idsToRemove);
 }

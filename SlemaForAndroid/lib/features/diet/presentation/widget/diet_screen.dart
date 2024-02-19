@@ -35,15 +35,19 @@ class _DietScreenState extends State<DietScreen> {
       ),
       body: MealsInDayWidget(meals: _controller.meals),
       floatingActionButton: SelectDishesButton(
-        onDishesSelected: (dishes) {},
+        onDishesSelected: _onDishesSelected,
         initDishesProvider: _mealsToDishes,
-      ), //TODO
+      ),
     );
   }
 
   void _onDateChanged(DateTime date) async {
     _controller.onDateChanged(date);
     setState(() {});
+  }
+
+  void _onDishesSelected(Map<MealTime, List<Dish>> dishes) async {
+    _controller.updateMeals(dishes);
   }
 
   void _onMealsChanged() {

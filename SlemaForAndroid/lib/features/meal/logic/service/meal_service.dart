@@ -53,4 +53,8 @@ class MealService {
     return LinkedHashMap.fromIterable(MealTime.values,
         key: (key) => key, value: (value) => []);
   }
+
+  Future deleteMeals(List<String> idsToRemove) async {
+    return repository.deleteMeals(idsToRemove);
+  }
 }
