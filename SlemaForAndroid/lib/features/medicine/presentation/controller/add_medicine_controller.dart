@@ -12,8 +12,7 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/time_of_day/time_of_day_comparing_extension.dart';
 import 'package:uuid/uuid.dart';
 
-class AddMedicineController extends ChangeNotifier
-    with Logger, ManageNotificationsController {
+class AddMedicineController with Logger, ManageNotificationsController {
   String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   String typedMedicineName = "";

@@ -30,12 +30,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final double _titleHorizontalPadding = 14.0;
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
