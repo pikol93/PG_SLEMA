@@ -13,6 +13,7 @@ class NotificationDto with Dto {
   final DateTime lastNotificationDate;
   final Frequency notificationFrequency;
   final int scheduledId;
+  final int delayBetweenIntakes;
 
   NotificationDto(
       this.id,
@@ -23,5 +24,6 @@ class NotificationDto with Dto {
       this.firstNotificationDate,
       this.lastNotificationDate,
       this.notificationFrequency,
-      this.scheduledId);
+      this.scheduledId,
+      this.delayBetweenIntakes);
 }
