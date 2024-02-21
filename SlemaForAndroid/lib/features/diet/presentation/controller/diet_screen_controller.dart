@@ -40,7 +40,7 @@ class DietScreenController {
   }
 
   void updateMeals(Map<MealTime, List<Dish>> dishes) async {
-    for (var mealTime in MealTime.values) {
+    for (var mealTime in dishes.keys) {
       var dishesIds = dishes[mealTime]!.map((e) => e.id).toList();
       await _removeNotSelectedMeals(mealTime, dishesIds);
       await _createMissingMeals(mealTime, dishes[mealTime]!);
