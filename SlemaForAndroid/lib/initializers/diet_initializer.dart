@@ -74,7 +74,7 @@ class DietInitializer with Initializer {
   }
 
   Future initializeMeals() async {
-    if (true) {
+    if (false) {
       var dishes = await dishService.getAllDishes();
       var mealService = MealService(
           SharedPreferencesMealRepository(MealToDtoConverter(dishService)));

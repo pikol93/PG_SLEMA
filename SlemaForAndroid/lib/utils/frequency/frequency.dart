@@ -1,4 +1,4 @@
-enum Frequency { singular, daily, everyTwoDays, everyThreeDays }
+enum Frequency { singular, daily, everyXDays }
 
 extension FrequencyExtension on Frequency {
   String get name {
@@ -7,10 +7,8 @@ extension FrequencyExtension on Frequency {
         return 'Jednorazowo';
       case Frequency.daily:
         return 'Codziennie';
-      case Frequency.everyTwoDays:
-        return 'Co dwa dni';
-      case Frequency.everyThreeDays:
-        return 'Co trzy dni';
+      case Frequency.everyXDays:
+        return 'Co X dni';
     }
   }
 }
