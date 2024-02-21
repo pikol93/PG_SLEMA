@@ -36,10 +36,10 @@ class MedicineDtoToJsonConverter
         json.containsKey('delayBetweenIntakes')
             ? json['delayBetweenIntakes']
             : frequency.defaultDelayBetweenIntakes,
-        dose: json['dose'],
-        intakeType: json['intakeType'],
-        opinion: json['opinion'],
-        medicineType: json['medicineType']);
+        json.containsKey('dose') ? json['dose'] : '',
+        json.containsKey('intakeType') ? json['intakeType'] : '',
+        json.containsKey('opinion') ? json['opinion'] : '',
+        json.containsKey('medicineType') ? json['medicineType'] : '');
   }
 
   Map<String, dynamic> _toJson(MedicineDto dto) => {
@@ -49,10 +49,9 @@ class MedicineDtoToJsonConverter
         'lastIntakeDate': dto.lastIntakeDate.toString(),
         'intakeFrequency': JsonParser.parseEnumToJson(dto.intakeFrequency),
         'delayBetweenIntakes': dto.delayBetweenIntakes,
-        if (dto.dose != null) 'dose': dto.dose.toString(),
-        if (dto.intakeType != null) 'intakeType': dto.intakeType.toString(),
-        if (dto.opinion != null) 'opinion': dto.opinion.toString(),
-        if (dto.medicineType != null)
-          'medicineType': dto.medicineType.toString(),
+        'dose': dto.dose.toString(),
+        'intakeType': dto.intakeType.toString(),
+        'opinion': dto.opinion.toString(),
+        'medicineType': dto.medicineType.toString(),
       };
 }

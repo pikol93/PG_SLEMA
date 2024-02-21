@@ -16,10 +16,15 @@ class AddMedicineController with Logger, ManageNotificationsController {
   String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   String typedMedicineName = "";
-  String typedIntakeType = "";
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  bool canDateBePicked = false;
+  int delayBetweenDays = Frequency.singular.defaultDelayBetweenIntakes;
+  String typedDose = "";
+  String typedIntakeType = "";
+  String typedOpinion = "";
+  String typedMedicineType = "";
+  bool canStartDateBePicked = false;
+  bool canEndDateBePicked = false;
   @override
   List<GetNotification> notifications =
       List<GetNotification>.empty(growable: true);
@@ -118,6 +123,6 @@ class AddMedicineController with Logger, ManageNotificationsController {
   }
 
   void checkIfDateCanBePicked() {
-    canDateBePicked = frequency == Frequency.singular ? false : true;
+    canEndDateBePicked = frequency == Frequency.singular ? false : true;
   }
 }

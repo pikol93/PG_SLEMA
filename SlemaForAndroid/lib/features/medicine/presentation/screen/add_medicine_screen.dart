@@ -129,7 +129,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   Widget _createDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canDateBePicked) ...[
+        if (_controller.canEndDateBePicked) ...[
           CustomDatePicker(
               onDateSelected: (date) => _controller.endIntakeDate = date,
               controller: DatePickerController(

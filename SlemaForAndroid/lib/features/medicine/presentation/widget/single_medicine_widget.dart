@@ -59,7 +59,12 @@ class SingleMedicineWidget extends StatelessWidget {
                   onDeletePressed: () => onMedicineDeleted(medicine)),
             ],
           ),
-          SingleMedicineLabel(label: medicine.intakeType),
+          if(medicine.dose != null)
+            SingleMedicineLabel(label: medicine.dose!),
+          if(medicine.intakeType != null)
+            SingleMedicineLabel(label: medicine.intakeType!),
+          if(medicine.medicineType != null)
+            SingleMedicineLabel(label: medicine.medicineType!),
         ]));
   }
 }

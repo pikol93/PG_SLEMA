@@ -18,10 +18,10 @@ class MedicineToDtoConverter {
         dto.intakeFrequency,
         await service.getAllNotificationsByMedicine(medicineId),
         dto.delayBetweenIntakes,
-        dose: dto.dose,
-        intakeType: dto.intakeType,
-        opinion: dto.opinion,
-        medicineType: dto.medicineType);
+        dto.dose,
+        dto.intakeType,
+        dto.opinion,
+        dto.medicineType);
   }
 
   MedicineDto toDto(Medicine medicine) {
@@ -32,9 +32,9 @@ class MedicineToDtoConverter {
         medicine.lastIntakeDate,
         medicine.intakeFrequency,
         medicine.delayBetweenIntakes,
-        dose: medicine.dose,
-        intakeType: medicine.intakeType,
-        opinion: medicine.opinion,
-        medicineType: medicine.medicineType);
+         medicine.dose,
+         medicine.intakeType,
+         medicine.opinion,
+         medicine.medicineType);
   }
 }

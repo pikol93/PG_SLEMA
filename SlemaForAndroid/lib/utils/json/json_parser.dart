@@ -9,7 +9,8 @@ class JsonParser {
     );
   }
 
-  static T parseEnumFromJsonOrRandom<T>(String strValue, List<T> possibleValues) {
+  static T parseEnumFromJsonOrRandom<T>(
+      String strValue, List<T> possibleValues) {
     return possibleValues.firstWhere((e) => e.toString() == strValue,
         orElse: () => (possibleValues..shuffle()).first);
   }
