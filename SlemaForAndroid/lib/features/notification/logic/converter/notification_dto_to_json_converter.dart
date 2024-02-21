@@ -24,9 +24,11 @@ class NotificationDtoToJsonConverter
     String lastNotificationDate = json.containsKey('lastNotificationDate')
         ? json['lastNotificationDate']
         : DateTime.now().toString();
-    String frequency = json.containsKey('NotificationFrequency')
+    String frequencyStr = json.containsKey('NotificationFrequency')
         ? json['NotificationFrequency']
         : JsonParser.parseEnumToJson(Frequency.singular);
+    Frequency frequency = JsonParser.parseEnumFromJsonOrRandom<Frequency>(
+        frequencyStr, Frequency.values);
     String notificationTime = json.containsKey('notificationTime')
         ? json['notificationTime']
         : JsonParser.parseTimeOfDayToJson(const TimeOfDay(hour: 0, minute: 0));
@@ -38,10 +40,13 @@ class NotificationDtoToJsonConverter
         JsonParser.parseTimeOfDayFromJson(notificationTime),
         DateTime.parse(firstNotificationDate),
         DateTime.parse(lastNotificationDate),
-        JsonParser.parseEnumFromJsonOrRandom<Frequency>(frequency, Frequency.values),
+        frequency,
         json.containsKey('scheduledId')
             ? json['scheduledId']
-            : IntegerIdGenerator.generateRandomId());
+            : IntegerIdGenerator.generateRandomId(),
+        json.containsKey('delayBetweenIntakes')
+            ? json['delayBetweenIntakes']
+            : frequency.defaultDelayBetweenIntakes);
   }
 
   Map<String, dynamic> _toJson(NotificationDto dto) => {
@@ -55,6 +60,7 @@ class NotificationDtoToJsonConverter
         'lastNotificationDate': dto.lastNotificationDate.toString(),
         'notificationFrequency':
             JsonParser.parseEnumToJson(dto.notificationFrequency),
-        'scheduledId': dto.scheduledId
+        'scheduledId': dto.scheduledId,
+        'delayBetweenIntakes': dto.delayBetweenIntakes
       };
 }
