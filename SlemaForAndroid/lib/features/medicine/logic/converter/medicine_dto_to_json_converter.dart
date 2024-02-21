@@ -31,7 +31,7 @@ class MedicineDtoToJsonConverter
         json.containsKey('intakeType') ? json['intakeType'] : '',
         DateTime.parse(firstIntakeDate),
         DateTime.parse(lastIntakeDate),
-        JsonParser.parseEnumFromJson(frequency, Frequency.values));
+        JsonParser.parseEnumFromJsonOrRandom(frequency, Frequency.values));
   }
 
   Map<String, dynamic> _toJson(MedicineDto dto) => {

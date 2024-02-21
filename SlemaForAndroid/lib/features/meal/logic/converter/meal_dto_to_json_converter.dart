@@ -26,7 +26,7 @@ class MealDtoToJsonConverter
         json['id'],
         json.containsKey('dishId') ? json['dishId'] : '',
         DateTime.parse(mealDate),
-        JsonParser.parseEnumFromJson(mealTime, MealTime.values));
+        JsonParser.parseEnumFromJsonOrRandom(mealTime, MealTime.values));
   }
 
   Map<String, dynamic> _toJson(MealDto dto) => {

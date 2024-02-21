@@ -38,7 +38,7 @@ class NotificationDtoToJsonConverter
         JsonParser.parseTimeOfDayFromJson(notificationTime),
         DateTime.parse(firstNotificationDate),
         DateTime.parse(lastNotificationDate),
-        JsonParser.parseEnumFromJson<Frequency>(frequency, Frequency.values),
+        JsonParser.parseEnumFromJsonOrRandom<Frequency>(frequency, Frequency.values),
         json.containsKey('scheduledId')
             ? json['scheduledId']
             : IntegerIdGenerator.generateRandomId());
