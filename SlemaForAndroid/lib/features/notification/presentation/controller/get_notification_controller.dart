@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/notification/domain/get_notification.dart';
+import 'package:pg_slema/features/notification/logic/entity/get_notification.dart';
 
 class GetNotificationController {
   final GetNotification notification;

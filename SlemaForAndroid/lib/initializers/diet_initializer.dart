@@ -1,16 +1,16 @@
-import 'package:pg_slema/features/dish/application/dish_service.dart';
-import 'package:pg_slema/features/dish/domain/dish.dart';
-import 'package:pg_slema/features/dish_category/application/dish_category_name_exception.dart';
-import 'package:pg_slema/features/dish_category/application/dish_category_service.dart';
-import 'package:pg_slema/features/dish_category/data/repository/shared_preferences_dish_category_repository.dart';
-import 'package:pg_slema/features/dish_category/domain/converter/dish_category_to_dto.dart';
-import 'package:pg_slema/features/dish_category/domain/dish_category.dart';
-import 'package:pg_slema/features/meal/application/meal_service.dart';
-import 'package:pg_slema/features/meal/data/repository/shared_preferences_meal_repository.dart';
-import 'package:pg_slema/features/meal/domain/converter/meal_to_dto_converter.dart';
-import 'package:pg_slema/features/meal/domain/meal.dart';
+import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/dish_category/logic/converter/dish_category_to_dto.dart';
+import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
+import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_dish_category_repository.dart';
+import 'package:pg_slema/features/dish_category/logic/service/dish_category_service.dart';
+import 'package:pg_slema/features/dish_category/logic/service/exception/dish_category_name_exception.dart';
+import 'package:pg_slema/features/meal/logic/converter/meal_to_dto_converter.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal.dart';
+import 'package:pg_slema/features/meal/logic/repository/shared_preferences_meal_repository.dart';
+import 'package:pg_slema/features/meal/logic/service/meal_service.dart';
 import 'package:pg_slema/initializers/initializer.dart';
-import 'package:pg_slema/utils/meal_time/meal_time.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 import 'package:uuid/uuid.dart';
 
 class DietInitializer with Initializer {

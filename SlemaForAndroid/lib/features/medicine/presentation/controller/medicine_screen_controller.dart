@@ -1,9 +1,9 @@
-import 'package:pg_slema/features/medicine/application/service/medicine_service.dart';
-import 'package:pg_slema/features/medicine/data/repository/shared_preferences_medicine_repository.dart';
-import 'package:pg_slema/features/notification/application/service/notification_service.dart';
-import 'package:pg_slema/features/notification/data/repository/shared_preferences_notification_repository.dart';
-import 'package:pg_slema/features/medicine/domain/converter/medicine_to_dto_converter.dart';
-import 'package:pg_slema/features/medicine/domain/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/converter/medicine_to_dto_converter.dart';
+import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
+import 'package:pg_slema/features/medicine/logic/repository/shared_preferences_medicine_repository.dart';
+import 'package:pg_slema/features/medicine/logic/service/medicine_service.dart';
+import 'package:pg_slema/features/notification/logic/repository/shared_preferences_notification_repository.dart';
+import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
 
 class MedicineScreenController {
   final Function onMedicinesChanged;

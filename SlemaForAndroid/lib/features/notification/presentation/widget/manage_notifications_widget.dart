@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/notification/domain/get_notification.dart';
+import 'package:pg_slema/features/notification/logic/entity/get_notification.dart';
 import 'package:pg_slema/features/notification/presentation/controller/get_notification_controller.dart';
 import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
 import 'package:pg_slema/features/notification/presentation/widget/create_notification_button.dart';
