@@ -5,13 +5,15 @@ class CustomTextFormField extends StatefulWidget {
   final IconData? icon;
   final String? initialValue;
   final ValueChanged<String> onChanged;
+  final bool isValueRequired;
 
   const CustomTextFormField(
       {super.key,
       required this.label,
       required this.icon,
       required this.onChanged,
-      this.initialValue});
+      this.initialValue,
+      this.isValueRequired = true});
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -36,7 +38,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   String? validateInput(String? value) {
-    if (value == null || value.isEmpty) {
+    if (widget.isValueRequired && (value == null || value.isEmpty)) {
       return 'Proszę uzupełnić to pole';
     }
     return null;

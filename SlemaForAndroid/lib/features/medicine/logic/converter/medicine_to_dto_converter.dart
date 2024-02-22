@@ -32,9 +32,9 @@ class MedicineToDtoConverter {
         medicine.lastIntakeDate,
         medicine.intakeFrequency,
         medicine.delayBetweenIntakes,
-         medicine.dose,
-         medicine.intakeType,
-         medicine.opinion,
-         medicine.medicineType);
+        medicine.dose,
+        medicine.intakeType,
+        medicine.opinion,
+        medicine.medicineType);
   }
 }

@@ -14,7 +14,15 @@ class MedicineDto with Dto {
   final String opinion;
   final String medicineType;
 
-  MedicineDto(this.id, this.name, this.firstIntakeDate, this.lastIntakeDate,
-      this.intakeFrequency, this.delayBetweenIntakes,
-      this.dose, this.intakeType, this.opinion, this.medicineType);
+  MedicineDto(
+      this.id,
+      this.name,
+      this.firstIntakeDate,
+      this.lastIntakeDate,
+      this.intakeFrequency,
+      this.delayBetweenIntakes,
+      this.dose,
+      this.intakeType,
+      this.opinion,
+      this.medicineType);
 }

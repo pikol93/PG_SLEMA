@@ -41,7 +41,7 @@ class DietInitializer with Initializer {
       'Cielęcina',
       'Baranina'
     ]);
-    await initializeMeals(); //TODO: remove
+    await initializeMeals(false);
   }
 
   Future initializeDishesForCategory(
@@ -73,8 +73,8 @@ class DietInitializer with Initializer {
         .toList(growable: true);
   }
 
-  Future initializeMeals() async {
-    if (false) {
+  Future initializeMeals(bool initialize) async {
+    if (initialize) {
       var dishes = await dishService.getAllDishes();
       var mealService = MealService(
           SharedPreferencesMealRepository(MealToDtoConverter(dishService)));

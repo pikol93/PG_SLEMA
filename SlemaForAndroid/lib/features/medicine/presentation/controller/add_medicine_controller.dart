@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/notification/logic/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
@@ -9,7 +8,6 @@ import 'package:pg_slema/features/notification/presentation/controller/manage_no
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:pg_slema/utils/time_of_day/time_of_day_comparing_extension.dart';
 import 'package:uuid/uuid.dart';
 
 class AddMedicineController with Logger, ManageNotificationsController {
@@ -136,6 +134,7 @@ class AddMedicineController with Logger, ManageNotificationsController {
   }
 
   void checkIfDelayBetweenIntakesCanBePicked() {
-    canDelayBetweenIntakesBePicked = frequency == Frequency.everyXDays ? true : false;
+    canDelayBetweenIntakesBePicked =
+        frequency == Frequency.everyXDays ? true : false;
   }
 }
