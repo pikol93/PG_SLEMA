@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
-import 'package:pg_slema/utils/string/string_casing_extension.dart';
 
 class FrequencyList extends StatefulWidget {
   final ValueChanged<Frequency> onChanged;
@@ -14,8 +13,7 @@ class FrequencyList extends StatefulWidget {
 
   List<DropdownMenuEntry<Frequency>> _createFrequencyEntries() {
     return Frequency.values
-        .map((e) => DropdownMenuEntry<Frequency>(
-            value: e, label: e.name.toCapitalized()))
+        .map((e) => DropdownMenuEntry<Frequency>(value: e, label: e.name))
         .toList();
   }
 }
