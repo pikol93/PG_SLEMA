@@ -23,13 +23,10 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
             visible: isSelected,
             child: const Icon(Icons.arrow_drop_down),
           ),
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 2),
-              borderRadius: BorderRadius.circular(16),
-              color: variant.colorRepresentation,
-            ),
-            child: IconButton(onPressed: onPressed, icon: variant.icon),
+          IconButton(
+            onPressed: onPressed,
+            icon: variant.icon,
+            padding: EdgeInsets.zero,
           ),
           Visibility(
             visible: isSelected,
