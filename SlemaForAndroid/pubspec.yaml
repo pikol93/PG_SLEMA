@@ -75,11 +75,8 @@ flutter:
   assets:
     - assets/motivational_quotes.txt
     - assets/medicine/
-    - assets/placeholder_face_awful.png
-    - assets/placeholder_face_bad.png
-    - assets/placeholder_face_neutral.png
-    - assets/placeholder_face_good.png
-    - assets/placeholder_face_great.png
+    - assets/wellbeing/variants/
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

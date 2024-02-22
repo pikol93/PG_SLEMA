@@ -42,15 +42,15 @@ extension SymptomValueExtension on WellBeingVariant {
   Image get icon {
     switch (this) {
       case WellBeingVariant.awful:
-        return Image.asset("assets/placeholder_face_awful.png");
+        return Image.asset("assets/wellbeing/variants/awful.png");
       case WellBeingVariant.bad:
-        return Image.asset("assets/placeholder_face_bad.png");
+        return Image.asset("assets/wellbeing/variants/bad.png");
       case WellBeingVariant.neutral:
-        return Image.asset("assets/placeholder_face_neutral.png");
+        return Image.asset("assets/wellbeing/variants/neutral.png");
       case WellBeingVariant.good:
-        return Image.asset("assets/placeholder_face_good.png");
+        return Image.asset("assets/wellbeing/variants/good.png");
       case WellBeingVariant.great:
-        return Image.asset("assets/placeholder_face_great.png");
+        return Image.asset("assets/wellbeing/variants/great.png");
     }
   }
 }
