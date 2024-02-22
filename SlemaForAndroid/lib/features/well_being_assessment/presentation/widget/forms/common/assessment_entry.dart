@@ -13,21 +13,25 @@ class AssessmentFormContainer extends StatelessWidget with Logger {
         Expanded(
           child: Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.lightBlue[50],
+                    color: Theme.of(context).colorScheme.primaryContainer,
                     borderRadius: const BorderRadius.all(Radius.circular(16)),
-                    boxShadow: const [
+                    boxShadow: [
                       BoxShadow(
-                        color: Colors.grey,
+                        color: Theme.of(context).colorScheme.shadow,
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: Offset(3, 3),
+                        offset: const Offset(0, 4),
                       )
-                    ]),
+                    ],
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 3.0,
+                    )),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: child,
                 )),
           ),

@@ -32,7 +32,10 @@ class AssessmentSymptomEntry extends StatelessWidget {
           children: [
             AssessmentSymptomsChangeValueButton(
               onPressed: onDecreasePressed,
-              icon: const Icon(Icons.remove_circle_outline),
+              icon: Icon(
+                Icons.remove_circle_outline,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
             Expanded(
               child: ConstrainedBox(
@@ -48,7 +51,10 @@ class AssessmentSymptomEntry extends StatelessWidget {
             ),
             AssessmentSymptomsChangeValueButton(
               onPressed: onIncreasePressed,
-              icon: const Icon(Icons.add_circle_outline),
+              icon: Icon(
+                Icons.add_circle_outline,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ],
         ),
@@ -58,7 +64,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
             Text(
               symptomValue.textRepresentation,
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.labelMedium,
+              style: Theme.of(context).textTheme.labelSmall,
             )
           ],
         ),

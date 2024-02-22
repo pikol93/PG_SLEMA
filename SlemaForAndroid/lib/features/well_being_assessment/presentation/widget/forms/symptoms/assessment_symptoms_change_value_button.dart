@@ -12,8 +12,7 @@ class AssessmentSymptomsChangeValueButton extends StatelessWidget {
     return IconButton(
       onPressed: onPressed,
       icon: icon,
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
-      constraints: const BoxConstraints(),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
     );
   }
 }
