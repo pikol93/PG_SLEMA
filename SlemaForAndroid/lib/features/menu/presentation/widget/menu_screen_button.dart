@@ -17,9 +17,9 @@ class MenuScreenButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: InkWell(
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
             Icon(
@@ -36,10 +36,10 @@ class MenuScreenButton extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () {
-          controller.onTabTapped(destinationIndex);
-        },
       ),
+      onTap: () {
+        controller.onTabTapped(destinationIndex);
+      },
     );
   }
 }
