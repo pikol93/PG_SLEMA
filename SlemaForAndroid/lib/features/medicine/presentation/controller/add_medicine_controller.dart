@@ -16,15 +16,17 @@ class AddMedicineController with Logger, ManageNotificationsController {
   String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   String typedMedicineName = "";
+  DateTime startIntakeDate = DateTime.now();
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  int delayBetweenDays = Frequency.singular.defaultDelayBetweenIntakes;
+  int delayBetweenIntakes = Frequency.singular.defaultDelayBetweenIntakes;
   String typedDose = "";
   String typedIntakeType = "";
   String typedOpinion = "";
   String typedMedicineType = "";
-  bool canStartDateBePicked = false;
+  bool canStartDateBePicked = true;
   bool canEndDateBePicked = false;
+  bool canDelayBetweenIntakesBePicked = false;
   @override
   List<GetNotification> notifications =
       List<GetNotification>.empty(growable: true);
@@ -37,13 +39,18 @@ class AddMedicineController with Logger, ManageNotificationsController {
   void initFromMedicine(Medicine medicine) {
     _medicineId = medicine.id;
     typedMedicineName = medicine.name;
-    typedIntakeType = medicine.intakeType;
     endIntakeDate = medicine.lastIntakeDate;
     frequency = medicine.intakeFrequency;
     notifications = medicine.notifications
         .map((e) => GetNotification(e.id, e.notificationTime))
         .toList(growable: true);
-    checkIfDateCanBePicked();
+    delayBetweenIntakes = medicine.delayBetweenIntakes;
+    typedDose = medicine.dose;
+    typedIntakeType = medicine.intakeType;
+    typedOpinion = medicine.opinion;
+    typedMedicineType = medicine.medicineType;
+    checkIfEndDateCanBePicked();
+    checkIfDelayBetweenIntakesCanBePicked();
   }
 
   Future<Medicine> createMedicine() async {
@@ -55,11 +62,15 @@ class AddMedicineController with Logger, ManageNotificationsController {
     Medicine medicine = Medicine(
         _medicineId,
         typedMedicineName,
-        typedIntakeType,
-        DateTime.now(),
+        startIntakeDate,
         lastMedicineDate,
         frequency,
-        medicineNotifications);
+        medicineNotifications,
+        delayBetweenIntakes,
+        typedDose,
+        typedIntakeType,
+        typedOpinion,
+        typedMedicineType);
 
     return medicine;
   }
@@ -85,20 +96,10 @@ class AddMedicineController with Logger, ManageNotificationsController {
 
   DateTime _getLastNotificationDateTime() {
     if (frequency == Frequency.singular) {
-      return _getDateTimeForSingularIntakeMedicine();
+      return startIntakeDate;
     } else {
       return endIntakeDate;
     }
-  }
-
-  DateTime _getDateTimeForSingularIntakeMedicine() {
-    var currentTime = TimeOfDay.now();
-    return notifications
-            .where((notification) =>
-                !notification.notificationTime.isHigher(currentTime))
-            .isNotEmpty
-        ? DateTime.now().add(const Duration(days: 1))
-        : DateTime.now();
   }
 
   Future<List<nt.Notification>> _createNotificationsForMedicine(
@@ -115,14 +116,26 @@ class AddMedicineController with Logger, ManageNotificationsController {
             'Przypomnienie',
             'Trzeba przyjąć $typedMedicineName',
             notification.notificationTime,
-            DateTime.now(),
+            startIntakeDate,
             lastNotificationDate,
             frequency,
-            idsToSchedule.removeLast()))
+            idsToSchedule.removeLast(),
+            delayBetweenIntakes))
         .toList(growable: true);
   }
 
-  void checkIfDateCanBePicked() {
+  void onFrequencyChanged(Frequency frequency) {
+    this.frequency = frequency;
+    delayBetweenIntakes = frequency.defaultDelayBetweenIntakes;
+    checkIfDelayBetweenIntakesCanBePicked();
+    checkIfEndDateCanBePicked();
+  }
+
+  void checkIfEndDateCanBePicked() {
     canEndDateBePicked = frequency == Frequency.singular ? false : true;
+  }
+
+  void checkIfDelayBetweenIntakesCanBePicked() {
+    canDelayBetweenIntakesBePicked = frequency == Frequency.everyXDays ? true : false;
   }
 }
