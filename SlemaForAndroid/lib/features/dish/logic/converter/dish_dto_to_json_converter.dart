@@ -14,8 +14,7 @@ class DishDtoToJsonConverter
   }
 
   DishDto _fromJson(Map<String, dynamic> json) {
-    return DishDto(json['id'], json.containsKey('name') ? json['name'] : '',
-        json.containsKey('categoryId') ? json['categoryId'] : '');
+    return DishDto(json['id'], json['name'] ?? '', json['categoryId'] ?? '');
   }
 
   Map<String, dynamic> _toJson(DishDto dto) => {
