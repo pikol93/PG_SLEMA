@@ -125,7 +125,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   void _handleFrequencyChange(Frequency frequency) {
     _controller.onFrequencyChanged(frequency);
     setState(() {
-      _controller.checkIfEndDateCanBePicked();
+      _controller.updatePermissionForEndDatePicking();
     });
   }
 

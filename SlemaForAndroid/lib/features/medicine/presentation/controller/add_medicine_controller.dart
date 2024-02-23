@@ -47,8 +47,8 @@ class AddMedicineController with Logger, ManageNotificationsController {
     typedIntakeType = medicine.intakeType;
     typedOpinion = medicine.opinion;
     typedMedicineType = medicine.medicineType;
-    checkIfEndDateCanBePicked();
-    checkIfDelayBetweenIntakesCanBePicked();
+    updatePermissionForEndDatePicking();
+    updatePermissionForDelayBetweenIntakesPicking();
   }
 
   Future<Medicine> createMedicine() async {
@@ -125,15 +125,15 @@ class AddMedicineController with Logger, ManageNotificationsController {
   void onFrequencyChanged(Frequency frequency) {
     this.frequency = frequency;
     delayBetweenIntakes = frequency.defaultDelayBetweenIntakes;
-    checkIfDelayBetweenIntakesCanBePicked();
-    checkIfEndDateCanBePicked();
+    updatePermissionForDelayBetweenIntakesPicking();
+    updatePermissionForEndDatePicking();
   }
 
-  void checkIfEndDateCanBePicked() {
+  void updatePermissionForEndDatePicking() {
     canEndDateBePicked = frequency == Frequency.singular ? false : true;
   }
 
-  void checkIfDelayBetweenIntakesCanBePicked() {
+  void updatePermissionForDelayBetweenIntakesPicking() {
     canDelayBetweenIntakesBePicked =
         frequency == Frequency.everyXDays ? true : false;
   }
