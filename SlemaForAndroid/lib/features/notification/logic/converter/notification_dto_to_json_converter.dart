@@ -28,7 +28,8 @@ class NotificationDtoToJsonConverter
         json['lastNotificationDate'] ?? DateTime.now().toString();
 
     try {
-      frequency = _parseFrequencyFromJson(json);
+      frequency = JsonParser.parseEnumFromJson<Frequency>(
+          json['notificationFrequency'], Frequency.values);
     } on ArgumentError {
       //Frequency is initialized before try catch clause
     }
@@ -63,13 +64,4 @@ class NotificationDtoToJsonConverter
         'scheduledId': dto.scheduledId,
         'delayBetweenNotifications': dto.delayBetweenNotifications
       };
-
-  Frequency _parseFrequencyFromJson(Map<String, dynamic> json) {
-    String? frequencyStr = json['notificationFrequency'];
-    if (frequencyStr == null) {
-      throw ArgumentError("Missing key in json");
-    }
-    return JsonParser.parseEnumFromJson<Frequency>(
-        frequencyStr, Frequency.values);
-  }
 }

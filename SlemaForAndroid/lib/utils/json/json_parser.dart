@@ -9,9 +9,14 @@ class JsonParser {
     );
   }
 
-  static T parseEnumFromJson<T>(String strValue, List<T> possibleValues) {
-    return possibleValues.firstWhere((e) => e.toString() == strValue,
-        orElse: () => (throw ArgumentError("Incorrect enum value")));
+  /// Throws ArgumentError when jsonKey is null or doesn't match to any enum toString
+  static T parseEnumFromJson<T>(String? jsonKey, List<T> possibleValues) {
+    if(jsonKey == null) {
+      throw ArgumentError("Enum string can't be null");
+    }
+
+    return possibleValues.firstWhere((e) => e.toString() == jsonKey,
+        orElse: () => (throw ArgumentError("Incorrect enum string")));
   }
 
   static String parseEnumToJson<T>(T value) {

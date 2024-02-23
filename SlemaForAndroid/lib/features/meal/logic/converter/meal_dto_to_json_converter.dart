@@ -16,17 +16,15 @@ class MealDtoToJsonConverter
   }
 
   MealDto _fromJson(Map<String, dynamic> json) {
-    String mealTime = json.containsKey('mealTime')
-        ? json['mealTime']
-        : JsonParser.parseEnumToJson(MealTime.firstMeal);
-    String mealDate = json.containsKey('mealDate')
-        ? json['mealDate']
-        : DateTime.now().toString();
+    String mealTime = json['mealTime']
+        ?? JsonParser.parseEnumToJson(MealTime.firstMeal);
+    String mealDate = json['mealDate']
+        ?? DateTime.now().toString();
     return MealDto(
         json['id'],
-        json.containsKey('dishId') ? json['dishId'] : '',
+        json['dishId'] ?? '',
         DateTime.parse(mealDate),
-        JsonParser.parseEnumFromJsonOrRandom(mealTime, MealTime.values));
+        JsonParser.parseEnumFromJson(mealTime, MealTime.values));
   }
 
   Map<String, dynamic> _toJson(MealDto dto) => {
