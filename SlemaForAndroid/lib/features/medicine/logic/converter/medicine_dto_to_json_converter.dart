@@ -16,30 +16,31 @@ class MedicineDtoToJsonConverter
   }
 
   MedicineDto _fromJson(Map<String, dynamic> json) {
-    String firstIntakeDate = json.containsKey('firstIntakeDate')
-        ? json['firstIntakeDate']
-        : DateTime.now().toString();
-    String lastIntakeDate = json.containsKey('lastIntakeDate')
-        ? json['lastIntakeDate']
-        : DateTime.now().toString();
-    String frequencyStr = json.containsKey('intakeFrequency')
-        ? json['intakeFrequency']
-        : JsonParser.parseEnumToJson(Frequency.singular);
-    Frequency frequency =
-        JsonParser.parseEnumFromJsonOrRandom(frequencyStr, Frequency.values);
+    if (!json.containsKey('id')) {
+      throw const FormatException("Missing 'id' key in JSON");
+    }
+
+    Frequency frequency = Frequency.singular;
+    String firstIntakeDate =
+        json['firstIntakeDate'] ?? DateTime.now().toString();
+    String lastIntakeDate = json['lastIntakeDate'] ?? DateTime.now().toString();
+    try {
+      frequency = JsonParser.parseEnumFromJson(
+          json['intakeFrequency'], Frequency.values);
+    } on ArgumentError {
+      //Frequency is initialized before try catch clause
+    }
     return MedicineDto(
         json['id'],
-        json.containsKey('name') ? json['name'] : '',
+        json['name'] ?? '',
         DateTime.parse(firstIntakeDate),
         DateTime.parse(lastIntakeDate),
         frequency,
-        json.containsKey('delayBetweenIntakes')
-            ? json['delayBetweenIntakes']
-            : frequency.defaultDelayBetweenIntakes,
-        json.containsKey('dose') ? json['dose'] : '',
-        json.containsKey('intakeType') ? json['intakeType'] : '',
-        json.containsKey('opinion') ? json['opinion'] : '',
-        json.containsKey('medicineType') ? json['medicineType'] : '');
+        json['delayBetweenIntakes'] ?? frequency.defaultDelayBetweenIntakes,
+        json['dose'] ?? '',
+        json['intakeType'] ?? '',
+        json['opinion'] ?? '',
+        json['medicineType'] ?? '');
   }
 
   Map<String, dynamic> _toJson(MedicineDto dto) => {

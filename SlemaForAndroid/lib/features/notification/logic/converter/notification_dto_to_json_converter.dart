@@ -21,6 +21,7 @@ class NotificationDtoToJsonConverter
     if (!json.containsKey('id')) {
       throw const FormatException("Missing 'id' key in JSON");
     }
+
     Frequency frequency = Frequency.singular;
     String firstNotificationDate =
         json['firstNotificationDate'] ?? DateTime.now().toString();

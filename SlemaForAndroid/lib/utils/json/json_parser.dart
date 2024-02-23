@@ -11,7 +11,7 @@ class JsonParser {
 
   /// Throws ArgumentError when jsonKey is null or doesn't match to any enum toString
   static T parseEnumFromJson<T>(String? jsonKey, List<T> possibleValues) {
-    if(jsonKey == null) {
+    if (jsonKey == null) {
       throw ArgumentError("Enum string can't be null");
     }
 
