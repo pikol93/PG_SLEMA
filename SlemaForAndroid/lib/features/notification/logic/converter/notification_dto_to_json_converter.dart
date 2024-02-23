@@ -22,21 +22,14 @@ class NotificationDtoToJsonConverter
       throw const FormatException("Missing 'id' key in JSON");
     }
 
-    Frequency frequency = Frequency.singular;
+    Frequency frequency = _getFrequency(json['notificationFrequency']);
     String firstNotificationDate =
         json['firstNotificationDate'] ?? DateTime.now().toString();
     String lastNotificationDate =
         json['lastNotificationDate'] ?? DateTime.now().toString();
-
-    try {
-      frequency = JsonParser.parseEnumFromJson<Frequency>(
-          json['notificationFrequency'], Frequency.values);
-    } on ArgumentError {
-      //Frequency is initialized before try catch clause
-    }
-
     String notificationTime = json['notificationTime'] ??
         JsonParser.parseTimeOfDayToJson(const TimeOfDay(hour: 0, minute: 0));
+
     return NotificationDto(
         json['id'],
         json['ownerId'] ?? '',
@@ -65,4 +58,14 @@ class NotificationDtoToJsonConverter
         'scheduledId': dto.scheduledId,
         'delayBetweenNotifications': dto.delayBetweenNotifications
       };
+
+  Frequency _getFrequency(String? jsonKey) {
+    Frequency frequency = Frequency.singular;
+    try {
+      frequency = JsonParser.parseEnumFromJson(jsonKey, Frequency.values);
+    } on ArgumentError {
+      //Frequency is initialized before try catch clause
+    }
+    return frequency;
+  }
 }

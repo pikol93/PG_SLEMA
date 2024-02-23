@@ -16,14 +16,13 @@ class MealDtoToJsonConverter
   }
 
   MealDto _fromJson(Map<String, dynamic> json) {
-    MealTime mealTime = MealTime.firstMeal;
-    try {
-      mealTime =
-          JsonParser.parseEnumFromJson(json['mealTime'], MealTime.values);
-    } on ArgumentError {
-      //Meal time is initialized before try catch clause
+    if (!json.containsKey('id')) {
+      throw const FormatException("Missing 'id' key in JSON");
     }
+
+    MealTime mealTime = _getMealTime(json['mealTime']);
     String mealDate = json['mealDate'] ?? DateTime.now().toString();
+
     return MealDto(
         json['id'], json['dishId'] ?? '', DateTime.parse(mealDate), mealTime);
   }
@@ -34,4 +33,14 @@ class MealDtoToJsonConverter
         'mealDate': dto.mealDate.toString(),
         'mealTime': JsonParser.parseEnumToJson(dto.mealTime),
       };
+
+  MealTime _getMealTime(String? jsonKey) {
+    MealTime mealTime = MealTime.firstMeal;
+    try {
+      mealTime = JsonParser.parseEnumFromJson(jsonKey, MealTime.values);
+    } on ArgumentError {
+      //Meal time is initialized before try catch clause
+    }
+    return mealTime;
+  }
 }

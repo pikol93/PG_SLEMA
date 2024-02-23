@@ -20,16 +20,11 @@ class MedicineDtoToJsonConverter
       throw const FormatException("Missing 'id' key in JSON");
     }
 
-    Frequency frequency = Frequency.singular;
+    Frequency frequency = _getFrequency(json['intakeFrequency']);
     String firstIntakeDate =
         json['firstIntakeDate'] ?? DateTime.now().toString();
     String lastIntakeDate = json['lastIntakeDate'] ?? DateTime.now().toString();
-    try {
-      frequency = JsonParser.parseEnumFromJson(
-          json['intakeFrequency'], Frequency.values);
-    } on ArgumentError {
-      //Frequency is initialized before try catch clause
-    }
+
     return MedicineDto(
         json['id'],
         json['name'] ?? '',
@@ -55,4 +50,14 @@ class MedicineDtoToJsonConverter
         'opinion': dto.opinion.toString(),
         'medicineType': dto.medicineType.toString(),
       };
+
+  Frequency _getFrequency(String? jsonKey) {
+    Frequency frequency = Frequency.singular;
+    try {
+      frequency = JsonParser.parseEnumFromJson(jsonKey, Frequency.values);
+    } on ArgumentError {
+      //Frequency is initialized before try catch clause
+    }
+    return frequency;
+  }
 }
