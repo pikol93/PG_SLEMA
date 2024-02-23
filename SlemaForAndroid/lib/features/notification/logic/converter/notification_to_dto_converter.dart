@@ -13,7 +13,7 @@ class NotificationToDtoConverter {
         dto.lastNotificationDate,
         dto.notificationFrequency,
         dto.scheduledId,
-        dto.delayBetweenIntakes);
+        dto.delayBetweenNotifications);
   }
 
   static NotificationDto toDto(Notification notification) {
@@ -27,6 +27,6 @@ class NotificationToDtoConverter {
         notification.lastNotificationDate,
         notification.notificationFrequency,
         notification.scheduledId,
-        notification.delayBetweenIntakes);
+        notification.delayBetweenNotifications);
   }
 }

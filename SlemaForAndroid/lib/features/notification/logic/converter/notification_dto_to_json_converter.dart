@@ -18,35 +18,35 @@ class NotificationDtoToJsonConverter
   }
 
   NotificationDto _fromJson(Map<String, dynamic> json) {
-    String firstNotificationDate = json.containsKey('firstNotificationDate')
-        ? json['firstNotificationDate']
-        : DateTime.now().toString();
-    String lastNotificationDate = json.containsKey('lastNotificationDate')
-        ? json['lastNotificationDate']
-        : DateTime.now().toString();
-    String frequencyStr = json.containsKey('NotificationFrequency')
-        ? json['NotificationFrequency']
-        : JsonParser.parseEnumToJson(Frequency.singular);
-    Frequency frequency = JsonParser.parseEnumFromJsonOrRandom<Frequency>(
-        frequencyStr, Frequency.values);
-    String notificationTime = json.containsKey('notificationTime')
-        ? json['notificationTime']
-        : JsonParser.parseTimeOfDayToJson(const TimeOfDay(hour: 0, minute: 0));
+    if (!json.containsKey('id')) {
+      throw const FormatException("Missing 'id' key in JSON");
+    }
+    Frequency frequency = Frequency.singular;
+    String firstNotificationDate =
+        json['firstNotificationDate'] ?? DateTime.now().toString();
+    String lastNotificationDate =
+        json['lastNotificationDate'] ?? DateTime.now().toString();
+
+    try {
+      frequency = _parseFrequencyFromJson(json);
+    } on ArgumentError {
+      //Frequency is initialized before try catch clause
+    }
+
+    String notificationTime = json['notificationTime'] ??
+        JsonParser.parseTimeOfDayToJson(const TimeOfDay(hour: 0, minute: 0));
     return NotificationDto(
         json['id'],
-        json.containsKey('ownerId') ? json['ownerId'] : '',
-        json.containsKey('title') ? json['title'] : '',
-        json.containsKey('body') ? json['body'] : '',
+        json['ownerId'] ?? '',
+        json['title'] ?? '',
+        json['body'] ?? '',
         JsonParser.parseTimeOfDayFromJson(notificationTime),
         DateTime.parse(firstNotificationDate),
         DateTime.parse(lastNotificationDate),
         frequency,
-        json.containsKey('scheduledId')
-            ? json['scheduledId']
-            : IntegerIdGenerator.generateRandomId(),
-        json.containsKey('delayBetweenIntakes')
-            ? json['delayBetweenIntakes']
-            : frequency.defaultDelayBetweenIntakes);
+        json['scheduledId'] ?? IntegerIdGenerator.generateRandomId(),
+        json['delayBetweenNotifications'] ??
+            frequency.defaultDelayBetweenIntakes);
   }
 
   Map<String, dynamic> _toJson(NotificationDto dto) => {
@@ -61,6 +61,15 @@ class NotificationDtoToJsonConverter
         'notificationFrequency':
             JsonParser.parseEnumToJson(dto.notificationFrequency),
         'scheduledId': dto.scheduledId,
-        'delayBetweenIntakes': dto.delayBetweenIntakes
+        'delayBetweenNotifications': dto.delayBetweenNotifications
       };
+
+  Frequency _parseFrequencyFromJson(Map<String, dynamic> json) {
+    String? frequencyStr = json['notificationFrequency'];
+    if (frequencyStr == null) {
+      throw ArgumentError("Missing key in json");
+    }
+    return JsonParser.parseEnumFromJson<Frequency>(
+        frequencyStr, Frequency.values);
+  }
 }
