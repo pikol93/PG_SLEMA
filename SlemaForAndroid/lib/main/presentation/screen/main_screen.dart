@@ -6,7 +6,8 @@ import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_scr
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
-import 'package:pg_slema/features/menu/presentation/widget/menu_screen.dart';
+import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
+import 'package:pg_slema/features/well_being_assessment/presentation/screen/assessment_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -60,6 +61,7 @@ class MainScreenState extends State<MainScreen> {
         const AllMedicinesScreen(),
         const DietScreen(),
         const ExercisesScreen(),
+        const AssessmentScreen()
       ][controller.currentIndex],
     );
   }

@@ -20,26 +20,28 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
   @override
   Widget build(BuildContext context) {
     final currentDateString = DateTime.now().toDateString();
-    return Scaffold(
-      appBar: AssessmentAppBar(currentDateString),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: const Column(
-            children: [
-              AssessmentFormContainer(
-                child: AssessmentWellBeingForm(),
-              ),
-              AssessmentFormContainer(
-                child: AssessmentSymptomsFormWidget(),
-              ),
-              AssessmentFormContainer(
-                child: AssessmentSleepForm(),
-              ),
-            ],
+    return CustomScrollView(
+      slivers: <Widget>[
+        AssessmentAppBar(currentDateString: currentDateString),
+        SliverToBoxAdapter(
+          child: Form(
+            key: _formKey,
+            child: const Column(
+              children: [
+                AssessmentFormContainer(
+                  child: AssessmentWellBeingForm(),
+                ),
+                AssessmentFormContainer(
+                  child: AssessmentSymptomsFormWidget(),
+                ),
+                AssessmentFormContainer(
+                  child: AssessmentSleepForm(),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

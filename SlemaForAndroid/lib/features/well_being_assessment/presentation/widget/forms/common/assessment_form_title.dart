@@ -11,7 +11,10 @@ class AssessmentFormTitle extends StatelessWidget with Logger {
     return Text(
       title,
       textAlign: TextAlign.center,
-      style: Theme.of(context).textTheme.headlineMedium,
+      style: Theme.of(context)
+          .textTheme
+          .headlineMedium
+          ?.copyWith(fontWeight: FontWeight.w700),
     );
   }
 }
