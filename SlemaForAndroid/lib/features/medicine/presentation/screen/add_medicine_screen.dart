@@ -56,10 +56,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                         padding: EdgeInsets.only(
                             left: _mainWidgetsPaddingHorizontal, right: 3.0),
                         child: CustomTextFormField(
-                          label: "Dawka TODO",
+                          label: "Dawka",
                           icon: Icons.vaccines,
-                          onChanged: (value) =>
-                              logger.warning("Not implemented yet - Dawka"),
+                          onChanged: (value) => _controller.typedDose = value,
+                          isValueRequired: false,
                         ),
                       ),
                     ),
@@ -70,10 +70,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                           right: _mainWidgetsPaddingHorizontal,
                         ),
                         child: CustomTextFormField(
-                          label: "Rodzaj TODO",
+                          label: "Rodzaj",
                           icon: Icons.medication_outlined,
                           onChanged: (value) =>
-                              logger.warning("Not implemented yet - Rodzaj"),
+                              _controller.typedMedicineType = value,
+                          isValueRequired: false,
                         ),
                       ),
                     ),
@@ -87,6 +88,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     label: "Jak używać",
                     icon: Icons.water_drop_outlined,
                     onChanged: (value) => _controller.typedIntakeType = value,
+                    isValueRequired: false,
                   ),
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
@@ -95,7 +97,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 SizedBox(height: _mainPaddingBetweenInputs),
-                _createDataFieldIfPossible(),
+                _createStartIntakeDataField(),
+                _createEndIntakeDataFieldIfPossible(),
                 ManageNotificationsWidget(
                   controller: _controller,
                 ),
@@ -120,16 +123,16 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   }
 
   void _handleFrequencyChange(Frequency frequency) {
-    _controller.frequency = frequency;
+    _controller.onFrequencyChanged(frequency);
     setState(() {
-      _controller.checkIfDateCanBePicked();
+      _controller.updatePermissionForEndDatePicking();
     });
   }
 
-  Widget _createDataFieldIfPossible() {
+  Widget _createEndIntakeDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canDateBePicked) ...[
+        if (_controller.canEndDateBePicked) ...[
           CustomDatePicker(
               onDateSelected: (date) => _controller.endIntakeDate = date,
               controller: DatePickerController(
@@ -139,6 +142,19 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
               label: "Data zakończenia przyjmowania"),
           const SizedBox(height: 20),
         ]
+      ],
+    );
+  }
+
+  Widget _createStartIntakeDataField() {
+    return Column(
+      children: [
+        CustomDatePicker(
+            onDateSelected: (date) => _controller.startIntakeDate = date,
+            controller: DatePickerController(DateTime.now(),
+                DateTime.now().add(const Duration(days: 365)), DateTime.now()),
+            label: "Data zakończenia przyjmowania"),
+        const SizedBox(height: 20),
       ],
     );
   }

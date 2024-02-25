@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/notification/logic/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
@@ -9,17 +8,23 @@ import 'package:pg_slema/features/notification/presentation/controller/manage_no
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:pg_slema/utils/time_of_day/time_of_day_comparing_extension.dart';
 import 'package:uuid/uuid.dart';
 
 class AddMedicineController with Logger, ManageNotificationsController {
   String _medicineId = const Uuid().v4();
   late final NotificationService _notificationService;
   String typedMedicineName = "";
-  String typedIntakeType = "";
+  DateTime startIntakeDate = DateTime.now();
   DateTime endIntakeDate = DateTime.now();
   Frequency frequency = Frequency.singular;
-  bool canDateBePicked = false;
+  int delayBetweenIntakes = Frequency.singular.defaultDelayBetweenIntakes;
+  String typedDose = "";
+  String typedIntakeType = "";
+  String typedOpinion = "";
+  String typedMedicineType = "";
+  bool canStartDateBePicked = true;
+  bool canEndDateBePicked = false;
+  bool canDelayBetweenIntakesBePicked = false;
   @override
   List<GetNotification> notifications =
       List<GetNotification>.empty(growable: true);
@@ -32,13 +37,18 @@ class AddMedicineController with Logger, ManageNotificationsController {
   void initFromMedicine(Medicine medicine) {
     _medicineId = medicine.id;
     typedMedicineName = medicine.name;
-    typedIntakeType = medicine.intakeType;
     endIntakeDate = medicine.lastIntakeDate;
     frequency = medicine.intakeFrequency;
     notifications = medicine.notifications
         .map((e) => GetNotification(e.id, e.notificationTime))
         .toList(growable: true);
-    checkIfDateCanBePicked();
+    delayBetweenIntakes = medicine.delayBetweenIntakes;
+    typedDose = medicine.dose;
+    typedIntakeType = medicine.intakeType;
+    typedOpinion = medicine.opinion;
+    typedMedicineType = medicine.medicineType;
+    updatePermissionForEndDatePicking();
+    updatePermissionForDelayBetweenIntakesPicking();
   }
 
   Future<Medicine> createMedicine() async {
@@ -50,11 +60,15 @@ class AddMedicineController with Logger, ManageNotificationsController {
     Medicine medicine = Medicine(
         _medicineId,
         typedMedicineName,
-        typedIntakeType,
-        DateTime.now(),
+        startIntakeDate,
         lastMedicineDate,
         frequency,
-        medicineNotifications);
+        medicineNotifications,
+        delayBetweenIntakes,
+        typedDose,
+        typedIntakeType,
+        typedOpinion,
+        typedMedicineType);
 
     return medicine;
   }
@@ -80,20 +94,10 @@ class AddMedicineController with Logger, ManageNotificationsController {
 
   DateTime _getLastNotificationDateTime() {
     if (frequency == Frequency.singular) {
-      return _getDateTimeForSingularIntakeMedicine();
+      return startIntakeDate;
     } else {
       return endIntakeDate;
     }
-  }
-
-  DateTime _getDateTimeForSingularIntakeMedicine() {
-    var currentTime = TimeOfDay.now();
-    return notifications
-            .where((notification) =>
-                !notification.notificationTime.isHigher(currentTime))
-            .isNotEmpty
-        ? DateTime.now().add(const Duration(days: 1))
-        : DateTime.now();
   }
 
   Future<List<nt.Notification>> _createNotificationsForMedicine(
@@ -110,14 +114,27 @@ class AddMedicineController with Logger, ManageNotificationsController {
             'Przypomnienie',
             'Trzeba przyjąć $typedMedicineName',
             notification.notificationTime,
-            DateTime.now(),
+            startIntakeDate,
             lastNotificationDate,
             frequency,
-            idsToSchedule.removeLast()))
+            idsToSchedule.removeLast(),
+            delayBetweenIntakes))
         .toList(growable: true);
   }
 
-  void checkIfDateCanBePicked() {
-    canDateBePicked = frequency == Frequency.singular ? false : true;
+  void onFrequencyChanged(Frequency frequency) {
+    this.frequency = frequency;
+    delayBetweenIntakes = frequency.defaultDelayBetweenIntakes;
+    updatePermissionForDelayBetweenIntakesPicking();
+    updatePermissionForEndDatePicking();
+  }
+
+  void updatePermissionForEndDatePicking() {
+    canEndDateBePicked = frequency == Frequency.singular ? false : true;
+  }
+
+  void updatePermissionForDelayBetweenIntakesPicking() {
+    canDelayBetweenIntakesBePicked =
+        frequency == Frequency.everyXDays ? true : false;
   }
 }

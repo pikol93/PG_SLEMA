@@ -14,8 +14,11 @@ class DishDtoToJsonConverter
   }
 
   DishDto _fromJson(Map<String, dynamic> json) {
-    return DishDto(json['id'], json.containsKey('name') ? json['name'] : '',
-        json.containsKey('categoryId') ? json['categoryId'] : '');
+    if (!json.containsKey('id')) {
+      throw const FormatException("Missing 'id' key in JSON");
+    }
+
+    return DishDto(json['id'], json['name'] ?? '', json['categoryId'] ?? '');
   }
 
   Map<String, dynamic> _toJson(DishDto dto) => {

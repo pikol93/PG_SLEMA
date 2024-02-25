@@ -84,7 +84,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   void _handleFrequencyChange(Frequency frequency) {
     _controller.frequency = frequency;
     setState(() {
-      _controller.canDateBePicked =
+      _controller.canEndDateBePicked =
           frequency == Frequency.singular ? false : true;
     });
   }
@@ -92,7 +92,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   Widget _createDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canDateBePicked) ...[
+        if (_controller.canEndDateBePicked) ...[
           CustomDatePicker(
               onDateSelected: (date) => _controller.endIntakeDate = date,
               controller: DatePickerController(

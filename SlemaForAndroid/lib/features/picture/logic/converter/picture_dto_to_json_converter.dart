@@ -19,9 +19,9 @@ class PictureDtoToJsonConverter
     }
 
     String id = json['id'];
-    String url = json.containsKey('url') ? json['url'] : '';
-    String name = json.containsKey('name') ? json['name'] : '';
-    String extension = json.containsKey('extension') ? json['extension'] : '';
+    String url = json['url'] ?? '';
+    String name = json['name'] ?? '';
+    String extension = json['extension'] ?? '';
     int byteSize =
         json.containsKey('byteSize') ? int.parse(json['byteSize']) : 0;
 

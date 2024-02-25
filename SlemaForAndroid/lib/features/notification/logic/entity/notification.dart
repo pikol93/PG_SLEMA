@@ -12,6 +12,7 @@ class Notification {
   final DateTime lastNotificationDate;
   final Frequency notificationFrequency;
   final int scheduledId;
+  final int delayBetweenNotifications;
 
   Notification(
       this.id,
@@ -22,7 +23,8 @@ class Notification {
       this.firstNotificationDate,
       this.lastNotificationDate,
       this.notificationFrequency,
-      this.scheduledId);
+      this.scheduledId,
+      this.delayBetweenNotifications);
 
   @override
   String toString() {

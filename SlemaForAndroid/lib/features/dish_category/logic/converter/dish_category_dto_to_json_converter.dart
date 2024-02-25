@@ -14,8 +14,11 @@ class DishCategoryDtoToJsonConverter
   }
 
   DishCategoryDto _fromJson(Map<String, dynamic> json) {
-    return DishCategoryDto(
-        json['id'], json.containsKey('name') ? json['name'] : "",
+    if (!json.containsKey('id')) {
+      throw const FormatException("Missing 'id' key in JSON");
+    }
+
+    return DishCategoryDto(json['id'], json['name'] ?? "",
         parentCategoryId: json['parentCategoryId']);
   }
 
