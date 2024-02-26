@@ -87,7 +87,7 @@ ThemeData lightTheme = ThemeData(
       ),
     ]);
 
-ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    colorScheme: darkColorScheme);
+ThemeData darkTheme = lightTheme.copyWith(
+  brightness: Brightness.dark,
+  colorScheme: darkColorScheme,
+);
