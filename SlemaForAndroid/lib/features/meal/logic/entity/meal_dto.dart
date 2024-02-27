@@ -5,9 +5,9 @@ class MealDto with Dto {
   @override
   final String id;
   final String title;
-  final Set<String> dishesIds;
+  final Set<String> ingredientsIds;
   final DateTime mealDate;
   final MealTime mealTime;
 
-  MealDto(this.id, this.title, this.dishesIds, this.mealDate, this.mealTime);
+  MealDto(this.id, this.title, this.ingredientsIds, this.mealDate, this.mealTime);
 }

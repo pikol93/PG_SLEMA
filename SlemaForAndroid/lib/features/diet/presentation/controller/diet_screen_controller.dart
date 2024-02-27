@@ -60,7 +60,7 @@ class DietScreenController {
 
   Future _createMissingMeals(MealTime mealTime, List<Dish> dishes) async {
     var idGenerator = const Uuid();
-    var currentDishes = meals[mealTime]!.map((e) => e.dishes.id).toList();
+    var currentDishes = meals[mealTime]!.map((e) => e.ingredients.id).toList();
     var dishesToAdd = dishes
         .where((element) => !currentDishes.contains(element.id))
         .toList(growable: true);

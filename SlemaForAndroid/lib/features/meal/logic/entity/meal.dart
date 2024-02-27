@@ -5,9 +5,9 @@ class Meal {
   static const String mealListSharedPrefKey = 'meals';
   final String id;
   final String title;
-  final Set<Dish> dishes;
+  final Set<Dish> ingredients;
   final DateTime mealDate;
   final MealTime mealTime;
 
-  Meal(this.id, this.title, this.dishes, this.mealDate, this.mealTime);
+  Meal(this.id, this.title, this.ingredients, this.mealDate, this.mealTime);
 }

@@ -24,7 +24,7 @@ class MealsInMealTimeWidget extends StatelessWidget {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      return Text(meals.elementAt(index).dishes.name)
+                      return Text(meals.elementAt(index).ingredients.name)
                           .build(context);
                     },
                     childCount: meals.length,
