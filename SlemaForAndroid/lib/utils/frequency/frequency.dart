@@ -11,8 +11,4 @@ extension FrequencyExtension on Frequency {
         return 'Co X dni';
     }
   }
-
-  int get defaultDelayBetweenIntakes {
-    return 1;
-  }
 }
