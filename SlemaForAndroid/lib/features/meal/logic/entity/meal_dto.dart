@@ -4,9 +4,10 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 class MealDto with Dto {
   @override
   final String id;
+  final String title;
   final Set<String> dishesIds;
   final DateTime mealDate;
   final MealTime mealTime;
 
-  MealDto(this.id, this.dishesIds, this.mealDate, this.mealTime);
+  MealDto(this.id, this.title, this.dishesIds, this.mealDate, this.mealTime);
 }

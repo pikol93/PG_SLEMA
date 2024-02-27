@@ -4,9 +4,10 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 class Meal {
   static const String mealListSharedPrefKey = 'meals';
   final String id;
+  final String title;
   final Set<Dish> dishes;
   final DateTime mealDate;
   final MealTime mealTime;
 
-  Meal(this.id, this.dishes, this.mealDate, this.mealTime);
+  Meal(this.id, this.title, this.dishes, this.mealDate, this.mealTime);
 }

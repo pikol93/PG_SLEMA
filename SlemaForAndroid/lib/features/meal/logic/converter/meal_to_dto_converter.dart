@@ -13,11 +13,12 @@ class MealToDtoConverter {
     var dishes = allDishes
         .where((element) => dto.dishesIds.contains(element.id))
         .toSet();
-    return Meal(dto.id, dishes, dto.mealDate, dto.mealTime);
+    return Meal(dto.id, dto.title, dishes, dto.mealDate, dto.mealTime);
   }
 
   MealDto toDto(Meal meal) {
     var dishesIds = meal.dishes.map((e) => e.id).toSet();
-    return MealDto(meal.id, dishesIds, meal.mealDate, meal.mealTime);
+    return MealDto(
+        meal.id, meal.title, dishesIds, meal.mealDate, meal.mealTime);
   }
 }
