@@ -74,11 +74,10 @@ class NotificationSchedulingService {
   }
 
   DateTime _calculateDailyNotificationDate(nt.Notification notification) {
-    var now = DateTime.now();
     return DateTime(
-        now.year,
-        now.month,
-        now.day,
+        notification.notificationDate.year,
+        notification.notificationDate.month,
+        notification.notificationDate.day,
         notification.notificationTime.hour,
         notification.notificationTime.minute);
   }
@@ -86,9 +85,9 @@ class NotificationSchedulingService {
   DateTime _calculateSingularNotificationDateTime(
       nt.Notification notification) {
     return DateTime(
-        notification.lastNotificationDate.year,
-        notification.lastNotificationDate.month,
-        notification.lastNotificationDate.day,
+        notification.notificationDate.year,
+        notification.notificationDate.month,
+        notification.notificationDate.day,
         notification.notificationTime.hour,
         notification.notificationTime.minute);
   }
