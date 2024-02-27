@@ -22,14 +22,13 @@ class MealDtoToJsonConverter
 
     MealTime mealTime = _getMealTime(json['mealTime']);
     String mealDate = json['mealDate'] ?? DateTime.now().toString();
-
-    return MealDto(
-        json['id'], json['dishId'] ?? '', DateTime.parse(mealDate), mealTime);
+    Set<String> dishesIds = json['dishesIds'].from(json['dishesIds']) ?? [];
+    return MealDto(json['id'], dishesIds, DateTime.parse(mealDate), mealTime);
   }
 
   Map<String, dynamic> _toJson(MealDto dto) => {
         'id': dto.id.toString(),
-        'dishId': dto.dishId.toString(),
+        'dishesIds': dto.dishesIds.toList(),
         'mealDate': dto.mealDate.toString(),
         'mealTime': JsonParser.parseEnumToJson(dto.mealTime),
       };

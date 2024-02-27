@@ -9,11 +9,15 @@ class MealToDtoConverter {
   MealToDtoConverter(this.service);
 
   Future<Meal> fromDto(MealDto dto) async {
-    Dish dish = await service.getDish(dto.dishId);
-    return Meal(dto.id, dish, dto.mealDate, dto.mealTime);
+    List<Dish> allDishes = await service.getAllDishes();
+    var dishes = allDishes
+        .where((element) => dto.dishesIds.contains(element.id))
+        .toSet();
+    return Meal(dto.id, dishes, dto.mealDate, dto.mealTime);
   }
 
   MealDto toDto(Meal meal) {
-    return MealDto(meal.id, meal.dish.id, meal.mealDate, meal.mealTime);
+    var dishesIds = meal.dishes.map((e) => e.id).toSet();
+    return MealDto(meal.id, dishesIds, meal.mealDate, meal.mealTime);
   }
 }

@@ -56,7 +56,7 @@ class _DietScreenState extends State<DietScreen> {
 
   Map<MealTime, List<Dish>> _mealsToDishes() {
     return _controller.meals.map((key, value) {
-      var dishes = value.map((e) => e.dish).toList(growable: true);
+      var dishes = value.map((e) => e.dishes).toList(growable: true);
       return MapEntry(key, dishes);
     });
   }
