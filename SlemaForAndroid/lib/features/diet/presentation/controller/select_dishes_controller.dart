@@ -1,7 +1,7 @@
-import 'package:pg_slema/features/dish/logic/converter/dish_to_dto_converter.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/dish/logic/repository/shared_preferences_dish_repository.dart';
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/converter/ingredient_to_dto_converter.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_dish_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
 import 'package:pg_slema/features/dish_category/logic/converter/dish_category_to_dto.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_dish_category_repository.dart';
@@ -10,8 +10,8 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesController {
   final Function onDishCategoriesChanged;
-  final Map<MealTime, List<Dish>> selectedDishes;
-  late final DishService dishService;
+  final Map<MealTime, List<Ingredient>> selectedDishes;
+  late final IngredientService dishService;
   late List<DishCategory> mainCategories;
   late final DishCategoryService dishCategoryService;
   late MealTime currentMealTime;
@@ -19,9 +19,9 @@ class SelectDishesController {
   SelectDishesController(this.onDishCategoriesChanged, this.selectedDishes) {
     currentMealTime = MealTime.firstMeal;
     mainCategories = List.empty();
-    final dishConverter = DishToDtoConverter();
-    final dishRepository = SharedPreferencesDishRepository(dishConverter);
-    dishService = DishService(dishRepository);
+    final dishConverter = IngredientToDtoConverter();
+    final dishRepository = SharedPreferencesIngredientRepository(dishConverter);
+    dishService = IngredientService(dishRepository);
     final converter = DishCategoryToDtoConverter();
     final repository = SharedPreferencesDishCategoryRepository(converter);
     dishCategoryService = DishCategoryService(repository, dishService);
@@ -38,7 +38,7 @@ class SelectDishesController {
     currentMealTime = mealTime;
   }
 
-  void onDishAdded(Dish dish) {
+  void onDishAdded(Ingredient dish) {
     selectedDishes[currentMealTime]!.add(dish);
   }
 
@@ -46,7 +46,7 @@ class SelectDishesController {
     selectedDishes[currentMealTime]!.removeWhere((e) => e.id == dishId);
   }
 
-  List<Dish> getSelectedDishesForCategory(String categoryId) {
+  List<Ingredient> getSelectedDishesForCategory(String categoryId) {
     var dishes = selectedDishes[currentMealTime];
     return dishes!
         .where((element) => element.categoryId == categoryId)

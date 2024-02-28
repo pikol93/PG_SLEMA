@@ -1,15 +1,15 @@
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_dto.dart';
 
 class MealToDtoConverter {
-  final DishService service;
+  final IngredientService service;
 
   MealToDtoConverter(this.service);
 
   Future<Meal> fromDto(MealDto dto) async {
-    List<Dish> allIngredients = await service.getAllDishes();
+    List<Ingredient> allIngredients = await service.getAllIngredients();
     var ingredients = allIngredients
         .where((element) => dto.ingredientsIds.contains(element.id))
         .toSet();

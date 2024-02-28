@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 
 class DishCategory {
   static String dishCategoryListSharedPrefKey = "dishcategories";
@@ -6,7 +6,7 @@ class DishCategory {
   final String name;
   final String? parentCategoryId;
   List<DishCategory>? subcategories;
-  List<Dish>? dishes;
+  List<Ingredient>? dishes;
 
   DishCategory(this.id, this.name,
       {this.parentCategoryId, this.subcategories, this.dishes});

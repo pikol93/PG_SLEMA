@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/screen/select_dishes_screen.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesButton extends StatelessWidget {
-  final ValueChanged<Map<MealTime, List<Dish>>> onDishesSelected;
-  final ValueGetter<Map<MealTime, List<Dish>>> initDishesProvider;
+  final ValueChanged<Map<MealTime, List<Ingredient>>> onDishesSelected;
+  final ValueGetter<Map<MealTime, List<Ingredient>>> initDishesProvider;
 
   const SelectDishesButton(
       {super.key,

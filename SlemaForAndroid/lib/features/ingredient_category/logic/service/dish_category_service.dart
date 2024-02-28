@@ -1,11 +1,11 @@
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 import 'package:pg_slema/features/dish_category/logic/repository/dish_category_repository.dart';
 import 'package:pg_slema/features/dish_category/logic/service/exception/dish_category_name_exception.dart';
 
 class DishCategoryService {
   final DishCategoryRepository repository;
-  final DishService dishService;
+  final IngredientService dishService;
 
   DishCategoryService(this.repository, this.dishService);
 
@@ -55,7 +55,8 @@ class DishCategoryService {
   }
 
   Future addDishesToCategory(DishCategory category) async {
-    category.dishes = await dishService.getAllDishesByDishCategory(category.id);
+    category.dishes =
+        await dishService.getAllIngredientsByIngredientCategory(category.id);
   }
 
   Future addSubcategoriesToCategory(DishCategory category) async {

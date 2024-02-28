@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/dishes_list.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 
 class DishesInDishCategory extends StatefulWidget {
   final DishCategory category;
-  final ValueChanged<Dish> onDishAdded;
+  final ValueChanged<Ingredient> onDishAdded;
   final ValueChanged<String> onDishRemoved;
   final List<String> selectedDishesIds;
 
@@ -26,7 +26,7 @@ class DishesInDishCategory extends StatefulWidget {
         List.empty();
   }
 
-  List<Dish> getDishes() {
+  List<Ingredient> getDishes() {
     return category.dishes ?? List.empty();
   }
 }
@@ -52,7 +52,7 @@ class _DishesInDishCategoryState extends State<DishesInDishCategory> {
     );
   }
 
-  void _onDishAdded(Dish value) {
+  void _onDishAdded(Ingredient value) {
     widget.onDishAdded(value);
     setState(() {
       widget.selectedDishesIds.add(value.id);

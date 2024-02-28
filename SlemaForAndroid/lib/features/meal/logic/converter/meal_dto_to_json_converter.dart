@@ -22,7 +22,8 @@ class MealDtoToJsonConverter
 
     MealTime mealTime = _getMealTime(json['mealTime']);
     String mealDate = json['mealDate'] ?? DateTime.now().toString();
-    Set<String> ingredientsIds = json['ingredientsIds'].from(json['ingredientsIds']) ?? [];
+    Set<String> ingredientsIds =
+        json['ingredientsIds'].from(json['ingredientsIds']) ?? [];
     return MealDto(json['id'], json['title'] ?? '', ingredientsIds,
         DateTime.parse(mealDate), mealTime);
   }

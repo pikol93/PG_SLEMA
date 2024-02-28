@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
 import 'package:pg_slema/features/dish_category/logic/converter/dish_category_to_dto.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_dish_category_repository.dart';
@@ -15,7 +15,7 @@ import 'package:uuid/uuid.dart';
 
 class DietInitializer with Initializer {
   final DishCategoryService dishCategoryService;
-  final DishService dishService;
+  final IngredientService dishService;
   final Uuid idGenerator;
 
   DietInitializer(this.dishService)
@@ -49,12 +49,12 @@ class DietInitializer with Initializer {
     DishCategory dishCategory = await getCategoryByName(categoryName);
     var dish = generateDishes(names, dishCategory.id);
     var currentDishes = await dishService
-        .getAllDishesByDishCategory(dishCategory.id)
+        .getAllIngredientsByIngredientCategory(dishCategory.id)
         .then((value) => value.map((e) => e.name));
     var dishToAdd = dish
         .where((e) => !currentDishes.contains(e.name))
         .toList(growable: true);
-    await dishService.addAllDishesFrom(dishToAdd);
+    await dishService.addAllIngredientsFrom(dishToAdd);
   }
 
   Future<DishCategory> getCategoryByName(String name) async {
@@ -67,15 +67,15 @@ class DietInitializer with Initializer {
     }
   }
 
-  List<Dish> generateDishes(List<String> names, String categoryId) {
+  List<Ingredient> generateDishes(List<String> names, String categoryId) {
     return names
-        .map((e) => Dish(idGenerator.v4(), e, categoryId))
+        .map((e) => Ingredient(idGenerator.v4(), e, categoryId))
         .toList(growable: true);
   }
 
   Future initializeMeals(bool initialize) async {
     if (initialize) {
-      var dishes = await dishService.getAllDishes();
+      var dishes = await dishService.getAllIngredients();
       var mealService = MealService(
           SharedPreferencesMealRepository(MealToDtoConverter(dishService)));
       var meals = await mealService.getAllMeals();

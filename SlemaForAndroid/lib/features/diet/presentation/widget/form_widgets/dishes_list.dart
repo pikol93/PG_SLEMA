@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 
 class DishesList extends StatelessWidget {
-  final List<Dish> dishes;
-  final ValueChanged<Dish> onDishAdded;
+  final List<Ingredient> dishes;
+  final ValueChanged<Ingredient> onDishAdded;
   final ValueChanged<String> onDishRemoved;
   final List<bool> dishesToggles;
 

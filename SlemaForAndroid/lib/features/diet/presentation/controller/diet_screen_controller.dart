@@ -1,9 +1,9 @@
 import 'dart:collection';
 
-import 'package:pg_slema/features/dish/logic/converter/dish_to_dto_converter.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/dish/logic/repository/shared_preferences_dish_repository.dart';
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/converter/ingredient_to_dto_converter.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_dish_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
 import 'package:pg_slema/features/meal/logic/converter/meal_to_dto_converter.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
@@ -20,9 +20,9 @@ class DietScreenController {
   DietScreenController(this.onMealsChanged) : super() {
     meals = LinkedHashMap();
     date = DateTime.now();
-    var dishConverter = DishToDtoConverter();
-    var dishRepository = SharedPreferencesDishRepository(dishConverter);
-    var dishService = DishService(dishRepository);
+    var dishConverter = IngredientToDtoConverter();
+    var dishRepository = SharedPreferencesIngredientRepository(dishConverter);
+    var dishService = IngredientService(dishRepository);
     var converter = MealToDtoConverter(dishService);
     var repository = SharedPreferencesMealRepository(converter);
     mealService = MealService(repository);
@@ -39,7 +39,7 @@ class DietScreenController {
     onMealsChanged();
   }
 
-  void updateMeals(Map<MealTime, List<Dish>> dishes) async {
+  void updateMeals(Map<MealTime, List<Ingredient>> dishes) async {
     for (var entry in dishes.entries) {
       var dishesIds = entry.value.map((e) => e.id).toList();
       await _removeNotSelectedMeals(entry.key, dishesIds);
@@ -58,7 +58,7 @@ class DietScreenController {
     meals[mealTime]!.removeWhere((element) => idsToRemove.contains(element.id));
   }
 
-  Future _createMissingMeals(MealTime mealTime, List<Dish> dishes) async {
+  Future _createMissingMeals(MealTime mealTime, List<Ingredient> dishes) async {
     var idGenerator = const Uuid();
     var currentDishes = meals[mealTime]!.map((e) => e.ingredients.id).toList();
     var dishesToAdd = dishes

@@ -3,13 +3,13 @@ import 'package:pg_slema/features/diet/presentation/controller/select_dishes_con
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/dishes_in_dish_category.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_list.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/save_button.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesScreen extends StatefulWidget {
-  final ValueChanged<Map<MealTime, List<Dish>>> onDishesSelected;
-  final ValueGetter<Map<MealTime, List<Dish>>> initDishesProvider;
+  final ValueChanged<Map<MealTime, List<Ingredient>>> onDishesSelected;
+  final ValueGetter<Map<MealTime, List<Ingredient>>> initDishesProvider;
 
   const SelectDishesScreen(
       {super.key,

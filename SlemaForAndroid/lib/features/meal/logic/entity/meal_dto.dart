@@ -9,5 +9,6 @@ class MealDto with Dto {
   final DateTime mealDate;
   final MealTime mealTime;
 
-  MealDto(this.id, this.title, this.ingredientsIds, this.mealDate, this.mealTime);
+  MealDto(
+      this.id, this.title, this.ingredientsIds, this.mealDate, this.mealTime);
 }
