@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/ingredient_category/logic/entity/ingredient_category.dart';
-import 'package:pg_slema/features/ingredient_category/logic/entity/ingredient_category_dto.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category_dto.dart';
 
 class IngredientCategoryToDtoConverter {
   IngredientCategory fromDto(IngredientCategoryDto dto) {

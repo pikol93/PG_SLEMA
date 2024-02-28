@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/ingredient/logic/repository/Ingredient_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/ingredient_repository.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 
 class IngredientService {

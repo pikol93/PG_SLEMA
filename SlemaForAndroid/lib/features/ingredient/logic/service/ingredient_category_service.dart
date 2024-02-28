@@ -1,7 +1,7 @@
-import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
-import 'package:pg_slema/features/ingredient_category/logic/entity/ingredient_category.dart';
-import 'package:pg_slema/features/ingredient_category/logic/repository/ingredient_category_repository.dart';
-import 'package:pg_slema/features/ingredient_category/logic/service/exception/ingredient_category_name_exception.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_service.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/ingredient_category_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/service/exception/ingredient_category_name_exception.dart';
 
 class IngredientCategoryService {
   final IngredientCategoryRepository repository;

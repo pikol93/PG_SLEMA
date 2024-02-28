@@ -2,7 +2,7 @@ import 'package:pg_slema/features/ingredient/logic/converter/ingredient_dto_to_j
 import 'package:pg_slema/features/ingredient/logic/converter/ingredient_to_dto_converter.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_dto.dart';
-import 'package:pg_slema/features/ingredient/logic/repository/Ingredient_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/ingredient_repository.dart';
 import 'package:pg_slema/utils/data/shared_preferences_crud_repository.dart';
 
 class SharedPreferencesIngredientRepository

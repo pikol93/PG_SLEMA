@@ -1,5 +1,5 @@
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
-import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_service.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_dto.dart';
 

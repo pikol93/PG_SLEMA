@@ -1,10 +1,10 @@
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
-import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
-import 'package:pg_slema/features/ingredient_category/logic/converter/ingredient_category_to_dto.dart';
-import 'package:pg_slema/features/ingredient_category/logic/entity/ingredient_category.dart';
-import 'package:pg_slema/features/ingredient_category/logic/repository/shared_preferences_ingredient_category_repository.dart';
-import 'package:pg_slema/features/ingredient_category/logic/service/ingredient_category_service.dart';
-import 'package:pg_slema/features/ingredient_category/logic/service/exception/ingredient_category_name_exception.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_service.dart';
+import 'package:pg_slema/features/ingredient/logic/converter/ingredient_category_to_dto.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_ingredient_category_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_category_service.dart';
+import 'package:pg_slema/features/ingredient/logic/service/exception/ingredient_category_name_exception.dart';
 import 'package:pg_slema/features/meal/logic/converter/meal_to_dto_converter.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/repository/shared_preferences_meal_repository.dart';

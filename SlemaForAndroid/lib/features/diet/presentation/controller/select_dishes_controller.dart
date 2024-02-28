@@ -1,7 +1,7 @@
 import 'package:pg_slema/features/ingredient/logic/converter/ingredient_to_dto_converter.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
-import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_dish_repository.dart';
-import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
+import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_ingredient_repository.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_service.dart';
 import 'package:pg_slema/features/dish_category/logic/converter/ingredient_category_to_dto.dart';
 import 'package:pg_slema/features/dish_category/logic/entity/ingredient_category.dart';
 import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_ingredient_category_repository.dart';
