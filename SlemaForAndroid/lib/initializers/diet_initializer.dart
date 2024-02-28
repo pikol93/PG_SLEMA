@@ -41,7 +41,7 @@ class DietInitializer with Initializer {
       'Cielęcina',
       'Baranina'
     ]);
-    await initializeMeals(false);
+    await initializeMeals(true);
   }
 
   Future initializeIngredientsForCategory(
@@ -81,25 +81,27 @@ class DietInitializer with Initializer {
           MealToDtoConverter(ingredientService)));
       var meals = await mealService.getAllMeals();
       if (meals.isEmpty) {
-        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[0],
-            DateTime.now(), MealTime.firstMeal));
-        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[1],
-            DateTime.now(), MealTime.secondMeal));
-        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[1],
+        await mealService.addMeal(Meal(idGenerator.v4(), 'Jeden',
+            {ingredients[0]}, DateTime.now(), MealTime.firstMeal));
+        await mealService.addMeal(Meal(idGenerator.v4(), 'Pusty', {},
             DateTime.now(), MealTime.secondMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
-            ingredients[2],
+            'Dwa',
+            {ingredients[1], ingredients[2]},
+            DateTime.now(),
+            MealTime.thirdMeal));
+
+        await mealService.addMeal(Meal(
+            idGenerator.v4(),
+            'Duplikat',
+            {ingredients[2], ingredients[2]},
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.thirdMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
-            ingredients[3],
-            DateTime.now().subtract(const Duration(days: 1)),
-            MealTime.fourthMeal));
-        await mealService.addMeal(Meal(
-            idGenerator.v4(),
-            ingredients[4],
+            '',
+            {ingredients[3]},
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.fourthMeal));
       }
