@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/dishes_list.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
-import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
+import 'package:pg_slema/features/dish_category/logic/entity/ingredient_category.dart';
 
 class DishesInDishCategory extends StatefulWidget {
   final DishCategory category;

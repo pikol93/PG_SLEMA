@@ -1,10 +1,10 @@
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
-import 'package:pg_slema/features/dish_category/logic/converter/dish_category_to_dto.dart';
-import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
-import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_dish_category_repository.dart';
-import 'package:pg_slema/features/dish_category/logic/service/dish_category_service.dart';
-import 'package:pg_slema/features/dish_category/logic/service/exception/dish_category_name_exception.dart';
+import 'package:pg_slema/features/ingredient_category/logic/converter/ingredient_category_to_dto.dart';
+import 'package:pg_slema/features/ingredient_category/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/features/ingredient_category/logic/repository/shared_preferences_ingredient_category_repository.dart';
+import 'package:pg_slema/features/ingredient_category/logic/service/ingredient_category_service.dart';
+import 'package:pg_slema/features/ingredient_category/logic/service/exception/ingredient_category_name_exception.dart';
 import 'package:pg_slema/features/meal/logic/converter/meal_to_dto_converter.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/repository/shared_preferences_meal_repository.dart';
@@ -14,26 +14,26 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 import 'package:uuid/uuid.dart';
 
 class DietInitializer with Initializer {
-  final DishCategoryService dishCategoryService;
-  final IngredientService dishService;
+  final IngredientCategoryService ingredientCategoryService;
+  final IngredientService ingredientService;
   final Uuid idGenerator;
 
-  DietInitializer(this.dishService)
+  DietInitializer(this.ingredientService)
       : idGenerator = const Uuid(),
-        dishCategoryService = DishCategoryService(
-            SharedPreferencesDishCategoryRepository(
-                DishCategoryToDtoConverter()),
-            dishService);
+        ingredientCategoryService = IngredientCategoryService(
+            SharedPreferencesIngredientCategoryRepository(
+                IngredientCategoryToDtoConverter()),
+            ingredientService);
 
   @override
   Future initialize() async {
-    await initializeDishesForCategory(
+    await initializeIngredientsForCategory(
         'Owoce', ['Jagoda', 'Banan', 'Malina', 'Pomarańcza', 'Mandarynka']);
-    await initializeDishesForCategory(
+    await initializeIngredientsForCategory(
         'Warzywa', ['Ogórek', 'Brokuł', 'Kalafior', 'Marchew', 'Burak']);
-    await initializeDishesForCategory(
+    await initializeIngredientsForCategory(
         'Nabiał', ['Twaróg', 'Ser żółty', 'Mleko']);
-    await initializeDishesForCategory('Mięso', [
+    await initializeIngredientsForCategory('Mięso', [
       'Wieprzowina',
       'Wołowina',
       'Kurczak',
@@ -44,30 +44,31 @@ class DietInitializer with Initializer {
     await initializeMeals(false);
   }
 
-  Future initializeDishesForCategory(
+  Future initializeIngredientsForCategory(
       String categoryName, List<String> names) async {
-    DishCategory dishCategory = await getCategoryByName(categoryName);
-    var dish = generateDishes(names, dishCategory.id);
-    var currentDishes = await dishService
-        .getAllIngredientsByIngredientCategory(dishCategory.id)
+    IngredientCategory ingredientCategory =
+        await getCategoryByName(categoryName);
+    var ingredient = generateIngredients(names, ingredientCategory.id);
+    var currentIngredients = await ingredientService
+        .getAllIngredientsByIngredientCategory(ingredientCategory.id)
         .then((value) => value.map((e) => e.name));
-    var dishToAdd = dish
-        .where((e) => !currentDishes.contains(e.name))
+    var ingredientToAdd = ingredient
+        .where((e) => !currentIngredients.contains(e.name))
         .toList(growable: true);
-    await dishService.addAllIngredientsFrom(dishToAdd);
+    await ingredientService.addAllIngredientsFrom(ingredientToAdd);
   }
 
-  Future<DishCategory> getCategoryByName(String name) async {
+  Future<IngredientCategory> getCategoryByName(String name) async {
     try {
-      var category = DishCategory(idGenerator.v4(), name);
-      await dishCategoryService.addDishCategory(category);
+      var category = IngredientCategory(idGenerator.v4(), name);
+      await ingredientCategoryService.addIngredientCategory(category);
       return category;
-    } on DishCategoryNameException {
-      return dishCategoryService.getDishCategoryByName(name);
+    } on IngredientCategoryNameException {
+      return ingredientCategoryService.getIngredientCategoryByName(name);
     }
   }
 
-  List<Ingredient> generateDishes(List<String> names, String categoryId) {
+  List<Ingredient> generateIngredients(List<String> names, String categoryId) {
     return names
         .map((e) => Ingredient(idGenerator.v4(), e, categoryId))
         .toList(growable: true);
@@ -75,30 +76,30 @@ class DietInitializer with Initializer {
 
   Future initializeMeals(bool initialize) async {
     if (initialize) {
-      var dishes = await dishService.getAllIngredients();
-      var mealService = MealService(
-          SharedPreferencesMealRepository(MealToDtoConverter(dishService)));
+      var ingredients = await ingredientService.getAllIngredients();
+      var mealService = MealService(SharedPreferencesMealRepository(
+          MealToDtoConverter(ingredientService)));
       var meals = await mealService.getAllMeals();
       if (meals.isEmpty) {
-        await mealService.addMeal(Meal(
-            idGenerator.v4(), dishes[0], DateTime.now(), MealTime.firstMeal));
-        await mealService.addMeal(Meal(
-            idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
-        await mealService.addMeal(Meal(
-            idGenerator.v4(), dishes[1], DateTime.now(), MealTime.secondMeal));
+        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[0],
+            DateTime.now(), MealTime.firstMeal));
+        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[1],
+            DateTime.now(), MealTime.secondMeal));
+        await mealService.addMeal(Meal(idGenerator.v4(), ingredients[1],
+            DateTime.now(), MealTime.secondMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
-            dishes[2],
+            ingredients[2],
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.thirdMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
-            dishes[3],
+            ingredients[3],
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.fourthMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
-            dishes[4],
+            ingredients[4],
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.fourthMeal));
       }

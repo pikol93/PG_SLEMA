@@ -2,10 +2,10 @@ import 'package:pg_slema/features/ingredient/logic/converter/ingredient_to_dto_c
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/ingredient/logic/repository/shared_preferences_dish_repository.dart';
 import 'package:pg_slema/features/ingredient/logic/service/Ingredient_service.dart';
-import 'package:pg_slema/features/dish_category/logic/converter/dish_category_to_dto.dart';
-import 'package:pg_slema/features/dish_category/logic/entity/dish_category.dart';
-import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_dish_category_repository.dart';
-import 'package:pg_slema/features/dish_category/logic/service/dish_category_service.dart';
+import 'package:pg_slema/features/dish_category/logic/converter/ingredient_category_to_dto.dart';
+import 'package:pg_slema/features/dish_category/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/features/dish_category/logic/repository/shared_preferences_ingredient_category_repository.dart';
+import 'package:pg_slema/features/dish_category/logic/service/ingredient_category_service.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesController {
