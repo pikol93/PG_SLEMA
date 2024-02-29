@@ -10,9 +10,11 @@ class MealToDtoConverter {
 
   Future<Meal> fromDto(MealDto dto) async {
     List<Ingredient> allIngredients = await service.getAllIngredients();
-    var ingredients = allIngredients
-        .where((element) => dto.ingredientsIds.contains(element.id))
-        .toList();
+    List<String> allIngredientsIds = allIngredients.map((e) => e.id).toList();
+    var ingredients = dto.ingredientsIds
+        .where((id) => allIngredientsIds.contains(id))
+        .map((e) => allIngredients.firstWhere((element) => element.id == e))
+        .toList(growable: true);
     return Meal(dto.id, dto.title, ingredients, dto.mealDate, dto.mealTime);
   }
 

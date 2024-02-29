@@ -51,7 +51,7 @@ class MealService {
 
   LinkedHashMap<MealTime, Meal?> createEmptyMap() {
     return LinkedHashMap.fromIterable(MealTime.values,
-        key: (key) => key, value: null);
+        key: (key) => key, value: (_) => null);
   }
 
   Future deleteMeals(List<String> idsToRemove) async {

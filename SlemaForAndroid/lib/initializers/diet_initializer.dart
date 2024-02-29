@@ -41,7 +41,7 @@ class DietInitializer with Initializer {
       'Cielęcina',
       'Baranina'
     ]);
-    await initializeMeals(true);
+    await initializeMeals(false);
   }
 
   Future initializeIngredientsForCategory(

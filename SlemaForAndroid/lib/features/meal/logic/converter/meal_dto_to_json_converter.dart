@@ -19,11 +19,9 @@ class MealDtoToJsonConverter
     if (!json.containsKey('id')) {
       throw const FormatException("Missing 'id' key in JSON");
     }
-
     MealTime mealTime = _getMealTime(json['mealTime']);
     String mealDate = json['mealDate'] ?? DateTime.now().toString();
-    var ingredientsIds =
-        json['ingredientsIds'].from(json['ingredientsIds']) ?? [];
+    var ingredientsIds = List<String>.from(json['ingredientsIds'] ?? []);
     return MealDto(json['id'], json['title'] ?? '', ingredientsIds,
         DateTime.parse(mealDate), mealTime);
   }
@@ -31,7 +29,7 @@ class MealDtoToJsonConverter
   Map<String, dynamic> _toJson(MealDto dto) => {
         'id': dto.id.toString(),
         'title': dto.title.toString(),
-        'ingredientsIds': dto.ingredientsIds.toList(),
+        'ingredientsIds': dto.ingredientsIds,
         'mealDate': dto.mealDate.toString(),
         'mealTime': JsonParser.parseEnumToJson(dto.mealTime),
       };

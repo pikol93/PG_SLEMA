@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
-import 'package:pg_slema/features/diet/presentation/widget/select_dishes_button.dart';
-import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/diet/presentation/widget/update_meals_button.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
@@ -35,7 +34,7 @@ class _DietScreenState extends State<DietScreen> {
         ),
       ),
       body: MealsInDayWidget(meals: _controller.meals),
-      floatingActionButton: SelectDishesButton(
+      floatingActionButton: UpdateMealsButton(
         onMealsSelected: _onMealsSelected,
         initMealsProvider: _mealsProvider,
       ),

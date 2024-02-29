@@ -53,23 +53,6 @@ class DietScreenController {
     onMealsChanged();
   }
 
-  Future _removeNotSelectedIngredientsFromMeal(
-      MealTime mealTime, Meal meal) async {
-    var selectedIds = meal.ingredients.map((e) => e.id).toList(growable: true);
-    meals[mealTime]!
-        .ingredients
-        .removeWhere((e) => !selectedIds.contains(e.id));
-  }
-
-  Future _createMissingIngredients(MealTime mealTime, Meal meal) async {
-    var currentIngredients =
-        meals[mealTime]!.ingredients.map((e) => e.id).toList();
-    var ingredientsToAdd = meal.ingredients
-        .where((element) => !currentIngredients.contains(element.id))
-        .toList(growable: true);
-    meals[mealTime]!.ingredients.addAll(ingredientsToAdd);
-  }
-
   bool _shouldMealBeDeleted(Meal meal) {
     return meal.id != "" && meal.title == "" && meal.ingredients.isEmpty;
   }
@@ -99,5 +82,22 @@ class DietScreenController {
         Meal(idGenerator.v4(), meal.title, meal.ingredients, date, mealTime);
     await mealService.addMeal(newMeal);
     meals[mealTime] = newMeal;
+  }
+
+  Future _removeNotSelectedIngredientsFromMeal(
+      MealTime mealTime, Meal meal) async {
+    var selectedIds = meal.ingredients.map((e) => e.id).toList(growable: true);
+    meals[mealTime]!
+        .ingredients
+        .removeWhere((e) => !selectedIds.contains(e.id));
+  }
+
+  Future _createMissingIngredients(MealTime mealTime, Meal meal) async {
+    var currentIngredients =
+        meals[mealTime]!.ingredients.map((e) => e.id).toList();
+    var ingredientsToAdd = meal.ingredients
+        .where((element) => !currentIngredients.contains(element.id))
+        .toList(growable: true);
+    meals[mealTime]!.ingredients.addAll(ingredientsToAdd);
   }
 }
