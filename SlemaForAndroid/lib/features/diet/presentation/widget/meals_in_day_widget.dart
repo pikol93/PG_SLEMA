@@ -6,7 +6,7 @@ import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class MealsInDayWidget extends StatelessWidget {
-  final LinkedHashMap<MealTime, List<Meal>> meals;
+  final LinkedHashMap<MealTime, Meal?> meals;
 
   const MealsInDayWidget({super.key, required this.meals});
 
@@ -19,9 +19,9 @@ class MealsInDayWidget extends StatelessWidget {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return MealsInMealTimeWidget(
-                          mealTime: meals.entries.elementAt(index).key,
-                          meals: meals.entries.elementAt(index).value)
+                  return MealInMealTimeWidget(
+                          mealTime: meals.keys.elementAt(index),
+                          meal: meals.values.elementAt(index))
                       .build(context);
                 },
                 childCount: meals.entries.length,
