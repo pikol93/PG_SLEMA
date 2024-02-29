@@ -4,13 +4,13 @@ import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class SelectDishesButton extends StatelessWidget {
-  final ValueChanged<Map<MealTime, List<Ingredient>>> onDishesSelected;
-  final ValueGetter<Map<MealTime, List<Ingredient>>> initDishesProvider;
+  final ValueChanged<Map<MealTime, List<Ingredient>>> onMealsSelected;
+  final ValueGetter<Map<MealTime, List<Ingredient>>> initMealsProvider;
 
   const SelectDishesButton(
       {super.key,
-      required this.onDishesSelected,
-      required this.initDishesProvider});
+      required this.onMealsSelected,
+      required this.initMealsProvider});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class SelectDishesButton extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => SelectDishesScreen(
-                    onDishesSelected: onDishesSelected,
-                    initDishesProvider: initDishesProvider)));
+                    onDishesSelected: onMealsSelected,
+                    initDishesProvider: initMealsProvider)));
       },
       child: const Icon(Icons.add),
     );

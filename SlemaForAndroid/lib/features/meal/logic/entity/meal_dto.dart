@@ -5,7 +5,7 @@ class MealDto with Dto {
   @override
   final String id;
   final String title;
-  final Set<String> ingredientsIds;
+  final List<String> ingredientsIds;
   final DateTime mealDate;
   final MealTime mealTime;
 

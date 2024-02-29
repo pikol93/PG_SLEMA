@@ -36,8 +36,8 @@ class _DietScreenState extends State<DietScreen> {
       ),
       body: MealsInDayWidget(meals: _controller.meals),
       floatingActionButton: SelectDishesButton(
-        onDishesSelected: _onDishesSelected,
-        initDishesProvider: _mealsToDishes,
+        onMealsSelected: _onMealsSelected,
+        initMealsProvider: _mealsProvider,
       ),
     );
   }
@@ -47,8 +47,8 @@ class _DietScreenState extends State<DietScreen> {
     setState(() {});
   }
 
-  void _onDishesSelected(Map<MealTime, List<Ingredient>> dishes) async {
-    _controller.updateMeals(dishes);
+  void _onMealsSelected(Map<MealTime, Meal> meals) async {
+    _controller.updateMeals(meals);
   }
 
   void _onMealsChanged() {
@@ -57,7 +57,7 @@ class _DietScreenState extends State<DietScreen> {
 
   Map<MealTime, Meal> _mealsProvider() {
     return _controller.meals.map((key, value) {
-      var newValue = value ?? Meal("", "", {}, _controller.date, key);
+      var newValue = value ?? Meal("", "", [], _controller.date, key);
       return MapEntry(key, newValue);
     });
   }

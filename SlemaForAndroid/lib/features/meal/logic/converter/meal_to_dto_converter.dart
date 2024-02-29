@@ -12,12 +12,12 @@ class MealToDtoConverter {
     List<Ingredient> allIngredients = await service.getAllIngredients();
     var ingredients = allIngredients
         .where((element) => dto.ingredientsIds.contains(element.id))
-        .toSet();
+        .toList();
     return Meal(dto.id, dto.title, ingredients, dto.mealDate, dto.mealTime);
   }
 
   MealDto toDto(Meal meal) {
-    var ingredientsIds = meal.ingredients.map((e) => e.id).toSet();
+    var ingredientsIds = meal.ingredients.map((e) => e.id).toList();
     return MealDto(
         meal.id, meal.title, ingredientsIds, meal.mealDate, meal.mealTime);
   }

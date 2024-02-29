@@ -5,7 +5,7 @@ class Meal {
   static const String mealListSharedPrefKey = 'meals';
   final String id;
   final String title;
-  final Set<Ingredient> ingredients;
+  final List<Ingredient> ingredients;
   final DateTime mealDate;
   final MealTime mealTime;
 

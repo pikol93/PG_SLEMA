@@ -82,26 +82,26 @@ class DietInitializer with Initializer {
       var meals = await mealService.getAllMeals();
       if (meals.isEmpty) {
         await mealService.addMeal(Meal(idGenerator.v4(), 'Jeden',
-            {ingredients[0]}, DateTime.now(), MealTime.firstMeal));
-        await mealService.addMeal(Meal(idGenerator.v4(), 'Pusty', {},
+            [ingredients[0]], DateTime.now(), MealTime.firstMeal));
+        await mealService.addMeal(Meal(idGenerator.v4(), 'Pusty', [],
             DateTime.now(), MealTime.secondMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
             'Dwa',
-            {ingredients[1], ingredients[2]},
+            [ingredients[1], ingredients[2]],
             DateTime.now(),
             MealTime.thirdMeal));
 
         await mealService.addMeal(Meal(
             idGenerator.v4(),
             'Duplikat',
-            {ingredients[2], ingredients[2]},
+            [ingredients[2], ingredients[2]],
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.thirdMeal));
         await mealService.addMeal(Meal(
             idGenerator.v4(),
             '',
-            {ingredients[3]},
+            [ingredients[3]],
             DateTime.now().subtract(const Duration(days: 1)),
             MealTime.fourthMeal));
       }
