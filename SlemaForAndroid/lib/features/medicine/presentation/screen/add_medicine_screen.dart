@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/custom_date_picker.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen_app_bar.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -22,10 +23,15 @@ class AddMedicineScreen extends StatefulWidget {
 class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
-
   final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
+  bool notificationsAvailable = false;
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      notificationsAvailable = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,17 +97,28 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     isValueRequired: false,
                   ),
                 ),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                FrequencyList(
-                    initialValue: _controller.frequency,
-                    onChanged: (frequency) =>
-                        _handleFrequencyChange(frequency)),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                _createIntakeDataFieldIfPossible(),
-                ManageNotificationsWidget(
-                  controller: _controller,
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: _mainWidgetsPaddingHorizontal),
+                  child: NotificationManager(
+                    switchValue: notificationsAvailable,
+                    onChanged: changeNotificationsAvailable,
+                  ),
                 ),
-                SizedBox(height: _mainPaddingBetweenInputs),
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                if (notificationsAvailable) ...[
+                  FrequencyList(
+                    initialValue: _controller.frequency,
+                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  _createIntakeDataFieldIfPossible(),
+                  ManageNotificationsWidget(
+                    controller: _controller,
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                ],
                 Padding(
                   padding: EdgeInsets.only(
                       left: _saveButtonAdditionalPaddingHorizontal,

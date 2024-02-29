@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/custom_date_picker.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 

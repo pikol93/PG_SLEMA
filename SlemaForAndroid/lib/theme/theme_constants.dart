@@ -17,6 +17,14 @@ ThemeData lightTheme = ThemeData(
         fontSize: 64,
         fontFamily: 'Dongle',
       ),
+      displayMedium: TextStyle(
+        fontSize: 54,
+        fontWeight: FontWeight.w700,
+      ),
+      displaySmall: TextStyle(
+        fontSize: 48,
+        fontWeight: FontWeight.w700,
+      ),
       headlineLarge: TextStyle(
         fontSize: 44,
         fontWeight: FontWeight.w700,
@@ -80,6 +88,12 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: lightColorScheme.primary,
       foregroundColor: lightColorScheme.onPrimary,
       iconSize: 40,
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.resolveWith((states) =>
+          states.contains(MaterialState.selected)
+              ? lightColorScheme.primary
+              : lightColorScheme.primaryContainer),
     ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
