@@ -101,7 +101,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   ),
                   SizedBox(height: _mainPaddingBetweenInputs),
                   _createIntakeDataFieldIfPossible(),
-                  ManageNotificationsWidget(
+                  ManageNotificationsTimeWidget(
                     controller: _controller,
                   ),
                   SizedBox(height: _mainPaddingBetweenInputs),

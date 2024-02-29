@@ -35,19 +35,12 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: _onTap,
-      child: InputDecorator(
-        decoration: InputDecoration(
-          labelText: widget.label,
-          border: const OutlineInputBorder(),
-          prefixIcon: const Icon(Icons.schedule),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(widget.controller.selectedTime.format(context)),
-            const Icon(Icons.arrow_drop_down),
-          ],
-        ),
+      child: Row(
+        children: [
+          Text(widget.controller.selectedTime.format(context),
+              style: Theme.of(context).textTheme.headlineSmall),
+          const Icon(Icons.arrow_drop_down),
+        ],
       ),
     );
   }

@@ -63,7 +63,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
                 _createIntakeDataFieldIfPossible(),
-                ManageNotificationsWidget(
+                ManageNotificationsTimeWidget(
                   controller: _controller,
                 ),
                 const SizedBox(height: 20),

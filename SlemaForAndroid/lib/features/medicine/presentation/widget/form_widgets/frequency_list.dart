@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
+import '../../../../../theme/general_container_theme.dart';
+
 class FrequencyList extends StatefulWidget {
   final ValueChanged<Frequency> onChanged;
   final Frequency initialValue;
@@ -16,7 +18,6 @@ class FrequencyList extends StatefulWidget {
         .map((e) => DropdownMenuEntry<Frequency>(
               value: e,
               label: e.name,
-              style: const ButtonStyle(),
             ))
         .toList();
   }
@@ -35,7 +36,9 @@ class _FrequencyListState extends State<FrequencyList> {
       onSelected: (value) {
         widget.onChanged(value!);
       },
-      label: const Text("Częstotliwość przyjmowania"),
+      label: const Text(
+        "Częstotliwość przyjmowania",
+      ),
       //Setting width because of: https://github.com/flutter/flutter/issues/125199
       width: MediaQuery.of(context).size.width - 50,
       textStyle: TextStyle(
