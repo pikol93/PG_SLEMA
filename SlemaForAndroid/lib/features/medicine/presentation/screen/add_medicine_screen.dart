@@ -108,9 +108,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
                 if (notificationsAvailable) ...[
-                  FrequencyList(
-                    initialValue: _controller.frequency,
-                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _mainWidgetsPaddingHorizontal),
+                    child: FrequencyList(
+                      initialValue: _controller.frequency,
+                      onChanged: (frequency) =>
+                          _handleFrequencyChange(frequency),
+                    ),
                   ),
                   SizedBox(height: _mainPaddingBetweenInputs),
                   _createIntakeDataFieldIfPossible(),
