@@ -97,8 +97,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 SizedBox(height: _mainPaddingBetweenInputs),
-                _createStartIntakeDataField(),
-                _createEndIntakeDataFieldIfPossible(),
+                _createIntakeDataFieldIfPossible(),
                 ManageNotificationsWidget(
                   controller: _controller,
                 ),
@@ -125,36 +124,23 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   void _handleFrequencyChange(Frequency frequency) {
     _controller.onFrequencyChanged(frequency);
     setState(() {
-      _controller.updatePermissionForEndDatePicking();
+      _controller.updatePermissionForDatePicking();
     });
   }
 
-  Widget _createEndIntakeDataFieldIfPossible() {
+  Widget _createIntakeDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canEndDateBePicked) ...[
+        if (_controller.canDateBePicked) ...[
           CustomDatePicker(
-              onDateSelected: (date) => _controller.endIntakeDate = date,
+              onDateSelected: (date) => _controller.intakeDate = date,
               controller: DatePickerController(
-                  DateTime.now().add(const Duration(days: 1)),
+                  DateTime.now(),
                   DateTime.now().add(const Duration(days: 365)),
-                  DateTime.now().add(const Duration(days: 1))),
-              label: "Data zakończenia przyjmowania"),
+                  DateTime.now()),
+              label: "Data przyjęcia"),
           const SizedBox(height: 20),
         ]
-      ],
-    );
-  }
-
-  Widget _createStartIntakeDataField() {
-    return Column(
-      children: [
-        CustomDatePicker(
-            onDateSelected: (date) => _controller.startIntakeDate = date,
-            controller: DatePickerController(DateTime.now(),
-                DateTime.now().add(const Duration(days: 365)), DateTime.now()),
-            label: "Data zakończenia przyjmowania"),
-        const SizedBox(height: 20),
       ],
     );
   }

@@ -21,17 +21,13 @@ class MedicineDtoToJsonConverter
     }
 
     Frequency frequency = _getFrequency(json['intakeFrequency']);
-    String firstIntakeDate =
-        json['firstIntakeDate'] ?? DateTime.now().toString();
-    String lastIntakeDate = json['lastIntakeDate'] ?? DateTime.now().toString();
+    String intakeDate = json['intakeDate'] ?? DateTime.now().toString();
 
     return MedicineDto(
         json['id'],
         json['name'] ?? '',
-        DateTime.parse(firstIntakeDate),
-        DateTime.parse(lastIntakeDate),
+        DateTime.parse(intakeDate),
         frequency,
-        json['delayBetweenIntakes'] ?? frequency.defaultDelayBetweenIntakes,
         json['dose'] ?? '',
         json['intakeType'] ?? '',
         json['opinion'] ?? '',
@@ -41,10 +37,8 @@ class MedicineDtoToJsonConverter
   Map<String, dynamic> _toJson(MedicineDto dto) => {
         'id': dto.id.toString(),
         'name': dto.name.toString(),
-        'firstIntakeDate': dto.firstIntakeDate.toString(),
-        'lastIntakeDate': dto.lastIntakeDate.toString(),
+        'intakeDate': dto.intakeDate.toString(),
         'intakeFrequency': JsonParser.parseEnumToJson(dto.intakeFrequency),
-        'delayBetweenIntakes': dto.delayBetweenIntakes,
         'dose': dto.dose.toString(),
         'intakeType': dto.intakeType.toString(),
         'opinion': dto.opinion.toString(),

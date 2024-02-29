@@ -62,7 +62,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                     onChanged: (frequency) =>
                         _handleFrequencyChange(frequency)),
                 const SizedBox(height: 20),
-                _createDataFieldIfPossible(),
+                _createIntakeDataFieldIfPossible(),
                 ManageNotificationsWidget(
                   controller: _controller,
                 ),
@@ -82,35 +82,26 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   }
 
   void _handleFrequencyChange(Frequency frequency) {
-    _controller.frequency = frequency;
+    _controller.onFrequencyChanged(frequency);
     setState(() {
-      _controller.canEndDateBePicked =
-          frequency == Frequency.singular ? false : true;
+      _controller.updatePermissionForDatePicking();
     });
   }
 
-  Widget _createDataFieldIfPossible() {
+  Widget _createIntakeDataFieldIfPossible() {
     return Column(
       children: [
-        if (_controller.canEndDateBePicked) ...[
+        if (_controller.canDateBePicked) ...[
           CustomDatePicker(
-              onDateSelected: (date) => _controller.endIntakeDate = date,
+              onDateSelected: (date) => _controller.intakeDate = date,
               controller: DatePickerController(
-                  DateTime.now().add(const Duration(days: 1)),
+                  DateTime.now(),
                   DateTime.now().add(const Duration(days: 365)),
-                  createInitialDateTime()),
-              label: "Data zakończenia przyjmowania"),
+                  DateTime.now()),
+              label: "Data przyjęcia"),
           const SizedBox(height: 20),
         ]
       ],
     );
-  }
-
-  DateTime createInitialDateTime() {
-    return _controller.endIntakeDate
-                .compareTo(DateTime.now().add(const Duration(days: 1))) >
-            -1
-        ? _controller.endIntakeDate
-        : DateTime.now().add(const Duration(days: 1));
   }
 }

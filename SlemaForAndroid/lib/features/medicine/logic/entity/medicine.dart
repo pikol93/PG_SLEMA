@@ -5,11 +5,9 @@ class Medicine {
   static const String medicineListSharedPrefKey = 'medicines';
   final String id;
   final String name;
-  final DateTime firstIntakeDate;
-  final DateTime lastIntakeDate;
+  final DateTime intakeDate;
   final Frequency intakeFrequency;
   final List<Notification> notifications;
-  final int delayBetweenIntakes;
   final String dose;
   final String intakeType;
   final String opinion;
@@ -18,11 +16,9 @@ class Medicine {
   Medicine(
       this.id,
       this.name,
-      this.firstIntakeDate,
-      this.lastIntakeDate,
+      this.intakeDate,
       this.intakeFrequency,
       this.notifications,
-      this.delayBetweenIntakes,
       this.dose,
       this.intakeType,
       this.opinion,
@@ -31,7 +27,7 @@ class Medicine {
   @override
   String toString() {
     return 'Medicine{id: $id, name: $name, intakeType: $intakeType, '
-        'firstIntakeDate: $firstIntakeDate, lastIntakeDate: $lastIntakeDate, '
+        'intakeDate: $intakeDate,'
         'intakeFrequency: $intakeFrequency}, numberOfNotifications: ${notifications.length}';
   }
 }

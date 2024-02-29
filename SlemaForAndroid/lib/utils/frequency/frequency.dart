@@ -1,4 +1,4 @@
-enum Frequency { singular, daily, everyXDays }
+enum Frequency { singular, daily }
 
 extension FrequencyExtension on Frequency {
   String get name {
@@ -7,12 +7,6 @@ extension FrequencyExtension on Frequency {
         return 'Jednorazowo';
       case Frequency.daily:
         return 'Codziennie';
-      case Frequency.everyXDays:
-        return 'Co X dni';
     }
-  }
-
-  int get defaultDelayBetweenIntakes {
-    return 1;
   }
 }

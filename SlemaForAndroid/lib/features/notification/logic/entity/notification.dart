@@ -8,11 +8,9 @@ class Notification {
   final String title;
   final String body;
   final TimeOfDay notificationTime;
-  final DateTime firstNotificationDate;
-  final DateTime lastNotificationDate;
+  final DateTime notificationDate;
   final Frequency notificationFrequency;
   final int scheduledId;
-  final int delayBetweenNotifications;
 
   Notification(
       this.id,
@@ -20,17 +18,15 @@ class Notification {
       this.title,
       this.body,
       this.notificationTime,
-      this.firstNotificationDate,
-      this.lastNotificationDate,
+      this.notificationDate,
       this.notificationFrequency,
-      this.scheduledId,
-      this.delayBetweenNotifications);
+      this.scheduledId);
 
   @override
   String toString() {
     return 'Notification{id: $id, ownerId: $ownerId, title: $title, body: $body, '
-        'notificationTime: $notificationTime, firstNotificationDate: $firstNotificationDate, '
-        'lastNotificationDate: $lastNotificationDate, notificationFrequency: $notificationFrequency, '
+        'notificationTime: $notificationTime, notificationDate: $notificationDate,'
+        'notificationFrequency: $notificationFrequency, '
         'scheduledId: $scheduledId}';
   }
 }

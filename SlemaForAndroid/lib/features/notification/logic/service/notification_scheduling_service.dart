@@ -34,6 +34,8 @@ class NotificationSchedulingService {
       case Frequency.singular:
         _scheduleSingularNotification(notification);
         break;
+      case Frequency.daily:
+        _scheduleDailyNotification(notification);
       default:
     }
   }
@@ -50,26 +52,53 @@ class NotificationSchedulingService {
         notification.title,
         notification.body,
         tz.TZDateTime.from(calculatedNotificationDateTime, tz.local),
-        _generateDetails(),
+        _generateDetails("1", "singular"),
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
+  }
+
+  Future _scheduleDailyNotification(nt.Notification notification) async {
+    DateTime calculatedNotificationDateTime =
+        _calculateDailyNotificationDate(notification);
+    return _flutterLocalNotificationsPlugin.zonedSchedule(
+        notification.scheduledId,
+        notification.title,
+        notification.body,
+        tz.TZDateTime.from(calculatedNotificationDateTime, tz.local),
+        _generateDetails("2", "daily"),
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.time);
+  }
+
+  DateTime _calculateDailyNotificationDate(nt.Notification notification) {
+    return DateTime(
+        notification.notificationDate.year,
+        notification.notificationDate.month,
+        notification.notificationDate.day,
+        notification.notificationTime.hour,
+        notification.notificationTime.minute);
   }
 
   DateTime _calculateSingularNotificationDateTime(
       nt.Notification notification) {
     return DateTime(
-        notification.lastNotificationDate.year,
-        notification.lastNotificationDate.month,
-        notification.lastNotificationDate.day,
+        notification.notificationDate.year,
+        notification.notificationDate.month,
+        notification.notificationDate.day,
         notification.notificationTime.hour,
         notification.notificationTime.minute);
   }
 
-  NotificationDetails _generateDetails() {
-    return const NotificationDetails(
-        android: AndroidNotificationDetails('channelId', 'channelName',
-            importance: Importance.max),
-        iOS: DarwinNotificationDetails());
+  NotificationDetails _generateDetails(String channelId, String channelName) {
+    return NotificationDetails(
+        android: AndroidNotificationDetails(channelId, channelName,
+            importance: Importance.max,
+            priority: Priority.max,
+            playSound: true),
+        iOS: const DarwinNotificationDetails());
   }
 
   void _receiveLocalNotificationOnIOS(
