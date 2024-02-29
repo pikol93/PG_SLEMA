@@ -109,7 +109,7 @@ class AddMedicineController with Logger, ManageNotificationsController {
   }
 
   void updatePermissionForDatePicking() {
-    canDateBePicked = frequency == Frequency.singular ? true : false;
+    canDateBePicked = frequency == Frequency.singular;
   }
 
   DateTime _getDateForNotification(TimeOfDay notificationTime) {
