@@ -4,6 +4,7 @@ import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
 import 'package:pg_slema/features/diet/presentation/widget/select_dishes_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class DietScreen extends StatefulWidget {
@@ -54,10 +55,10 @@ class _DietScreenState extends State<DietScreen> {
     setState(() {});
   }
 
-  Map<MealTime, List<Ingredient>> _mealsToDishes() {
+  Map<MealTime, Meal> _mealsProvider() {
     return _controller.meals.map((key, value) {
-      var dishes = value.map((e) => e.ingredients).toList(growable: true);
-      return MapEntry(key, dishes);
+      var newValue = value ?? Meal("", "", {}, _controller.date, key);
+      return MapEntry(key, newValue);
     });
   }
 }
