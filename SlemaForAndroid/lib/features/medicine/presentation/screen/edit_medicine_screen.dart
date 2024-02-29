@@ -8,6 +8,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
 
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
@@ -23,6 +24,17 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
 
+  final double _mainWidgetsPaddingHorizontal = 12.0;
+  final double _mainPaddingBetweenInputs = 15.0;
+  final double _singleWidgetInRowPadding = 3.0;
+  final double _saveButtonAdditionalPaddingHorizontal = 30.0;
+  late bool notificationsAvailable = _controller.notifications.isNotEmpty;
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      notificationsAvailable = newValue;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -33,46 +45,92 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Dodaj lek"),
+        title: const Text("Edytuj lekarstwo"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          padding: EdgeInsets.symmetric(
+              horizontal: 2 * _mainWidgetsPaddingHorizontal, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 CustomTextFormField(
                   label: "Nazwa",
-                  icon: Icons.create,
-                  initialValue: _controller.typedMedicineName,
+                  icon: null,
                   onChanged: (value) => _controller.typedMedicineName = value,
+                  initialValue: _controller.typedMedicineName,
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: _mainPaddingBetweenInputs),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(right: _singleWidgetInRowPadding),
+                        child: CustomTextFormField(
+                          label: "Dawka",
+                          icon: Icons.vaccines,
+                          onChanged: (value) => _controller.typedDose = value,
+                          isValueRequired: false,
+                          initialValue: _controller.typedDose,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(left: _singleWidgetInRowPadding),
+                        child: CustomTextFormField(
+                          label: "Rodzaj",
+                          icon: Icons.medication_outlined,
+                          onChanged: (value) =>
+                              _controller.typedMedicineType = value,
+                          isValueRequired: false,
+                          initialValue: _controller.typedMedicineType,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: _mainPaddingBetweenInputs),
                 CustomTextFormField(
-                  label: "Sposób aplikacji leku",
-                  icon: Icons.create,
-                  initialValue: _controller.typedIntakeType,
+                  label: "Jak używać",
+                  icon: Icons.water_drop_outlined,
                   onChanged: (value) => _controller.typedIntakeType = value,
+                  isValueRequired: false,
+                  initialValue: _controller.typedIntakeType,
                 ),
-                const SizedBox(height: 20),
-                FrequencyList(
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                NotificationManager(
+                  switchValue: notificationsAvailable,
+                  onChanged: changeNotificationsAvailable,
+                ),
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                if (notificationsAvailable) ...[
+                  FrequencyList(
                     initialValue: _controller.frequency,
-                    onChanged: (frequency) =>
-                        _handleFrequencyChange(frequency)),
-                const SizedBox(height: 20),
-                _createIntakeDataFieldIfPossible(),
-                ManageNotificationsTimeWidget(
-                  controller: _controller,
-                ),
-                const SizedBox(height: 20),
-                CustomSaveButton(
+                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  _createIntakeDataFieldIfPossible(),
+                  ManageNotificationsTimeWidget(
                     controller: _controller,
-                    formKey: _formKey,
-                    onAddedMedicine: () => _controller
-                        .createMedicine()
-                        .then(widget.onMedicineChanged)),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: _saveButtonAdditionalPaddingHorizontal,
+                      right: _saveButtonAdditionalPaddingHorizontal),
+                  child: CustomSaveButton(
+                      controller: _controller,
+                      formKey: _formKey,
+                      onAddedMedicine: () => _controller
+                          .createMedicine()
+                          .then(widget.onMedicineChanged)),
+                ),
               ],
             ),
           ),
