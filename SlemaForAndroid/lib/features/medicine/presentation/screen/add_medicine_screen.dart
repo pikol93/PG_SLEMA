@@ -9,8 +9,8 @@ import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen_app_bar.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
+import 'package:pg_slema/utils/simple_appbar/simple_appbar.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -37,7 +37,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AddMedicineScreenAppBar(),
+      appBar: const SimpleAppbar(title: "Dodaj lekarstwo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(

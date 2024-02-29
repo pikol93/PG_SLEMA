@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 
-import '../../../../../theme/general_container_theme.dart';
-
 class FrequencyList extends StatefulWidget {
   final ValueChanged<Frequency> onChanged;
   final Frequency initialValue;
