@@ -42,13 +42,14 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       child: InputDecorator(
         decoration: InputDecoration(
           labelText: widget.label,
-          border: const OutlineInputBorder(),
-          prefixIcon: const Icon(Icons.calendar_today),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(widget.controller.selectedDate.toDateString()),
+            Text(
+              widget.controller.selectedDate.toDateString(),
+              style: Theme.of(context).textTheme.labelSmall,
+            ),
             const Icon(Icons.arrow_drop_down),
           ],
         ),
