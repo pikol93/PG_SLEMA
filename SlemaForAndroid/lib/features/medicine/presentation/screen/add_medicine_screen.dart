@@ -25,6 +25,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
   final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
+  final double _singleWidgetInRowPadding = 3.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
   bool notificationsAvailable = false;
   void changeNotificationsAvailable(newValue) {
@@ -40,27 +41,23 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: _mainWidgetsPaddingHorizontal, vertical: 30),
+              horizontal: 2 * _mainWidgetsPaddingHorizontal, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _mainWidgetsPaddingHorizontal),
-                  child: CustomTextFormField(
-                    label: "Nazwa",
-                    icon: null,
-                    onChanged: (value) => _controller.typedMedicineName = value,
-                  ),
+                CustomTextFormField(
+                  label: "Nazwa",
+                  icon: null,
+                  onChanged: (value) => _controller.typedMedicineName = value,
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
                 Row(
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            left: _mainWidgetsPaddingHorizontal, right: 3.0),
+                        padding:
+                            EdgeInsets.only(right: _singleWidgetInRowPadding),
                         child: CustomTextFormField(
                           label: "Dawka",
                           icon: Icons.vaccines,
@@ -71,10 +68,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 3.0,
-                          right: _mainWidgetsPaddingHorizontal,
-                        ),
+                        padding:
+                            EdgeInsets.only(left: _singleWidgetInRowPadding),
                         child: CustomTextFormField(
                           label: "Rodzaj",
                           icon: Icons.medication_outlined,
@@ -87,35 +82,22 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   ],
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _mainWidgetsPaddingHorizontal),
-                  child: CustomTextFormField(
-                    label: "Jak używać",
-                    icon: Icons.water_drop_outlined,
-                    onChanged: (value) => _controller.typedIntakeType = value,
-                    isValueRequired: false,
-                  ),
+                CustomTextFormField(
+                  label: "Jak używać",
+                  icon: Icons.water_drop_outlined,
+                  onChanged: (value) => _controller.typedIntakeType = value,
+                  isValueRequired: false,
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _mainWidgetsPaddingHorizontal),
-                  child: NotificationManager(
-                    switchValue: notificationsAvailable,
-                    onChanged: changeNotificationsAvailable,
-                  ),
+                NotificationManager(
+                  switchValue: notificationsAvailable,
+                  onChanged: changeNotificationsAvailable,
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
                 if (notificationsAvailable) ...[
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: _mainWidgetsPaddingHorizontal),
-                    child: FrequencyList(
-                      initialValue: _controller.frequency,
-                      onChanged: (frequency) =>
-                          _handleFrequencyChange(frequency),
-                    ),
+                  FrequencyList(
+                    initialValue: _controller.frequency,
+                    onChanged: (frequency) => _handleFrequencyChange(frequency),
                   ),
                   SizedBox(height: _mainPaddingBetweenInputs),
                   _createIntakeDataFieldIfPossible(),
