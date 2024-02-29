@@ -36,44 +36,15 @@ class _FrequencyListState extends State<FrequencyList> {
         widget.onChanged(value!);
       },
       label: const Text("Częstotliwość przyjmowania"),
+      //Setting width because of: https://github.com/flutter/flutter/issues/125199
       width: MediaQuery.of(context).size.width - 50,
       textStyle: TextStyle(
-        fontSize: labelFontSize,
-        fontWeight: FontWeight.w700,
+        fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
         color: Theme.of(context).primaryColor,
       ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.primaryContainer,
-        suffixIconColor: Theme.of(context).colorScheme.primary,
-        labelStyle: TextStyle(
-          fontSize: labelFontSize,
-          fontWeight: FontWeight.w700,
-          color: Theme.of(context).primaryColor,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
+      inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
+            filled: true,
           ),
-          borderSide: BorderSide(
-              color: Theme.of(context).primaryColor, width: borderWidth),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
-          borderSide: BorderSide(
-              color: Theme.of(context).primaryColor, width: borderWidth),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(borderRadius),
-          ),
-          borderSide: BorderSide(
-              color: Theme.of(context).primaryColor, width: borderWidth),
-        ),
-      ),
-      //Setting width because of: https://github.com/flutter/flutter/issues/125199
     );
   }
 }

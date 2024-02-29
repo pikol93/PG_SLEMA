@@ -95,6 +95,34 @@ ThemeData lightTheme = ThemeData(
               ? lightColorScheme.primary
               : lightColorScheme.primaryContainer),
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: lightColorScheme.primaryContainer,
+      suffixIconColor: lightColorScheme.primary,
+      labelStyle: TextStyle(
+        fontSize: 24.0,
+        fontWeight: FontWeight.w700,
+        color: lightColorScheme.primary,
+      ),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(18),
+        ),
+        borderSide: BorderSide(color: lightColorScheme.primary, width: 2.5),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(18),
+        ),
+        borderSide: BorderSide(color: lightColorScheme.primary, width: 2.5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(18.0),
+        ),
+        borderSide: BorderSide(color: lightColorScheme.primary, width: 2.5),
+      ),
+    ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
         colorPrimaryLighter: colorPrimaryLighter,
