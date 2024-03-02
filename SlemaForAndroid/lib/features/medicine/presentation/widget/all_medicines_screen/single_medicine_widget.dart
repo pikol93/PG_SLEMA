@@ -59,12 +59,18 @@ class SingleMedicineWidget extends StatelessWidget {
                   onDeletePressed: () => onMedicineDeleted(medicine)),
             ],
           ),
-          if (medicine.dose.isNotEmpty)
-            SingleMedicineLabel(label: medicine.dose),
-          if (medicine.intakeType.isNotEmpty)
-            SingleMedicineLabel(label: medicine.intakeType),
-          if (medicine.medicineType.isNotEmpty)
-            SingleMedicineLabel(label: medicine.medicineType),
+          Wrap(
+            runSpacing: 5.0,
+            spacing: 5.0,
+            children: [
+              if (medicine.dose.isNotEmpty)
+                SingleMedicineLabel(label: medicine.dose),
+              if (medicine.medicineType.isNotEmpty)
+                SingleMedicineLabel(label: medicine.medicineType),
+              if (medicine.intakeType.isNotEmpty)
+                SingleMedicineLabel(label: medicine.intakeType),
+            ],
+          )
         ]));
   }
 }
