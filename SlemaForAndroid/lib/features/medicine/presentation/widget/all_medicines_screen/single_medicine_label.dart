@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class SingleMedicineLabel extends StatelessWidget {
   final String label;
-  const SingleMedicineLabel({super.key, required this.label});
+  final Color color;
+  const SingleMedicineLabel(
+      {super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Colors.lightBlueAccent,
+        color: color,
         boxShadow: [
           BoxShadow(
             color: Theme.of(context).colorScheme.shadow,

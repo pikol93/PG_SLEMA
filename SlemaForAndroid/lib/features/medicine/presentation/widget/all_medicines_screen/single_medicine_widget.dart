@@ -64,11 +64,20 @@ class SingleMedicineWidget extends StatelessWidget {
             spacing: 5.0,
             children: [
               if (medicine.dose.isNotEmpty)
-                SingleMedicineLabel(label: medicine.dose),
+                SingleMedicineLabel(
+                  label: medicine.dose,
+                  color: const Color(0xFFB6DDFA),
+                ),
               if (medicine.medicineType.isNotEmpty)
-                SingleMedicineLabel(label: medicine.medicineType),
+                SingleMedicineLabel(
+                  label: medicine.medicineType,
+                  color: const Color(0xFFFAB6B6),
+                ),
               if (medicine.intakeType.isNotEmpty)
-                SingleMedicineLabel(label: medicine.intakeType),
+                SingleMedicineLabel(
+                  label: medicine.intakeType,
+                  color: const Color(0xFFB6FAB6),
+                ),
             ],
           )
         ]));
