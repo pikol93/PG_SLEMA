@@ -27,12 +27,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final double _mainPaddingBetweenInputs = 15.0;
   final double _singleWidgetInRowPadding = 3.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
-  bool notificationsAvailable = false;
-  void changeNotificationsAvailable(newValue) {
-    setState(() {
-      notificationsAvailable = newValue;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +84,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
                 NotificationManager(
-                  switchValue: notificationsAvailable,
+                  switchValue: _controller.canNotificationsBePicked,
                   onChanged: changeNotificationsAvailable,
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                if (notificationsAvailable) ...[
+                if (_controller.canNotificationsBePicked) ...[
                   FrequencyList(
                     initialValue: _controller.frequency,
                     onChanged: (frequency) => _handleFrequencyChange(frequency),
@@ -123,6 +117,12 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
         ),
       ),
     );
+  }
+
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      _controller.canNotificationsBePicked = newValue;
+    });
   }
 
   void _handleFrequencyChange(Frequency frequency) {

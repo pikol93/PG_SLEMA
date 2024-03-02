@@ -29,12 +29,6 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   final double _mainPaddingBetweenInputs = 15.0;
   final double _singleWidgetInRowPadding = 3.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
-  late bool notificationsAvailable = _controller.notifications.isNotEmpty;
-  void changeNotificationsAvailable(newValue) {
-    setState(() {
-      notificationsAvailable = newValue;
-    });
-  }
 
   @override
   void initState() {
@@ -102,11 +96,11 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
                 NotificationManager(
-                  switchValue: notificationsAvailable,
+                  switchValue: _controller.canNotificationsBePicked,
                   onChanged: changeNotificationsAvailable,
                 ),
                 SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                if (notificationsAvailable) ...[
+                if (_controller.canNotificationsBePicked) ...[
                   FrequencyList(
                     initialValue: _controller.frequency,
                     onChanged: (frequency) => _handleFrequencyChange(frequency),
@@ -135,6 +129,12 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
         ),
       ),
     );
+  }
+
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      _controller.canNotificationsBePicked = newValue;
+    });
   }
 
   void _handleFrequencyChange(Frequency frequency) {
