@@ -18,7 +18,8 @@ class NotificationsInitializer with Initializer {
   Future initialize() async {
     var notifications = await _notificationService.getAllNotifications();
     for (var notification in notifications) {
-      if(notification.notificationFrequency != Frequency.singular || isNotificationInFuture(notification)) {
+      if (notification.notificationFrequency != Frequency.singular ||
+          isNotificationInFuture(notification)) {
         _schedulingService.cancelNotification(notification);
         _schedulingService.scheduleNotification(notification);
       }
@@ -27,8 +28,9 @@ class NotificationsInitializer with Initializer {
 
   bool isNotificationInFuture(Notification notification) {
     var now = DateTime.now();
-    int compareDates =  notification.notificationDate.compareDates(now);
-    bool compareTimes = notification.notificationTime.isHigher(mt.TimeOfDay(hour: now.hour, minute: now.minute));
-    return compareDates > 0 || compareDates == 0 && compareTimes ;
+    int compareDates = notification.notificationDate.compareDates(now);
+    bool compareTimes = notification.notificationTime
+        .isHigher(mt.TimeOfDay(hour: now.hour, minute: now.minute));
+    return compareDates > 0 || compareDates == 0 && compareTimes;
   }
 }
