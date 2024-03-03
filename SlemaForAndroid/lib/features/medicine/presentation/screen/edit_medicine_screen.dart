@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/custom_date_picker.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
+import 'package:pg_slema/utils/simple_appbar/simple_appbar.dart';
 
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
@@ -23,6 +25,11 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
 
+  final double _mainWidgetsPaddingHorizontal = 12.0;
+  final double _mainPaddingBetweenInputs = 15.0;
+  final double _singleWidgetInRowPadding = 3.0;
+  final double _saveButtonAdditionalPaddingHorizontal = 30.0;
+
   @override
   void initState() {
     super.initState();
@@ -32,53 +39,102 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dodaj lek"),
-        centerTitle: true,
-      ),
+      appBar: const SimpleAppbar(title: "Edytuj lekarstwo"),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+          padding: EdgeInsets.symmetric(
+              horizontal: 2 * _mainWidgetsPaddingHorizontal, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
                 CustomTextFormField(
                   label: "Nazwa",
-                  icon: Icons.create,
-                  initialValue: _controller.typedMedicineName,
+                  icon: null,
                   onChanged: (value) => _controller.typedMedicineName = value,
+                  initialValue: _controller.typedMedicineName,
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: _mainPaddingBetweenInputs),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(right: _singleWidgetInRowPadding),
+                        child: CustomTextFormField(
+                          label: "Dawka",
+                          icon: Icons.vaccines,
+                          onChanged: (value) => _controller.typedDose = value,
+                          isValueRequired: false,
+                          initialValue: _controller.typedDose,
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(left: _singleWidgetInRowPadding),
+                        child: CustomTextFormField(
+                          label: "Rodzaj",
+                          icon: Icons.medication_outlined,
+                          onChanged: (value) =>
+                              _controller.typedMedicineType = value,
+                          isValueRequired: false,
+                          initialValue: _controller.typedMedicineType,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: _mainPaddingBetweenInputs),
                 CustomTextFormField(
-                  label: "Sposób aplikacji leku",
-                  icon: Icons.create,
-                  initialValue: _controller.typedIntakeType,
+                  label: "Jak używać",
+                  icon: Icons.water_drop_outlined,
                   onChanged: (value) => _controller.typedIntakeType = value,
+                  isValueRequired: false,
+                  initialValue: _controller.typedIntakeType,
                 ),
-                const SizedBox(height: 20),
-                FrequencyList(
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                NotificationManager(
+                  switchValue: _controller.canNotificationsBePicked,
+                  onChanged: changeNotificationsAvailable,
+                ),
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                if (_controller.canNotificationsBePicked) ...[
+                  FrequencyList(
                     initialValue: _controller.frequency,
-                    onChanged: (frequency) =>
-                        _handleFrequencyChange(frequency)),
-                const SizedBox(height: 20),
-                _createIntakeDataFieldIfPossible(),
-                ManageNotificationsWidget(
-                  controller: _controller,
-                ),
-                const SizedBox(height: 20),
-                CustomSaveButton(
+                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  _createIntakeDataFieldIfPossible(),
+                  ManageNotificationsTimeWidget(
                     controller: _controller,
-                    formKey: _formKey,
-                    onAddedMedicine: () => _controller
-                        .createMedicine()
-                        .then(widget.onMedicineChanged)),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                ],
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: _saveButtonAdditionalPaddingHorizontal,
+                      right: _saveButtonAdditionalPaddingHorizontal),
+                  child: CustomSaveButton(
+                      controller: _controller,
+                      formKey: _formKey,
+                      onAddedMedicine: () => _controller
+                          .createMedicine()
+                          .then(widget.onMedicineChanged)),
+                ),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      _controller.canNotificationsBePicked = newValue;
+    });
   }
 
   void _handleFrequencyChange(Frequency frequency) {

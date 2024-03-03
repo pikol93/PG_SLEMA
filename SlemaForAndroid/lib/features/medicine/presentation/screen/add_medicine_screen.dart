@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/custom_date_picker.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/save_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/text_input.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/custom_date_picker.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/formWidgets/frequency_list.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_screen_app_bar.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
+import 'package:pg_slema/utils/simple_appbar/simple_appbar.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -22,39 +23,35 @@ class AddMedicineScreen extends StatefulWidget {
 class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
-
   final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
+  final double _singleWidgetInRowPadding = 3.0;
   final double _saveButtonAdditionalPaddingHorizontal = 30.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AddMedicineScreenAppBar(),
+      appBar: const SimpleAppbar(title: "Dodaj lekarstwo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: _mainWidgetsPaddingHorizontal, vertical: 30),
+              horizontal: 2 * _mainWidgetsPaddingHorizontal, vertical: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _mainWidgetsPaddingHorizontal),
-                  child: CustomTextFormField(
-                    label: "Nazwa",
-                    icon: null,
-                    onChanged: (value) => _controller.typedMedicineName = value,
-                  ),
+                CustomTextFormField(
+                  label: "Nazwa",
+                  icon: null,
+                  onChanged: (value) => _controller.typedMedicineName = value,
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
                 Row(
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
-                            left: _mainWidgetsPaddingHorizontal, right: 3.0),
+                        padding:
+                            EdgeInsets.only(right: _singleWidgetInRowPadding),
                         child: CustomTextFormField(
                           label: "Dawka",
                           icon: Icons.vaccines,
@@ -65,10 +62,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: EdgeInsets.only(
-                          left: 3.0,
-                          right: _mainWidgetsPaddingHorizontal,
-                        ),
+                        padding:
+                            EdgeInsets.only(left: _singleWidgetInRowPadding),
                         child: CustomTextFormField(
                           label: "Rodzaj",
                           icon: Icons.medication_outlined,
@@ -81,27 +76,30 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   ],
                 ),
                 SizedBox(height: _mainPaddingBetweenInputs),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _mainWidgetsPaddingHorizontal),
-                  child: CustomTextFormField(
-                    label: "Jak używać",
-                    icon: Icons.water_drop_outlined,
-                    onChanged: (value) => _controller.typedIntakeType = value,
-                    isValueRequired: false,
-                  ),
+                CustomTextFormField(
+                  label: "Jak używać",
+                  icon: Icons.water_drop_outlined,
+                  onChanged: (value) => _controller.typedIntakeType = value,
+                  isValueRequired: false,
                 ),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                FrequencyList(
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                NotificationManager(
+                  switchValue: _controller.canNotificationsBePicked,
+                  onChanged: changeNotificationsAvailable,
+                ),
+                SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                if (_controller.canNotificationsBePicked) ...[
+                  FrequencyList(
                     initialValue: _controller.frequency,
-                    onChanged: (frequency) =>
-                        _handleFrequencyChange(frequency)),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                _createIntakeDataFieldIfPossible(),
-                ManageNotificationsWidget(
-                  controller: _controller,
-                ),
-                SizedBox(height: _mainPaddingBetweenInputs),
+                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  _createIntakeDataFieldIfPossible(),
+                  ManageNotificationsTimeWidget(
+                    controller: _controller,
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                ],
                 Padding(
                   padding: EdgeInsets.only(
                       left: _saveButtonAdditionalPaddingHorizontal,
@@ -119,6 +117,12 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
         ),
       ),
     );
+  }
+
+  void changeNotificationsAvailable(newValue) {
+    setState(() {
+      _controller.canNotificationsBePicked = newValue;
+    });
   }
 
   void _handleFrequencyChange(Frequency frequency) {

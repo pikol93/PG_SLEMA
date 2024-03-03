@@ -22,6 +22,7 @@ class AddMedicineController with Logger, ManageNotificationsController {
   String typedOpinion = "";
   String typedMedicineType = "";
   bool canDateBePicked = true;
+  bool canNotificationsBePicked = false;
   @override
   List<GetNotification> notifications =
       List<GetNotification>.empty(growable: true);
@@ -39,6 +40,7 @@ class AddMedicineController with Logger, ManageNotificationsController {
     notifications = medicine.notifications
         .map((e) => GetNotification(e.id, e.notificationTime))
         .toList(growable: true);
+    canNotificationsBePicked = notifications.isNotEmpty;
     typedDose = medicine.dose;
     typedIntakeType = medicine.intakeType;
     typedOpinion = medicine.opinion;
@@ -47,7 +49,10 @@ class AddMedicineController with Logger, ManageNotificationsController {
   }
 
   Future<Medicine> createMedicine() async {
-    var medicineNotifications = await _createNotificationsForMedicine();
+    List<nt.Notification> medicineNotifications = [];
+    if (canNotificationsBePicked) {
+      medicineNotifications = await _createNotificationsForMedicine();
+    }
 
     Medicine medicine = Medicine(
         _medicineId,

@@ -51,6 +51,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       validator: validateInput,
       onChanged: widget.onChanged,
       keyboardType: TextInputType.text,
+      style: TextStyle(
+        fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
+        color: Theme.of(context).primaryColor,
+      ),
       decoration: InputDecoration(
         filled: true,
         fillColor: Theme.of(context).colorScheme.primaryContainer,
@@ -62,24 +66,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontSize: labelFontSize,
             fontWeight: FontWeight.w700,
             color: Theme.of(context).primaryColor),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(borderRadius),
-            ),
-            borderSide: BorderSide(
-                color: Theme.of(context).primaryColor, width: borderWidth)),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(borderRadius),
-            ),
-            borderSide: BorderSide(
-                color: Theme.of(context).primaryColor, width: borderWidth)),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(borderRadius),
-            ),
-            borderSide: BorderSide(
-                color: Theme.of(context).primaryColor, width: borderWidth)),
         prefixIcon: widget.icon == null
             ? null
             : SizedBox(

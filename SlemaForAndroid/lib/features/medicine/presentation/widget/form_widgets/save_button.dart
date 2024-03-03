@@ -28,12 +28,16 @@ class CustomSaveButton extends StatelessWidget {
             }
           },
           style: ButtonStyle(
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.0))),
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).primaryColor),
-              elevation: MaterialStateProperty.all(6)),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(32.0),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Theme.of(context).primaryColor,
+            ),
+            elevation: MaterialStateProperty.all(6),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(14.0),
             child: Center(

@@ -22,28 +22,38 @@ class GetNotificationWidget extends StatefulWidget {
 class _GetNotificationWidgetState extends State<GetNotificationWidget> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-            flex: 4,
+    return Container(
+      height: 36,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: CustomTimePicker(
               onTimeChanged: onTimeChanged,
               controller: TimePickerController(
                   widget.controller.notification.notificationTime),
-            )),
-        Expanded(
-          flex: 2,
-          child: FilledButton(
-            onPressed: onDeleteClicked,
-            style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(0),
-                backgroundColor: Theme.of(context).primaryColor),
-            child: const Icon(Icons.remove_circle_outline, color: Colors.white),
+            ),
           ),
-        )
-      ],
+          IconButton(
+            onPressed: onDeleteClicked,
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(EdgeInsets.zero),
+              iconSize: MaterialStateProperty.all(26),
+              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              iconColor:
+                  MaterialStateProperty.all(Theme.of(context).primaryColor),
+            ),
+            icon: const Icon(
+              Icons.remove_circle_outline,
+            ),
+          )
+        ],
+      ),
     );
   }
 

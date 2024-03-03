@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/add_medicine_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/single_medicine_widget.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen_app_bar.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/add_medicine_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/single_medicine_widget.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/all_medicines_screen_app_bar.dart';
 
 class AllMedicinesScreen extends StatefulWidget {
   const AllMedicinesScreen({super.key});

@@ -13,12 +13,19 @@ class FrequencyList extends StatefulWidget {
 
   List<DropdownMenuEntry<Frequency>> _createFrequencyEntries() {
     return Frequency.values
-        .map((e) => DropdownMenuEntry<Frequency>(value: e, label: e.name))
+        .map((e) => DropdownMenuEntry<Frequency>(
+              value: e,
+              label: e.name,
+            ))
         .toList();
   }
 }
 
 class _FrequencyListState extends State<FrequencyList> {
+  final double borderWidth = 2.5;
+  final double borderRadius = 18.0;
+  final double labelFontSize = 24.0;
+
   @override
   Widget build(BuildContext context) {
     return DropdownMenu(
@@ -27,7 +34,18 @@ class _FrequencyListState extends State<FrequencyList> {
       onSelected: (value) {
         widget.onChanged(value!);
       },
-      label: const Text("Częstotliwość przyjmowania"),
+      label: const Text(
+        "Częstotliwość przyjmowania",
+      ),
+      //Setting width because of: https://github.com/flutter/flutter/issues/125199
+      width: MediaQuery.of(context).size.width - 50,
+      textStyle: TextStyle(
+        fontSize: Theme.of(context).textTheme.labelSmall?.fontSize,
+        color: Theme.of(context).primaryColor,
+      ),
+      inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
+            filled: true,
+          ),
     );
   }
 }
