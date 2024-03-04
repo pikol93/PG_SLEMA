@@ -33,25 +33,25 @@ class MealService {
     return await repository.getAllMealsByDate(date);
   }
 
-  Future<LinkedHashMap<MealTime, List<Meal>>> getGroupedMealsByDate(
+  Future<LinkedHashMap<MealTime, Meal?>> getGroupedMealsByDate(
       DateTime date) async {
     var meals =
         await getAllMealsByDate(DateTime(date.year, date.month, date.day));
     return groupMealsByMealTime(meals);
   }
 
-  Future<LinkedHashMap<MealTime, List<Meal>>> groupMealsByMealTime(
+  Future<LinkedHashMap<MealTime, Meal?>> groupMealsByMealTime(
       List<Meal> meals) async {
-    LinkedHashMap<MealTime, List<Meal>> groupedMeals = createEmptyMap();
+    LinkedHashMap<MealTime, Meal?> groupedMeals = createEmptyMap();
     for (var meal in meals) {
-      groupedMeals[meal.mealTime]?.add(meal);
+      groupedMeals[meal.mealTime] = meal;
     }
     return groupedMeals;
   }
 
-  LinkedHashMap<MealTime, List<Meal>> createEmptyMap() {
+  LinkedHashMap<MealTime, Meal?> createEmptyMap() {
     return LinkedHashMap.fromIterable(MealTime.values,
-        key: (key) => key, value: (value) => []);
+        key: (key) => key, value: (_) => null);
   }
 
   Future deleteMeals(List<String> idsToRemove) async {
