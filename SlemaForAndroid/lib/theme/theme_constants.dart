@@ -124,6 +124,18 @@ ThemeData lightTheme = ThemeData(
         borderSide: BorderSide(color: lightColorScheme.primary, width: 2.5),
       ),
     ),
+    timePickerTheme: TimePickerThemeData(
+      hourMinuteColor: MaterialStateColor.resolveWith(
+        (states) => states.contains(MaterialState.selected)
+            ? lightColorScheme.primary
+            : lightColorScheme.secondary,
+      ),
+      hourMinuteTextColor: MaterialStateColor.resolveWith(
+        (states) => states.contains(MaterialState.selected)
+            ? lightColorScheme.onPrimary
+            : lightColorScheme.onSecondary,
+      ),
+    ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
         colorPrimaryLighter: colorPrimaryLighter,
