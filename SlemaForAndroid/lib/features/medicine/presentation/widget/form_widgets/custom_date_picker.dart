@@ -27,9 +27,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           initialDate: widget.controller.initialDate,
           firstDate: widget.controller.allowedFirstDate,
           lastDate: widget.controller.allowedLastDate,
-          helpText: "Wybierz datę przyjęcia leku",
-          fieldLabelText: "Wpisz swoją datę przyjęcia leku",
-          errorFormatText: "Zły format daty!",
+          initialEntryMode: DatePickerEntryMode.calendarOnly,
         );
 
         if (selectedDate != null) {
