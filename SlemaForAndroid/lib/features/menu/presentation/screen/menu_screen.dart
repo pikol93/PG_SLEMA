@@ -10,11 +10,16 @@ class MenuScreen extends StatelessWidget {
       children: [
         SizedBox(
           height: 100,
+          width: MediaQuery.of(context).size.width,
           child: Padding(
-            padding: const EdgeInsets.only(top: 30.0),
+            padding: const EdgeInsets.only(top: 24.0, left: 20.0),
             child: Text(
-              "Menu",
-              style: Theme.of(context).textTheme.headlineLarge,
+              "Więcej",
+              style: Theme.of(context).appBarTheme.titleTextStyle!.copyWith(
+                    color: Theme.of(context).primaryColor,
+                    fontSize:
+                        Theme.of(context).textTheme.displayLarge?.fontSize,
+                  ),
             ),
           ),
         ),
