@@ -42,7 +42,7 @@ class MenuScreenButton extends StatelessWidget {
                 child: Icon(
                   Icons.chevron_right_rounded,
                   size: 40,
-                  color: Theme.of(context).dividerTheme.color,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                 ),
               ),
             ),
