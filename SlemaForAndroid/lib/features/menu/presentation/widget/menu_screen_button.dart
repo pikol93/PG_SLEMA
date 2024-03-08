@@ -35,14 +35,14 @@ class MenuScreenButton extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge
-                    ?.copyWith(height: .8)),
+                    ?.copyWith(height: .75)),
             Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Icon(
                   Icons.chevron_right_rounded,
                   size: 40,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).dividerTheme.color,
                 ),
               ),
             ),
