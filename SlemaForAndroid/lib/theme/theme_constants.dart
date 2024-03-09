@@ -46,7 +46,7 @@ ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.w600,
       ),
       labelSmall: TextStyle(
-        fontSize: 20,
+        fontSize: 24,
       ),
     ),
     bottomAppBarTheme: BottomAppBarTheme(
@@ -123,6 +123,33 @@ ThemeData lightTheme = ThemeData(
         ),
         borderSide: BorderSide(color: lightColorScheme.primary, width: 2.5),
       ),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      hourMinuteColor: MaterialStateColor.resolveWith(
+        (states) => states.contains(MaterialState.selected)
+            ? lightColorScheme.primary
+            : lightColorScheme.secondary,
+      ),
+      hourMinuteTextColor: MaterialStateColor.resolveWith(
+        (states) => states.contains(MaterialState.selected)
+            ? lightColorScheme.onPrimary
+            : lightColorScheme.onSecondary,
+      ),
+      padding: const EdgeInsets.all(25),
+    ),
+    datePickerTheme: DatePickerThemeData(
+      headerHelpStyle: const TextStyle(fontSize: 34),
+      headerHeadlineStyle: const TextStyle(fontSize: 28),
+      headerForegroundColor: lightColorScheme.primary,
+      yearForegroundColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.disabled)) {
+          return lightColorScheme.inversePrimary;
+        } else if (states.contains(MaterialState.selected)) {
+          return lightColorScheme.onPrimary;
+        } else {
+          return lightColorScheme.primary;
+        }
+      }),
     ),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/diet_screen_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/diet_app_bar.dart';
 import 'package:pg_slema/features/diet/presentation/widget/meals_in_day_widget.dart';
-import 'package:pg_slema/features/diet/presentation/widget/select_dishes_button.dart';
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/diet/presentation/widget/update_meals_button.dart';
+import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class DietScreen extends StatefulWidget {
@@ -34,9 +34,9 @@ class _DietScreenState extends State<DietScreen> {
         ),
       ),
       body: MealsInDayWidget(meals: _controller.meals),
-      floatingActionButton: SelectDishesButton(
-        onDishesSelected: _onDishesSelected,
-        initDishesProvider: _mealsToDishes,
+      floatingActionButton: UpdateMealsButton(
+        onMealsSelected: _onMealsSelected,
+        initMealsProvider: _mealsProvider,
       ),
     );
   }
@@ -46,18 +46,18 @@ class _DietScreenState extends State<DietScreen> {
     setState(() {});
   }
 
-  void _onDishesSelected(Map<MealTime, List<Dish>> dishes) async {
-    _controller.updateMeals(dishes);
+  void _onMealsSelected(Map<MealTime, Meal> meals) async {
+    _controller.updateMeals(meals);
   }
 
   void _onMealsChanged() {
     setState(() {});
   }
 
-  Map<MealTime, List<Dish>> _mealsToDishes() {
+  Map<MealTime, Meal> _mealsProvider() {
     return _controller.meals.map((key, value) {
-      var dishes = value.map((e) => e.dish).toList(growable: true);
-      return MapEntry(key, dishes);
+      var newValue = value ?? Meal("", "", [], _controller.date, key);
+      return MapEntry(key, newValue);
     });
   }
 }

@@ -1,19 +1,26 @@
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
-import 'package:pg_slema/features/dish/logic/service/dish_service.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
+import 'package:pg_slema/features/ingredient/logic/service/ingredient_service.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_dto.dart';
 
 class MealToDtoConverter {
-  final DishService service;
+  final IngredientService service;
 
   MealToDtoConverter(this.service);
 
   Future<Meal> fromDto(MealDto dto) async {
-    Dish dish = await service.getDish(dto.dishId);
-    return Meal(dto.id, dish, dto.mealDate, dto.mealTime);
+    List<Ingredient> allIngredients = await service.getAllIngredients();
+    List<String> allIngredientsIds = allIngredients.map((e) => e.id).toList();
+    var ingredients = dto.ingredientsIds
+        .where((id) => allIngredientsIds.contains(id))
+        .map((e) => allIngredients.firstWhere((element) => element.id == e))
+        .toList(growable: true);
+    return Meal(dto.id, dto.title, ingredients, dto.mealDate, dto.mealTime);
   }
 
   MealDto toDto(Meal meal) {
-    return MealDto(meal.id, meal.dish.id, meal.mealDate, meal.mealTime);
+    var ingredientsIds = meal.ingredients.map((e) => e.id).toList();
+    return MealDto(
+        meal.id, meal.title, ingredientsIds, meal.mealDate, meal.mealTime);
   }
 }

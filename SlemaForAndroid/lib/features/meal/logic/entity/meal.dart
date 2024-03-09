@@ -1,12 +1,13 @@
-import 'package:pg_slema/features/dish/logic/entity/dish.dart';
+import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class Meal {
   static const String mealListSharedPrefKey = 'meals';
   final String id;
-  final Dish dish;
+  final String title;
+  final List<Ingredient> ingredients;
   final DateTime mealDate;
   final MealTime mealTime;
 
-  Meal(this.id, this.dish, this.mealDate, this.mealTime);
+  Meal(this.id, this.title, this.ingredients, this.mealDate, this.mealTime);
 }

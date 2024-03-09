@@ -49,11 +49,11 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
     var allDto = await getAllDto();
     final index = allDto.indexWhere((e) => e.id == dto.id);
     allDto[index] = dto;
-    final jsonMedicinesList = allDto
+    final jsonItemsList = allDto
         .map(dtoToJsonConverter.to)
         .map(jsonEncode)
         .toList(growable: true);
-    await _updateItemsList(jsonMedicinesList);
+    await _updateItemsList(jsonItemsList);
   }
 
   Future deleteAllFrom(List<String> dtoIds) async {
@@ -84,11 +84,11 @@ abstract class SharedPreferencesCrudRepository<T extends Dto> {
       final index = allDto.indexWhere((e) => e.id == element.id);
       allDto[index] = element;
     }
-    final jsonMedicinesList = allDto
+    final jsonItemsList = allDto
         .map(dtoToJsonConverter.to)
         .map(jsonEncode)
         .toList(growable: true);
-    await _updateItemsList(jsonMedicinesList);
+    await _updateItemsList(jsonItemsList);
   }
 
   Future<List<String>> _getJsonItemsList() async {

@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
-class MealsInMealTimeWidget extends StatelessWidget {
+class MealInMealTimeWidget extends StatelessWidget {
   final MealTime mealTime;
-  final List<Meal> meals;
+  final Meal? meal;
 
-  const MealsInMealTimeWidget(
-      {super.key, required this.mealTime, required this.meals});
+  const MealInMealTimeWidget(
+      {super.key, required this.mealTime, required this.meal});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,10 @@ class MealsInMealTimeWidget extends StatelessWidget {
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      return Text(meals.elementAt(index).dish.name)
+                      return Text(meal?.ingredients.elementAt(index).name ?? "")
                           .build(context);
                     },
-                    childCount: meals.length,
+                    childCount: meal?.ingredients.length ?? 0,
                   ),
                 ),
               ],

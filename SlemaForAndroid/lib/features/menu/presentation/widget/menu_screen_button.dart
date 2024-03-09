@@ -19,20 +19,32 @@ class MenuScreenButton extends StatelessWidget {
 
     return InkWell(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 2.0),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Icon(
               iconData,
+              size: 40,
+              color: Theme.of(context).primaryColor,
             ),
             const SizedBox(
-              width: 20.0,
+              width: 10.0,
             ),
-            Text(
-              label,
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    height: 0.52381,
-                  ),
+            Text(label,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineLarge
+                    ?.copyWith(height: .75)),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Icon(
+                  Icons.chevron_right_rounded,
+                  size: 40,
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+              ),
             ),
           ],
         ),
