@@ -6,6 +6,7 @@ import 'package:pg_slema/features/notification/logic/entity/get_notification.dar
 import 'package:pg_slema/features/notification/logic/entity/notification.dart'
     as nt;
 import 'package:pg_slema/features/notification/presentation/controller/manage_notifications_controller.dart';
+import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/utils/id/integer_id_generator.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
@@ -58,7 +59,9 @@ class AddMedicineController with Logger, ManageNotificationsController {
     Medicine medicine = Medicine(
         _medicineId,
         typedMedicineName,
-        intakeDate.compareTo(DateTime.now()) >= 0 ? intakeDate : DateTime.now(),
+        intakeDate.compareDates(DateTime.now()) >= 0
+            ? intakeDate
+            : DateTime.now(),
         frequency,
         medicineNotifications,
         typedDose,
@@ -123,7 +126,8 @@ class AddMedicineController with Logger, ManageNotificationsController {
       var now = DateTime.now();
       var nowTime = TimeOfDay(hour: now.hour, minute: now.minute);
       var tomorrow = now.add(const Duration(days: 1));
-      int compareDates = intakeDate.compareTo(now);
+
+      int compareDates = intakeDate.compareDates(now);
       if (compareDates > 0) {
         return intakeDate;
       } else if (compareDates < 0 || nowTime.isHigher(notificationTime)) {
