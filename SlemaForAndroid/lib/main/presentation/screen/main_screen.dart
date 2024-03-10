@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
+import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
@@ -60,6 +61,7 @@ class MainScreenState extends State<MainScreen> {
         const MenuScreen(),
         const AllMedicinesScreen(),
         const DietScreen(),
+        const ExercisesScreen(),
         const PicturesScreen(),
         const AssessmentScreen()
       ][controller.currentIndex],

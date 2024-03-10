@@ -25,7 +25,7 @@ class ExerciseDtoToJsonConverter
     return ExerciseDto(
         json['id'],
         json['name'] ?? '',
-        json['intensity'] ?? 50,
+        json['intensity '] ?? 50,
         json['exerciseDuration'] ?? 1,
         DateTime.parse(exerciseDate),
         exerciseTime);
@@ -34,8 +34,8 @@ class ExerciseDtoToJsonConverter
   Map<String, dynamic> _toJson(ExerciseDto dto) => {
         'id': dto.id.toString(),
         'name': dto.name.toString(),
-        'intensity': dto.intensity.toString(),
-        'exerciseDuration': dto.exerciseDuration.toString(),
+        'intensity': dto.intensity,
+        'exerciseDuration': dto.exerciseDuration,
         'exerciseDate': dto.exerciseDate.toString(),
         'exerciseTime': JsonParser.parseTimeOfDayToJson(dto.exerciseTime),
       };

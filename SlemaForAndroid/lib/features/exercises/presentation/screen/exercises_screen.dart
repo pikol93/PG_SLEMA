@@ -1,18 +1,18 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pg_slema/features/exercises/presentation/controller/all_exercises_controller.dart';
+import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 
-class AllExerciseScreen extends StatefulWidget {
-  const AllExerciseScreen({super.key});
+class ExercisesScreen extends StatefulWidget {
+  const ExercisesScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => AllExerciseScreenState();
+  State<StatefulWidget> createState() => ExercisesScreenState();
 }
 
-class AllExerciseScreenState extends State<AllExerciseScreen> {
+class ExercisesScreenState extends State<ExercisesScreen> {
   late final AllExercisesController _controller;
 
-  AllExerciseScreenState() {
+  ExercisesScreenState() {
     _controller = AllExercisesController(_onExercisesChanged);
     super.initState();
     _controller.initializeExercises();

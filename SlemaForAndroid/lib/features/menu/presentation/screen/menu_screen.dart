@@ -40,15 +40,21 @@ class MenuScreen extends StatelessWidget {
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
+          iconData: Icons.fitness_center_outlined,
+          label: 'Ćwiczenia',
+          destinationIndex: 5,
+        ),
+        const MenuScreenDivider(),
+        const MenuScreenButton(
           iconData: Icons.image,
           label: 'Zdjęcia',
-          destinationIndex: 5,
+          destinationIndex: 6,
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
           iconData: Icons.assessment_outlined,
           label: 'Raport',
-          destinationIndex: 6,
+          destinationIndex: 7,
         ),
         const MenuScreenDivider()
       ],
