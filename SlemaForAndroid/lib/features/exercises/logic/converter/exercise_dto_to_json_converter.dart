@@ -26,7 +26,7 @@ class ExerciseDtoToJsonConverter
         json['id'],
         json['name'] ?? '',
         json['intensity'] ?? 50,
-        json['exerciseDuration'] ?? 0,
+        json['exerciseDuration'] ?? 1,
         DateTime.parse(exerciseDate),
         exerciseTime);
   }
