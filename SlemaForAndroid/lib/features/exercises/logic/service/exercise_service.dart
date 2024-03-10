@@ -2,7 +2,6 @@ import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/features/exercises/logic/repository/exercise_repository.dart';
 
 class ExerciseService {
-
   final ExerciseRepository repository;
 
   ExerciseService(this.repository);

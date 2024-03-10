@@ -7,14 +7,14 @@ import 'package:pg_slema/features/picture/presentation/widget/pick_picture.dart'
 import 'package:pg_slema/features/picture/presentation/widget/picture_list.dart';
 import 'package:pg_slema/features/picture/presentation/widget/take_picture.dart';
 
-class ExercisesScreen extends StatefulWidget {
-  const ExercisesScreen({super.key});
+class PicturesScreen extends StatefulWidget {
+  const PicturesScreen({super.key});
 
   @override
-  ExercisesScreenState createState() => ExercisesScreenState();
+  PicturesScreenState createState() => PicturesScreenState();
 }
 
-class ExercisesScreenState extends State<ExercisesScreen> {
+class PicturesScreenState extends State<PicturesScreen> {
   late PictureListController _pictureListController;
   late TakePictureController _takePictureController;
   @override
