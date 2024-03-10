@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 
-class ExerciseWidget extends StatefulWidget {
+class ExerciseWidget extends StatelessWidget {
   final Exercise exercise;
 
   const ExerciseWidget({super.key, required this.exercise});
 
-  @override
-  ExerciseWidgetState createState() => ExerciseWidgetState();
-}
-
-class ExerciseWidgetState extends State<ExerciseWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,15 +18,15 @@ class ExerciseWidgetState extends State<ExerciseWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.exercise.name,
+            exercise.name,
           ),
           const SizedBox(height: 8.0),
-          Text(widget.exercise.intensity as String),
-          Text(widget.exercise.exerciseDuration as String),
+          Text(exercise.intensity as String),
+          Text(exercise.exerciseDuration as String),
           const SizedBox(height: 8.0),
-          Text(widget.exercise.exerciseTime as String),
+          Text(exercise.exerciseTime as String),
           const SizedBox(height: 8.0),
-          Text(widget.exercise.exerciseDate as String),
+          Text(exercise.exerciseDate as String),
           const SizedBox(height: 8.0),
         ],
       ),
