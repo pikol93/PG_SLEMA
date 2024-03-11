@@ -1,54 +1,46 @@
-import 'package:flutter/material.dart';
-import 'package:pg_slema/features/picture/logic/repository/shared_preferences_picture_repository.dart';
-import 'package:pg_slema/features/picture/logic/service/picture_service_impl.dart';
-import 'package:pg_slema/features/picture/presentation/controller/picture_list_controller.dart';
-import 'package:pg_slema/features/picture/presentation/controller/take_picture_controller.dart';
-import 'package:pg_slema/features/picture/presentation/widget/pick_picture.dart';
-import 'package:pg_slema/features/picture/presentation/widget/picture_list.dart';
-import 'package:pg_slema/features/picture/presentation/widget/take_picture.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({super.key});
 
   @override
-  ExercisesScreenState createState() => ExercisesScreenState();
+  State<StatefulWidget> createState() => ExercisesScreenState();
 }
 
 class ExercisesScreenState extends State<ExercisesScreen> {
-  late PictureListController _pictureListController;
-  late TakePictureController _takePictureController;
-  @override
-  void initState() {
+  late final AllExercisesController _controller;
+
+  ExercisesScreenState() {
+    _controller = AllExercisesController(_onExercisesChanged);
     super.initState();
-    SharedPreferencesPictureRepository pictureRepository =
-        SharedPreferencesPictureRepository();
-    PictureServiceImpl pictureService = PictureServiceImpl(pictureRepository);
-    _pictureListController = PictureListController(
-      pictureService,
-    );
-    _takePictureController = TakePictureController(pictureService);
+    _controller.initializeExercises();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          ListView(
-            children: [
-              PickPicture(
-                  voidCallbackAfterAddedImage:
-                      _pictureListController.refreshPicturesData),
-              TakePicture(
-                voidCallbackAfterAddedImage:
-                    _pictureListController.refreshPicturesData,
-                takePictureController: _takePictureController,
+    return Builder(
+      builder: (BuildContext context) {
+        return CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return ExerciseWidget(
+                          exercise: _controller.exercises.elementAt(index))
+                      .build(context);
+                },
+                childCount: _controller.exercises.length,
               ),
-              PictureList(pictureListController: _pictureListController)
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  void _onExercisesChanged() {
+    setState(() {});
   }
 }

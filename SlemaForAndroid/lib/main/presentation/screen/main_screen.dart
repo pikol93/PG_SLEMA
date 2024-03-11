@@ -3,6 +3,7 @@ import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
+import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
@@ -61,6 +62,7 @@ class MainScreenState extends State<MainScreen> {
         const AllMedicinesScreen(),
         const DietScreen(),
         const ExercisesScreen(),
+        const PicturesScreen(),
         const AssessmentScreen()
       ][controller.currentIndex],
     );
