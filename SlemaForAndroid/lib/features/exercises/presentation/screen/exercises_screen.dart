@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/add_exercise_button.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/all_exercises_widget.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
-import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 
 class ExercisesScreen extends StatefulWidget {
   const ExercisesScreen({super.key});
@@ -20,23 +21,10 @@ class ExercisesScreenState extends State<ExercisesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (BuildContext context) {
-        return CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return ExerciseWidget(
-                          exercise: _controller.exercises.elementAt(index))
-                      .build(context);
-                },
-                childCount: _controller.exercises.length,
-              ),
-            ),
-          ],
-        );
-      },
+    return Scaffold(
+      body: AllExercisesWidget(exercises: _controller.exercises),
+      floatingActionButton:
+          AddExerciseButton(onExerciseAdded: _controller.onExerciseCreated),
     );
   }
 
