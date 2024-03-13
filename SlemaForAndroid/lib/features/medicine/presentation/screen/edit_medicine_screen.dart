@@ -9,7 +9,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
-import 'package:pg_slema/utils/simple_appbar/simple_appbar.dart';
+import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
