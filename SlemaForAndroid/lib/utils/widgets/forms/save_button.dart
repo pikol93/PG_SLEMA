@@ -4,13 +4,13 @@ import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_
 class CustomSaveButton extends StatelessWidget {
   final AddMedicineController controller;
   final GlobalKey<FormState> formKey;
-  final VoidCallback onAddedMedicine;
+  final VoidCallback onSaved;
 
   const CustomSaveButton(
       {super.key,
       required this.controller,
       required this.formKey,
-      required this.onAddedMedicine});
+      required this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomSaveButton extends StatelessWidget {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               try {
-                addNewMedicine(context);
+                saveForm(context);
               } on Exception catch (_) {
                 showInfoAboutIncorrectSave(context);
               }
@@ -58,8 +58,8 @@ class CustomSaveButton extends StatelessWidget {
     );
   }
 
-  void addNewMedicine(BuildContext context) {
-    onAddedMedicine.call();
+  void saveForm(BuildContext context) {
+    onSaved.call();
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

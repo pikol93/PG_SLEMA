@@ -119,7 +119,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                   child: CustomSaveButton(
                       controller: _controller,
                       formKey: _formKey,
-                      onAddedMedicine: () => _controller
+                      onSaved: () => _controller
                           .createMedicine()
                           .then(widget.onMedicineChanged)),
                 ),

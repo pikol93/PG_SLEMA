@@ -107,7 +107,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   child: CustomSaveButton(
                       controller: _controller,
                       formKey: _formKey,
-                      onAddedMedicine: () => _controller
+                      onSaved: () => _controller
                           .createMedicine()
                           .then(widget.onMedicineAdded)),
                 ),
