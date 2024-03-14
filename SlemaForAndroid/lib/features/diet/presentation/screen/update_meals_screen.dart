@@ -6,6 +6,7 @@ import 'package:pg_slema/features/diet/presentation/widget/form_widgets/save_but
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
+import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 
 class UpdateMealsScreen extends StatefulWidget {
   final ValueChanged<Map<MealTime, Meal>> onMealsUpdated;
@@ -33,41 +34,52 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Edytuj posiłki"),
-          centerTitle: true,
-        ),
-        body: Center(
-            child: SingleChildScrollView(
-          physics: const ScrollPhysics(),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              MealTimeList(
-                  onMealTimeChanged: _onMealTimeChanged,
-                  initialValue: _controller.currentMealTime),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: _controller.mainCategories.length,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  return IngredientsInIngredientCategory(
-                      category: _controller.mainCategories[index],
-                      onIngredientAdded: _controller.onIngredientAdded,
-                      onIngredientRemoved: _controller.onIngredientRemoved,
-                      selectedIngredientsIds:
-                          getSelectedIngredientsIdsForCategory(
-                              _controller.mainCategories[index]));
-                },
+    return Column(
+      children: [
+        const DefaultAppBar(title: "Zarządzaj posiłkami"),
+        Expanded(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: Material(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40.0),
+                child: SingleChildScrollView(
+                  physics: const ScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      MealTimeList(
+                          onMealTimeChanged: _onMealTimeChanged,
+                          initialValue: _controller.currentMealTime),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _controller.mainCategories.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          return IngredientsInIngredientCategory(
+                              category: _controller.mainCategories[index],
+                              onIngredientAdded: _controller.onIngredientAdded,
+                              onIngredientRemoved:
+                                  _controller.onIngredientRemoved,
+                              selectedIngredientsIds:
+                                  getSelectedIngredientsIdsForCategory(
+                                      _controller.mainCategories[index]));
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      CustomSaveButton(
+                          onSaveButtonClicked: () =>
+                              widget.onMealsUpdated(_controller.meals))
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 20),
-              CustomSaveButton(
-                  onSaveButtonClicked: () =>
-                      widget.onMealsUpdated(_controller.meals))
-            ],
+            ),
           ),
-        )));
+        )
+      ],
+    );
   }
 
   void _onMealTimeChanged(MealTime mealTime) {
