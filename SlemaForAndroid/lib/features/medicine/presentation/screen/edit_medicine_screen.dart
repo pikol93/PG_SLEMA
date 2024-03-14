@@ -4,8 +4,8 @@ import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
+import 'package:pg_slema/utils/widgets/forms/save_button.dart';
+import 'package:pg_slema/utils/widgets/forms/text_input.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
