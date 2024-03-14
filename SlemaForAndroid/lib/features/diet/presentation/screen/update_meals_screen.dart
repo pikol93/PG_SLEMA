@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/update_meals_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_in_ingredient_category.dart';
+import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_info.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_list.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
@@ -37,49 +39,42 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
     return Column(
       children: [
         const DefaultAppBar(title: "Zarządzaj posiłkami"),
-        Expanded(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            color: Theme.of(context).scaffoldBackgroundColor,
-            child: Material(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: SingleChildScrollView(
-                  physics: const ScrollPhysics(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      MealTimeList(
-                          onMealTimeChanged: _onMealTimeChanged,
-                          initialValue: _controller.currentMealTime),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: _controller.mainCategories.length,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          return IngredientsInIngredientCategory(
-                              category: _controller.mainCategories[index],
-                              onIngredientAdded: _controller.onIngredientAdded,
-                              onIngredientRemoved:
-                                  _controller.onIngredientRemoved,
-                              selectedIngredientsIds:
-                                  getSelectedIngredientsIdsForCategory(
-                                      _controller.mainCategories[index]));
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: CustomSaveButton(
-                          onSaved: () =>
-                              widget.onMealsUpdated(_controller.meals),
-                          formKey: null,
-                        ),
-                      )
-                    ],
-                  ),
+        DefaultBody(
+          child: SingleChildScrollView(
+            physics: const ScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                MealTimeInfo(
+                  iconData: Icons.set_meal,
+                  mealTimeName: _controller.currentMealTime.name,
                 ),
-              ),
+                MealTimeList(
+                    onMealTimeChanged: _onMealTimeChanged,
+                    initialValue: _controller.currentMealTime),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _controller.mainCategories.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    return IngredientsInIngredientCategory(
+                        category: _controller.mainCategories[index],
+                        onIngredientAdded: _controller.onIngredientAdded,
+                        onIngredientRemoved: _controller.onIngredientRemoved,
+                        selectedIngredientsIds:
+                            getSelectedIngredientsIdsForCategory(
+                                _controller.mainCategories[index]));
+                  },
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: CustomSaveButton(
+                    onSaved: () => widget.onMealsUpdated(_controller.meals),
+                    formKey: null,
+                  ),
+                )
+              ],
             ),
           ),
         )

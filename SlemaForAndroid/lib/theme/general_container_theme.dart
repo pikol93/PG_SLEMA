@@ -10,9 +10,3 @@ BoxDecoration generalContainerBoxDecorationTheme = BoxDecoration(
     color: lightColorScheme.primary,
   ),
 );
-
-TextStyle generalContainerTextStyleTheme = TextStyle(
-  fontSize: 24.0,
-  fontWeight: FontWeight.w700,
-  color: lightColorScheme.primary,
-);
