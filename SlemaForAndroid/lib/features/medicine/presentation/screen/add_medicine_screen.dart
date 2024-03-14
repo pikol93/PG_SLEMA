@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/custom_date_picker.dart';
+import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/save_button.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/text_input.dart';
 import 'package:pg_slema/utils/frequency/frequency.dart';
@@ -136,7 +136,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
     return Column(
       children: [
         if (_controller.canDateBePicked) ...[
-          CustomDatePicker(
+          DatePicker(
               onDateSelected: (date) => _controller.intakeDate = date,
               controller: DatePickerController(
                   DateTime.now(),
