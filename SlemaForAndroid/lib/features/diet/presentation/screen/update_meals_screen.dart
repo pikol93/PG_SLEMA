@@ -67,12 +67,9 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: CustomSaveButton(
-                    onSaved: () => widget.onMealsUpdated(_controller.meals),
-                    formKey: null,
-                  ),
+                CustomSaveButton(
+                  onSaved: () => widget.onMealsUpdated(_controller.meals),
+                  formKey: null,
                 )
               ],
             ),

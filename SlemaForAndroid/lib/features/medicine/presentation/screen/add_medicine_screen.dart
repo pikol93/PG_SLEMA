@@ -26,7 +26,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
   final double _mainPaddingBetweenInputs = 15.0;
   final double _singleWidgetInRowPadding = 3.0;
-  final double _saveButtonAdditionalPaddingHorizontal = 30.0;
 
   @override
   Widget build(BuildContext context) {
@@ -101,16 +100,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                     ),
                     SizedBox(height: _mainPaddingBetweenInputs),
                   ],
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: _saveButtonAdditionalPaddingHorizontal,
-                        right: _saveButtonAdditionalPaddingHorizontal),
-                    child: CustomSaveButton(
-                        formKey: _formKey,
-                        onSaved: () => _controller
-                            .createMedicine()
-                            .then(widget.onMedicineAdded)),
-                  ),
+                  CustomSaveButton(
+                      formKey: _formKey,
+                      onSaved: () => _controller
+                          .createMedicine()
+                          .then(widget.onMedicineAdded)),
                   SizedBox(height: _mainPaddingBetweenInputs),
                 ],
               ),

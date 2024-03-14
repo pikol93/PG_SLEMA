@@ -25,11 +25,8 @@ class EditMedicineScreen extends StatefulWidget {
 class _EditMedicineScreen extends State<EditMedicineScreen> {
   final _controller = AddMedicineController();
   final _formKey = GlobalKey<FormState>();
-
-  final double _mainWidgetsPaddingHorizontal = 12.0;
   final double _mainPaddingBetweenInputs = 15.0;
   final double _singleWidgetInRowPadding = 3.0;
-  final double _saveButtonAdditionalPaddingHorizontal = 30.0;
 
   @override
   void initState() {
@@ -114,16 +111,11 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                     ),
                     SizedBox(height: _mainPaddingBetweenInputs),
                   ],
-                  Padding(
-                    padding: EdgeInsets.only(
-                        left: _saveButtonAdditionalPaddingHorizontal,
-                        right: _saveButtonAdditionalPaddingHorizontal),
-                    child: CustomSaveButton(
-                        formKey: _formKey,
-                        onSaved: () => _controller
-                            .createMedicine()
-                            .then(widget.onMedicineChanged)),
-                  ),
+                  CustomSaveButton(
+                      formKey: _formKey,
+                      onSaved: () => _controller
+                          .createMedicine()
+                          .then(widget.onMedicineChanged)),
                   SizedBox(height: _mainPaddingBetweenInputs),
                 ],
               ),

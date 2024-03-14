@@ -10,7 +10,7 @@ class CustomSaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 50.0),
         child: ElevatedButton(
           onPressed: () {
             if (formKey?.currentState?.validate() ?? true) {
