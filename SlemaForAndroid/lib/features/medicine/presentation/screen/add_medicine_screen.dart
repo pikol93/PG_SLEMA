@@ -39,6 +39,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
               key: _formKey,
               child: Column(
                 children: [
+                  SizedBox(height: _mainPaddingBetweenInputs),
                   CustomTextFormField(
                     label: "Nazwa",
                     icon: null,
@@ -110,6 +111,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                             .createMedicine()
                             .then(widget.onMedicineAdded)),
                   ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
                 ],
               ),
             ),

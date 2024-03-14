@@ -48,6 +48,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
               key: _formKey,
               child: Column(
                 children: [
+                  SizedBox(height: _mainPaddingBetweenInputs),
                   CustomTextFormField(
                     label: "Nazwa",
                     icon: null,
@@ -123,6 +124,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                             .createMedicine()
                             .then(widget.onMedicineChanged)),
                   ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
                 ],
               ),
             ),
