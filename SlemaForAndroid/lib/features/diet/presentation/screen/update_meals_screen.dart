@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/update_meals_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_in_ingredient_category.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_list.dart';
-import 'package:pg_slema/features/diet/presentation/widget/form_widgets/save_button.dart';
+import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
@@ -68,9 +68,14 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                         },
                       ),
                       const SizedBox(height: 20),
-                      CustomSaveButton(
-                          onSaveButtonClicked: () =>
-                              widget.onMealsUpdated(_controller.meals))
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: CustomSaveButton(
+                          onSaved: () =>
+                              widget.onMealsUpdated(_controller.meals),
+                          formKey: null,
+                        ),
+                      )
                     ],
                   ),
                 ),

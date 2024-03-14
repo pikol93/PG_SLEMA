@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 
 class CustomSaveButton extends StatelessWidget {
-  final AddMedicineController controller;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState>? formKey;
   final VoidCallback onSaved;
 
-  const CustomSaveButton(
-      {super.key,
-      required this.controller,
-      required this.formKey,
-      required this.onSaved});
+  const CustomSaveButton({super.key, this.formKey, required this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +13,7 @@ class CustomSaveButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ElevatedButton(
           onPressed: () {
-            if (formKey.currentState!.validate()) {
+            if (formKey?.currentState?.validate() ?? true) {
               try {
                 saveForm(context);
               } on Exception catch (_) {
@@ -59,7 +53,7 @@ class CustomSaveButton extends StatelessWidget {
   }
 
   void saveForm(BuildContext context) {
-    onSaved.call();
+    onSaved();
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(

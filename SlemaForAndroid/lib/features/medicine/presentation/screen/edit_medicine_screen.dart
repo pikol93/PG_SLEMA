@@ -117,7 +117,6 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                       left: _saveButtonAdditionalPaddingHorizontal,
                       right: _saveButtonAdditionalPaddingHorizontal),
                   child: CustomSaveButton(
-                      controller: _controller,
                       formKey: _formKey,
                       onSaved: () => _controller
                           .createMedicine()

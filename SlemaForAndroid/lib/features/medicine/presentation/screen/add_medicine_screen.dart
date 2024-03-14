@@ -105,7 +105,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                       left: _saveButtonAdditionalPaddingHorizontal,
                       right: _saveButtonAdditionalPaddingHorizontal),
                   child: CustomSaveButton(
-                      controller: _controller,
                       formKey: _formKey,
                       onSaved: () => _controller
                           .createMedicine()
