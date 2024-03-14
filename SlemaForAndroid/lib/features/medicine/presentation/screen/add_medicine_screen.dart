@@ -31,7 +31,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppbar(title: "Dodaj lekarstwo"),
+      appBar: const DefaultAppbar(title: "Dodaj lekarstwo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(

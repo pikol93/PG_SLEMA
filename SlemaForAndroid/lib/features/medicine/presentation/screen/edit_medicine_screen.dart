@@ -39,7 +39,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const SimpleAppbar(title: "Edytuj lekarstwo"),
+      appBar: const DefaultAppbar(title: "Edytuj lekarstwo"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
