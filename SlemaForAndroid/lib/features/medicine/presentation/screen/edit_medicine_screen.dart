@@ -10,6 +10,7 @@ import 'package:pg_slema/features/notification/presentation/widget/manage_notifi
 import 'package:pg_slema/utils/frequency/frequency.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
@@ -38,95 +39,96 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const DefaultAppBar(title: "Edytuj lekarstwo"),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: 2 * _mainWidgetsPaddingHorizontal, vertical: 30),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                CustomTextFormField(
-                  label: "Nazwa",
-                  icon: null,
-                  onChanged: (value) => _controller.typedMedicineName = value,
-                  initialValue: _controller.typedMedicineName,
-                ),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(right: _singleWidgetInRowPadding),
-                        child: CustomTextFormField(
-                          label: "Dawka",
-                          icon: Icons.vaccines,
-                          onChanged: (value) => _controller.typedDose = value,
-                          isValueRequired: false,
-                          initialValue: _controller.typedDose,
+    return Column(
+      children: [
+        const DefaultAppBar(title: "Edytuj lekarstwo"),
+        DefaultBody(
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  CustomTextFormField(
+                    label: "Nazwa",
+                    icon: null,
+                    onChanged: (value) => _controller.typedMedicineName = value,
+                    initialValue: _controller.typedMedicineName,
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(right: _singleWidgetInRowPadding),
+                          child: CustomTextFormField(
+                            label: "Dawka",
+                            icon: Icons.vaccines,
+                            onChanged: (value) => _controller.typedDose = value,
+                            isValueRequired: false,
+                            initialValue: _controller.typedDose,
+                          ),
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            EdgeInsets.only(left: _singleWidgetInRowPadding),
-                        child: CustomTextFormField(
-                          label: "Rodzaj",
-                          icon: Icons.medication_outlined,
-                          onChanged: (value) =>
-                              _controller.typedMedicineType = value,
-                          isValueRequired: false,
-                          initialValue: _controller.typedMedicineType,
+                      Expanded(
+                        child: Padding(
+                          padding:
+                              EdgeInsets.only(left: _singleWidgetInRowPadding),
+                          child: CustomTextFormField(
+                            label: "Rodzaj",
+                            icon: Icons.medication_outlined,
+                            onChanged: (value) =>
+                                _controller.typedMedicineType = value,
+                            isValueRequired: false,
+                            initialValue: _controller.typedMedicineType,
+                          ),
                         ),
                       ),
+                    ],
+                  ),
+                  SizedBox(height: _mainPaddingBetweenInputs),
+                  CustomTextFormField(
+                    label: "Jak używać",
+                    icon: Icons.water_drop_outlined,
+                    onChanged: (value) => _controller.typedIntakeType = value,
+                    isValueRequired: false,
+                    initialValue: _controller.typedIntakeType,
+                  ),
+                  SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                  NotificationManager(
+                    switchValue: _controller.canNotificationsBePicked,
+                    onChanged: changeNotificationsAvailable,
+                  ),
+                  SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                  if (_controller.canNotificationsBePicked) ...[
+                    FrequencyList(
+                      initialValue: _controller.frequency,
+                      onChanged: (frequency) =>
+                          _handleFrequencyChange(frequency),
                     ),
+                    SizedBox(height: _mainPaddingBetweenInputs),
+                    _createIntakeDataFieldIfPossible(),
+                    ManageNotificationsTimeWidget(
+                      controller: _controller,
+                    ),
+                    SizedBox(height: _mainPaddingBetweenInputs),
                   ],
-                ),
-                SizedBox(height: _mainPaddingBetweenInputs),
-                CustomTextFormField(
-                  label: "Jak używać",
-                  icon: Icons.water_drop_outlined,
-                  onChanged: (value) => _controller.typedIntakeType = value,
-                  isValueRequired: false,
-                  initialValue: _controller.typedIntakeType,
-                ),
-                SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                NotificationManager(
-                  switchValue: _controller.canNotificationsBePicked,
-                  onChanged: changeNotificationsAvailable,
-                ),
-                SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                if (_controller.canNotificationsBePicked) ...[
-                  FrequencyList(
-                    initialValue: _controller.frequency,
-                    onChanged: (frequency) => _handleFrequencyChange(frequency),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: _saveButtonAdditionalPaddingHorizontal,
+                        right: _saveButtonAdditionalPaddingHorizontal),
+                    child: CustomSaveButton(
+                        formKey: _formKey,
+                        onSaved: () => _controller
+                            .createMedicine()
+                            .then(widget.onMedicineChanged)),
                   ),
-                  SizedBox(height: _mainPaddingBetweenInputs),
-                  _createIntakeDataFieldIfPossible(),
-                  ManageNotificationsTimeWidget(
-                    controller: _controller,
-                  ),
-                  SizedBox(height: _mainPaddingBetweenInputs),
                 ],
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: _saveButtonAdditionalPaddingHorizontal,
-                      right: _saveButtonAdditionalPaddingHorizontal),
-                  child: CustomSaveButton(
-                      formKey: _formKey,
-                      onSaved: () => _controller
-                          .createMedicine()
-                          .then(widget.onMedicineChanged)),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        )
+      ],
     );
   }
 
