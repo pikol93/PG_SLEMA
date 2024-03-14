@@ -45,6 +45,7 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(height: 20),
                 MealTimeInfo(
                   iconData: Icons.set_meal,
                   mealTimeName: _controller.currentMealTime.name,
@@ -70,7 +71,8 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                 CustomSaveButton(
                   onSaved: () => widget.onMealsUpdated(_controller.meals),
                   formKey: null,
-                )
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
