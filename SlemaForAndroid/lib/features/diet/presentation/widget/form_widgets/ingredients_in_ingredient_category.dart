@@ -59,11 +59,22 @@ class _IngredientsInIngredientCategoryState
                     .headlineMedium
                     ?.copyWith(height: 0.59),
               ),
-              // IconButton(
-              //   onPressed: expandContainer,
-              //   color: Theme.of(context).dividerColor.withOpacity(0.4),
-              //   icon: const Icon(Icons.keyboard_arrow_down_rounded),
-              // )
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                    onPressed: expandContainer,
+                    color: Theme.of(context).dividerColor.withOpacity(0.4),
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    padding: EdgeInsets.zero,
+                    iconSize: 30,
+                    constraints: const BoxConstraints(),
+                    style: const ButtonStyle(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
           const ContainerDivider(),
