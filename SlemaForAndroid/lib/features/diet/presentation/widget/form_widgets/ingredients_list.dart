@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredient_toggle_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 
-class IngredientsList extends StatelessWidget {
+class IngredientsList extends StatefulWidget {
   final List<Ingredient> ingredients;
   final ValueChanged<Ingredient> onIngredientAdded;
   final ValueChanged<String> onIngredientRemoved;
@@ -14,23 +15,45 @@ class IngredientsList extends StatelessWidget {
       required this.onIngredientRemoved,
       required this.ingredientsToggles});
 
-  List<Text> ingredientsToWidgets() {
-    return ingredients.map((e) => Text(e.name)).toList();
+  @override
+  State<IngredientsList> createState() => _IngredientsListState();
+}
+
+class _IngredientsListState extends State<IngredientsList> {
+  List<IngredientToggleButton> ingredientsToWidgets() {
+    return widget.ingredients
+        .asMap()
+        .map((index, e) => MapEntry(
+            index,
+            IngredientToggleButton(
+              label: e.name,
+              onTogglePressed: () => onTogglePressed(index),
+              isToggledOn: widget.ingredientsToggles[index],
+            )))
+        .values
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ToggleButtons(
-        isSelected: ingredientsToggles,
-        onPressed: onTogglePressed,
-        children: ingredientsToWidgets());
+    return SizedBox(
+      width: double.maxFinite,
+      child: Wrap(
+        spacing: 5.0,
+        runSpacing: 5.0,
+        children: ingredientsToWidgets(),
+      ),
+    );
   }
 
   void onTogglePressed(int index) {
-    if (ingredientsToggles[index] == true) {
-      onIngredientRemoved(ingredients[index].id);
+    if (widget.ingredientsToggles[index] == true) {
+      widget.onIngredientRemoved(widget.ingredients[index].id);
     } else {
-      onIngredientAdded(ingredients[index]);
+      widget.onIngredientAdded(widget.ingredients[index]);
     }
+    setState(() {
+      widget.ingredientsToggles[index] = !widget.ingredientsToggles[index];
+    });
   }
 }
