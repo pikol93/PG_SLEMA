@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
+import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_exact_date_picker.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_move_backward.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_move_forward.dart';
@@ -58,7 +59,7 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
         ),
         Flexible(
           child: CalendarMoveForward(
-            onPressed: _onForwardPressed,
+            onPressed: controller.pickedDate.isToday ? null : _onForwardPressed,
           ),
         ),
         //const MealIdeaIconButton(),
