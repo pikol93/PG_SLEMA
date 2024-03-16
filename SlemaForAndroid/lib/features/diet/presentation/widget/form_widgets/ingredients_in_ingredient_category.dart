@@ -36,7 +36,12 @@ class IngredientsInIngredientCategory extends StatefulWidget {
 
 class _IngredientsInIngredientCategoryState
     extends State<IngredientsInIngredientCategory> {
-  void expandContainer() {}
+  bool ingredientsExpanded = false;
+  void expandContainer() {
+    setState(() {
+      ingredientsExpanded = !ingredientsExpanded;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +84,12 @@ class _IngredientsInIngredientCategoryState
           ),
           const ContainerDivider(),
           IngredientsList(
-              ingredients: widget.getIngredients(),
-              onIngredientAdded: _onIngredientAdded,
-              onIngredientRemoved: _onIngredientRemoved,
-              ingredientsToggles: widget.ingredientsToToggles())
+            ingredients: widget.getIngredients(),
+            onIngredientAdded: _onIngredientAdded,
+            onIngredientRemoved: _onIngredientRemoved,
+            ingredientsToggles: widget.ingredientsToToggles(),
+            isExpanded: ingredientsExpanded,
+          )
         ],
       ),
     );

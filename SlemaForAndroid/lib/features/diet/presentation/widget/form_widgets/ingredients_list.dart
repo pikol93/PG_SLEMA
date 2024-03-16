@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredient_toggle_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
@@ -7,13 +9,16 @@ class IngredientsList extends StatefulWidget {
   final ValueChanged<Ingredient> onIngredientAdded;
   final ValueChanged<String> onIngredientRemoved;
   final List<bool> ingredientsToggles;
+  final bool isExpanded;
+  final int ingredientsCollapsedNumber = 5;
 
   const IngredientsList(
       {super.key,
       required this.ingredients,
       required this.onIngredientAdded,
       required this.onIngredientRemoved,
-      required this.ingredientsToggles});
+      required this.ingredientsToggles,
+      required this.isExpanded});
 
   @override
   State<IngredientsList> createState() => _IngredientsListState();
@@ -34,6 +39,16 @@ class _IngredientsListState extends State<IngredientsList> {
         .toList();
   }
 
+  List<Widget> getWrapChildren() {
+    List<Widget> children = ingredientsToWidgets();
+    if (widget.isExpanded) {
+      children = children.sublist(
+          0, min(children.length, widget.ingredientsCollapsedNumber));
+    }
+
+    return children;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -41,7 +56,7 @@ class _IngredientsListState extends State<IngredientsList> {
       child: Wrap(
         spacing: 5.0,
         runSpacing: 5.0,
-        children: ingredientsToWidgets(),
+        children: getWrapChildren(),
       ),
     );
   }
