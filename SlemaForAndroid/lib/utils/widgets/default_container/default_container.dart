@@ -3,7 +3,12 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class DefaultContainer extends StatelessWidget with Logger {
   final bool shadow;
-  const DefaultContainer({super.key, required this.child, this.shadow = true});
+  final EdgeInsets padding;
+  const DefaultContainer(
+      {super.key,
+      required this.child,
+      this.shadow = true,
+      this.padding = const EdgeInsets.all(0)});
 
   final Widget child;
 
@@ -13,8 +18,7 @@ class DefaultContainer extends StatelessWidget with Logger {
       children: [
         Expanded(
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+            padding: padding,
             child: Container(
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primaryContainer,

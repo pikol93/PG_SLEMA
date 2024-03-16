@@ -29,12 +29,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
             child: const Column(
               children: [
                 DefaultContainer(
+                  padding: EdgeInsets.all(15),
                   child: AssessmentWellBeingForm(),
                 ),
                 DefaultContainer(
+                  padding: EdgeInsets.all(15),
                   child: AssessmentSymptomsFormWidget(),
                 ),
                 DefaultContainer(
+                  padding: EdgeInsets.all(15),
                   child: AssessmentSleepForm(),
                 ),
               ],

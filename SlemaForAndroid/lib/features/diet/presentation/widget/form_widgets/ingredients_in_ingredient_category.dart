@@ -46,6 +46,7 @@ class _IngredientsInIngredientCategoryState
   @override
   Widget build(BuildContext context) {
     return DefaultContainer(
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(
         children: [
           const SizedBox(

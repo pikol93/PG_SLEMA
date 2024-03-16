@@ -50,9 +50,11 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                   iconData: Icons.set_meal,
                   mealTimeName: _controller.currentMealTime.name,
                 ),
+                const SizedBox(height: 20),
                 MealTimeList(
-                    onMealTimeChanged: _onMealTimeChanged,
-                    initialValue: _controller.currentMealTime),
+                  onMealTimeChanged: _onMealTimeChanged,
+                  initialValue: _controller.currentMealTime,
+                ),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: _controller.mainCategories.length,
