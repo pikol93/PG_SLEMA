@@ -11,6 +11,7 @@ class IngredientsList extends StatefulWidget {
   final List<bool> ingredientsToggles;
   final bool isExpanded;
   final int ingredientsCollapsedNumber = 5;
+  final VoidCallback expandContainer;
 
   const IngredientsList(
       {super.key,
@@ -18,7 +19,8 @@ class IngredientsList extends StatefulWidget {
       required this.onIngredientAdded,
       required this.onIngredientRemoved,
       required this.ingredientsToggles,
-      required this.isExpanded});
+      required this.isExpanded,
+      required this.expandContainer});
 
   @override
   State<IngredientsList> createState() => _IngredientsListState();
@@ -41,9 +43,17 @@ class _IngredientsListState extends State<IngredientsList> {
 
   List<Widget> getWrapChildren() {
     List<Widget> children = ingredientsToWidgets();
-    if (widget.isExpanded) {
-      children = children.sublist(
+    if (!widget.isExpanded) {
+      List<Widget> newChildren = children.sublist(
           0, min(children.length, widget.ingredientsCollapsedNumber));
+
+      int optionsLeft = children.length - newChildren.length;
+      newChildren.add(IngredientToggleButton(
+        label: "+$optionsLeft więcej",
+        onTogglePressed: widget.expandContainer,
+        isToggledOn: false,
+      ));
+      children = newChildren;
     }
 
     return children;

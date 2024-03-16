@@ -89,6 +89,7 @@ class _IngredientsInIngredientCategoryState
             onIngredientRemoved: _onIngredientRemoved,
             ingredientsToggles: widget.ingredientsToToggles(),
             isExpanded: ingredientsExpanded,
+            expandContainer: expandContainer,
           )
         ],
       ),
