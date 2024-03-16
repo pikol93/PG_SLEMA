@@ -32,6 +32,7 @@ class MealInMealTimeWidget extends StatelessWidget {
                 builder: (context) => UpdateMealsScreen(
                   onMealsUpdated: onMealsSelected,
                   initMealsProvider: initMealsProvider,
+                  mealTime: mealTime,
                 ),
               ),
             );
