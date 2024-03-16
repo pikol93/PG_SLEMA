@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CalendarMoveBackward extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CalendarMoveBackward({super.key, required this.onPressed});
 
@@ -15,9 +15,12 @@ class CalendarMoveBackward extends StatelessWidget {
         shadows: [Shadow(color: Colors.transparent)],
       ),
       style: Theme.of(context).iconButtonTheme.style?.copyWith(
-            iconColor: MaterialStatePropertyAll(
-              Theme.of(context).colorScheme.onPrimary,
-            ),
+            iconColor: MaterialStateProperty.resolveWith((states) {
+              if (!states.contains(MaterialState.disabled)) {
+                return Theme.of(context).colorScheme.onPrimary;
+              }
+              return Theme.of(context).colorScheme.onPrimary.withOpacity(0.2);
+            }),
             iconSize: const MaterialStatePropertyAll(30),
           ),
       onPressed: onPressed,

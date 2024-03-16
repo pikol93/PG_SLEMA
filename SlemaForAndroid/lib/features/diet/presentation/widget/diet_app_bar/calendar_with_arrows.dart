@@ -44,7 +44,10 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
         ),
         Flexible(
           child: CalendarMoveBackward(
-            onPressed: _onBackwardPressed,
+            onPressed:
+                (controller.pickedDate.compareDates(controller.firstDate) == 0)
+                    ? null
+                    : _onBackwardPressed,
           ),
         ),
         Flexible(
@@ -59,7 +62,10 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
         ),
         Flexible(
           child: CalendarMoveForward(
-            onPressed: controller.pickedDate.isToday ? null : _onForwardPressed,
+            onPressed:
+                (controller.pickedDate.compareDates(controller.lastDate) == 0)
+                    ? null
+                    : _onForwardPressed,
           ),
         ),
         //const MealIdeaIconButton(),

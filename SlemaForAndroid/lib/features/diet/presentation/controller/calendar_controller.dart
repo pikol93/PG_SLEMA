@@ -15,6 +15,8 @@ class CalendarController {
     firstDate = DateTime.now().subtract(Duration(
         days: (daysInYearApprox * 1.0 / monthsInYear * monthsAllowedToGoBack)
             .round()));
+    print(firstDate.toDateString());
+    print(this.pickedDate);
   }
 
   String getPickedDateStringRepresentationForAppBar() {
