@@ -26,26 +26,28 @@ class _ManageNotificationsTimeWidgetState
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
-              child: ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: widget.controller.notifications.length,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              final notification = widget.controller.notifications[index];
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-                child: GetNotificationWidget(
-                  onNotificationChanged:
-                      widget.controller.onNotificationChanged, //update?
-                  onNotificationDeleted: onNotificationDeleted,
-                  controller:
-                      GetNotificationController(notification: notification),
-                ),
-              );
-            },
-          )),
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: widget.controller.notifications.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                final notification = widget.controller.notifications[index];
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 8.0),
+                  child: GetNotificationWidget(
+                    onNotificationChanged:
+                        widget.controller.onNotificationChanged, //update?
+                    onNotificationDeleted: onNotificationDeleted,
+                    controller:
+                        GetNotificationController(notification: notification),
+                  ),
+                );
+              },
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: CreateNotificationButton(
