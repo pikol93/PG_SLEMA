@@ -51,7 +51,7 @@ class DietInitializer with Initializer {
     ]);
     await initializeIngredientsForCategory('Warzywa', [
       'Ogórek',
-      'Brokuł',
+      'Rzodkiewka',
       'Kalafior',
       'Marchew',
       'Burak',
@@ -62,14 +62,15 @@ class DietInitializer with Initializer {
       'Dynia',
       'Cukinia',
       'Kapusta',
-      'Rzodkiewka',
       'Por',
+      'Brokuł',
       'Bakłażan'
     ]);
 
     await initializeIngredientsForCategory('Nabiał', [
       'Twaróg',
       'Ser żółty',
+      'Ser pleśniowy',
       'Mleko',
       'Masło',
       'Jogurt',
@@ -77,7 +78,6 @@ class DietInitializer with Initializer {
       'Ser feta',
       'Kefir',
       'Jajka',
-      'Ser pleśniowy'
     ]);
 
     await initializeIngredientsForCategory('Mięso', [

@@ -29,6 +29,7 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         DefaultContainer(
           shadow: false,
+          padding: const EdgeInsets.all(15),
           child: Text(
             "Raport zdrowotny",
             textAlign: TextAlign.center,
@@ -46,6 +47,7 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         DefaultContainer(
             shadow: false,
+            padding: const EdgeInsets.all(15),
             child: Text(
               "Kalendarz",
               textAlign: TextAlign.center,
@@ -60,7 +62,10 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5.0,
         ),
-        const DefaultContainer(shadow: false, child: MotivationDaily()),
+        const DefaultContainer(
+            shadow: false,
+            padding: EdgeInsets.all(15),
+            child: MotivationDaily()),
       ],
     );
   }
