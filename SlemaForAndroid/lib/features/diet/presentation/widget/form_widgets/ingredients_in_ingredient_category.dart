@@ -83,13 +83,17 @@ class _IngredientsInIngredientCategoryState
             ],
           ),
           const ContainerDivider(),
-          IngredientsList(
-            ingredients: widget.getIngredients(),
-            onIngredientAdded: _onIngredientAdded,
-            onIngredientRemoved: _onIngredientRemoved,
-            ingredientsToggles: widget.ingredientsToToggles(),
-            isExpanded: ingredientsExpanded,
-            expandContainer: expandContainer,
+          AnimatedSize(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.fastOutSlowIn,
+            child: IngredientsList(
+              ingredients: widget.getIngredients(),
+              onIngredientAdded: _onIngredientAdded,
+              onIngredientRemoved: _onIngredientRemoved,
+              ingredientsToggles: widget.ingredientsToToggles(),
+              isExpanded: ingredientsExpanded,
+              expandContainer: expandContainer,
+            ),
           )
         ],
       ),
