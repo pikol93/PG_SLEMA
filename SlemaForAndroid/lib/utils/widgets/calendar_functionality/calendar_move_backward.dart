@@ -8,10 +8,18 @@ class CalendarMoveBackward extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
+      constraints: const BoxConstraints(),
+      padding: EdgeInsets.zero,
       icon: const Icon(
         Icons.arrow_back,
-        color: Colors.black,
+        shadows: [Shadow(color: Colors.transparent)],
       ),
+      style: Theme.of(context).iconButtonTheme.style?.copyWith(
+            iconColor: MaterialStatePropertyAll(
+              Theme.of(context).colorScheme.onPrimary,
+            ),
+            iconSize: const MaterialStatePropertyAll(30),
+          ),
       onPressed: onPressed,
     );
   }

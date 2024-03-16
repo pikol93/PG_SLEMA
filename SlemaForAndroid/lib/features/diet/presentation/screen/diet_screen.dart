@@ -25,20 +25,26 @@ class _DietScreenState extends State<DietScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60),
-        child: DietAppBar(
-          onDateChanged: _onDateChanged,
-          initDate: _controller.date,
-        ),
-      ),
-      body: MealsInDayWidget(meals: _controller.meals),
-      floatingActionButton: UpdateMealsButton(
-        onMealsSelected: _onMealsSelected,
-        initMealsProvider: _mealsProvider,
-      ),
+    return Column(
+      children: [
+        DietAppBar(onDateChanged: _onDateChanged, initDate: _controller.date),
+      ],
     );
+
+    // return Scaffold(
+    //   appBar: PreferredSize(
+    //     preferredSize: const Size.fromHeight(60),
+    //     child: DietAppBar(
+    //       onDateChanged: _onDateChanged,
+    //       initDate: _controller.date,
+    //     ),
+    //   ),
+    //   body: MealsInDayWidget(meals: _controller.meals),
+    //   floatingActionButton: UpdateMealsButton(
+    //     onMealsSelected: _onMealsSelected,
+    //     initMealsProvider: _mealsProvider,
+    //   ),
+    // );
   }
 
   void _onDateChanged(DateTime date) async {

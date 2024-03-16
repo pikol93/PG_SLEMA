@@ -27,20 +27,17 @@ class CalendarExactDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    return IconButton(
       onPressed: handleDatePick(context),
-      style: OutlinedButton.styleFrom(
-        shape: const CircleBorder(),
-        side: const BorderSide(
-          color: Colors.black87,
-          width: 1.5,
-          strokeAlign: 1.5,
-        ),
-      ),
-      child: const Icon(
+      style: Theme.of(context).iconButtonTheme.style?.copyWith(
+            iconColor: MaterialStatePropertyAll(
+              Theme.of(context).colorScheme.onPrimary,
+            ),
+            iconSize: const MaterialStatePropertyAll(30),
+          ),
+      icon: const Icon(
         Icons.calendar_month,
-        color: Colors.black,
-        size: 25,
+        shadows: [Shadow(color: Colors.transparent)],
       ),
     );
   }

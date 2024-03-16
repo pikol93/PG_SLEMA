@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/calendar_with_arrows.dart';
-import 'package:pg_slema/features/diet/presentation/widget/diet_app_bar/meal_idea_icon_button.dart';
 
 class DietAppBar extends StatefulWidget implements PreferredSizeWidget {
   final ValueChanged<DateTime> onDateChanged;
@@ -24,16 +23,13 @@ class _DietAppBarState extends State<DietAppBar> {
         backgroundColor: Theme.of(context).primaryColor,
         title: Row(
           children: [
-            Expanded(
-                child: CalendarWithArrows(
-              onDateChanged: widget.onDateChanged,
-              initDate: widget.initDate,
-            )),
-            const MealIdeaIconButton()
+            Flexible(
+              child: CalendarWithArrows(
+                onDateChanged: widget.onDateChanged,
+                initDate: widget.initDate,
+              ),
+            ),
           ],
         ));
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

@@ -29,25 +29,37 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
   Widget build(BuildContext context) {
     controller.setLanguage(context);
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        CalendarExactDatePicker(
-          onDatePicked: _onDatePicked,
-          controller: DatePickerController(
-              controller.firstDate, controller.lastDate, controller.pickedDate),
-        ),
-        CalendarMoveBackward(
-          onPressed: _onBackwardPressed,
-        ),
-        Expanded(
-          child: Text(
-            controller.getPickedDateStringRepresentationForAppBar(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+        Flexible(
+          child: CalendarExactDatePicker(
+            onDatePicked: _onDatePicked,
+            controller: DatePickerController(
+              controller.firstDate,
+              controller.lastDate,
+              controller.pickedDate,
+            ),
           ),
         ),
-        CalendarMoveForward(
-          onPressed: _onForwardPressed,
+        Flexible(
+          child: CalendarMoveBackward(
+            onPressed: _onBackwardPressed,
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          fit: FlexFit.tight,
+          child: Text(
+            controller.getPickedDateStringRepresentationForAppBar(),
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary, height: 1.0),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Flexible(
+          child: CalendarMoveForward(
+            onPressed: _onForwardPressed,
+          ),
         ),
         //const MealIdeaIconButton(),
       ],
