@@ -27,19 +27,76 @@ class DietInitializer with Initializer {
 
   @override
   Future initialize() async {
-    await initializeIngredientsForCategory(
-        'Owoce', ['Jagoda', 'Banan', 'Malina', 'Pomarańcza', 'Mandarynka']);
-    await initializeIngredientsForCategory(
-        'Warzywa', ['Ogórek', 'Brokuł', 'Kalafior', 'Marchew', 'Burak']);
-    await initializeIngredientsForCategory(
-        'Nabiał', ['Twaróg', 'Ser żółty', 'Mleko']);
+    await initializeIngredientsForCategory('Owoce', [
+      'Jagoda',
+      'Banan',
+      'Malina',
+      'Pomarańcza',
+      'Jabłko',
+      'Mandarynka',
+      'Truskawka',
+      'Winogrono',
+      'Arbuz',
+      'Ananas',
+      'Gruszka',
+      'Brzoskwinia',
+      'Kiwi',
+      'Śliwka',
+      'Wiśnia',
+      'Cytryna',
+      'Liczi',
+      'Karambola',
+      'Granat',
+      'Mango'
+    ]);
+    await initializeIngredientsForCategory('Warzywa', [
+      'Ogórek',
+      'Brokuł',
+      'Kalafior',
+      'Marchew',
+      'Burak',
+      'Papryka',
+      'Pomidor',
+      'Cebula',
+      'Szpinak',
+      'Dynia',
+      'Cukinia',
+      'Kapusta',
+      'Rzodkiewka',
+      'Por',
+      'Bakłażan'
+    ]);
+
+    await initializeIngredientsForCategory('Nabiał', [
+      'Twaróg',
+      'Ser żółty',
+      'Mleko',
+      'Masło',
+      'Jogurt',
+      'Śmietana',
+      'Ser feta',
+      'Kefir',
+      'Jajka',
+      'Ser pleśniowy'
+    ]);
+
     await initializeIngredientsForCategory('Mięso', [
       'Wieprzowina',
       'Wołowina',
       'Kurczak',
       'Indyk',
       'Cielęcina',
-      'Baranina'
+      'Baranina',
+      'Kaczka',
+      'Gęś',
+      'Królik',
+      'Łosoś',
+      'Tuńczyk',
+      'Krewetki',
+      'Śledź',
+      'Żeberka',
+      'Kiełbasa',
+      'Szynka'
     ]);
     await initializeMeals(false);
   }
