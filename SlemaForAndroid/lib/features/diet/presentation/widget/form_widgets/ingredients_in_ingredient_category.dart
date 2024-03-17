@@ -3,8 +3,6 @@ import 'package:pg_slema/utils/widgets/default_container/container_with_divider.
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_list.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
-import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
-import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class IngredientsInIngredientCategory extends StatefulWidget {
   final IngredientCategory category;
