@@ -29,7 +29,8 @@ Future<void> main() async {
       ],
       child: MaterialApp(
         theme: lightTheme,
-        darkTheme: darkTheme,
+        // TODO: Dark theme has been disabled as of SLEMA-172. It is to be enabled once dark theme is ready to be used.
+        darkTheme: lightTheme,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
