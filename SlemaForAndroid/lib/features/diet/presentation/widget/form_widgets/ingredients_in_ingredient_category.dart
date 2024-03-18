@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_list.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
+import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
+import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class IngredientsInIngredientCategory extends StatefulWidget {
   final IngredientCategory category;
@@ -34,23 +36,68 @@ class IngredientsInIngredientCategory extends StatefulWidget {
 
 class _IngredientsInIngredientCategoryState
     extends State<IngredientsInIngredientCategory> {
+  bool ingredientsExpanded = false;
+  void expandContainer() {
+    setState(() {
+      ingredientsExpanded = !ingredientsExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Text(widget.category.name),
-        const SizedBox(
-          height: 10,
-        ),
-        IngredientsList(
-            ingredients: widget.getIngredients(),
-            onIngredientAdded: _onIngredientAdded,
-            onIngredientRemoved: _onIngredientRemoved,
-            ingredientsToggles: widget.ingredientsToToggles())
-      ],
+    return DefaultContainer(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 5.0,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const Icon(Icons.egg_alt,
+                  size: 30.0), //TODO Icon connected to the category
+              const SizedBox(width: 5.0),
+              Text(
+                widget.category.name,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(height: 0.59),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: IconButton(
+                    onPressed: expandContainer,
+                    color: Theme.of(context).dividerColor.withOpacity(0.4),
+                    icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                    padding: EdgeInsets.zero,
+                    iconSize: 30,
+                    constraints: const BoxConstraints(),
+                    style: const ButtonStyle(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          const ContainerDivider(),
+          AnimatedSize(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.fastOutSlowIn,
+            child: IngredientsList(
+              ingredients: widget.getIngredients(),
+              onIngredientAdded: _onIngredientAdded,
+              onIngredientRemoved: _onIngredientRemoved,
+              ingredientsToggles: widget.ingredientsToToggles(),
+              isExpanded: ingredientsExpanded,
+              expandContainer: expandContainer,
+            ),
+          )
+        ],
+      ),
     );
   }
 

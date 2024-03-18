@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AssessmentFormDivider extends StatelessWidget {
-  const AssessmentFormDivider({super.key});
+class ContainerDivider extends StatelessWidget {
+  const ContainerDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

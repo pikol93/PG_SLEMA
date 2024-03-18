@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/utils/date/date.dart';
 
-class CustomDatePicker extends StatefulWidget {
+class DatePicker extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
   final DatePickerController controller;
   final String label;
 
-  const CustomDatePicker(
+  const DatePicker(
       {super.key,
       required this.onDateSelected,
       required this.controller,
       required this.label});
 
   @override
-  State<CustomDatePicker> createState() => _CustomDatePickerState();
+  State<DatePicker> createState() => _DatePickerState();
 }
 
-class _CustomDatePickerState extends State<CustomDatePicker> {
+class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return InkWell(

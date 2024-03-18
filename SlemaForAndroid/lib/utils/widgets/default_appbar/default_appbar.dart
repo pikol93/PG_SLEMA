@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SimpleAppbar extends StatelessWidget implements PreferredSizeWidget {
+class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const SimpleAppbar({super.key, required this.title});
+  const DefaultAppBar({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      toolbarHeight: kToolbarHeight + 10,
       backgroundColor: Theme.of(context).primaryColor,
       title: Padding(
         padding: const EdgeInsets.only(
