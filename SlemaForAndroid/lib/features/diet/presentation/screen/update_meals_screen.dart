@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/update_meals_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_in_ingredient_category.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_info.dart';
-import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_list.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
@@ -13,11 +12,13 @@ import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 class UpdateMealsScreen extends StatefulWidget {
   final ValueChanged<Map<MealTime, Meal>> onMealsUpdated;
   final ValueGetter<Map<MealTime, Meal>> initMealsProvider;
+  final MealTime mealTime;
 
   const UpdateMealsScreen(
       {super.key,
       required this.onMealsUpdated,
-      required this.initMealsProvider});
+      required this.initMealsProvider,
+      required this.mealTime});
 
   @override
   State<StatefulWidget> createState() => _UpdateMealsScreenState();
@@ -30,7 +31,10 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
   void initState() {
     super.initState();
     _controller = UpdateMealsController(
-        _onIngredientCategoriesChanged, widget.initMealsProvider());
+      _onIngredientCategoriesChanged,
+      widget.initMealsProvider(),
+      widget.mealTime,
+    );
     _controller.initialize();
   }
 
@@ -50,11 +54,6 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                   iconData: Icons.set_meal,
                   mealTimeName: _controller.currentMealTime.name,
                 ),
-                const SizedBox(height: 20),
-                MealTimeList(
-                  onMealTimeChanged: _onMealTimeChanged,
-                  initialValue: _controller.currentMealTime,
-                ),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: _controller.mainCategories.length,
@@ -69,7 +68,6 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
                                 _controller.mainCategories[index]));
                   },
                 ),
-                const SizedBox(height: 20),
                 CustomSaveButton(
                   onSaved: () => widget.onMealsUpdated(_controller.meals),
                   formKey: null,
@@ -81,11 +79,6 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
         )
       ],
     );
-  }
-
-  void _onMealTimeChanged(MealTime mealTime) {
-    _controller.onMealTimeChanged(mealTime);
-    setState(() {});
   }
 
   void _onIngredientCategoriesChanged() {

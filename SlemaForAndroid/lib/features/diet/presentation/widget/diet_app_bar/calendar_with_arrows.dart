@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/diet/presentation/controller/calendar_controller.dart';
+import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_exact_date_picker.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_move_backward.dart';
 import 'package:pg_slema/utils/widgets/calendar_functionality/calendar_move_forward.dart';
@@ -29,25 +30,43 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
   Widget build(BuildContext context) {
     controller.setLanguage(context);
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        CalendarExactDatePicker(
-          onDatePicked: _onDatePicked,
-          controller: DatePickerController(
-              controller.firstDate, controller.lastDate, controller.pickedDate),
-        ),
-        CalendarMoveBackward(
-          onPressed: _onBackwardPressed,
-        ),
-        Expanded(
-          child: Text(
-            controller.getPickedDateStringRepresentationForAppBar(),
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+        Flexible(
+          child: CalendarExactDatePicker(
+            onDatePicked: _onDatePicked,
+            controller: DatePickerController(
+              controller.firstDate,
+              controller.lastDate,
+              controller.pickedDate,
+            ),
           ),
         ),
-        CalendarMoveForward(
-          onPressed: _onForwardPressed,
+        Flexible(
+          child: CalendarMoveBackward(
+            onPressed:
+                (controller.pickedDate.compareDates(controller.firstDate) == 0)
+                    ? null
+                    : _onBackwardPressed,
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          fit: FlexFit.tight,
+          child: Text(
+            controller.getPickedDateStringRepresentationForAppBar(),
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: Theme.of(context).colorScheme.onPrimary, height: 1.0),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        Flexible(
+          child: CalendarMoveForward(
+            onPressed:
+                (controller.pickedDate.compareDates(controller.lastDate) == 0)
+                    ? null
+                    : _onForwardPressed,
+          ),
         ),
         //const MealIdeaIconButton(),
       ],

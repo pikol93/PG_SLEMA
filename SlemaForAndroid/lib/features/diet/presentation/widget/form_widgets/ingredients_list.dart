@@ -6,21 +6,21 @@ import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
 
 class IngredientsList extends StatefulWidget {
   final List<Ingredient> ingredients;
-  final ValueChanged<Ingredient> onIngredientAdded;
-  final ValueChanged<String> onIngredientRemoved;
-  final List<bool> ingredientsToggles;
+  final ValueChanged<Ingredient>? onIngredientAdded;
+  final ValueChanged<String>? onIngredientRemoved;
+  final List<bool>? ingredientsToggles;
   final bool isExpanded;
   final int ingredientsCollapsedNumber = 5;
-  final VoidCallback expandContainer;
+  final VoidCallback? expandContainer;
 
   const IngredientsList(
       {super.key,
       required this.ingredients,
-      required this.onIngredientAdded,
-      required this.onIngredientRemoved,
-      required this.ingredientsToggles,
+      this.onIngredientAdded,
+      this.onIngredientRemoved,
+      this.ingredientsToggles,
       required this.isExpanded,
-      required this.expandContainer});
+      this.expandContainer});
 
   @override
   State<IngredientsList> createState() => _IngredientsListState();
@@ -35,7 +35,7 @@ class _IngredientsListState extends State<IngredientsList> {
             IngredientToggleButton(
               label: e.name,
               onTogglePressed: () => onTogglePressed(index),
-              isToggledOn: widget.ingredientsToggles[index],
+              isToggledOn: widget.ingredientsToggles?[index] ?? false,
             )))
         .values
         .toList();
@@ -50,7 +50,7 @@ class _IngredientsListState extends State<IngredientsList> {
       int optionsLeft = children.length - newChildren.length;
       newChildren.add(IngredientToggleButton(
         label: "+$optionsLeft więcej",
-        onTogglePressed: widget.expandContainer,
+        onTogglePressed: widget.expandContainer ?? () {},
         isToggledOn: false,
       ));
       children = newChildren;
@@ -72,13 +72,15 @@ class _IngredientsListState extends State<IngredientsList> {
   }
 
   void onTogglePressed(int index) {
-    if (widget.ingredientsToggles[index] == true) {
-      widget.onIngredientRemoved(widget.ingredients[index].id);
+    if (widget.ingredientsToggles == null) return; //if onPress not used
+
+    if (widget.ingredientsToggles![index] == true) {
+      widget.onIngredientRemoved!(widget.ingredients[index].id);
     } else {
-      widget.onIngredientAdded(widget.ingredients[index]);
+      widget.onIngredientAdded!(widget.ingredients[index]);
     }
     setState(() {
-      widget.ingredientsToggles[index] = !widget.ingredientsToggles[index];
+      widget.ingredientsToggles![index] = !widget.ingredientsToggles![index];
     });
   }
 }

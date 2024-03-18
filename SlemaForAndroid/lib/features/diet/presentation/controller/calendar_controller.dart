@@ -18,7 +18,7 @@ class CalendarController {
   }
 
   String getPickedDateStringRepresentationForAppBar() {
-    DateFormat formatter = DateFormat('EEE, d MMM, yyyy', languageCode);
+    DateFormat formatter = DateFormat('EEE, d MMM', languageCode);
     String dateString = pickedDate.isToday
         ? "Dzisiaj"
         : pickedDate.isYesterday

@@ -17,8 +17,9 @@ class UpdateMealsController {
   late List<IngredientCategory> mainCategories;
   late MealTime currentMealTime;
 
-  UpdateMealsController(this.onIngredientCategoriesChanged, this.meals) {
-    currentMealTime = MealTime.firstMeal;
+  UpdateMealsController(
+      this.onIngredientCategoriesChanged, this.meals, MealTime mealTime) {
+    currentMealTime = mealTime;
     mainCategories = List.empty();
     final ingredientConverter = IngredientToDtoConverter();
     final ingredientRepository =

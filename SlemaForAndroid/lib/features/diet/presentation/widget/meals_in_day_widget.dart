@@ -7,29 +7,32 @@ import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
 
 class MealsInDayWidget extends StatelessWidget {
   final LinkedHashMap<MealTime, Meal?> meals;
+  final ValueChanged<Map<MealTime, Meal>> onMealsSelected;
+  final ValueGetter<Map<MealTime, Meal>> initMealsProvider;
 
-  const MealsInDayWidget({super.key, required this.meals});
+  const MealsInDayWidget(
+      {super.key,
+      required this.meals,
+      required this.onMealsSelected,
+      required this.initMealsProvider});
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (BuildContext context) {
-        return CustomScrollView(
-          slivers: [
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return MealInMealTimeWidget(
-                          mealTime: meals.keys.elementAt(index),
-                          meal: meals.values.elementAt(index))
-                      .build(context);
-                },
-                childCount: meals.entries.length,
-              ),
-            ),
-          ],
-        );
-      },
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: meals.entries.length,
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return MealInMealTimeWidget(
+            mealTime: meals.keys.elementAt(index),
+            meal: meals.values.elementAt(index),
+            onMealsSelected: onMealsSelected,
+            initMealsProvider: initMealsProvider,
+          ).build(context);
+        },
+      ),
     );
   }
 }
