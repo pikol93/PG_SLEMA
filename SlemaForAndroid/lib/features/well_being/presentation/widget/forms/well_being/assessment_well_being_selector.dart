@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/logic/entity/enum/well_being_variant.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/well_being/assessment_well_being_selector_variant.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
+import 'package:pg_slema/features/well_being/presentation/widget/forms/well_being/assessment_well_being_selector_variant.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentWellBeingSelector extends StatelessWidget with Logger {

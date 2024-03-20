@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/assessment_button.dart';
+import 'package:pg_slema/features/well_being/presentation/widget/assessment_button.dart';
 import 'package:provider/provider.dart';
 
 class MotivationScreen extends StatefulWidget {

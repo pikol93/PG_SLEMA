@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being_assessment/logic/entity/enum/symptom_value.dart';
-import 'package:pg_slema/features/well_being_assessment/logic/entity/symptom_type.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
+import 'package:pg_slema/features/well_being/logic/entity/symptom_type.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
+import 'package:pg_slema/features/well_being/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
