@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
+import 'package:pg_slema/features/exercises/presentation/screen/add_exercise_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -20,6 +21,17 @@ class ExercisesScreenState extends State<ExercisesScreen> {
     _controller = AllExercisesController(_onExercisesChanged);
     super.initState();
     _controller.initializeExercises();
+  }
+
+  void openAddExerciseScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddExerciseScreen(
+          onExerciseAdded: _controller.onExerciseCreated,
+        ),
+      ),
+    );
   }
 
   @override
@@ -46,7 +58,7 @@ class ExercisesScreenState extends State<ExercisesScreen> {
               ],
             ),
             DefaultFloatingActionButton(
-                onPressed: () {}, child: const Icon(Icons.add))
+                onPressed: openAddExerciseScreen, child: const Icon(Icons.add))
           ],
         ),
       ),

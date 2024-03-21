@@ -25,6 +25,16 @@ class _AllMedicinesScreenState extends State<AllMedicinesScreen> {
     _controller.initializeMedicines();
   }
 
+  void openAddingMedicinesScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            AddMedicineScreen(onMedicineAdded: onMedicineCreated),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,13 +58,7 @@ class _AllMedicinesScreenState extends State<AllMedicinesScreen> {
               ),
             ]),
             DefaultFloatingActionButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      AddMedicineScreen(onMedicineAdded: onMedicineCreated),
-                ),
-              ),
+              onPressed: openAddingMedicinesScreen,
               child: const Icon(Icons.add),
             )
           ]),
