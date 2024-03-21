@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 
@@ -40,7 +41,7 @@ class MenuScreenButton extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Icon(
-                  Icons.chevron_right_rounded,
+                  CustomIcons.angle_right,
                   size: 40,
                   color: Theme.of(context).colorScheme.outlineVariant,
                 ),

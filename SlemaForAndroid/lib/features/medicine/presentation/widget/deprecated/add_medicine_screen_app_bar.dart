@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../custom_icons_icons.dart';
+
 class AddMedicineScreenAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   final double _toolbarHeight = 170.0;
@@ -21,7 +23,7 @@ class AddMedicineScreenAppBar extends StatelessWidget
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.arrow_back_rounded),
+            icon: const Icon(CustomIcons.arrow_left),
             color: Theme.of(context).colorScheme.onPrimary,
           ),
           SizedBox(height: _spaceBetweenBackIconAndTitle),

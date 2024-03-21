@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/add_medicine_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
@@ -61,7 +62,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                               EdgeInsets.only(right: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Dawka",
-                            icon: Icons.vaccines,
+                            icon: CustomIcons.dose_syringe,
                             onChanged: (value) => _controller.typedDose = value,
                             isValueRequired: false,
                             initialValue: _controller.typedDose,
@@ -74,7 +75,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                               EdgeInsets.only(left: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Rodzaj",
-                            icon: Icons.medication_outlined,
+                            icon: CustomIcons.medicine_type,
                             onChanged: (value) =>
                                 _controller.typedMedicineType = value,
                             isValueRequired: false,
@@ -87,7 +88,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                   SizedBox(height: _mainPaddingBetweenInputs),
                   CustomTextFormField(
                     label: "Jak używać",
-                    icon: Icons.water_drop_outlined,
+                    icon: CustomIcons.hand_medical,
                     onChanged: (value) => _controller.typedIntakeType = value,
                     isValueRequired: false,
                     initialValue: _controller.typedIntakeType,

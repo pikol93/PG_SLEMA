@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/picture/logic/repository/shared_preferences_picture_repository.dart';
 import 'package:pg_slema/features/picture/logic/service/picture_service_impl.dart';
 import 'package:pg_slema/features/picture/presentation/controller/log_shared_preferences_picture_controller.dart';
@@ -38,13 +39,13 @@ class _PickPictureState extends State<PickPicture> {
             await pickImageController.pickPicture();
             widget.voidCallbackAfterAddedImage();
           },
-          icon: const Icon(Icons.image_search),
+          icon: const Icon(CustomIcons.search),
         ),
         IconButton(
           onPressed: () async {
             logSharedPreferencesPictureController.printGetAllPictures();
           },
-          icon: const Icon(Icons.question_mark),
+          icon: const Icon(CustomIcons.question_mark),
         ),
       ],
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/single_medicine_label.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/popup_menu_edit_delete_button.dart';
@@ -26,7 +27,7 @@ class SingleMedicineWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0, right: 8.0),
               child: Icon(
-                Icons.medication_outlined,
+                CustomIcons.medicine_type,
                 color: Theme.of(context).primaryColor,
                 size: 32,
               ),

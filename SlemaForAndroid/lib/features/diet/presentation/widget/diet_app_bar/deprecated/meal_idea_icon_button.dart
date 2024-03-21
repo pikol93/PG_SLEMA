@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../custom_icons_icons.dart';
+
 class MealIdeaIconButton extends StatelessWidget {
   const MealIdeaIconButton({super.key});
 
@@ -17,7 +19,7 @@ class MealIdeaIconButton extends StatelessWidget {
                   padding: const EdgeInsets.all(3.0),
                   child: IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.cancel_outlined),
+                    icon: const Icon(CustomIcons.remove),
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -34,7 +36,7 @@ class MealIdeaIconButton extends StatelessWidget {
                   padding: const EdgeInsets.all(3.0),
                   child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(Icons.refresh),
+                    icon: const Icon(CustomIcons.question_mark),
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -53,7 +55,7 @@ class MealIdeaIconButton extends StatelessWidget {
         showMealIdea(context);
       },
       icon: const Icon(
-        Icons.question_mark_outlined,
+        CustomIcons.question_mark,
         color: Colors.black,
       ),
     );

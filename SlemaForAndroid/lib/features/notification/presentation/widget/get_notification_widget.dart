@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/notification/logic/entity/get_notification.dart';
 import 'package:pg_slema/features/notification/presentation/controller/get_notification_controller.dart';
 import 'package:pg_slema/features/notification/presentation/controller/time_picker_controller.dart';
@@ -49,7 +50,7 @@ class _GetNotificationWidgetState extends State<GetNotificationWidget> {
                   MaterialStateProperty.all(Theme.of(context).primaryColor),
             ),
             icon: const Icon(
-              Icons.remove_circle_outline,
+              CustomIcons.remove_circle,
             ),
           )
         ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/utils/date/date.dart';
 
@@ -48,7 +49,7 @@ class _DatePickerState extends State<DatePicker> {
               widget.controller.selectedDate.toDateString(),
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            const Icon(Icons.arrow_drop_down),
+            const Icon(CustomIcons.angle_down),
           ],
         ),
       ),

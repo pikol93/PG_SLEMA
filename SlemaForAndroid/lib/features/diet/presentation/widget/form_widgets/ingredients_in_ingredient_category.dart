@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_with_divider.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_list.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient.dart';
@@ -45,10 +46,10 @@ class _IngredientsInIngredientCategoryState
   @override
   Widget build(BuildContext context) {
     return ContainerWithDivider(
-      iconDataLeft: Icons.egg_alt, //TODO Icon connected to the category
+      iconDataLeft: CustomIcons.meal, //TODO Icon connected to the category
       label: widget.category.name,
       onIconRightPressed: expandContainer,
-      iconDataRight: Icons.keyboard_arrow_down_rounded,
+      iconDataRight: CustomIcons.angle_down,
       child: AnimatedSize(
         duration: const Duration(milliseconds: 200),
         curve: Curves.fastOutSlowIn,

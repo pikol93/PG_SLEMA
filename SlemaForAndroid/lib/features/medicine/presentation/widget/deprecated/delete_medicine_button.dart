@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 
 class DeleteMedicineButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -12,7 +13,7 @@ class DeleteMedicineButton extends StatelessWidget {
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(0),
           backgroundColor: Theme.of(context).primaryColorLight),
-      child: const Icon(Icons.delete, color: Colors.white),
+      child: const Icon(CustomIcons.remove, color: Colors.white),
     );
   }
 }

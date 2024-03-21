@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/well_being_assessment/logic/entity/enum/well_being_variant.dart';
 
 class AssessmentWellBeingSelectorVariant extends StatelessWidget {
@@ -21,7 +22,7 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
         children: [
           Visibility(
             visible: isSelected,
-            child: const Icon(Icons.arrow_drop_down),
+            child: const Icon(CustomIcons.arrow_square_down),
           ),
           IconButton(
             onPressed: onPressed,
@@ -30,7 +31,7 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
           ),
           Visibility(
             visible: isSelected,
-            child: const Icon(Icons.arrow_drop_up),
+            child: const Icon(CustomIcons.arrow_square_up),
           ),
         ],
       ),

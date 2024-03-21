@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/edit_medicine_screen.dart';
 
@@ -18,7 +19,7 @@ class EditMedicineButton extends StatelessWidget {
           shape: const CircleBorder(),
           padding: const EdgeInsets.all(0),
           backgroundColor: Theme.of(context).primaryColorLight),
-      child: const Icon(Icons.edit),
+      child: const Icon(CustomIcons.edit),
     );
   }
 

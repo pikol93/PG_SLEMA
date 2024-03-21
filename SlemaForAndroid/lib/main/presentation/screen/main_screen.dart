@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
@@ -9,6 +10,7 @@ import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/screen/assessment_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -29,24 +31,24 @@ class MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             CustomNavigationDestination(
-              icon: Icons.calendar_month_outlined,
-              selectedIcon: Icons.calendar_month,
+              icon: CustomIcons.calendar,
+              selectedIcon: CustomIcons.calendar,
               label: 'Kalendarz',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,
               destinationIndex: 0,
             ),
             CustomNavigationDestination(
-              icon: Icons.home_outlined,
-              selectedIcon: Icons.home,
+              icon: CustomIcons.house,
+              selectedIcon: CustomIcons.house,
               label: 'Start',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,
               destinationIndex: 1,
             ),
             CustomNavigationDestination(
-              icon: Icons.menu_outlined,
-              selectedIcon: Icons.menu,
+              icon: CustomIcons.menu_burger,
+              selectedIcon: CustomIcons.menu_burger,
               label: 'Menu',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,

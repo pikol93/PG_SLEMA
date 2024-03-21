@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/diet/presentation/controller/update_meals_controller.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/ingredients_in_ingredient_category.dart';
 import 'package:pg_slema/features/diet/presentation/widget/form_widgets/meal_time_info.dart';
@@ -51,7 +52,7 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
               children: [
                 const SizedBox(height: 20),
                 MealTimeInfo(
-                  iconData: Icons.set_meal,
+                  iconData: CustomIcons.meal_type,
                   mealTimeName: _controller.currentMealTime.name,
                 ),
                 ListView.builder(

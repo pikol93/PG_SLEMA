@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -21,7 +22,7 @@ class HomeAppBar extends StatelessWidget {
         actions: [
           IconButton(
             padding: const EdgeInsets.only(bottom: 12.0, right: 12.0),
-            icon: const Icon(Icons.settings),
+            icon: const Icon(CustomIcons.settings),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('TODO ustawienia')));

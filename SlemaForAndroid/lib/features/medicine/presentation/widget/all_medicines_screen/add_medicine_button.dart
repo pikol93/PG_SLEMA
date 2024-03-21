@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/add_medicine_screen.dart';
 
@@ -18,7 +19,7 @@ class AddMedicineButton extends StatelessWidget {
               ),
             ));
       },
-      child: const Icon(Icons.add),
+      child: const Icon(CustomIcons.add_square),
     );
   }
 }

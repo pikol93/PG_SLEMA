@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/notification/presentation/controller/time_picker_controller.dart';
 
 class CustomTimePicker extends StatefulWidget {
@@ -39,7 +40,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         children: [
           Text(widget.controller.selectedTime.format(context),
               style: Theme.of(context).textTheme.headlineSmall),
-          const Icon(Icons.arrow_drop_down),
+          const Icon(CustomIcons.angle_down),
         ],
       ),
     );

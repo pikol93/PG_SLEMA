@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/menu/presentation/widget/menu_screen_button.dart';
 import 'package:pg_slema/features/menu/presentation/widget/menu_screen_divider.dart';
 
@@ -28,31 +29,31 @@ class MenuScreen extends StatelessWidget {
           height: 20,
         ),
         const MenuScreenButton(
-          iconData: Icons.medication_outlined,
+          iconData: CustomIcons.medicine_capsules,
           label: 'Lekarstwa',
           destinationIndex: 3,
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
-          iconData: Icons.restaurant_menu_outlined,
+          iconData: CustomIcons.diet,
           label: 'Dieta',
           destinationIndex: 4,
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
-          iconData: Icons.fitness_center_outlined,
+          iconData: CustomIcons.award,
           label: 'Ćwiczenia',
           destinationIndex: 5,
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
-          iconData: Icons.image,
+          iconData: CustomIcons.photo,
           label: 'Zdjęcia',
           destinationIndex: 6,
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
-          iconData: Icons.assessment_outlined,
+          iconData: CustomIcons.medical_report,
           label: 'Raport',
           destinationIndex: 7,
         ),
