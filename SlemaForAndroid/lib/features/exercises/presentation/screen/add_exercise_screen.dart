@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
+import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/add_exercise_controller.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -17,7 +18,7 @@ class AddExerciseScreen extends StatefulWidget {
 }
 
 class _AddExerciseScreenState extends State<AddExerciseScreen> {
-  final _controller = AddExerciseController();
+  final _exerciseController = AddExerciseController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -29,11 +30,24 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
             key: _formKey,
             child: Column(
               children: [
+                const SizedBox(height: 20.0),
                 CustomTextFormField(
                   label: "Rodzaj aktywności",
                   icon: Icons.sports_gymnastics,
-                  onChanged: (val) => _controller.name = val,
+                  onChanged: (val) => _exerciseController.name = val,
                 ),
+                const SizedBox(height: 20.0),
+                DatePicker(
+                  onDateSelected: (date) =>
+                      _exerciseController.exerciseDate = date,
+                  controller: DatePickerController(
+                    DateTime.now().subtract(const Duration(days: 365)),
+                    DateTime.now(),
+                    DateTime.now(),
+                  ),
+                  label: "Data ćwiczenia",
+                ),
+                const SizedBox(height: 20.0),
                 CustomSaveButton(
                   formKey: _formKey,
                   onSaved: _onSaveButtonClicked,
@@ -47,7 +61,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
   }
 
   void _onSaveButtonClicked() {
-    var exercise = _controller.createExercise();
+    var exercise = _exerciseController.createExercise();
     widget.onExerciseAdded(exercise);
   }
 }
