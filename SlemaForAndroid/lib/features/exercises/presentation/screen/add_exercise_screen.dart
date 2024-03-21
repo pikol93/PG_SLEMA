@@ -20,6 +20,12 @@ class AddExerciseScreen extends StatefulWidget {
 
 class _AddExerciseScreenState extends State<AddExerciseScreen> {
   final _exerciseController = AddExerciseController();
+  final _dateController = DatePickerController(
+    DateTime.now().subtract(const Duration(days: 365)),
+    DateTime.now(),
+    DateTime.now(),
+  );
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -41,15 +47,13 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                 DatePicker(
                   onDateSelected: (date) =>
                       _exerciseController.exerciseDate = date,
-                  controller: DatePickerController(
-                    DateTime.now().subtract(const Duration(days: 365)),
-                    DateTime.now(),
-                    DateTime.now(),
-                  ),
+                  controller: _dateController,
                   label: "Data ćwiczenia",
                 ),
                 const SizedBox(height: 20.0),
-                const ExerciseDurationPicker(),
+                ExerciseDurationPicker(
+                  onDurationChanged: _onDurationChanged,
+                ),
                 const SizedBox(height: 20.0),
                 CustomSaveButton(
                   formKey: _formKey,
@@ -66,5 +70,9 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
   void _onSaveButtonClicked() {
     var exercise = _exerciseController.createExercise();
     widget.onExerciseAdded(exercise);
+  }
+
+  void _onDurationChanged(TimeOfDay duration) {
+    _exerciseController.exerciseTime = duration;
   }
 }
