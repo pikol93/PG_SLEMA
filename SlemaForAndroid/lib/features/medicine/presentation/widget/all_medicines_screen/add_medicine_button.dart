@@ -19,7 +19,7 @@ class AddMedicineButton extends StatelessWidget {
               ),
             ));
       },
-      child: const Icon(CustomIcons.add_square),
+      child: const Icon(CustomIcons.addSquare),
     );
   }
 }

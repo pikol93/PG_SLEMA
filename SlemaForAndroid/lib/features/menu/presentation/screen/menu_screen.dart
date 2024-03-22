@@ -29,7 +29,7 @@ class MenuScreen extends StatelessWidget {
           height: 20,
         ),
         const MenuScreenButton(
-          iconData: CustomIcons.medicine_capsules,
+          iconData: CustomIcons.medicineCapsules,
           label: 'Lekarstwa',
           destinationIndex: 3,
         ),
@@ -53,7 +53,7 @@ class MenuScreen extends StatelessWidget {
         ),
         const MenuScreenDivider(),
         const MenuScreenButton(
-          iconData: CustomIcons.medical_report,
+          iconData: CustomIcons.medicalReport,
           label: 'Raport',
           destinationIndex: 7,
         ),

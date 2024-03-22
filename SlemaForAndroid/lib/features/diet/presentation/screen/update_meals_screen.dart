@@ -52,7 +52,7 @@ class _UpdateMealsScreenState extends State<UpdateMealsScreen> {
               children: [
                 const SizedBox(height: 20),
                 MealTimeInfo(
-                  iconData: CustomIcons.meal_type,
+                  iconData: CustomIcons.mealType,
                   mealTimeName: _controller.currentMealTime.name,
                 ),
                 ListView.builder(

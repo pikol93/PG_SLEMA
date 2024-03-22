@@ -54,7 +54,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                               EdgeInsets.only(right: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Dawka",
-                            icon: CustomIcons.dose_syringe,
+                            icon: CustomIcons.doseSyringe,
                             onChanged: (value) => _controller.typedDose = value,
                             isValueRequired: false,
                           ),
@@ -66,7 +66,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                               EdgeInsets.only(left: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Rodzaj",
-                            icon: CustomIcons.medicine_type,
+                            icon: CustomIcons.medicineType,
                             onChanged: (value) =>
                                 _controller.typedMedicineType = value,
                             isValueRequired: false,
@@ -78,7 +78,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
                   SizedBox(height: _mainPaddingBetweenInputs),
                   CustomTextFormField(
                     label: "Jak używać",
-                    icon: CustomIcons.hand_medical,
+                    icon: CustomIcons.handMedical,
                     onChanged: (value) => _controller.typedIntakeType = value,
                     isValueRequired: false,
                   ),

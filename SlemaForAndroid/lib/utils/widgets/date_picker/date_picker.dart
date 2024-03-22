@@ -49,7 +49,7 @@ class _DatePickerState extends State<DatePicker> {
               widget.controller.selectedDate.toDateString(),
               style: Theme.of(context).textTheme.labelSmall,
             ),
-            const Icon(CustomIcons.angle_down),
+            const Icon(CustomIcons.angleDown),
           ],
         ),
       ),

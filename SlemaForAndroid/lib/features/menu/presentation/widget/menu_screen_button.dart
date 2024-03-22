@@ -41,7 +41,7 @@ class MenuScreenButton extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Icon(
-                  CustomIcons.angle_right,
+                  CustomIcons.angleRight,
                   size: 40,
                   color: Theme.of(context).colorScheme.outlineVariant,
                 ),

@@ -62,7 +62,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                               EdgeInsets.only(right: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Dawka",
-                            icon: CustomIcons.dose_syringe,
+                            icon: CustomIcons.doseSyringe,
                             onChanged: (value) => _controller.typedDose = value,
                             isValueRequired: false,
                             initialValue: _controller.typedDose,
@@ -75,7 +75,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                               EdgeInsets.only(left: _singleWidgetInRowPadding),
                           child: CustomTextFormField(
                             label: "Rodzaj",
-                            icon: CustomIcons.medicine_type,
+                            icon: CustomIcons.medicineType,
                             onChanged: (value) =>
                                 _controller.typedMedicineType = value,
                             isValueRequired: false,
@@ -88,7 +88,7 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
                   SizedBox(height: _mainPaddingBetweenInputs),
                   CustomTextFormField(
                     label: "Jak używać",
-                    icon: CustomIcons.hand_medical,
+                    icon: CustomIcons.handMedical,
                     onChanged: (value) => _controller.typedIntakeType = value,
                     isValueRequired: false,
                     initialValue: _controller.typedIntakeType,

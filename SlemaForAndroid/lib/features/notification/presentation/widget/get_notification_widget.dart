@@ -50,7 +50,7 @@ class _GetNotificationWidgetState extends State<GetNotificationWidget> {
                   MaterialStateProperty.all(Theme.of(context).primaryColor),
             ),
             icon: const Icon(
-              CustomIcons.remove_circle,
+              CustomIcons.removeCircle,
             ),
           )
         ],

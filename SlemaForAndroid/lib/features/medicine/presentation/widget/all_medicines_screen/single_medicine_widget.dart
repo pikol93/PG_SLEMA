@@ -27,7 +27,7 @@ class SingleMedicineWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0, right: 8.0),
               child: Icon(
-                CustomIcons.medicine_type,
+                CustomIcons.medicineType,
                 color: Theme.of(context).primaryColor,
                 size: 32,
               ),

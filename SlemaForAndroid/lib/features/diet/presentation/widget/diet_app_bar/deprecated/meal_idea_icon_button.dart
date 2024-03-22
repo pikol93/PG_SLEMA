@@ -36,7 +36,7 @@ class MealIdeaIconButton extends StatelessWidget {
                   padding: const EdgeInsets.all(3.0),
                   child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(CustomIcons.question_mark),
+                    icon: const Icon(CustomIcons.questionMark),
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -55,7 +55,7 @@ class MealIdeaIconButton extends StatelessWidget {
         showMealIdea(context);
       },
       icon: const Icon(
-        CustomIcons.question_mark,
+        CustomIcons.questionMark,
         color: Colors.black,
       ),
     );

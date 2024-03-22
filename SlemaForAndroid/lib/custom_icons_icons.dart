@@ -23,25 +23,25 @@ class CustomIcons {
   static const _kFontFam = 'CustomIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData medical_report =
+  static const IconData medicalReport =
       IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData add_circle =
+  static const IconData addAircle =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData add_square =
+  static const IconData addSquare =
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData activity_type =
+  static const IconData activityType =
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData angle_down =
+  static const IconData angleDown =
       IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData angle_right =
+  static const IconData angleRight =
       IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData arrow_left =
+  static const IconData arrowLeft =
       IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData arrow_right =
+  static const IconData arrowRight =
       IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData arrow_square_down =
+  static const IconData arrowSquareDown =
       IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData arrow_square_up =
+  static const IconData arrowSquareUp =
       IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData award =
       IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -49,45 +49,45 @@ class CustomIcons {
       IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData consultation =
       IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData dairy_cheese =
+  static const IconData dairyCheese =
       IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData diet =
       IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData dose_syringe =
+  static const IconData doseSyringe =
       IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData edit =
       IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData emoji =
       IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData fruit_apple =
+  static const IconData fruitApple =
       IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData grain_wheat =
+  static const IconData grainWheat =
       IconData(0xe813, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData hand_medical =
+  static const IconData handMedical =
       IconData(0xe814, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData house =
       IconData(0xe815, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData meal =
       IconData(0xe816, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData meal_type =
+  static const IconData mealType =
       IconData(0xe817, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData meat_chicken =
+  static const IconData meatChicken =
       IconData(0xe818, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData medicine_capsules =
+  static const IconData medicineCapsules =
       IconData(0xe819, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData medicine_type =
+  static const IconData medicineType =
       IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData menu_burger =
+  static const IconData menuBurger =
       IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData menu_dots_vertical =
+  static const IconData menuDotsVertical =
       IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData photo =
       IconData(0xe81d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData question_mark =
+  static const IconData questionMark =
       IconData(0xe81e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData remove =
       IconData(0xe81f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData remove_circle =
+  static const IconData removeCircle =
       IconData(0xe820, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData search =
       IconData(0xe821, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -95,6 +95,6 @@ class CustomIcons {
       IconData(0xe822, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData settings =
       IconData(0xe823, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData vegetable_carrot =
+  static const IconData vegetableCarrot =
       IconData(0xe824, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

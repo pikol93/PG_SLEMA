@@ -49,7 +49,7 @@ class _IngredientsInIngredientCategoryState
       iconDataLeft: CustomIcons.meal, //TODO Icon connected to the category
       label: widget.category.name,
       onIconRightPressed: expandContainer,
-      iconDataRight: CustomIcons.angle_down,
+      iconDataRight: CustomIcons.angleDown,
       child: AnimatedSize(
         duration: const Duration(milliseconds: 200),
         curve: Curves.fastOutSlowIn,

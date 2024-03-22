@@ -45,7 +45,7 @@ class _PickPictureState extends State<PickPicture> {
           onPressed: () async {
             logSharedPreferencesPictureController.printGetAllPictures();
           },
-          icon: const Icon(CustomIcons.question_mark),
+          icon: const Icon(CustomIcons.questionMark),
         ),
       ],
     );

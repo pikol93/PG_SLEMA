@@ -13,7 +13,7 @@ class CalendarMoveForward extends StatelessWidget {
       constraints: const BoxConstraints(),
       padding: EdgeInsets.zero,
       icon: const Icon(
-        CustomIcons.arrow_right,
+        CustomIcons.arrowRight,
         shadows: [Shadow(color: Colors.transparent)],
       ),
       style: Theme.of(context).iconButtonTheme.style?.copyWith(

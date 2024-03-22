@@ -46,8 +46,8 @@ class MainScreenState extends State<MainScreen> {
               destinationIndex: 1,
             ),
             CustomNavigationDestination(
-              icon: CustomIcons.menu_burger,
-              selectedIcon: CustomIcons.menu_burger,
+              icon: CustomIcons.menuBurger,
+              selectedIcon: CustomIcons.menuBurger,
               label: 'Menu',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,

@@ -40,7 +40,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
         children: [
           Text(widget.controller.selectedTime.format(context),
               style: Theme.of(context).textTheme.headlineSmall),
-          const Icon(CustomIcons.angle_down),
+          const Icon(CustomIcons.angleDown),
         ],
       ),
     );

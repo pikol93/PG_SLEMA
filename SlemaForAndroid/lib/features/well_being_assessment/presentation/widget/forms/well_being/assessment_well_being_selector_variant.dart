@@ -22,7 +22,7 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
         children: [
           Visibility(
             visible: isSelected,
-            child: const Icon(CustomIcons.arrow_square_down),
+            child: const Icon(CustomIcons.arrowSquareDown),
           ),
           IconButton(
             onPressed: onPressed,
@@ -31,7 +31,7 @@ class AssessmentWellBeingSelectorVariant extends StatelessWidget {
           ),
           Visibility(
             visible: isSelected,
-            child: const Icon(CustomIcons.arrow_square_up),
+            child: const Icon(CustomIcons.arrowSquareUp),
           ),
         ],
       ),

@@ -23,7 +23,7 @@ class AddMedicineScreenAppBar extends StatelessWidget
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: const Icon(CustomIcons.arrow_left),
+            icon: const Icon(CustomIcons.arrowLeft),
             color: Theme.of(context).colorScheme.onPrimary,
           ),
           SizedBox(height: _spaceBetweenBackIconAndTitle),
