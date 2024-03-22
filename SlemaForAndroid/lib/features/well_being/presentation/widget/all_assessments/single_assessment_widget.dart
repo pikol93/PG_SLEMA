@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class SingleAssessmentWidget extends StatelessWidget {
-  const SingleAssessmentWidget({super.key});
+  final Assessment assessment;
+
+  const SingleAssessmentWidget({super.key, required this.assessment});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class SingleAssessmentWidget extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                "asd",
+                "Assessment: ${assessment.id} ${assessment.intakeDate}",
                 style: Theme.of(context).textTheme.headlineLarge,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/repository/shared_preferences_assessments_repository.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service_impl.dart';
@@ -34,7 +35,12 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen> {
           child: ListView.builder(
             itemCount: 15,
             itemBuilder: (BuildContext context, int index) {
-              return const SingleAssessmentWidget().build(context);
+              var assessment = Assessment(
+                id: index,
+                intakeDate: DateTime.timestamp(),
+              );
+              return SingleAssessmentWidget(assessment: assessment)
+                  .build(context);
             },
           ),
         )
