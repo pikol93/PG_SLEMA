@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
@@ -29,24 +30,24 @@ class MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             CustomNavigationDestination(
-              icon: Icons.calendar_month_outlined,
-              selectedIcon: Icons.calendar_month,
+              icon: CustomIcons.calendar,
+              selectedIcon: CustomIcons.calendar,
               label: 'Kalendarz',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,
               destinationIndex: 0,
             ),
             CustomNavigationDestination(
-              icon: Icons.home_outlined,
-              selectedIcon: Icons.home,
+              icon: CustomIcons.house,
+              selectedIcon: CustomIcons.house,
               label: 'Start',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,
               destinationIndex: 1,
             ),
             CustomNavigationDestination(
-              icon: Icons.menu_outlined,
-              selectedIcon: Icons.menu,
+              icon: CustomIcons.menuBurger,
+              selectedIcon: CustomIcons.menuBurger,
               label: 'Menu',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,

@@ -118,4 +118,6 @@ flutter:
           weight: 700
         - asset: assets/fonts/Dongle-Light.ttf
           weight: 300
-
+    - family: CustomIcons
+      fonts:
+        - asset: assets/fonts/CustomIcons.ttf

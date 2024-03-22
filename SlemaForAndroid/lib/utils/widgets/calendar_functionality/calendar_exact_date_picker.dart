@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 
 class CalendarExactDatePicker extends StatelessWidget {
@@ -36,7 +37,7 @@ class CalendarExactDatePicker extends StatelessWidget {
             iconSize: const MaterialStatePropertyAll(30),
           ),
       icon: const Icon(
-        Icons.calendar_month,
+        CustomIcons.calendar,
         shadows: [Shadow(color: Colors.transparent)],
       ),
     );

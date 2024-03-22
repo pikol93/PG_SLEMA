@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
@@ -35,7 +36,7 @@ class ContainerWithDividerState extends State<ContainerWithDivider> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (widget.iconDataLeft != null)
-                const Icon(Icons.egg_alt, size: 30.0),
+                const Icon(CustomIcons.meal, size: 30.0),
               const SizedBox(width: 5.0),
               Text(
                 widget.label,

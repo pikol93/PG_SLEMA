@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:pg_slema/custom_icons_icons.dart';
+
 class CalendarMoveForward extends StatelessWidget {
   final VoidCallback? onPressed;
 
@@ -11,7 +13,7 @@ class CalendarMoveForward extends StatelessWidget {
       constraints: const BoxConstraints(),
       padding: EdgeInsets.zero,
       icon: const Icon(
-        Icons.arrow_forward,
+        CustomIcons.arrowRight,
         shadows: [Shadow(color: Colors.transparent)],
       ),
       style: Theme.of(context).iconButtonTheme.style?.copyWith(

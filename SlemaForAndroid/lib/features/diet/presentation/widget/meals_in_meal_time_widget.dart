@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_with_divider.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
@@ -24,7 +25,7 @@ class MealInMealTimeWidget extends StatelessWidget {
       children: [
         ContainerWithDivider(
           label: mealTime.name,
-          iconDataRight: Icons.edit,
+          iconDataRight: CustomIcons.edit,
           onIconRightPressed: () {
             Navigator.push(
               context,

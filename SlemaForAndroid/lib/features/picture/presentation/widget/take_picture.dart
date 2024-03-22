@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 
 import 'package:pg_slema/features/picture/presentation/controller/take_picture_controller.dart';
 
@@ -26,7 +27,7 @@ class _TakePictureState extends State<TakePicture> {
         await widget.takePictureController.takePicture();
         widget.voidCallbackAfterAddedImage();
       },
-      icon: const Icon(Icons.camera_alt),
+      icon: const Icon(CustomIcons.photo),
     );
   }
 }
