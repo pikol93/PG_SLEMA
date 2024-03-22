@@ -3,7 +3,7 @@ import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class ExerciseDurationPicker extends StatefulWidget {
-  final ValueChanged<TimeOfDay> onDurationChanged;
+  final ValueChanged<int> onDurationChanged;
   const ExerciseDurationPicker({super.key, required this.onDurationChanged});
 
   @override
@@ -32,9 +32,8 @@ class _ExerciseDurationPickerState extends State<ExerciseDurationPicker> {
               setState(() {
                 _currentSliderValue = value;
               });
-              widget.onDurationChanged(_currentSliderValue
-                  .toExerciseDuration()
-                  .timeOfDayRepresentation);
+              widget.onDurationChanged(
+                  _currentSliderValue.toExerciseDuration().intRepresentation);
             },
           ),
           Text(

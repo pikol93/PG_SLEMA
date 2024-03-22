@@ -59,18 +59,18 @@ extension ExerciseDurationExtension on ExerciseDuration {
     }
   }
 
-  TimeOfDay get timeOfDayRepresentation {
+  int get intRepresentation {
     switch (this) {
       case ExerciseDuration.upTo15:
-        return const TimeOfDay(hour: 0, minute: 15);
+        return 20;
       case ExerciseDuration.upTo30:
-        return const TimeOfDay(hour: 0, minute: 30);
+        return 40;
       case ExerciseDuration.upTo60:
-        return const TimeOfDay(hour: 1, minute: 0);
+        return 60;
       case ExerciseDuration.upTo120:
-        return const TimeOfDay(hour: 2, minute: 0);
+        return 80;
       case ExerciseDuration.over120:
-        return const TimeOfDay(hour: 2, minute: 1);
+        return 100;
       default:
         throw ArgumentError("Unexpected argument \"$this\"");
     }

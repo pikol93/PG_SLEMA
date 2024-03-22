@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_duration_picker.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/exercise_intensity_picker.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/add_exercise_controller.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/utils/widgets/forms/text_input.dart';
-
-import '../../../../utils/widgets/date_picker/date_picker.dart';
+import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 
 class AddExerciseScreen extends StatefulWidget {
   final ValueChanged<Exercise> onExerciseAdded;
@@ -55,6 +55,10 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                   onDurationChanged: _onDurationChanged,
                 ),
                 const SizedBox(height: 20.0),
+                ExerciseIntensityPicker(
+                  onIntensityChanged: _onIntensityChanged,
+                ),
+                const SizedBox(height: 20.0),
                 CustomSaveButton(
                   formKey: _formKey,
                   onSaved: _onSaveButtonClicked,
@@ -72,7 +76,11 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
     widget.onExerciseAdded(exercise);
   }
 
-  void _onDurationChanged(TimeOfDay duration) {
-    _exerciseController.exerciseTime = duration;
+  void _onDurationChanged(int duration) {
+    _exerciseController.exerciseDuration = duration;
+  }
+
+  void _onIntensityChanged(int intensity) {
+    _exerciseController.intensity = intensity;
   }
 }
