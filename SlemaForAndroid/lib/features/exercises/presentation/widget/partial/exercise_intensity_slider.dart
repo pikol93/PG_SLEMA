@@ -22,6 +22,9 @@ class _ExerciseIntensitySliderState extends State<ExerciseIntensitySlider> {
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         child: SliderTheme(
           data: SliderThemeData(
+            activeTrackColor: _currentSliderValue
+                .toExerciseIntensity()
+                .colorRepresentationLerp(_currentSliderValue),
             trackHeight: 40,
             inactiveTrackColor:
                 Theme.of(context).colorScheme.secondaryContainer,
