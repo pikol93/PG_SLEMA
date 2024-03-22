@@ -45,13 +45,21 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                   onChanged: _onNameChanged,
                 ),
                 const SizedBox(height: 20.0),
-                DatePicker(
-                  label: "Data ćwiczenia",
-                  onDateSelected: _onDateChanged,
-                  controller: _dateController,
+                Row(
+                  children: [
+                    Expanded(
+                      child: DatePicker(
+                        label: "Data ćwiczenia",
+                        onDateSelected: _onDateChanged,
+                        controller: _dateController,
+                      ),
+                    ),
+                    const SizedBox(width: 6.0),
+                    Expanded(
+                      child: TimeOfDayPicker(onTimeSelected: _onTimeChanged),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 20.0),
-                TimeOfDayPicker(onTimeSelected: _onTimeChanged),
                 const SizedBox(height: 20.0),
                 ExerciseDurationPicker(onDurationChanged: _onDurationChanged),
                 const SizedBox(height: 20.0),
