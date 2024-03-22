@@ -81,13 +81,12 @@ extension ExerciseDurationExtension on ExerciseIntensity {
     Color orange = const Color(0xffffd6a5);
     Color yellow = const Color(0xfffdffb6);
     Color green = const Color(0xffcaffbf);
-    Color blue = const Color(0xffc6def1);
 
     switch (this) {
       case ExerciseIntensity.veryGentle:
-        return Color.lerp(blue, blue, value);
+        return Color.lerp(green, green, value);
       case ExerciseIntensity.gentle:
-        return Color.lerp(blue, green, value);
+        return Color.lerp(green, green, value);
       case ExerciseIntensity.moderate:
         return Color.lerp(green, yellow, value);
       case ExerciseIntensity.intense:
