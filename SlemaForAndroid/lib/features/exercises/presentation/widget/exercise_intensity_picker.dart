@@ -17,6 +17,7 @@ class _ExerciseIntensityPickerState extends State<ExerciseIntensityPicker> {
   @override
   Widget build(BuildContext context) {
     return DefaultContainer(
+      shadow: false,
       child: Column(
         children: [
           Text(
