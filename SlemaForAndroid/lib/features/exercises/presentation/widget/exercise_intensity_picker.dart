@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
+import 'package:pg_slema/features/exercises/presentation/widget/partial/exercise_intensity_slider.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
@@ -13,7 +14,9 @@ class ExerciseIntensityPicker extends StatefulWidget {
 }
 
 class _ExerciseIntensityPickerState extends State<ExerciseIntensityPicker> {
-  double _currentSliderValue = 0;
+  String _label = ExerciseIntensity.veryGentle.labelTextRepresentation;
+  String _text = ExerciseIntensity.veryGentle.textRepresentation;
+
   @override
   Widget build(BuildContext context) {
     return DefaultContainer(
@@ -26,27 +29,27 @@ class _ExerciseIntensityPickerState extends State<ExerciseIntensityPicker> {
           ),
           const ContainerDivider(),
           Text(
-            _currentSliderValue.toExerciseIntensity().labelTextRepresentation,
+            _label,
             style: Theme.of(context).textTheme.labelSmall,
           ),
-          Slider(
-            value: _currentSliderValue,
-            divisions: ExerciseIntensity.values.length - 1,
-            onChanged: (double value) {
-              setState(() {
-                _currentSliderValue = value;
-              });
-              widget.onIntensityChanged(
-                  _currentSliderValue.toExerciseIntensity().intRepresentation);
-            },
-          ),
+          ExerciseIntensitySlider(onSliderChanged: _onIntensityChanged),
           Text(
-            _currentSliderValue.toExerciseIntensity().textRepresentation,
+            _text,
             style: Theme.of(context).textTheme.bodyLarge,
             textAlign: TextAlign.center,
           )
         ],
       ),
     );
+  }
+
+  void _onIntensityChanged(double sliderValue) {
+    widget.onIntensityChanged(
+        sliderValue.toExerciseIntensity().intRepresentation);
+
+    setState(() {
+      _label = sliderValue.toExerciseIntensity().labelTextRepresentation;
+      _text = sliderValue.toExerciseIntensity().textRepresentation;
+    });
   }
 }
