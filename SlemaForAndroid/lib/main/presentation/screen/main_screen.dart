@@ -4,11 +4,11 @@ import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
+import 'package:pg_slema/features/well_being/presentation/screen/all_assessments_screen.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
-import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -63,7 +63,7 @@ class MainScreenState extends State<MainScreen> {
         const DietScreen(),
         const ExercisesScreen(),
         const PicturesScreen(),
-        const AssessmentScreen()
+        const AllAssessmentsScreen(),
       ][controller.currentIndex],
     );
   }
