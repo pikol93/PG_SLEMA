@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
 import 'package:pg_slema/features/well_being_assessment/presentation/screen/assessment_screen.dart';
 
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
