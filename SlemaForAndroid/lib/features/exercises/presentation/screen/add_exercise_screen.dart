@@ -9,6 +9,7 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/utils/widgets/forms/text_input.dart';
 import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
+import 'package:pg_slema/utils/widgets/time_of_day_picker/time_of_day_picker.dart';
 
 class AddExerciseScreen extends StatefulWidget {
   final ValueChanged<Exercise> onExerciseAdded;
@@ -41,23 +42,21 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                 CustomTextFormField(
                   label: "Rodzaj aktywności",
                   icon: Icons.sports_gymnastics,
-                  onChanged: (val) => _exerciseController.name = val,
+                  onChanged: _onNameChanged,
                 ),
                 const SizedBox(height: 20.0),
                 DatePicker(
-                  onDateSelected: (date) =>
-                      _exerciseController.exerciseDate = date,
-                  controller: _dateController,
                   label: "Data ćwiczenia",
+                  onDateSelected: _onDateChanged,
+                  controller: _dateController,
                 ),
                 const SizedBox(height: 20.0),
-                ExerciseDurationPicker(
-                  onDurationChanged: _onDurationChanged,
-                ),
+                TimeOfDayPicker(onTimeSelected: _onTimeChanged),
+                const SizedBox(height: 20.0),
+                ExerciseDurationPicker(onDurationChanged: _onDurationChanged),
                 const SizedBox(height: 20.0),
                 ExerciseIntensityPicker(
-                  onIntensityChanged: _onIntensityChanged,
-                ),
+                    onIntensityChanged: _onIntensityChanged),
                 const SizedBox(height: 20.0),
                 CustomSaveButton(
                   formKey: _formKey,
@@ -71,9 +70,16 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
     );
   }
 
-  void _onSaveButtonClicked() {
-    var exercise = _exerciseController.createExercise();
-    widget.onExerciseAdded(exercise);
+  void _onNameChanged(String name) {
+    _exerciseController.name = name;
+  }
+
+  void _onDateChanged(DateTime dateTime) {
+    _exerciseController.exerciseDate = dateTime;
+  }
+
+  void _onTimeChanged(TimeOfDay timeOfDay) {
+    _exerciseController.exerciseTime = timeOfDay;
   }
 
   void _onDurationChanged(int duration) {
@@ -82,5 +88,10 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
 
   void _onIntensityChanged(int intensity) {
     _exerciseController.intensity = intensity;
+  }
+
+  void _onSaveButtonClicked() {
+    var exercise = _exerciseController.createExercise();
+    widget.onExerciseAdded(exercise);
   }
 }
