@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../custom_icons_icons.dart';
+import 'package:pg_slema/custom_icons_icons.dart';
 
 class AddMedicineScreenAppBar extends StatelessWidget
     implements PreferredSizeWidget {
