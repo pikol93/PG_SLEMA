@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/all_assessments/single_assessment_widget.dart';
@@ -11,8 +12,10 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class AllAssessmentsScreen extends StatefulWidget {
   final AssessmentsService service;
+  final AssessmentFactory factory;
 
-  const AllAssessmentsScreen({super.key, required this.service});
+  const AllAssessmentsScreen(
+      {super.key, required this.service, required this.factory});
 
   @override
   State<AllAssessmentsScreen> createState() => _AllAssessmentsScreenState();
@@ -54,10 +57,13 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
         ),
         FloatingActionButton(
           onPressed: () {
+            final assessment = widget.factory.generateWithUniqueId();
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AssessmentScreen(),
+                  builder: (context) => AssessmentScreen(
+                    assessment: assessment,
+                  ),
                 ));
           },
           child: const Icon(Icons.add),

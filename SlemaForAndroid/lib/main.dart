@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/assessment_factory_impl.dart';
 import 'package:pg_slema/features/well_being/logic/repository/shared_preferences_assessments_repository.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service_impl.dart';
 import 'package:pg_slema/initializers/global_initializer.dart';
@@ -25,6 +26,7 @@ Future<void> main() async {
   final assessmentsRepository = SharedPreferencesAssessmentsRepository();
   final assessmentsService =
       AssessmentsServiceImpl(repository: assessmentsRepository);
+  final assessmentFactory = AssessmentFactoryImpl();
 
   runApp(
     MultiProvider(
@@ -47,6 +49,7 @@ Future<void> main() async {
         ],
         home: MainScreen(
           assessmentsService: assessmentsService,
+          assessmentFactory: assessmentFactory,
         ),
       ),
     ),

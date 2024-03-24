@@ -8,6 +8,16 @@ class Assessment {
     return intakeDate.isAfter(other.intakeDate);
   }
 
+  Assessment copyWith({
+    int? id,
+    DateTime? intakeDate,
+  }) {
+    return Assessment(
+      id: id ?? this.id,
+      intakeDate: intakeDate ?? this.intakeDate,
+    );
+  }
+
   /// Converts a given [map] to an [Assessment] object. Returns null if the [map] could not be converted.
   static Assessment? fromJsonObject(Map<String, dynamic> map) {
     try {

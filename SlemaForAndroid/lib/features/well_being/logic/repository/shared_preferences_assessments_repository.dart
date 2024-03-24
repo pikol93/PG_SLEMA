@@ -52,6 +52,11 @@ class SharedPreferencesAssessmentsRepository
     await _saveToSharedPreferences();
   }
 
+  @override
+  ChangeNotifier getAssessmentChangeNotifier() {
+    return assessmentChangeNotifier;
+  }
+
   /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
   static Future<SharedPreferencesAssessmentsRepository> create() async {
     final self = SharedPreferencesAssessmentsRepository();
@@ -95,10 +100,5 @@ class SharedPreferencesAssessmentsRepository
 
     logger.debug("Saved assessments to shared preferences.");
     assessmentChangeNotifier.notifyListeners();
-  }
-
-  @override
-  ChangeNotifier getAssessmentChangeNotifier() {
-    return assessmentChangeNotifier;
   }
 }
