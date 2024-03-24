@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/assessment_help_button.dart';
 
 class AssessmentAppBar extends StatelessWidget {
-  final String currentDateString;
-
-  const AssessmentAppBar({super.key, required this.currentDateString});
+  const AssessmentAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

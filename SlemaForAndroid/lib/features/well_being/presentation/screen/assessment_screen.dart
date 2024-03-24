@@ -22,7 +22,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
     final currentDateString = DateTime.now().toDateString();
     return CustomScrollView(
       slivers: <Widget>[
-        AssessmentAppBar(currentDateString: currentDateString),
+        const AssessmentAppBar(),
         SliverToBoxAdapter(
           child: Form(
             key: _formKey,
