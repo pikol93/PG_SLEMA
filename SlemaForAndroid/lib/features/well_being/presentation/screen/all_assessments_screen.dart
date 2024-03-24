@@ -32,32 +32,40 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
 
   @override
   Widget build(BuildContext context) {
-    logger.debug("building...");
     return Column(
       children: [
         const DefaultAppBar(title: "Raporty zdrowotne"),
         DefaultBody(
           child: FutureBuilder(
             future: assessmentsFuture,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                List<Assessment> displayedAssessments = snapshot.data!;
-                return ListView.builder(
-                  itemCount: displayedAssessments.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SingleAssessmentWidget(
-                            assessment: displayedAssessments[index])
-                        .build(context);
-                  },
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
-            },
+            builder: _futureBuilder,
           ),
         ),
         FloatingActionButton(onPressed: _onAddButtonPressed),
       ],
+    );
+  }
+
+  Widget _futureBuilder(
+    BuildContext context,
+    AsyncSnapshot<List<Assessment>> snapshot,
+  ) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const Center(
+        child: SizedBox(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    List<Assessment> displayedAssessments = snapshot.data!;
+    return ListView.builder(
+      itemCount: displayedAssessments.length,
+      itemBuilder: (BuildContext context, int index) {
+        return SingleAssessmentWidget(
+          assessment: displayedAssessments[index],
+        ).build(context);
+      },
     );
   }
 
