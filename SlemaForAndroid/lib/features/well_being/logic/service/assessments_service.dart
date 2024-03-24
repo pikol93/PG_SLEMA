@@ -1,8 +1,8 @@
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 
 abstract class AssessmentsService {
-  /// Gets [count] top entries in the chronological order.
-  Future<List<Assessment>> getTopEntries(int count);
+  /// Gets all existing assessments in the chronological order.
+  Future<List<Assessment>> getAll();
 
   /// TODO: Finish docs.
   Future saveEntry(Assessment assessment);

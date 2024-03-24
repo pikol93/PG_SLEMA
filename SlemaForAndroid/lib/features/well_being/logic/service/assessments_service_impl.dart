@@ -8,8 +8,8 @@ class AssessmentsServiceImpl implements AssessmentsService {
   AssessmentsServiceImpl({required this.repository});
 
   @override
-  Future<List<Assessment>> getTopEntries(int count) {
-    return repository.get(count);
+  Future<List<Assessment>> getAll() {
+    return repository.getAll();
   }
 
   @override

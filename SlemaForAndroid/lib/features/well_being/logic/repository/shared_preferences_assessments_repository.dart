@@ -12,30 +12,14 @@ class SharedPreferencesAssessmentsRepository
   static const String _assessmentsSharedPreferencesKey = 'assessments';
 
   final assessmentsRwLock = ReadWriteMutex();
-  final loadedAssessments = List.empty(growable: true);
+  final List<Assessment> loadedAssessments = List.empty(growable: true);
   final sharedPreferencesConnector = SharedPreferencesConnector();
 
-  /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
-  static Future<SharedPreferencesAssessmentsRepository> create() async {
-    final self = SharedPreferencesAssessmentsRepository();
-    await self._loadFromSharedPreferences();
-    return self;
-  }
-
   @override
-  Future<List<Assessment>> get(int count) async {
-    List<Assessment> result = List.empty(growable: true);
-    await assessmentsRwLock.protectRead(() async {
-      for (int i = 0; i < count; i++) {
-        if (i >= loadedAssessments.length) {
-          break;
-        }
-
-        result.add(loadedAssessments[i]);
-      }
+  Future<List<Assessment>> getAll() {
+    return assessmentsRwLock.protectRead(() async {
+      return List.from(loadedAssessments, growable: false);
     });
-
-    return result;
   }
 
   @override
@@ -63,6 +47,13 @@ class SharedPreferencesAssessmentsRepository
 
     // Need to update data in order to keep loadedAssessments up to date.
     await _saveToSharedPreferences();
+  }
+
+  /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
+  static Future<SharedPreferencesAssessmentsRepository> create() async {
+    final self = SharedPreferencesAssessmentsRepository();
+    await self._loadFromSharedPreferences();
+    return self;
   }
 
   Future _loadFromSharedPreferences() async {
