@@ -3,6 +3,7 @@ import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
+import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/all_assessments/single_assessment_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
@@ -20,9 +21,6 @@ class AllAssessmentsScreen extends StatefulWidget {
 class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
     with Logger {
   late Future<List<Assessment>> assessmentsFuture;
-
-  // TODO: Remove.
-  int counter = 1;
 
   @override
   void initState() {
@@ -54,7 +52,16 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
             builder: _futureBuilder,
           ),
         ),
-        FloatingActionButton(onPressed: _onAddButtonPressed),
+        FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AssessmentScreen(),
+                ));
+          },
+          child: const Icon(Icons.add),
+        ),
       ],
     );
   }
@@ -80,12 +87,6 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
         ).build(context);
       },
     );
-  }
-
-  void _onAddButtonPressed() {
-    final assessment = Assessment(id: counter, intakeDate: DateTime.now());
-    counter += 1;
-    widget.service.saveEntry(assessment);
   }
 
   void _onAssessmentsChanged() {
