@@ -21,13 +21,26 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
     with Logger {
   late Future<List<Assessment>> assessmentsFuture;
 
+  // TODO: Remove.
   int counter = 1;
 
   @override
   void initState() {
     super.initState();
+    widget.service
+        .getAssessmentChangeNotifier()
+        .addListener(_onAssessmentsChanged);
 
-    assessmentsFuture = widget.service.getAll();
+    // Simulate data changing, to have the data correctly appear on the screen.
+    _onAssessmentsChanged();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.service
+        .getAssessmentChangeNotifier()
+        .removeListener(_onAssessmentsChanged);
   }
 
   @override
@@ -73,5 +86,12 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
     final assessment = Assessment(id: counter, intakeDate: DateTime.now());
     counter += 1;
     widget.service.saveEntry(assessment);
+  }
+
+  void _onAssessmentsChanged() {
+    logger.debug("On assessments changed.");
+    setState(() {
+      assessmentsFuture = widget.service.getAll();
+    });
   }
 }

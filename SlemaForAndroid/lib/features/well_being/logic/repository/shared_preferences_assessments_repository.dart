@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/repository/assessments_repository.dart';
+import 'package:pg_slema/utils/change_notifier_impl.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
@@ -14,6 +16,7 @@ class SharedPreferencesAssessmentsRepository
   final assessmentsRwLock = ReadWriteMutex();
   final List<Assessment> loadedAssessments = List.empty(growable: true);
   final sharedPreferencesConnector = SharedPreferencesConnector();
+  final ChangeNotifierImpl assessmentChangeNotifier = ChangeNotifierImpl();
 
   @override
   Future<List<Assessment>> getAll() {
@@ -91,5 +94,11 @@ class SharedPreferencesAssessmentsRepository
         json, _assessmentsSharedPreferencesKey);
 
     logger.debug("Saved assessments to shared preferences.");
+    assessmentChangeNotifier.notifyListeners();
+  }
+
+  @override
+  ChangeNotifier getAssessmentChangeNotifier() {
+    return assessmentChangeNotifier;
   }
 }
