@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const DefaultAppBar({super.key, required this.title});
+  final PreferredSizeWidget? bottom;
+
+  const DefaultAppBar({super.key, required this.title, this.bottom});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class DefaultAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: Theme.of(context).colorScheme.onPrimary, size: 38),
+      bottom: bottom,
     );
   }
 
