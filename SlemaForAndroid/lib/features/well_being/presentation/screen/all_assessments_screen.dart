@@ -14,8 +14,11 @@ class AllAssessmentsScreen extends StatefulWidget {
   final AssessmentsService service;
   final AssessmentFactory factory;
 
-  const AllAssessmentsScreen(
-      {super.key, required this.service, required this.factory});
+  const AllAssessmentsScreen({
+    super.key,
+    required this.service,
+    required this.factory,
+  });
 
   @override
   State<AllAssessmentsScreen> createState() => _AllAssessmentsScreenState();
@@ -63,6 +66,7 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
                 MaterialPageRoute(
                   builder: (context) => AssessmentScreen(
                     assessment: assessment,
+                    assessmentsService: widget.service,
                   ),
                 ));
           },
