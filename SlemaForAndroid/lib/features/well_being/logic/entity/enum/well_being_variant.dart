@@ -11,24 +11,9 @@ enum WellBeing {
 extension WellBeingExtension on WellBeing {
   static WellBeing from(String text) {
     return WellBeing.values.firstWhere(
-      (element) => element.savedValueRepresentation == text,
+      (element) => element.name == text,
       orElse: () => WellBeing.neutral,
     );
-  }
-
-  String get savedValueRepresentation {
-    switch (this) {
-      case WellBeing.awful:
-        return "0";
-      case WellBeing.bad:
-        return "1";
-      case WellBeing.neutral:
-        return "2";
-      case WellBeing.good:
-        return "3";
-      case WellBeing.great:
-        return "4";
-    }
   }
 
   String get textRepresentation {

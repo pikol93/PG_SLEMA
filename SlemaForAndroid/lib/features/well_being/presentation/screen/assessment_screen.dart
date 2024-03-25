@@ -67,9 +67,12 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
                       onDataChanged: _onDataChanged,
                     ),
                   ),
-                  const DefaultContainer(
-                    padding: EdgeInsets.all(15),
-                    child: AssessmentSymptomsFormWidget(),
+                  DefaultContainer(
+                    padding: const EdgeInsets.all(15),
+                    child: AssessmentSymptomsFormWidget(
+                      assessment: assessment!,
+                      onDataChanged: _onDataChanged,
+                    ),
                   ),
                   const DefaultContainer(
                     padding: EdgeInsets.all(15),

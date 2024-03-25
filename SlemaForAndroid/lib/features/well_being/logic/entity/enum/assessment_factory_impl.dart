@@ -16,6 +16,10 @@ class AssessmentFactoryImpl implements AssessmentFactory {
       id: random.nextInt(maxId),
       intakeDate: DateTime.now(),
       wellBeing: WellBeing.neutral,
+      symptomEntries: SymptomEntries(
+        // TODO: Insert symptom entries from the most recent assessment.
+        symptomEntries: [],
+      ),
     );
   }
 }

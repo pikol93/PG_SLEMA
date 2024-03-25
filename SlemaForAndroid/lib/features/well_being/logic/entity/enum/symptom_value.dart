@@ -9,6 +9,13 @@ enum SymptomValue {
 }
 
 extension SymptomValueExtension on SymptomValue {
+  static SymptomValue from(String text) {
+    return SymptomValue.values.firstWhere(
+      (element) => element.name == text,
+      orElse: () => SymptomValue.moderate,
+    );
+  }
+
   String get textRepresentation {
     switch (this) {
       case SymptomValue.none:
