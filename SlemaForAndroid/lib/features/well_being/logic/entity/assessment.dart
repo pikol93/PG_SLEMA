@@ -1,8 +1,12 @@
+import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
+
 class Assessment {
   final int id;
   final DateTime intakeDate;
+  final WellBeingVariant wellBeing;
 
-  Assessment({required this.id, required this.intakeDate});
+  Assessment(
+      {required this.id, required this.intakeDate, required this.wellBeing});
 
   bool isOlderThan(Assessment other) {
     return intakeDate.isAfter(other.intakeDate);
@@ -11,10 +15,12 @@ class Assessment {
   Assessment copyWith({
     int? id,
     DateTime? intakeDate,
+    WellBeingVariant? wellBeing,
   }) {
     return Assessment(
       id: id ?? this.id,
       intakeDate: intakeDate ?? this.intakeDate,
+      wellBeing: wellBeing ?? this.wellBeing,
     );
   }
 
@@ -24,6 +30,7 @@ class Assessment {
       return Assessment(
         id: map["id"],
         intakeDate: DateTime.parse(map["intakeDate"]),
+        wellBeing: WellBeingExtension.from(map["wellBeing"]),
       );
     } catch (ex) {
       return null;
@@ -34,6 +41,7 @@ class Assessment {
     return {
       "id": id,
       "intakeDate": intakeDate.toString(),
+      "wellBeing": wellBeing.savedValueRepresentation,
     };
   }
 }

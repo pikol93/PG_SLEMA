@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: Rename this.
 enum WellBeingVariant {
   awful,
   bad,
@@ -8,7 +9,29 @@ enum WellBeingVariant {
   great,
 }
 
-extension SymptomValueExtension on WellBeingVariant {
+extension WellBeingExtension on WellBeingVariant {
+  static WellBeingVariant from(String text) {
+    return WellBeingVariant.values.firstWhere(
+      (element) => element.savedValueRepresentation == text,
+      orElse: () => WellBeingVariant.neutral,
+    );
+  }
+
+  String get savedValueRepresentation {
+    switch (this) {
+      case WellBeingVariant.awful:
+        return "0";
+      case WellBeingVariant.bad:
+        return "1";
+      case WellBeingVariant.neutral:
+        return "2";
+      case WellBeingVariant.good:
+        return "3";
+      case WellBeingVariant.great:
+        return "4";
+    }
+  }
+
   String get textRepresentation {
     switch (this) {
       case WellBeingVariant.awful:

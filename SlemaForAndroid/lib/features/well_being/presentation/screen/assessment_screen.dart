@@ -20,9 +20,18 @@ class AssessmentScreen extends StatefulWidget {
 class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
 
+  Assessment? assessment;
+
+  @override
+  void initState() {
+    super.initState();
+
+    assessment = widget.assessment;
+    logger.debug("Modifying ${assessment!.id}");
+  }
+
   @override
   Widget build(BuildContext context) {
-    logger.debug("Modifying ${widget.assessment.id}");
     return Column(
       children: [
         const DefaultAppBar(
@@ -32,17 +41,20 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
           child: SingleChildScrollView(
             child: Form(
               key: _formKey,
-              child: const Column(
+              child: Column(
                 children: [
                   DefaultContainer(
-                    padding: EdgeInsets.all(15),
-                    child: AssessmentWellBeingForm(),
+                    padding: const EdgeInsets.all(15),
+                    child: AssessmentWellBeingForm(
+                      assessment: assessment!,
+                      onDataChanged: _onDataChanged,
+                    ),
                   ),
-                  DefaultContainer(
+                  const DefaultContainer(
                     padding: EdgeInsets.all(15),
                     child: AssessmentSymptomsFormWidget(),
                   ),
-                  DefaultContainer(
+                  const DefaultContainer(
                     padding: EdgeInsets.all(15),
                     child: AssessmentSleepForm(),
                   ),
@@ -53,5 +65,11 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
         )
       ],
     );
+  }
+
+  void _onDataChanged(Assessment Function(Assessment) mutateFunction) {
+    setState(() {
+      assessment = mutateFunction(assessment!);
+    });
   }
 }
