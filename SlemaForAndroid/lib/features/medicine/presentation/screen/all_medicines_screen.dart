@@ -5,8 +5,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_scr
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/all_medicines_screen_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
-
-import 'add_medicine_screen.dart';
+import 'package:pg_slema/features/medicine/presentation/screen/add_medicine_screen.dart';
 
 class AllMedicinesScreen extends StatefulWidget {
   const AllMedicinesScreen({super.key});

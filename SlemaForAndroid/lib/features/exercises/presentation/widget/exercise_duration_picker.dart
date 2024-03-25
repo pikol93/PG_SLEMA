@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
+import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
 
 class ExerciseDurationPicker extends StatefulWidget {
   final ValueChanged<int> onDurationChanged;
@@ -22,12 +23,17 @@ class _ExerciseDurationPickerState extends State<ExerciseDurationPicker> {
             "Czas trwania",
             style: Theme.of(context).textTheme.labelMedium,
           ),
+          const ContainerDivider(),
+          Text(
+            _currentSliderValue.toExerciseDuration().textRepresentation,
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
           Slider(
             value: _currentSliderValue,
             divisions: ExerciseDuration.values.length - 1,
-            label: _currentSliderValue
-                .toExerciseDuration()
-                .labelTextRepresentation,
+            // label: _currentSliderValue
+            //     .toExerciseDuration()
+            //     .labelTextRepresentation,
             onChanged: (double value) {
               setState(() {
                 _currentSliderValue = value;
@@ -36,10 +42,6 @@ class _ExerciseDurationPickerState extends State<ExerciseDurationPicker> {
                   _currentSliderValue.toExerciseDuration().intRepresentation);
             },
           ),
-          Text(
-            _currentSliderValue.toExerciseDuration().textRepresentation,
-            style: Theme.of(context).textTheme.labelSmall,
-          )
         ],
       ),
     );
