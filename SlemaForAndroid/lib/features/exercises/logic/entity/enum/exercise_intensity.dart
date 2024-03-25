@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/theme/exercise_intensity_colors.dart';
 
 enum ExerciseIntensity {
   veryGentle,
@@ -77,22 +78,22 @@ extension ExerciseDurationExtension on ExerciseIntensity {
   }
 
   Color? colorRepresentationLerp(double value) {
-    Color red = const Color(0xffffadad);
-    Color orange = const Color(0xffffd6a5);
-    Color yellow = const Color(0xfffdffb6);
-    Color green = const Color(0xffcaffbf);
-
     switch (this) {
       case ExerciseIntensity.veryGentle:
-        return Color.lerp(green, green, value);
+        return Color.lerp(ExerciseIntensityColors.green,
+            ExerciseIntensityColors.green, value);
       case ExerciseIntensity.gentle:
-        return Color.lerp(green, green, value);
+        return Color.lerp(ExerciseIntensityColors.green,
+            ExerciseIntensityColors.green, value);
       case ExerciseIntensity.moderate:
-        return Color.lerp(green, yellow, value);
+        return Color.lerp(ExerciseIntensityColors.green,
+            ExerciseIntensityColors.yellow, value);
       case ExerciseIntensity.intense:
-        return Color.lerp(yellow, orange, value);
+        return Color.lerp(ExerciseIntensityColors.yellow,
+            ExerciseIntensityColors.orange, value);
       case ExerciseIntensity.veryIntense:
-        return Color.lerp(orange, red, value);
+        return Color.lerp(
+            ExerciseIntensityColors.orange, ExerciseIntensityColors.red, value);
       default:
         throw ArgumentError("Unexpected argument \"$this\"");
     }
