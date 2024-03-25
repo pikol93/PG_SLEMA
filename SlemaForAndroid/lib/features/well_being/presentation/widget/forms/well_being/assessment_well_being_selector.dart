@@ -16,7 +16,7 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
 
   @override
   Widget build(BuildContext context) {
-    final children = WellBeingVariant.values
+    final children = WellBeing.values
         .map(
           (e) => Expanded(
             child: AssessmentWellBeingSelectorVariant(
@@ -49,7 +49,7 @@ class AssessmentWellBeingSelector extends StatelessWidget with Logger {
     );
   }
 
-  void onVariantPressed(WellBeingVariant variant) {
+  void onVariantPressed(WellBeing variant) {
     logger.debug("Pressed well being variant: $variant");
     onDataChanged((assessment) {
       return assessment.copyWith(wellBeing: variant);

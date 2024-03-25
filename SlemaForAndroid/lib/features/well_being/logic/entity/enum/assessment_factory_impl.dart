@@ -15,7 +15,7 @@ class AssessmentFactoryImpl implements AssessmentFactory {
     return Assessment(
       id: random.nextInt(maxId),
       intakeDate: DateTime.now(),
-      wellBeing: WellBeingVariant.neutral,
+      wellBeing: WellBeing.neutral,
     );
   }
 }

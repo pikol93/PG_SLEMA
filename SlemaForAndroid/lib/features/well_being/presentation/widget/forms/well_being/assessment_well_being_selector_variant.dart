@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
 
 class AssessmentWellBeingSelectorVariant extends StatelessWidget {
-  final WellBeingVariant variant;
-  final Function(WellBeingVariant) pressed;
+  final WellBeing variant;
+  final Function(WellBeing) pressed;
   final bool isSelected;
 
   const AssessmentWellBeingSelectorVariant(

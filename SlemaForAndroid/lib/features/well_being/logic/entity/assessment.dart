@@ -3,7 +3,7 @@ import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_varian
 class Assessment {
   final int id;
   final DateTime intakeDate;
-  final WellBeingVariant wellBeing;
+  final WellBeing wellBeing;
 
   Assessment(
       {required this.id, required this.intakeDate, required this.wellBeing});
@@ -15,7 +15,7 @@ class Assessment {
   Assessment copyWith({
     int? id,
     DateTime? intakeDate,
-    WellBeingVariant? wellBeing,
+    WellBeing? wellBeing,
   }) {
     return Assessment(
       id: id ?? this.id,
