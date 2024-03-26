@@ -96,7 +96,8 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
       itemBuilder: (BuildContext context, int index) {
         return SingleAssessmentWidget(
           assessment: displayedAssessments[index],
-        ).build(context);
+          assessmentsService: widget.service,
+        );
       },
     );
   }
