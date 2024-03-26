@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/presentation/widget/modify_symptoms/symptoms_bottom_bar.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -131,67 +132,5 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
     widget.onDataChanged((assessment) {
       return newAssessment;
     });
-  }
-}
-
-class SymptomsBottomBar extends StatefulWidget {
-  final void Function(String) onSymptomAddPressed;
-
-  const SymptomsBottomBar({
-    super.key,
-    required this.onSymptomAddPressed,
-  });
-
-  @override
-  State<SymptomsBottomBar> createState() => SymptomsBottomBarState();
-}
-
-class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
-  final double labelFontSize = 48.0;
-
-  String value = "";
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 64.0,
-        maxHeight: 64.0,
-      ),
-      color: Theme.of(context).primaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: onPressed,
-              icon: const Icon(Icons.add),
-            ),
-            Expanded(
-              // TODO: This settings seem to make no difference. Fix displaying the text.
-              child: TextFormField(
-                onChanged: onChanged,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(
-                    fontSize: labelFontSize,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  void onChanged(String newValue) {
-    value = newValue;
-  }
-
-  void onPressed() {
-    logger.debug("Pressed add button.");
-    widget.onSymptomAddPressed(value);
   }
 }
