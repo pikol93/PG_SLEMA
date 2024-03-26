@@ -31,6 +31,7 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Fix styling
     return Scaffold(
       body: Column(
         children: [
@@ -47,8 +48,22 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
                       },
                       icon: const Icon(Icons.remove),
                     ),
-                    Text(
-                      assessment!.symptomEntries.symptomEntries[index].name,
+                    Expanded(
+                      child: Text(
+                        assessment!.symptomEntries.symptomEntries[index].name,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        onMoveUpPressed(index);
+                      },
+                      icon: const Icon(Icons.arrow_upward),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        onMoveDownPressed(index);
+                      },
+                      icon: const Icon(Icons.arrow_downward),
                     ),
                   ],
                 );
@@ -63,6 +78,40 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
     );
   }
 
+  void onDeletePressed(int index) {
+    logger.debug("Symptom remove: $index");
+
+    final symptomEntries =
+        assessment!.symptomEntries.copyWithRemovedEntry(index);
+    updateSymptomEntries(symptomEntries);
+  }
+
+  void onMoveUpPressed(int index) {
+    logger.debug("Symptom move up: $index");
+
+    if (index == 0) {
+      logger.warning("Cannot move up an item at index 0.");
+      return;
+    }
+
+    final symptomEntries =
+        assessment!.symptomEntries.copyWithSwappedIndexes(index - 1, index);
+    updateSymptomEntries(symptomEntries);
+  }
+
+  void onMoveDownPressed(int index) {
+    logger.debug("Symptom move down: $index");
+
+    if (index == assessment!.symptomEntries.symptomEntries.length - 1) {
+      logger.warning("Cannot move up an item at max index.");
+      return;
+    }
+
+    final symptomEntries =
+        assessment!.symptomEntries.copyWithSwappedIndexes(index, index + 1);
+    updateSymptomEntries(symptomEntries);
+  }
+
   void onSymptomAddPressed(String value) {
     logger.debug("Symptom add: $value");
 
@@ -70,14 +119,6 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
 
     final symptomEntries =
         assessment!.symptomEntries.copyWithAdditionalEntry(value);
-    updateSymptomEntries(symptomEntries);
-  }
-
-  void onDeletePressed(int index) {
-    logger.debug("Symptom remove: $index");
-
-    final symptomEntries =
-        assessment!.symptomEntries.copyWithRemovedEntry(index);
     updateSymptomEntries(symptomEntries);
   }
 

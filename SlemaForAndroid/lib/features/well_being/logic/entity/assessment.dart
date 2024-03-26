@@ -69,6 +69,15 @@ class SymptomEntries {
     result.removeAt(index);
     return SymptomEntries(symptomEntries: result);
   }
+
+  SymptomEntries copyWithSwappedIndexes(int indexA, int indexB) {
+    final result = List<SymptomEntry>.from(symptomEntries);
+    SymptomEntry swapped = result[indexA];
+    result[indexA] = result[indexB];
+    result[indexB] = swapped;
+
+    return SymptomEntries(symptomEntries: result);
+  }
 }
 
 class Assessment {
