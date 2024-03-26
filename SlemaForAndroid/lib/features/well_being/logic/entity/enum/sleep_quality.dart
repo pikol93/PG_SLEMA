@@ -9,6 +9,13 @@ enum SleepQuality {
 }
 
 extension SleepQualityExtension on SleepQuality {
+  static SleepQuality from(String text) {
+    return SleepQuality.values.firstWhere(
+      (element) => element.name == text,
+      orElse: () => SleepQuality.neutral,
+    );
+  }
+
   String get buttonTextRepresentation {
     switch (this) {
       case SleepQuality.awful:

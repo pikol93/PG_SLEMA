@@ -7,6 +7,13 @@ enum SleepDuration {
 }
 
 extension SleepDurationExtension on SleepDuration {
+  static SleepDuration from(String text) {
+    return SleepDuration.values.firstWhere(
+      (element) => element.name == text,
+      orElse: () => SleepDuration.from7To8Hours,
+    );
+  }
+
   String get buttonTextRepresentation {
     switch (this) {
       case SleepDuration.lessThan3Hours:

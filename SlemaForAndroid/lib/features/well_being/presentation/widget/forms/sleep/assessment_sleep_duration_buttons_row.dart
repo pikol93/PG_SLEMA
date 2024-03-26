@@ -4,15 +4,23 @@ import 'package:pg_slema/features/well_being/presentation/widget/forms/sleep/ass
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSleepDurationButtonsRow extends StatelessWidget with Logger {
-  const AssessmentSleepDurationButtonsRow({super.key});
+  final SleepDuration sleepDuration;
+  final void Function(SleepDuration sleepDuration) onSleepDurationSelected;
+
+  const AssessmentSleepDurationButtonsRow({
+    super.key,
+    required this.sleepDuration,
+    required this.onSleepDurationSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Display selected value.
     var rowChildren = SleepDuration.values
         .map((e) => Expanded(
               child: AssessmentSleepDurationButton(
                 sleepDuration: e,
-                onPressed: onSleepDurationPressed,
+                onPressed: onSleepDurationSelected,
               ),
             ))
         .toList();
@@ -21,9 +29,5 @@ class AssessmentSleepDurationButtonsRow extends StatelessWidget with Logger {
       mainAxisAlignment: MainAxisAlignment.center,
       children: rowChildren,
     );
-  }
-
-  void onSleepDurationPressed(SleepDuration sleepDuration) {
-    logger.debug("Chosen sleep duration $sleepDuration");
   }
 }

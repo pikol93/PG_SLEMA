@@ -1,3 +1,5 @@
+import 'package:pg_slema/features/well_being/logic/entity/enum/sleep_duration.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/sleep_quality.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_entries.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
 
@@ -6,12 +8,16 @@ class Assessment {
   final DateTime intakeDate;
   final WellBeing wellBeing;
   final SymptomEntries symptomEntries;
+  final SleepDuration sleepDuration;
+  final SleepQuality sleepQuality;
 
   Assessment({
     required this.id,
     required this.intakeDate,
     required this.wellBeing,
     required this.symptomEntries,
+    required this.sleepDuration,
+    required this.sleepQuality,
   });
 
   bool isOlderThan(Assessment other) {
@@ -23,12 +29,16 @@ class Assessment {
     DateTime? intakeDate,
     WellBeing? wellBeing,
     SymptomEntries? symptomEntries,
+    SleepDuration? sleepDuration,
+    SleepQuality? sleepQuality,
   }) {
     return Assessment(
       id: id ?? this.id,
       intakeDate: intakeDate ?? this.intakeDate,
       wellBeing: wellBeing ?? this.wellBeing,
       symptomEntries: symptomEntries ?? this.symptomEntries,
+      sleepDuration: sleepDuration ?? this.sleepDuration,
+      sleepQuality: sleepQuality ?? this.sleepQuality,
     );
   }
 
@@ -36,11 +46,13 @@ class Assessment {
   static Assessment? fromJsonObject(Map<String, dynamic> map) {
     try {
       return Assessment(
-          id: map["id"],
-          intakeDate: DateTime.parse(map["intakeDate"]),
-          wellBeing: WellBeingExtension.from(map["wellBeing"]),
-          symptomEntries:
-              SymptomEntries.fromJsonObject(map["symptomEntries"])!);
+        id: map["id"],
+        intakeDate: DateTime.parse(map["intakeDate"]),
+        wellBeing: WellBeingExtension.from(map["wellBeing"]),
+        symptomEntries: SymptomEntries.fromJsonObject(map["symptomEntries"])!,
+        sleepDuration: SleepDurationExtension.from(map["sleepDuration"]),
+        sleepQuality: SleepQualityExtension.from(map["sleepQuality"]),
+      );
     } catch (ex) {
       return null;
     }
@@ -52,6 +64,8 @@ class Assessment {
       "intakeDate": intakeDate.toString(),
       "wellBeing": wellBeing.name,
       "symptomEntries": symptomEntries.toJsonObject(),
+      "sleepDuration": sleepDuration.name,
+      "sleepQuality": sleepQuality.name,
     };
   }
 }
