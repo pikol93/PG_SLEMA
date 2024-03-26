@@ -15,4 +15,7 @@ abstract class AssessmentsRepository {
 
   /// Gets the assessment change notifier. The notifier is invoked when the list of assessment changes.
   ChangeNotifier getAssessmentChangeNotifier();
+
+  /// Gets the most recent assessment stored in the repository. Returns null if no assessment is present.
+  Future<Assessment?> getMostRecentAssessment();
 }

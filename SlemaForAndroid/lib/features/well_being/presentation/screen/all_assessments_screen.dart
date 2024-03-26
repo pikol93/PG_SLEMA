@@ -60,15 +60,17 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
         ),
         FloatingActionButton(
           onPressed: () {
-            final assessment = widget.factory.generateWithUniqueId();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AssessmentScreen(
-                    assessment: assessment,
-                    assessmentsService: widget.service,
+            widget.factory.generateWithUniqueId().then(
+                  (assessment) => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AssessmentScreen(
+                        assessment: assessment,
+                        assessmentsService: widget.service,
+                      ),
+                    ),
                   ),
-                ));
+                );
           },
           child: const Icon(Icons.add),
         ),

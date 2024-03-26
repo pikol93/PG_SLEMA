@@ -57,6 +57,12 @@ class SharedPreferencesAssessmentsRepository
     return assessmentChangeNotifier;
   }
 
+  @override
+  Future<Assessment?> getMostRecentAssessment() {
+    return assessmentsRwLock
+        .protectRead(() async => loadedAssessments.firstOrNull);
+  }
+
   /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
   static Future<SharedPreferencesAssessmentsRepository> create() async {
     final self = SharedPreferencesAssessmentsRepository();

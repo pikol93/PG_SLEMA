@@ -26,7 +26,8 @@ Future<void> main() async {
   final assessmentsRepository = SharedPreferencesAssessmentsRepository();
   final assessmentsService =
       AssessmentsServiceImpl(repository: assessmentsRepository);
-  final assessmentFactory = AssessmentFactoryImpl();
+  final assessmentFactory =
+      AssessmentFactoryImpl(repository: assessmentsRepository);
 
   runApp(
     MultiProvider(
