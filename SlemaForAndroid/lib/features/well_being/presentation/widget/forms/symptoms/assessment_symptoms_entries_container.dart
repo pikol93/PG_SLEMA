@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/logic/entity/symptom_entry.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';

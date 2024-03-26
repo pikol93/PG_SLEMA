@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
+import 'package:pg_slema/features/well_being/logic/entity/symptom_entry.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/common/assessment_subtitle_text.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/symptoms/assessment_symptoms_change_value_button.dart';
 
