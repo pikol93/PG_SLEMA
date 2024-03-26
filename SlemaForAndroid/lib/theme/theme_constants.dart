@@ -151,6 +151,8 @@ ThemeData lightTheme = ThemeData(
         }
       }),
     ),
+    sliderTheme: SliderThemeData(
+        inactiveTrackColor: lightColorScheme.secondaryContainer),
     extensions: const <ThemeExtension<dynamic>>[
       MyColors(
         colorPrimaryLighter: colorPrimaryLighter,

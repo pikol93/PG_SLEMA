@@ -62,10 +62,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           padding: EdgeInsets.only(bottom: defaultTextBottomPadding),
           child: Text(widget.label),
         ),
-        labelStyle: TextStyle(
-            fontSize: labelFontSize,
-            fontWeight: FontWeight.w700,
-            color: Theme.of(context).primaryColor),
+        labelStyle: Theme.of(context).textTheme.labelSmall,
         prefixIcon: widget.icon == null
             ? null
             : SizedBox(
