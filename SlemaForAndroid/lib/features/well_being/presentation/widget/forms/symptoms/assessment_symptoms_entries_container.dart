@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
-import 'package:pg_slema/features/well_being/logic/entity/symptom_type.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/symptoms/assessment_symptom_entry.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
-  const AssessmentSymptomsEntriesContainer({super.key});
+  final Assessment assessment;
+  final void Function(String symptomName) onSymptomIncreasePressed;
+  final void Function(String symptomName) onSymptomDecreasePressed;
+
+  const AssessmentSymptomsEntriesContainer({
+    super.key,
+    required this.assessment,
+    required this.onSymptomIncreasePressed,
+    required this.onSymptomDecreasePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Make these values be stored somewhere in SharedPreferences instead of being hard-coded
-    const symptomsList = [
-      SymptomType(id: 1, name: "Zmiany skórne"),
-      SymptomType(id: 2, name: "Ból stawów"),
-      SymptomType(id: 3, name: "Mdłości"),
-    ];
-
+    List<SymptomEntry> entries = assessment.symptomEntries.symptomEntries;
     List<Widget> children = [];
 
     // Insert a divider between every symptom entry
-    for (final (index, element) in symptomsList.indexed) {
+    for (final (index, entry) in entries.indexed) {
       children.add(AssessmentSymptomEntry(
-        symptomType: element,
-        symptomValue: SymptomValue.mild,
-        decreasePressed: onDecreasePressed,
-        increasePressed: onIncreasePressed,
+        symptomEntry: entry,
+        decreasePressed: onSymptomDecreasePressed,
+        increasePressed: onSymptomIncreasePressed,
       ));
 
-      if (index < symptomsList.length - 1) {
+      if (index < entries.length - 1) {
         children.add(const ContainerDivider());
       }
     }
@@ -36,13 +37,5 @@ class AssessmentSymptomsEntriesContainer extends StatelessWidget with Logger {
     return Column(
       children: children,
     );
-  }
-
-  void onDecreasePressed(int symptomId) {
-    logger.debug("Decrease pressed on symptom $symptomId");
-  }
-
-  void onIncreasePressed(int symptomId) {
-    logger.debug("Increase pressed on symptom $symptomId");
   }
 }

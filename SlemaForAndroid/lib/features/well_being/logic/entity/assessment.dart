@@ -27,6 +27,13 @@ class SymptomEntry {
       "value": value.name,
     };
   }
+
+  SymptomEntry copyWith({String? name, SymptomValue? value}) {
+    return SymptomEntry(
+      name: name ?? this.name,
+      value: value ?? this.value,
+    );
+  }
 }
 
 class SymptomEntries {
@@ -50,6 +57,16 @@ class SymptomEntries {
 
   List<Map<String, dynamic>> toJsonObject() {
     return symptomEntries.map((e) => e.toJsonObject()).toList();
+  }
+
+  SymptomEntries copyWithReplacedEntry(SymptomEntry entry) {
+    final result = List<SymptomEntry>.from(symptomEntries);
+    int index = result.indexed
+        .firstWhere((element) => element.$2.name == entry.name)
+        .$1;
+
+    result[index] = entry;
+    return SymptomEntries(symptomEntries: result);
   }
 
   SymptomEntries copyWithAdditionalEntry(String name) {
@@ -77,6 +94,10 @@ class SymptomEntries {
     result[indexB] = swapped;
 
     return SymptomEntries(symptomEntries: result);
+  }
+
+  SymptomEntry? findEntryByName(String name) {
+    return symptomEntries.where((element) => element.name == name).firstOrNull;
   }
 }
 

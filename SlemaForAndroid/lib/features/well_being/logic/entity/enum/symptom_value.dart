@@ -60,4 +60,34 @@ extension SymptomValueExtension on SymptomValue {
         return 1.0;
     }
   }
+
+  SymptomValue get increased {
+    switch (this) {
+      case SymptomValue.none:
+        return SymptomValue.mild;
+      case SymptomValue.mild:
+        return SymptomValue.moderate;
+      case SymptomValue.moderate:
+        return SymptomValue.intense;
+      case SymptomValue.intense:
+        return SymptomValue.terrible;
+      case SymptomValue.terrible:
+        return SymptomValue.terrible;
+    }
+  }
+
+  SymptomValue get decreased {
+    switch (this) {
+      case SymptomValue.none:
+        return SymptomValue.none;
+      case SymptomValue.mild:
+        return SymptomValue.none;
+      case SymptomValue.moderate:
+        return SymptomValue.mild;
+      case SymptomValue.intense:
+        return SymptomValue.moderate;
+      case SymptomValue.terrible:
+        return SymptomValue.moderate;
+    }
+  }
 }

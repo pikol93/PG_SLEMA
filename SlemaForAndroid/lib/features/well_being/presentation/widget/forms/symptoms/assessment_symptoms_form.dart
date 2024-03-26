@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/modify_symptoms_screen.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/common/assessment_button.dart';
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
@@ -23,22 +24,61 @@ class AssessmentSymptomsFormWidget extends StatelessWidget with Logger {
       children: [
         const AssessmentFormTitle(title: "Symptomy"),
         const ContainerDivider(),
-        const AssessmentSymptomsEntriesContainer(),
+        AssessmentSymptomsEntriesContainer(
+          assessment: assessment,
+          onSymptomIncreasePressed: onIncreasePressed,
+          onSymptomDecreasePressed: onDecreasePressed,
+        ),
         const ContainerDivider(),
         AssessmentButton(
-            text: "DODAJ/USUŃ",
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return ModifySymptomsScreen(
-                    assessment: assessment,
-                    onDataChanged: onDataChanged,
-                  );
-                }),
-              );
-            }),
+          text: "DODAJ/USUŃ",
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                return ModifySymptomsScreen(
+                  assessment: assessment,
+                  onDataChanged: onDataChanged,
+                );
+              }),
+            );
+          },
+        ),
       ],
     );
+  }
+
+  void onIncreasePressed(String name) {
+    SymptomEntry? entry = assessment.symptomEntries.findEntryByName(name);
+    if (entry == null) {
+      logger.error(
+          "Could not find entry by name \"$name\". This should not happen.");
+      return;
+    }
+
+    SymptomValue value = entry.value.increased;
+    SymptomEntry newEntry = entry.copyWith(value: value);
+    SymptomEntries newEntries =
+        assessment.symptomEntries.copyWithReplacedEntry(newEntry);
+    onDataChanged((assessment) {
+      return assessment.copyWith(symptomEntries: newEntries);
+    });
+  }
+
+  void onDecreasePressed(String name) {
+    SymptomEntry? entry = assessment.symptomEntries.findEntryByName(name);
+    if (entry == null) {
+      logger.error(
+          "Could not find entry by name \"$name\". This should not happen.");
+      return;
+    }
+
+    SymptomValue value = entry.value.decreased;
+    SymptomEntry newEntry = entry.copyWith(value: value);
+    SymptomEntries newEntries =
+        assessment.symptomEntries.copyWithReplacedEntry(newEntry);
+    onDataChanged((assessment) {
+      return assessment.copyWith(symptomEntries: newEntries);
+    });
   }
 }

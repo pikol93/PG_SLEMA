@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class AddAssessmentScreenProgressBar extends StatefulWidget
     implements PreferredSizeWidget {

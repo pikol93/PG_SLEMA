@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
-import 'package:pg_slema/features/well_being/logic/entity/symptom_type.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/common/assessment_subtitle_text.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/forms/symptoms/assessment_symptoms_change_value_button.dart';
 
 class AssessmentSymptomEntry extends StatelessWidget {
-  final SymptomType symptomType;
-  final SymptomValue symptomValue;
-  final Function(int) decreasePressed;
-  final Function(int) increasePressed;
+  final SymptomEntry symptomEntry;
+  final Function(String) decreasePressed;
+  final Function(String) increasePressed;
 
-  const AssessmentSymptomEntry(
-      {super.key,
-      required this.symptomType,
-      required this.symptomValue,
-      required this.decreasePressed,
-      required this.increasePressed});
+  const AssessmentSymptomEntry({
+    super.key,
+    required this.symptomEntry,
+    required this.decreasePressed,
+    required this.increasePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AssessmentSubtitleText(text: symptomType.name),
+            AssessmentSubtitleText(text: symptomEntry.name),
           ],
         ),
         Row(
@@ -43,8 +42,8 @@ class AssessmentSymptomEntry extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.elliptical(8, 8)),
                   child: LinearProgressIndicator(
-                    value: symptomValue.valueRepresentation,
-                    color: symptomValue.colorRepresentation,
+                    value: symptomEntry.value.valueRepresentation,
+                    color: symptomEntry.value.colorRepresentation,
                   ),
                 ),
               ),
@@ -62,7 +61,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              symptomValue.textRepresentation,
+              symptomEntry.value.textRepresentation,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.labelSmall,
             )
@@ -73,10 +72,10 @@ class AssessmentSymptomEntry extends StatelessWidget {
   }
 
   void onDecreasePressed() {
-    decreasePressed(symptomType.id);
+    decreasePressed(symptomEntry.name);
   }
 
   void onIncreasePressed() {
-    increasePressed(symptomType.id);
+    increasePressed(symptomEntry.name);
   }
 }
