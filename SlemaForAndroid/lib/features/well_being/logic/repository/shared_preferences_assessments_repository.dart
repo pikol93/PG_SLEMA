@@ -27,6 +27,8 @@ class SharedPreferencesAssessmentsRepository
 
   @override
   Future save(Assessment assessment) async {
+    logger.debug("Saving assessment: ${jsonEncode(assessment.toJsonObject())}");
+
     await assessmentsRwLock.protectWrite(() async {
       int indexToInsertAt = 0;
       for (int i = 0; i < loadedAssessments.length; i++) {
