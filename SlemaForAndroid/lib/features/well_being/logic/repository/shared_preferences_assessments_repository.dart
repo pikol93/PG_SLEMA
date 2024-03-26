@@ -30,6 +30,16 @@ class SharedPreferencesAssessmentsRepository
     logger.debug("Saving assessment: ${jsonEncode(assessment.toJsonObject())}");
 
     await assessmentsRwLock.protectWrite(() async {
+      // Try replacing an existing assessment
+      int? index = loadedAssessments.indexed
+          .where((element) => element.$2.id == assessment.id)
+          .firstOrNull
+          ?.$1;
+      if (index != null) {
+        loadedAssessments[index] = assessment;
+        return;
+      }
+
       int indexToInsertAt = 0;
       for (int i = 0; i < loadedAssessments.length; i++) {
         if (assessment.isOlderThan(loadedAssessments[i])) {
