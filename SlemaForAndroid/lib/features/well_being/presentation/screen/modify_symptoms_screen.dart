@@ -39,8 +39,18 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
             child: ListView.builder(
               itemCount: assessment!.symptomEntries.symptomEntries.length,
               itemBuilder: (context, index) {
-                return Text(
-                  assessment!.symptomEntries.symptomEntries[index].name,
+                return Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        onDeletePressed(index);
+                      },
+                      icon: const Icon(Icons.remove),
+                    ),
+                    Text(
+                      assessment!.symptomEntries.symptomEntries[index].name,
+                    ),
+                  ],
                 );
               },
             ),
@@ -60,6 +70,18 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
 
     final symptomEntries =
         assessment!.symptomEntries.copyWithAdditionalEntry(value);
+    updateSymptomEntries(symptomEntries);
+  }
+
+  void onDeletePressed(int index) {
+    logger.debug("Symptom remove: $index");
+
+    final symptomEntries =
+        assessment!.symptomEntries.copyWithRemovedEntry(index);
+    updateSymptomEntries(symptomEntries);
+  }
+
+  void updateSymptomEntries(SymptomEntries symptomEntries) {
     final newAssessment = assessment!.copyWith(symptomEntries: symptomEntries);
     setState(() {
       assessment = newAssessment;

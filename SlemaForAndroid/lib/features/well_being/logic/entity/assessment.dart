@@ -63,6 +63,12 @@ class SymptomEntries {
 
     return SymptomEntries(symptomEntries: result);
   }
+
+  SymptomEntries copyWithRemovedEntry(int index) {
+    final result = List<SymptomEntry>.from(symptomEntries);
+    result.removeAt(index);
+    return SymptomEntries(symptomEntries: result);
+  }
 }
 
 class Assessment {
