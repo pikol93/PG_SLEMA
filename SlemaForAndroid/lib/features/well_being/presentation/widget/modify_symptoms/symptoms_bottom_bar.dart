@@ -31,13 +31,15 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
         child: Row(
           children: [
             IconButton(
-              onPressed: onPressed,
+              onPressed: onAddPressed,
               icon: const Icon(Icons.add),
             ),
             Expanded(
               // TODO: This settings seem to make no difference. Fix displaying the text.
               child: TextFormField(
                 onChanged: onChanged,
+                // TODO: Fix text not disappearing after clicking the add button.
+                initialValue: value,
                 decoration: InputDecoration(
                   labelStyle: TextStyle(
                     fontSize: labelFontSize,
@@ -57,8 +59,11 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
     value = newValue;
   }
 
-  void onPressed() {
+  void onAddPressed() {
     logger.debug("Pressed add button.");
     widget.onSymptomAddPressed(value);
+    setState(() {
+      value = "";
+    });
   }
 }
