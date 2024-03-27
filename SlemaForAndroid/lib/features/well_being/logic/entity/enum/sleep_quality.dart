@@ -53,15 +53,15 @@ extension SleepQualityExtension on SleepQuality {
   Color get colorRepresentation {
     switch (this) {
       case SleepQuality.awful:
-        return Colors.redAccent;
+        return Colors.redAccent.shade100;
       case SleepQuality.bad:
-        return Colors.orangeAccent;
+        return Colors.orangeAccent.shade100;
       case SleepQuality.neutral:
-        return Colors.yellowAccent;
+        return Colors.yellowAccent.shade100;
       case SleepQuality.good:
-        return Colors.greenAccent;
+        return Colors.greenAccent.shade100;
       case SleepQuality.great:
-        return Colors.blueAccent;
+        return Colors.blueAccent.shade100;
       default:
         throw ArgumentError("Unexpected argument \"$this\"");
     }
