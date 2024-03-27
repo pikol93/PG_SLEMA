@@ -64,4 +64,9 @@ class SymptomEntries {
   SymptomEntry? findEntryByName(String name) {
     return symptomEntries.where((element) => element.name == name).firstOrNull;
   }
+
+  @override
+  String toString() {
+    return symptomEntries.toString();
+  }
 }

@@ -33,4 +33,9 @@ class SymptomEntry {
       value: value ?? this.value,
     );
   }
+
+  @override
+  String toString() {
+    return "SymptomEntry{name:$name,value:$value}";
+  }
 }
