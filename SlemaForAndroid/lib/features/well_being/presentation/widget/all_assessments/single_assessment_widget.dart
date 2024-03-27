@@ -29,21 +29,37 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
 
     return DefaultContainer(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          const SizedBox(height: 8.0),
-          Text("ID: ${widget.assessment.id}"),
-          const SizedBox(height: 8.0),
-          Text("Data: ${widget.assessment.intakeDate}"),
-          const SizedBox(height: 8.0),
-          Text("wellBeing: ${widget.assessment.wellBeing}"),
-          const SizedBox(height: 8.0),
-          Text("Symptomy: ${widget.assessment.symptomEntries}"),
-          const SizedBox(height: 8.0),
-          Text("Długość snu: ${widget.assessment.sleepDuration}"),
-          const SizedBox(height: 8.0),
-          Text("Jakość snu: ${widget.assessment.sleepQuality}"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Icon(
+                  Icons.edit,
+                  color: Theme.of(context).primaryColor,
+                ),
+                onPressed: onEditPressed,
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 8.0),
+              Text("ID: ${widget.assessment.id}"),
+              const SizedBox(height: 8.0),
+              Text("Data: ${widget.assessment.intakeDate}"),
+              const SizedBox(height: 8.0),
+              Text("wellBeing: ${widget.assessment.wellBeing}"),
+              const SizedBox(height: 8.0),
+              Text("Symptomy: ${widget.assessment.symptomEntries}"),
+              const SizedBox(height: 8.0),
+              Text("Długość snu: ${widget.assessment.sleepDuration}"),
+              const SizedBox(height: 8.0),
+              Text("Jakość snu: ${widget.assessment.sleepQuality}"),
+            ],
+          ),
         ],
       ),
     );
