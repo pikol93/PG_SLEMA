@@ -29,32 +29,23 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
 
     return DefaultContainer(
       padding: const EdgeInsets.all(15),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8.0, right: 8.0),
-              child: Icon(
-                Icons.medication_outlined,
-                color: Theme.of(context).primaryColor,
-                size: 32,
-              ),
-            ),
-            Expanded(
-              child: Text(
-                "Assessment: ${widget.assessment.id} ${widget.assessment.intakeDate}",
-                style: Theme.of(context).textTheme.headlineLarge,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: onEditPressed,
-            ),
-          ],
-        )
-      ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 8.0),
+          Text("ID: ${widget.assessment.id}"),
+          const SizedBox(height: 8.0),
+          Text("Data: ${widget.assessment.intakeDate}"),
+          const SizedBox(height: 8.0),
+          Text("wellBeing: ${widget.assessment.wellBeing}"),
+          const SizedBox(height: 8.0),
+          Text("Symptomy: ${widget.assessment.symptomEntries}"),
+          const SizedBox(height: 8.0),
+          Text("Długość snu: ${widget.assessment.sleepDuration}"),
+          const SizedBox(height: 8.0),
+          Text("Jakość snu: ${widget.assessment.sleepQuality}"),
+        ],
+      ),
     );
   }
 
