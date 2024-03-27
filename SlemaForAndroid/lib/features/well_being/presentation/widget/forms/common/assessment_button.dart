@@ -13,7 +13,7 @@ class AssessmentButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.margin = const EdgeInsets.symmetric(horizontal: 2.0, vertical: 0.0),
-    this.padding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    this.padding = const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
     this.minimumSize = const Size(48, 16),
     this.boxColor = Colors.grey,
   });
