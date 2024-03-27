@@ -18,6 +18,9 @@ class SharedPreferencesAssessmentsRepository
   final sharedPreferencesConnector = SharedPreferencesConnector();
   final ChangeNotifierImpl assessmentChangeNotifier = ChangeNotifierImpl();
 
+  /// Do not use this ctor outside this class. If an instance of [SharedPreferencesAssessmentsRepository] is needed, then use the [create] method.
+  SharedPreferencesAssessmentsRepository._();
+
   @override
   Future<List<Assessment>> getAll() {
     return assessmentsRwLock.protectRead(() async {
@@ -77,7 +80,7 @@ class SharedPreferencesAssessmentsRepository
 
   /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
   static Future<SharedPreferencesAssessmentsRepository> create() async {
-    final self = SharedPreferencesAssessmentsRepository();
+    final self = SharedPreferencesAssessmentsRepository._();
     await self._loadFromSharedPreferences();
     return self;
   }
