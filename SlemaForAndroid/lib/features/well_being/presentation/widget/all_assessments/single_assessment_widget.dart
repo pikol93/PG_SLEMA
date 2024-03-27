@@ -28,7 +28,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
     buildContext = context;
 
     return DefaultContainer(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
