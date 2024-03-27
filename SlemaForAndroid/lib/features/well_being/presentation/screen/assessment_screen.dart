@@ -26,15 +26,14 @@ class AssessmentScreen extends StatefulWidget {
 class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
 
-  // TODO: Dart does not allow this to be not nullable, even if it is initialized right in initState()
-  Assessment? assessment;
+  late Assessment assessment;
 
   @override
   void initState() {
     super.initState();
 
     assessment = widget.assessment;
-    logger.debug("Modifying ${assessment!.id}");
+    logger.debug("Modifying ${assessment.id}");
   }
 
   @override
@@ -63,21 +62,21 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
                   DefaultContainer(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: AssessmentWellBeingForm(
-                      assessment: assessment!,
+                      assessment: assessment,
                       onDataChanged: _onDataChanged,
                     ),
                   ),
                   DefaultContainer(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: AssessmentSymptomsFormWidget(
-                      assessment: assessment!,
+                      assessment: assessment,
                       onDataChanged: _onDataChanged,
                     ),
                   ),
                   DefaultContainer(
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     child: AssessmentSleepForm(
-                      assessment: assessment!,
+                      assessment: assessment,
                       onDataChanged: _onDataChanged,
                     ),
                   ),
@@ -92,13 +91,13 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
 
   void _onDataChanged(Assessment Function(Assessment) mutateFunction) {
     setState(() {
-      assessment = mutateFunction(assessment!);
+      assessment = mutateFunction(assessment);
     });
   }
 
   void onBackPressed() {
     logger.debug("Assessment screen back button pressed");
-    widget.assessmentsService.saveEntry(assessment!);
+    widget.assessmentsService.saveEntry(assessment);
     Navigator.pop(context);
   }
 
