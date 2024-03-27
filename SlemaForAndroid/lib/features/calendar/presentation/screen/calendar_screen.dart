@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
@@ -6,12 +7,11 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const DefaultAppBar(title: "Kalendarz"),
         Center(
           child: Text(
-            "Kalendarz - do dokończenia :)",
+            "Do dokończenia :)",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
