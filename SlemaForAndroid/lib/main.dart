@@ -23,7 +23,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   GlobalInitializer().initialize();
 
-  final assessmentsRepository = SharedPreferencesAssessmentsRepository();
+  final assessmentsRepository =
+      await SharedPreferencesAssessmentsRepository.create();
   final assessmentsService =
       AssessmentsServiceImpl(repository: assessmentsRepository);
   final assessmentFactory =
