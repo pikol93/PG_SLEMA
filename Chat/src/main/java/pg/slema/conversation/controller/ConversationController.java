@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import pg.slema.conversation.dto.GetConversationsResponse;
 
 public interface ConversationController {
-
     @GetMapping("/api/conversations")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody

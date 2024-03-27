@@ -1,10 +1,10 @@
 package pg.slema.conversation.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
+import pg.slema.user.entity.User;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -22,6 +22,4 @@ public class Conversation {
     private UUID id;
 
     private String title;
-
-    //private List<M>
 }
