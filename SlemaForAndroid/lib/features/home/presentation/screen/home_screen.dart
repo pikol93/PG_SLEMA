@@ -46,7 +46,7 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5.0,
         ),
-        const UpcomingEventsWidget(),
+        UpcomingEventsWidget(),
         const SizedBox(
           height: 5.0,
         ),
