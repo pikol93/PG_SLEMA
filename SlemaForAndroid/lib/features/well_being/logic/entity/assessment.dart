@@ -42,20 +42,17 @@ class Assessment {
     );
   }
 
-  /// Converts a given [map] to an [Assessment] object. Returns null if the [map] could not be converted.
-  static Assessment? fromJsonObject(Map<String, dynamic> map) {
-    try {
-      return Assessment(
-        id: map["id"],
-        intakeDate: DateTime.parse(map["intakeDate"]),
-        wellBeing: WellBeingExtension.from(map["wellBeing"]),
-        symptomEntries: SymptomEntries.fromJsonObject(map["symptomEntries"])!,
-        sleepDuration: SleepDurationExtension.from(map["sleepDuration"]),
-        sleepQuality: SleepQualityExtension.from(map["sleepQuality"]),
-      );
-    } catch (ex) {
-      return null;
-    }
+  /// Converts a given [map] to an [Assessment] object. Throws an exception if the [map] could not be converted.
+  static Assessment fromJsonObject(Map<String, dynamic> map) {
+    return Assessment(
+      id: map["id"],
+      intakeDate: DateTime.parse(map["intakeDate"]),
+      wellBeing: WellBeingExtension.from(map["wellBeing"]),
+      symptomEntries: SymptomEntries.fromJsonObject(
+          List<Map<String, dynamic>>.from(map["symptomEntries"]))!,
+      sleepDuration: SleepDurationExtension.from(map["sleepDuration"]),
+      sleepQuality: SleepQualityExtension.from(map["sleepQuality"]),
+    );
   }
 
   Map<String, dynamic> toJsonObject() {

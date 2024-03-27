@@ -88,7 +88,15 @@ class SharedPreferencesAssessmentsRepository
 
     final assessments = entries
         .map((json) => jsonDecode(json))
-        .map((map) => Assessment.fromJsonObject(map))
+        .map((map) {
+          try {
+            return Assessment.fromJsonObject(map);
+          } catch (ex) {
+            logger.debug(
+                "Could not convert map to assessment. Map = $map, exception = $ex");
+            return null;
+          }
+        })
         .where((element) => element != null)
         .map((e) => e!)
         .toList();
@@ -102,11 +110,10 @@ class SharedPreferencesAssessmentsRepository
   }
 
   Future _saveToSharedPreferences() async {
-    List<Assessment>? assessmentsBefore;
-    await assessmentsRwLock.protectRead(() async {
-      assessmentsBefore = List.from(loadedAssessments, growable: false);
+    List<Assessment> assessments =
+        await assessmentsRwLock.protectRead(() async {
+      return List.from(loadedAssessments, growable: false);
     });
-    List<Assessment> assessments = assessmentsBefore!;
 
     List<String> json = assessments
         .map((e) => e.toJsonObject())
