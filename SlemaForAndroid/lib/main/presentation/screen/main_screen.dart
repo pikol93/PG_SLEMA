@@ -5,14 +5,23 @@ import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
+import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
+import 'package:pg_slema/features/well_being/presentation/screen/all_assessments_screen.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/widget/custom_navigation_destination.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
-import 'package:pg_slema/features/well_being_assessment/presentation/screen/assessment_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final AssessmentsService assessmentsService;
+  final AssessmentFactory assessmentFactory;
+
+  const MainScreen({
+    super.key,
+    required this.assessmentsService,
+    required this.assessmentFactory,
+  });
 
   @override
   MainScreenState createState() => MainScreenState();
@@ -64,7 +73,10 @@ class MainScreenState extends State<MainScreen> {
         const DietScreen(),
         const ExercisesScreen(),
         const PicturesScreen(),
-        const AssessmentScreen()
+        AllAssessmentsScreen(
+          service: widget.assessmentsService,
+          factory: widget.assessmentFactory,
+        ),
       ][controller.currentIndex],
     );
   }
