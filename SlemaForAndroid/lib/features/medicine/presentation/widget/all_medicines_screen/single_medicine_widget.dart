@@ -18,7 +18,7 @@ class SingleMedicineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultContainer(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
