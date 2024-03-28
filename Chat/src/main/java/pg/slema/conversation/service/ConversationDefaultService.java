@@ -30,7 +30,7 @@ public class ConversationDefaultService implements ConversationService {
 
     @Override
     public List<Conversation> findAllByUser(UUID userId) {
-        return conversationRepository.findConversationsByUsersId(userId);
+        return conversationRepository.findConversationsByParticipantsId(userId);
     }
 
     @Override

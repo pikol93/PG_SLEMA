@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface ConversationRepository extends JpaRepository<Conversation, UUID> {
-    List<Conversation> findConversationsByUsersId(UUID userId);
+    List<Conversation> findConversationsByParticipantsId(UUID userId);
 }

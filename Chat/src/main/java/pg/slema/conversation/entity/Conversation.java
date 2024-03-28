@@ -2,6 +2,7 @@ package pg.slema.conversation.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pg.slema.message.entity.Message;
 import pg.slema.user.entity.User;
 
 import java.util.List;
@@ -24,5 +25,12 @@ public class Conversation {
     private String title;
 
     @ManyToMany(mappedBy = "conversations")
-    private List<User> users;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<User> participants;
+
+    @OneToMany(mappedBy = "conversation", cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Message> messages;
 }
