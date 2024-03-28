@@ -22,4 +22,7 @@ public class Conversation {
     private UUID id;
 
     private String title;
+
+    @ManyToMany(mappedBy = "conversations")
+    private List<User> users;
 }

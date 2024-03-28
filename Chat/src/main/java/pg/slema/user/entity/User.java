@@ -1,9 +1,6 @@
 package pg.slema.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import pg.slema.conversation.entity.Conversation;
 
@@ -24,4 +21,11 @@ public class User {
     private UUID id;
 
     private String nickname;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_conversations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "conversation_id"))
+    private List<Conversation> conversations;
 }

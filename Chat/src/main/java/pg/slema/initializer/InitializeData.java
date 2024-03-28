@@ -8,6 +8,7 @@ import pg.slema.conversation.service.ConversationService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -27,6 +28,7 @@ public class InitializeData implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         initializeUsers();
         initializeConversations();
+        bindUsersAndConversations();
     }
 
     private void initializeConversations() {
@@ -40,7 +42,6 @@ public class InitializeData implements InitializingBean {
                     .id(UUID.fromString("5f4f9330-6c5a-401e-a3a5-e2e28882203a"))
                     .title("Second")
                     .build();
-
             conversationService.create(first);
             conversationService.create(second);
         }
@@ -54,5 +55,14 @@ public class InitializeData implements InitializingBean {
                     .build();
             userService.create(admin);
         }
+    }
+
+    private void bindUsersAndConversations() {
+        User user = userService.findAll().stream().findFirst().get();
+        Conversation conversation = conversationService.findAll().stream().findFirst().get();
+        user.setConversations(List.of(conversation));
+        conversation.setUsers(List.of(user));
+        userService.replace(user);
+        conversationService.replace(conversation);
     }
 }

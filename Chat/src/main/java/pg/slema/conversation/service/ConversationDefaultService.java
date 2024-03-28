@@ -6,6 +6,7 @@ import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.repository.ConversationRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ConversationDefaultService implements ConversationService {
@@ -24,6 +25,16 @@ public class ConversationDefaultService implements ConversationService {
 
     @Override
     public void create(Conversation conversation) {
+        conversationRepository.save(conversation);
+    }
+
+    @Override
+    public List<Conversation> findAllByUser(UUID userId) {
+        return conversationRepository.findConversationsByUsersId(userId);
+    }
+
+    @Override
+    public void replace(Conversation conversation) {
         conversationRepository.save(conversation);
     }
 }

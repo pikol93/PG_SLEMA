@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import pg.slema.user.dto.GetUsersResponse;
 
 public interface UserController {
-
     @RequestMapping("/api/users")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
