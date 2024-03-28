@@ -17,12 +17,12 @@ class UpcomingEventsWidgetController {
     _medicineService = MedicineService(medicineRepository, notificationService);
   }
 
-  Future<Iterable<Medicine>> getUpcomingEvents() async {
+  Future<List<Medicine>> getUpcomingEvents() async {
     //Ideally, this function will return list of ANY entity that is upcoming
     List<Medicine> events = await _medicineService.getAllMedicines();
     DateTime dateTimeNow = DateTime.now();
     events.removeWhere((e) => e.intakeDate.isBefore(dateTimeNow));
     events.sort((a, b) => a.intakeDate.compareTo(b.intakeDate));
-    return events.getRange(0, _visibleUpcomingEvents - 1);
+    return events.take(_visibleUpcomingEvents).toList();
   }
 }
