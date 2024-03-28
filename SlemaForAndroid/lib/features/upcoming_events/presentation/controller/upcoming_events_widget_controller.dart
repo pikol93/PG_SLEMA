@@ -4,6 +4,7 @@ import 'package:pg_slema/features/medicine/logic/repository/shared_preferences_m
 import 'package:pg_slema/features/notification/logic/repository/shared_preferences_notification_repository.dart';
 import 'package:pg_slema/features/notification/logic/service/notification_service.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
+import 'package:pg_slema/utils/frequency/frequency.dart';
 
 class UpcomingEventsWidgetController {
   late final MedicineService _medicineService;
@@ -20,9 +21,25 @@ class UpcomingEventsWidgetController {
   Future<List<Medicine>> getUpcomingEvents() async {
     //Ideally, this function will return list of ANY entity that is upcoming
     List<Medicine> events = await _medicineService.getAllMedicines();
-    DateTime dateTimeNow = DateTime.now();
-    events.removeWhere((e) => e.intakeDate.isBefore(dateTimeNow));
+    events.removeWhere(_removeMedicineWhere);
     events.sort((a, b) => a.intakeDate.compareTo(b.intakeDate));
     return events.take(_visibleUpcomingEvents).toList();
+  }
+
+  bool _removeMedicineWhere(Medicine medicine) {
+    // Beware, this method is vulnerable and needs testing
+    DateTime dateTimeNow = DateTime.now();
+    if ((medicine.intakeFrequency == Frequency.singular) &
+        medicine.intakeDate.isBefore(dateTimeNow)) {
+      return true;
+    }
+    // return medicine.notifications.any((notification) =>
+    //     notification.notificationDate.isBefore(dateTimeNow) |
+    //     (notification.notificationDate.isToday &
+    //         notification.notificationTime.isHigher(TimeOfDay.now())));
+    // This would work if the notifications were added every day.
+    // It is not a case here.
+
+    return medicine.notifications.isEmpty;
   }
 }

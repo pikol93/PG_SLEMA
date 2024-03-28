@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/upcoming_events/presentation/widget/medicine_event_widget.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 import 'package:pg_slema/features/upcoming_events/presentation/controller/upcoming_events_widget_controller.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
@@ -57,11 +58,16 @@ class _UpcomingEventsWidgetState extends State<UpcomingEventsWidget>
     List<Medicine> medicines =
         list.map((item) => item as Medicine).cast<Medicine>().toList();
     return SizedBox(
-      height: 100,
+      height: 110,
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5.0),
         itemCount: medicines.length,
         itemBuilder: (context, index) {
-          return Text(medicines[index].name);
+          return MedicineEventWidget(
+            medicine: medicines[index],
+            isLastInList: index == medicines.length - 1,
+          );
         },
       ),
     );
