@@ -57,8 +57,12 @@ class _UpcomingEventsWidgetState extends State<UpcomingEventsWidget>
   Widget _buildUpcomingEventsWidget(List list) {
     List<Medicine> medicines =
         list.map((item) => item as Medicine).cast<Medicine>().toList();
+    double widgetHeight = medicines.length * MedicineEventWidget.widgetHeight +
+        medicines.length * 10;
+    //widget height (without divider) + listview vertical padding + divider height
+
     return SizedBox(
-      height: 110,
+      height: widgetHeight,
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5.0),
