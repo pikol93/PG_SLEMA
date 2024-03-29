@@ -6,6 +6,8 @@ import pg.slema.user.entity.User;
 import pg.slema.user.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserDefaultService implements UserService {
@@ -20,6 +22,10 @@ public class UserDefaultService implements UserService {
     @Override
     public List<User> findAll() {
         return repository.findAll();
+    }
+
+    public Optional<User> find(UUID userID) {
+        return repository.findById(userID);
     }
 
     @Override

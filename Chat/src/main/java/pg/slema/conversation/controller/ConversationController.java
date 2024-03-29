@@ -16,5 +16,5 @@ public interface ConversationController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetConversationsResponse getUserConversations(@PathVariable("userId") UUID userId,
-                                                  @RequestParam(required = false) String role);
+                                                  @RequestParam String role);
 }
