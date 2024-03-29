@@ -28,7 +28,13 @@ public class InitializeData implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         initializeUsers();
         initializeConversations();
-        bindUsersAndConversations();
+        bindFirstUser();
+        bindSecondUser();
+        bindThirdUser();
+        bindFirstConversation();
+        bindSecondConversation();
+        bindThirdConversation();
+        bindFourthConversation();
     }
 
     private void initializeConversations() {
@@ -42,8 +48,20 @@ public class InitializeData implements InitializingBean {
                     .id(UUID.fromString("5f4f9330-6c5a-401e-a3a5-e2e28882203a"))
                     .title("Second")
                     .build();
+
+            Conversation third = Conversation.builder()
+                    .id(UUID.fromString("5f4f9330-6c5a-40aa-a3a5-e2e28882203a"))
+                    .title("Third")
+                    .build();
+
+            Conversation fourth = Conversation.builder()
+                    .id(UUID.fromString("5f4f9330-aa5a-401e-a3a5-e2e28882203a"))
+                    .title("Fourth")
+                    .build();
             conversationService.create(first);
             conversationService.create(second);
+            conversationService.create(third);
+            conversationService.create(fourth);
         }
     }
 
@@ -53,20 +71,82 @@ public class InitializeData implements InitializingBean {
                     .id(UUID.fromString("54c53da7-849a-4b93-8822-9006c494ca62"))
                     .nickname("Admin")
                     .build();
+
+            User volunteer = User.builder()
+                    .id(UUID.fromString("aac53da7-849a-4b93-8822-9006c494ca62"))
+                    .nickname("Volunteer")
+                    .build();
+
+            User typicalUser = User.builder()
+                    .id(UUID.fromString("bbc53da7-849a-4b93-8822-9006c494ca62"))
+                    .nickname("Typical user")
+                    .build();
             userService.create(admin);
+            userService.create(volunteer);
+            userService.create(typicalUser);
         }
     }
 
-    private void bindUsersAndConversations() {
-        User user = userService.findAll().stream().findFirst().get();
+    private void bindFirstUser() {
+        User firstUser = userService.findAll().get(0);
         Conversation first = conversationService.findAll().get(0);
-        user.setInitiatedConversations(List.of(first));
-        first.setInitiator(user);
         Conversation second = conversationService.findAll().get(1);
-        user.setParticipatedConversations(List.of(second));
-        second.setParticipants(List.of(user));
-        userService.replace(user);
+        Conversation third = conversationService.findAll().get(2);
+        Conversation fourth = conversationService.findAll().get(3);
+        firstUser.setInitiatedConversations(List.of(first, fourth));
+        firstUser.setParticipatedConversations(List.of(second, third));
+        userService.replace(firstUser);
+    }
+
+    private void bindSecondUser() {
+        User secondUser = userService.findAll().get(1);
+        Conversation second = conversationService.findAll().get(1);
+        Conversation third = conversationService.findAll().get(2);
+        Conversation fourth = conversationService.findAll().get(3);
+        secondUser.setInitiatedConversations(List.of(second));
+        secondUser.setParticipatedConversations(List.of(third, fourth));
+        userService.replace(secondUser);
+    }
+
+    private void bindThirdUser() {
+        User thirdUser = userService.findAll().get(2);
+        Conversation third = conversationService.findAll().get(2);
+        thirdUser.setInitiatedConversations(List.of(third));
+        userService.replace(thirdUser);
+    }
+
+    private void bindFirstConversation() {
+        User firstUser = userService.findAll().get(0);
+        Conversation first = conversationService.findAll().get(0); //First initialized, nobody participate
+        first.setInitiator(firstUser);
         conversationService.replace(first);
+    }
+
+    private void bindSecondConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        Conversation second = conversationService.findAll().get(1); //Second initialized, first participate
+        second.setInitiator(secondUser);
+        second.setParticipants(List.of(firstUser));
         conversationService.replace(second);
+    }
+
+    private void bindThirdConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        User thirdUser = userService.findAll().get(2);
+        Conversation third = conversationService.findAll().get(2); //Third initialized, first and second participate
+        third.setInitiator(thirdUser);
+        third.setParticipants(List.of(firstUser, secondUser));
+        conversationService.replace(third);
+    }
+
+    private void bindFourthConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        Conversation fourth = conversationService.findAll().get(3); //First initialized, second participate
+        fourth.setInitiator(firstUser);
+        fourth.setParticipants(List.of(secondUser));
+        conversationService.replace(fourth);
     }
 }
