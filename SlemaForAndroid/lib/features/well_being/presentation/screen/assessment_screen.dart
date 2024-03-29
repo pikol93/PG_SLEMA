@@ -12,11 +12,13 @@ import 'package:pg_slema/utils/widgets/default_container/default_container.dart'
 class AssessmentScreen extends StatefulWidget {
   final Assessment assessment;
   final AssessmentsService assessmentsService;
+  final bool isModification;
 
   const AssessmentScreen({
     super.key,
     required this.assessment,
     required this.assessmentsService,
+    required this.isModification,
   });
 
   @override
@@ -27,12 +29,15 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
 
   late Assessment assessment;
+  late String title;
 
   @override
   void initState() {
     super.initState();
 
     assessment = widget.assessment;
+    title = widget.isModification ? "Modyfikuj raport" : "Dodaj raport";
+
     logger.debug("Modifying ${assessment.id}");
   }
 
@@ -41,7 +46,7 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
     return Column(
       children: [
         DefaultAppBar(
-          title: "Dodaj raport",
+          title: title,
           leading: IconButton(
             onPressed: onBackPressed,
             icon: const Icon(Icons.arrow_back),

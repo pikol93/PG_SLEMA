@@ -67,6 +67,7 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
                       builder: (context) => AssessmentScreen(
                         assessment: assessment,
                         assessmentsService: widget.service,
+                        isModification: false,
                       ),
                     ),
                   ),

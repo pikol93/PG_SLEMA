@@ -74,6 +74,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
           return AssessmentScreen(
             assessment: widget.assessment,
             assessmentsService: widget.assessmentsService,
+            isModification: true,
           );
         },
       ),
