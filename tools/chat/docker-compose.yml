@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  chat-backend:
+    build:
+      context: ../../Chat
+      dockerfile: Dockerfile
+    env_file:
+      - ../../Enviromental/chat-backend.env
+    volumes:
+      - "../../Chat/target:/app"
+    command:  ["/scripts/launch.sh", "/app/slema-0.0.1-SNAPSHOT.jar"]
+ 
+  chat-frontend:
+    build:
+      context: ../../ChatSite
+      dockerfile: Dockerfile
+    env_file:
+      - ../../Enviromental/chat-front.env
+    ports:
+      - "8085:80"
+    depends_on:
+      - chat-backend
+    volumes:
+      - ../../ChatSite/dist/chat-site/browser/:/usr/share/nginx/html/
+    command: ["/scripts/launch.sh"]
+    
+  npm:
+    image: node:18
+    volumes:
+      - ../../ChatSite:/app
