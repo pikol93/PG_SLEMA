@@ -23,13 +23,9 @@ public class User {
 
     private String nickname;
 
-    @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(
-            name = "participated_conversations",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "conversation_id"))
-    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "participants")
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Conversation> participatedConversations;
 
     @OneToMany(mappedBy = "initiator", cascade = CascadeType.REMOVE)

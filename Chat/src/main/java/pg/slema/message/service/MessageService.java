@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface MessageService {
     List<Message> findAllByConversation(UUID conversationId);
+    void create(Message message);
+
 }

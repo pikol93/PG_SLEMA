@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.service.ConversationService;
+import pg.slema.message.entity.Message;
+import pg.slema.message.service.MessageService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
@@ -18,23 +20,29 @@ public class InitializeData implements InitializingBean {
 
     private final ConversationService conversationService;
 
+    private final MessageService messageService;
+
     @Autowired
-    public InitializeData(UserService userService, ConversationService conversationService) {
+    public InitializeData(UserService userService,
+                          ConversationService conversationService,
+                          MessageService messageService) {
         this.userService = userService;
         this.conversationService = conversationService;
+        this.messageService = messageService;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         initializeUsers();
         initializeConversations();
-        bindFirstUser();
-        bindSecondUser();
-        bindThirdUser();
         bindFirstConversation();
         bindSecondConversation();
         bindThirdConversation();
         bindFourthConversation();
+        addMessagesToFirstConversation();
+        addMessagesToSecondConversation();
+        addMessagesToThirdConversation();
+        addMessagesToFourthConversation();
     }
 
     private void initializeConversations() {
@@ -86,35 +94,6 @@ public class InitializeData implements InitializingBean {
             userService.create(typicalUser);
         }
     }
-
-    private void bindFirstUser() {
-        User firstUser = userService.findAll().get(0);
-        Conversation first = conversationService.findAll().get(0);
-        Conversation second = conversationService.findAll().get(1);
-        Conversation third = conversationService.findAll().get(2);
-        Conversation fourth = conversationService.findAll().get(3);
-        firstUser.setInitiatedConversations(List.of(first, fourth));
-        firstUser.setParticipatedConversations(List.of(second, third));
-        userService.replace(firstUser);
-    }
-
-    private void bindSecondUser() {
-        User secondUser = userService.findAll().get(1);
-        Conversation second = conversationService.findAll().get(1);
-        Conversation third = conversationService.findAll().get(2);
-        Conversation fourth = conversationService.findAll().get(3);
-        secondUser.setInitiatedConversations(List.of(second));
-        secondUser.setParticipatedConversations(List.of(third, fourth));
-        userService.replace(secondUser);
-    }
-
-    private void bindThirdUser() {
-        User thirdUser = userService.findAll().get(2);
-        Conversation third = conversationService.findAll().get(2);
-        thirdUser.setInitiatedConversations(List.of(third));
-        userService.replace(thirdUser);
-    }
-
     private void bindFirstConversation() {
         User firstUser = userService.findAll().get(0);
         Conversation first = conversationService.findAll().get(0); //First initialized, nobody participate
@@ -148,5 +127,137 @@ public class InitializeData implements InitializingBean {
         fourth.setInitiator(firstUser);
         fourth.setParticipants(List.of(secondUser));
         conversationService.replace(fourth);
+    }
+
+    private void addMessagesToFirstConversation() {
+        User firstUser = userService.findAll().get(0);
+        Conversation firstConversation = conversationService.findAll().get(0);
+
+        Message firstMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(firstUser)
+                .conversation(firstConversation)
+                .content("Halo")
+                .build();
+
+        messageService.create(firstMessage);
+    }
+
+    private void addMessagesToSecondConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        Conversation secondConversation = conversationService.findAll().get(1);
+
+        Message firstMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(secondUser)
+                .conversation(secondConversation)
+                .content("Potrzebuje pomocy")
+                .build();
+
+        Message secondMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(firstUser)
+                .conversation(secondConversation)
+                .content("W czym pomóc?")
+                .build();
+
+        Message thirdMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(secondUser)
+                .conversation(secondConversation)
+                .content("Ganczarenko")
+                .build();
+
+        messageService.create(firstMessage);
+        messageService.create(secondMessage);
+        messageService.create(thirdMessage);
+    }
+
+    private void addMessagesToThirdConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        User thirdUser = userService.findAll().get(2);
+        Conversation thirdConversation = conversationService.findAll().get(2);
+
+        Message firstMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(thirdUser)
+                .conversation(thirdConversation)
+                .content("Mam problem")
+                .build();
+
+        Message secondMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(secondUser)
+                .conversation(thirdConversation)
+                .content("Jaki problem?")
+                .build();
+
+        Message thirdMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(thirdUser)
+                .conversation(thirdConversation)
+                .content("Zaatakował mnie ganczar w sprawie parówek")
+                .build();
+
+        Message bonusMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(thirdUser)
+                .conversation(thirdConversation)
+                .content("Pomóżcie bo mnie zamkną w DLL i zrobią ze mnie COMA")
+                .build();
+
+        Message fourthMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(secondUser)
+                .conversation(thirdConversation)
+                .content("Przesyłam sprawę do specjalistów")
+                .build();
+
+        Message fifthMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(firstUser)
+                .conversation(thirdConversation)
+                .content("Łok łok łok, łokend łoł!")
+                .build();
+
+        Message sixthMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(thirdUser)
+                .conversation(thirdConversation)
+                .content("Podziękuję za taką pomoc")
+                .build();
+
+        messageService.create(firstMessage);
+        messageService.create(secondMessage);
+        messageService.create(thirdMessage);
+        messageService.create(fourthMessage);
+        messageService.create(fifthMessage);
+        messageService.create(sixthMessage);
+        messageService.create(bonusMessage);
+    }
+
+    private void addMessagesToFourthConversation() {
+        User firstUser = userService.findAll().get(0);
+        User secondUser = userService.findAll().get(1);
+        Conversation fourthConversation = conversationService.findAll().get(3);
+
+        Message firstMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(firstUser)
+                .conversation(fourthConversation)
+                .content("No to jak, towarzysze, pomożecie?")
+                .build();
+
+        Message secondMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(secondUser)
+                .conversation(fourthConversation)
+                .content("Pomożemy!")
+                .build();
+
+        messageService.create(firstMessage);
+        messageService.create(secondMessage);
     }
 }

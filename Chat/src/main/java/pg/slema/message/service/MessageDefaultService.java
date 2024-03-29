@@ -23,4 +23,9 @@ public class MessageDefaultService implements MessageService {
         return messageRepository.findMessagesByConversationId(conversationId);
     }
 
+    @Override
+    public void create(Message message) {
+        messageRepository.save(message);
+    }
+
 }
