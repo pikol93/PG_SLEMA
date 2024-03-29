@@ -51,7 +51,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
               const SizedBox(height: 8.0),
               Text("Data: ${widget.assessment.intakeDate}"),
               const SizedBox(height: 8.0),
-              Text("wellBeing: ${widget.assessment.wellBeing}"),
+              Text("Samopoczucie: ${widget.assessment.wellBeing}"),
               const SizedBox(height: 8.0),
               Text("Symptomy: ${widget.assessment.symptomEntries}"),
               const SizedBox(height: 8.0),
