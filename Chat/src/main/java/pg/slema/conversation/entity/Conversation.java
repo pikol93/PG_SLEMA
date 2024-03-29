@@ -24,7 +24,11 @@ public class Conversation {
 
     private String title;
 
-    @ManyToMany(mappedBy = "conversations")
+    @ManyToOne
+    @JoinColumn(name = "initiator")
+    private User initiator;
+
+    @ManyToMany(mappedBy = "participatedConversations")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<User> participants;

@@ -2,12 +2,12 @@ package pg.slema.conversation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pg.slema.conversation.dto.GetConversationsResponse;
 import pg.slema.conversation.function.ConversationsToResponse;
 import pg.slema.conversation.service.ConversationService;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -29,7 +29,10 @@ public class ConversationDefaultController implements ConversationController {
     }
 
     @Override
-    public GetConversationsResponse getUserConversations(@PathVariable("userId") UUID userId) {
-        return conversationsToResponse.apply(conversationService.findAllByUser(userId));
+    public GetConversationsResponse getUserConversations(UUID userId, String role) {
+        if(Objects.equals(role, "participant")) {
+            return conversationsToResponse.apply(conversationService.findAllByParticipant(userId));
+        }
+        return conversationsToResponse.apply(conversationService.findAllByInitiator(userId));
     }
 }

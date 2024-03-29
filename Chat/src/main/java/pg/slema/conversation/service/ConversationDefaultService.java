@@ -24,13 +24,18 @@ public class ConversationDefaultService implements ConversationService {
     }
 
     @Override
-    public void create(Conversation conversation) {
-        conversationRepository.save(conversation);
+    public List<Conversation> findAllByInitiator(UUID userId) {
+        return conversationRepository.findConversationsByInitiatorId(userId);
     }
 
     @Override
-    public List<Conversation> findAllByUser(UUID userId) {
+    public List<Conversation> findAllByParticipant(UUID userId) {
         return conversationRepository.findConversationsByParticipantsId(userId);
+    }
+
+    @Override
+    public void create(Conversation conversation) {
+        conversationRepository.save(conversation);
     }
 
     @Override

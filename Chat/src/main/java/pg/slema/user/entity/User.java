@@ -25,12 +25,17 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
-            name = "users_conversations",
+            name = "participated_conversations",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "conversation_id"))
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Conversation> conversations;
+    private List<Conversation> participatedConversations;
+
+    @OneToMany(mappedBy = "initiator", cascade = CascadeType.REMOVE)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<Conversation> initiatedConversations;
 
     @OneToMany(mappedBy = "sender", cascade = CascadeType.REMOVE)
     @EqualsAndHashCode.Exclude

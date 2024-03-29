@@ -59,10 +59,14 @@ public class InitializeData implements InitializingBean {
 
     private void bindUsersAndConversations() {
         User user = userService.findAll().stream().findFirst().get();
-        Conversation conversation = conversationService.findAll().stream().findFirst().get();
-        user.setConversations(List.of(conversation));
-        conversation.setParticipants(List.of(user));
+        Conversation first = conversationService.findAll().get(0);
+        user.setInitiatedConversations(List.of(first));
+        first.setInitiator(user);
+        Conversation second = conversationService.findAll().get(1);
+        user.setParticipatedConversations(List.of(second));
+        second.setParticipants(List.of(user));
         userService.replace(user);
-        conversationService.replace(conversation);
+        conversationService.replace(first);
+        conversationService.replace(second);
     }
 }

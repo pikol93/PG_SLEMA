@@ -7,7 +7,8 @@ import java.util.UUID;
 
 public interface ConversationService {
     List<Conversation> findAll();
+    List<Conversation> findAllByInitiator(UUID userId);
+    List<Conversation> findAllByParticipant(UUID userId);
     void create(Conversation conversation);
-    List<Conversation> findAllByUser(UUID userId);
     void replace(Conversation conversation);
 }
