@@ -22,12 +22,12 @@ class UpcomingEventsWidgetController {
   Future<List<Medicine>> getUpcomingEvents() async {
     //Ideally, this function will return list of ANY entity that is upcoming
     List<Medicine> events = await _medicineService.getAllMedicines();
-    events.removeWhere(_removeMedicineWhere);
+    events.removeWhere(_isMedicineIntakeMomentPast);
     events.sort((a, b) => a.intakeDate.compareTo(b.intakeDate));
     return events.take(_visibleUpcomingEvents).toList();
   }
 
-  bool _removeMedicineWhere(Medicine medicine) {
+  bool _isMedicineIntakeMomentPast(Medicine medicine) {
     // Beware, this method is vulnerable and needs testing
     DateTime dateTimeNow = DateTime.now();
     if (medicine.intakeFrequency == Frequency.singular) {
