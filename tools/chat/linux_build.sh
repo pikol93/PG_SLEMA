@@ -6,7 +6,7 @@ function main() {
     echo frontend
     docker-compose run --rm npm bash /app/build.sh
     echo backend
-    cd ../../Chat/; sh ./windows_build.sh
+    cd ../../Chat/; sh ./linux_build.sh
 }
 
 main
