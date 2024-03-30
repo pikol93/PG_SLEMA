@@ -4,5 +4,5 @@
       <p>ID: {{ conversation.id }}</p>
       <p>Title: {{ conversation.title }}</p>
   </div>
-  <a class="conversation-link" [routerLink]="['/conversation', conversation.id, 'messages']">Wiadomości</a>
+  <a class="conversation-link" routerLink="/conversations/{{conversation.id}}/messages" routerLinkActive="active" ariaCurrentWhenActive="page">Wiadomości</a>
 </div>
