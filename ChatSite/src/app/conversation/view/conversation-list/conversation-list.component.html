@@ -1,6 +1,8 @@
 <!-- conversations.component.html -->
-<div *ngFor="let conversation of conversations?.conversations">
-    <p>ID: {{ conversation.id }}</p>
-    <p>Title: {{ conversation.title }}</p>
+<div *ngFor="let conversation of conversations?.conversations" class="conversation-container">
+  <div class="conversation-details">
+      <p>ID: {{ conversation.id }}</p>
+      <p>Title: {{ conversation.title }}</p>
   </div>
-  
+  <a class="conversation-link" [routerLink]="['/conversation', conversation.id, 'messages']">Wiadomości</a>
+</div>

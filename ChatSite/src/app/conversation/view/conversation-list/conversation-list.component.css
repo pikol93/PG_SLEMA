@@ -1,0 +1,17 @@
+.conversation-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.conversation-details {
+    margin-bottom: 5px;
+}
+
+.conversation-link {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -1,0 +1,32 @@
+/* messages.component.css */
+.message-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+  }
+  
+  .message-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+  }
+  
+  .message-item.message-sent {
+    align-self: flex-end;
+    background-color: #cfe6ff;
+  }
+  
+  .message-content {
+    max-width: 80%;
+  }
+  
+  .sender-name {
+    font-weight: bold;
+  }
+  
+  .content {
+    margin-top: 5px;
+  }
+  
+  
