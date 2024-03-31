@@ -10,6 +10,7 @@ import pg.slema.message.service.MessageService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -185,6 +186,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Mam problem")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message secondMessage = Message.builder()
@@ -192,6 +194,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(thirdConversation)
                 .content("Jaki problem?")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message thirdMessage = Message.builder()
@@ -199,6 +202,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Zaatakował mnie ganczar w sprawie parówek")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message bonusMessage = Message.builder()
@@ -206,6 +210,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Pomóżcie bo mnie zamkną w DLL i zrobią ze mnie COMA")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message fourthMessage = Message.builder()
@@ -213,6 +218,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(thirdConversation)
                 .content("Przesyłam sprawę do specjalistów")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message fifthMessage = Message.builder()
@@ -220,6 +226,7 @@ public class InitializeData implements InitializingBean {
                 .sender(firstUser)
                 .conversation(thirdConversation)
                 .content("Łok łok łok, łokend łoł!")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         Message sixthMessage = Message.builder()
@@ -227,6 +234,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Podziękuję za taką pomoc")
+                .messageDateTime(LocalDateTime.now())
                 .build();
 
         messageService.create(firstMessage);

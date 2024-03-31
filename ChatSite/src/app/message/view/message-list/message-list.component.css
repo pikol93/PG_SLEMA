@@ -21,11 +21,11 @@
     max-width: 80%;
   }
   
-  .sender-name {
+  .message-content.sender-name {
     font-weight: bold;
   }
   
-  .content {
+  .message-content.content, .message-content.message-time {
     margin-top: 5px;
   }
 

@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +30,8 @@ public class GetMessagesResponse {
         private String content;
 
         private User sender;
+
+        private LocalDateTime dateTime;
     }
 
     @Singular

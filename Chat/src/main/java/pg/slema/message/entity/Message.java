@@ -5,6 +5,7 @@ import lombok.*;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.user.entity.User;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +22,8 @@ public class Message {
     private UUID id;
 
     private String content;
+
+    private LocalDateTime messageDateTime;
 
     @ManyToOne
     @JoinColumn(name = "conversation")
