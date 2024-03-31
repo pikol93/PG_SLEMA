@@ -17,7 +17,7 @@ public class GetUsersResponse {
 
         private UUID id;
 
-        private String nickname;
+        private String name;
     }
 
     @Singular

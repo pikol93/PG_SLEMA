@@ -14,13 +14,9 @@ public class GetConversationsResponse {
 
     @Data
     @Builder
-    public static class Conversation {
+    public static class User {
 
-        private final UUID id;
-
-        private final String title;
-
-        private final Message lastMessage;
+        private String name;
     }
 
     @Data
@@ -36,9 +32,13 @@ public class GetConversationsResponse {
 
     @Data
     @Builder
-    public static class User {
+    public static class Conversation {
 
-        private String name;
+        private final UUID id;
+
+        private final String title;
+
+        private final Message lastMessage;
     }
 
     @Singular

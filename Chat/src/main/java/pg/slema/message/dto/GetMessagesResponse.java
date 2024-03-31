@@ -18,7 +18,7 @@ public class GetMessagesResponse {
 
         private UUID id;
 
-        private String nickname;
+        private String name;
     }
 
     @Data
