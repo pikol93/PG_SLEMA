@@ -11,6 +11,7 @@ import pg.slema.message.service.MessageService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +23,8 @@ public class InitializeData implements InitializingBean {
     private final UserService userService;
 
     private final ConversationService conversationService;
+
+    private static int minutesCounter = 0;
 
     private final MessageService messageService;
 
@@ -133,6 +136,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToFirstConversation() {
+        minutesCounter = 3;
         User firstUser = userService.findAll().get(0);
         Conversation firstConversation = conversationService.findAll().get(0);
 
@@ -148,6 +152,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToSecondConversation() {
+        minutesCounter = 2;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         Conversation secondConversation = conversationService.findAll().get(1);
@@ -182,6 +187,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToThirdConversation() {
+        minutesCounter = 4;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         User thirdUser = userService.findAll().get(2);
@@ -253,6 +259,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToFourthConversation() {
+        minutesCounter = 0;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         Conversation fourthConversation = conversationService.findAll().get(3);
@@ -279,8 +286,8 @@ public class InitializeData implements InitializingBean {
     
     @SneakyThrows
     private LocalDateTime simulateMessageDelay() {
-        int delayTime = new Random().nextInt(5);
-        Thread.sleep(delayTime * 100);
-        return LocalDateTime.now();
+        int secondsDelayTime = new Random().nextInt(5);
+        int minutesDelayTime = minutesCounter++;
+        return LocalDateTime.now().plusSeconds(secondsDelayTime).plusMinutes(minutesDelayTime);
     }
 }

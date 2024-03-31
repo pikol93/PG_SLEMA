@@ -3,6 +3,7 @@ import { ConversationService } from '../../service/conversation.service';
 import { Conversations } from '../../model/conversations';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { formatDate, formatTime } from '../../../utils/DateFormatUtils';
 
 @Component({
   selector: 'app-conversation-list',
@@ -23,4 +24,11 @@ export class ConversationListComponent {
     this.service.getConversations().subscribe(conversations => this.conversations = conversations);
   }
 
+  formatDate(dateTimeStr: string): string {
+    return formatDate(dateTimeStr);
+  }
+
+  formatTime(dateTimeStr: string) : string {
+    return formatTime(dateTimeStr);
+  }
 }

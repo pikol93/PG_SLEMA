@@ -2,7 +2,7 @@ export interface Message {
     id: string;
     sender: {
         id: string;
-        nickname: string;
+        name: string;
     }
     content: string;
     dateTime: string;

@@ -1,8 +1,14 @@
 <!-- conversations.component.html -->
-<div *ngFor="let conversation of conversations?.conversations" class="conversation-container">
-  <div class="conversation-details">
-      <p>ID: {{ conversation.id }}</p>
-      <p>Title: {{ conversation.title }}</p>
+<div class="conversation-list">
+  <div *ngFor="let conversation of conversations?.conversations" class="conversation-container">
+    <div class="conversation-header">
+      <h3 class="conversation-title">{{ conversation.title }}</h3>
+      <span class="conversation-date">{{ formatDate(conversation.lastMessage.dateTime) }} {{ formatTime(conversation.lastMessage.dateTime) }}</span>
+    </div>
+    <div class="conversation-content">
+      <p class="conversation-sender">{{ conversation.lastMessage.sender.name }}</p>
+      <p class="conversation-message">{{ conversation.lastMessage.content }}</p>
+    </div>
+    <a class="conversation-link" routerLink="/conversations/{{conversation.id}}/messages" routerLinkActive="active" ariaCurrentWhenActive="page">Wiadomości</a>
   </div>
-  <a class="conversation-link" routerLink="/conversations/{{conversation.id}}/messages" routerLinkActive="active" ariaCurrentWhenActive="page">Wiadomości</a>
 </div>

@@ -30,7 +30,7 @@ public class MessagesToResponse implements Function<List<Message>, GetMessagesRe
     private GetMessagesResponse.User fromUser(User user) {
         return GetMessagesResponse.User.builder()
                 .id(user.getId())
-                .nickname(user.getNickname())
+                .name(user.getNickname())
                 .build();
     }
 
