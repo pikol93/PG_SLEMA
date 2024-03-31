@@ -41,4 +41,9 @@ public class Conversation {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Message> messages;
+
+    @OneToOne
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Message lastMessage;
 }

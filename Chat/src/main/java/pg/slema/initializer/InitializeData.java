@@ -141,6 +141,7 @@ public class InitializeData implements InitializingBean {
                 .sender(firstUser)
                 .conversation(firstConversation)
                 .content("Halo")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         messageService.create(firstMessage);
@@ -156,6 +157,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(secondConversation)
                 .content("Potrzebuje pomocy")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message secondMessage = Message.builder()
@@ -163,6 +165,7 @@ public class InitializeData implements InitializingBean {
                 .sender(firstUser)
                 .conversation(secondConversation)
                 .content("W czym pomóc?")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message thirdMessage = Message.builder()
@@ -170,6 +173,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(secondConversation)
                 .content("Ganczarenko")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         messageService.create(firstMessage);
@@ -258,6 +262,7 @@ public class InitializeData implements InitializingBean {
                 .sender(firstUser)
                 .conversation(fourthConversation)
                 .content("No to jak, towarzysze, pomożecie?")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message secondMessage = Message.builder()
@@ -265,6 +270,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(fourthConversation)
                 .content("Pomożemy!")
+                .dateTime(simulateMessageDelay())
                 .build();
 
         messageService.create(firstMessage);

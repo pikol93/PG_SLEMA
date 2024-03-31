@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,6 +19,26 @@ public class GetConversationsResponse {
         private final UUID id;
 
         private final String title;
+
+        private final Message lastMessage;
+    }
+
+    @Data
+    @Builder
+    public static class Message {
+
+        private String content;
+
+        private LocalDateTime dateTime;
+
+        private User sender;
+    }
+
+    @Data
+    @Builder
+    public static class User {
+
+        private String name;
     }
 
     @Singular
