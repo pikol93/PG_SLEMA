@@ -21,7 +21,6 @@ public class MessageDefaultController implements MessageController {
         this.messagesToResponse = messagesToResponse;
     }
 
-
     @Override
     public GetMessagesResponse getConversationMessages(UUID conversationId) {
         return messagesToResponse.apply(messageService.findAllByConversation(conversationId));

@@ -23,7 +23,7 @@ public class MessagesToResponse implements Function<List<Message>, GetMessagesRe
                 .id(message.getId())
                 .content(message.getContent())
                 .sender(fromUser(message.getSender()))
-                .dateTime(message.getMessageDateTime())
+                .dateTime(message.getDateTime())
                 .build();
     }
 

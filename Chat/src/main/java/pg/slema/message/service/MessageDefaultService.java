@@ -5,22 +5,27 @@ import org.springframework.stereotype.Service;
 import pg.slema.message.entity.Message;
 import pg.slema.message.repository.MessageRepository;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class MessageDefaultService implements MessageService {
 
     private final MessageRepository messageRepository;
 
+    private final Comparator<Message> messageComparator;
+
     @Autowired
-    public MessageDefaultService(MessageRepository messageRepository) {
+    public MessageDefaultService(MessageRepository messageRepository,
+                                 Comparator<Message> messageComparator) {
         this.messageRepository = messageRepository;
+        this.messageComparator = messageComparator;
     }
 
     @Override
     public List<Message> findAllByConversation(UUID conversationId) {
-        return messageRepository.findMessagesByConversationId(conversationId);
+        List<Message> messages = messageRepository.findMessagesByConversationId(conversationId);
+        messages.sort(messageComparator);
+        return messages;
     }
 
     @Override

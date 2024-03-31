@@ -1,5 +1,6 @@
 package pg.slema.initializer;
 
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ import pg.slema.user.service.UserService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -186,7 +188,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Mam problem")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message secondMessage = Message.builder()
@@ -194,7 +196,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(thirdConversation)
                 .content("Jaki problem?")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message thirdMessage = Message.builder()
@@ -202,7 +204,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Zaatakował mnie ganczar w sprawie parówek")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message bonusMessage = Message.builder()
@@ -210,7 +212,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Pomóżcie bo mnie zamkną w DLL i zrobią ze mnie COMA")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message fourthMessage = Message.builder()
@@ -218,7 +220,7 @@ public class InitializeData implements InitializingBean {
                 .sender(secondUser)
                 .conversation(thirdConversation)
                 .content("Przesyłam sprawę do specjalistów")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message fifthMessage = Message.builder()
@@ -226,7 +228,7 @@ public class InitializeData implements InitializingBean {
                 .sender(firstUser)
                 .conversation(thirdConversation)
                 .content("Łok łok łok, łokend łoł!")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         Message sixthMessage = Message.builder()
@@ -234,7 +236,7 @@ public class InitializeData implements InitializingBean {
                 .sender(thirdUser)
                 .conversation(thirdConversation)
                 .content("Podziękuję za taką pomoc")
-                .messageDateTime(LocalDateTime.now())
+                .dateTime(simulateMessageDelay())
                 .build();
 
         messageService.create(firstMessage);
@@ -267,5 +269,12 @@ public class InitializeData implements InitializingBean {
 
         messageService.create(firstMessage);
         messageService.create(secondMessage);
+    }
+    
+    @SneakyThrows
+    private LocalDateTime simulateMessageDelay() {
+        int delayTime = new Random().nextInt(5);
+        Thread.sleep(delayTime * 100);
+        return LocalDateTime.now();
     }
 }
