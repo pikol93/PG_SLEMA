@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/assessment_factory_impl.dart';
+import 'package:pg_slema/features/well_being/logic/repository/shared_preferences_assessments_repository.dart';
+import 'package:pg_slema/features/well_being/logic/service/assessments_service_impl.dart';
 import 'package:pg_slema/initializers/global_initializer.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 import 'package:pg_slema/main/presentation/screen/main_screen.dart';
@@ -19,6 +22,13 @@ Future<void> main() async {
   tz.setLocalLocation(tz.getLocation('Poland'));
   WidgetsFlutterBinding.ensureInitialized();
   GlobalInitializer().initialize();
+
+  final assessmentsRepository =
+      await SharedPreferencesAssessmentsRepository.create();
+  final assessmentsService =
+      AssessmentsServiceImpl(repository: assessmentsRepository);
+  final assessmentFactory =
+      AssessmentFactoryImpl(repository: assessmentsRepository);
 
   runApp(
     MultiProvider(
@@ -39,7 +49,10 @@ Future<void> main() async {
         supportedLocales: const [
           Locale('pl', 'PL'),
         ],
-        home: const MainScreen(),
+        home: MainScreen(
+          assessmentsService: assessmentsService,
+          assessmentFactory: assessmentFactory,
+        ),
       ),
     ),
   );
