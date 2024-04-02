@@ -11,6 +11,7 @@ public class ChatMessageController {
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
     public ChatMessage get(ChatMessage chatMessage) {
+        System.out.println(chatMessage.toString());
         return chatMessage;
     }
 }
