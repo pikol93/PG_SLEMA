@@ -12,7 +12,25 @@ function connect(roomId) {
         reconnectDelay: 5000,
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
-        onConnect: () => client.subscribe(`/topic/messages/${roomId}`, message => {
+        onConnect: function() {
+            client.subscribe(`/user/topic/messages/${roomId}`, message => {
+            console.log(message);
+            var receivedMessage = JSON.parse(message.body);
+            console.log('Otrzymano wiadomość:', receivedMessage);
+            
+
+            var messages = receivedMessage.messages;
+            var messageContainer = document.getElementById('message-container');
+
+            messages.forEach(function(message) {
+                var messageDiv = document.createElement('div');
+                messageDiv.textContent = message.sender.name + ": " + message.content;
+                messageContainer.appendChild(messageDiv);
+            });
+
+          })
+
+          client.subscribe(`/topic/messages/${roomId}`, message => {
             console.log(message);
             var receivedMessage = JSON.parse(message.body);
             console.log('Otrzymano wiadomość:', receivedMessage);
@@ -20,6 +38,7 @@ function connect(roomId) {
             messageDiv.textContent = receivedMessage.user + ": " + receivedMessage.value;
             document.getElementById('message-container').appendChild(messageDiv);
           })
+        }
     })
     var userName = document.getElementById('user-name').value;
     client.activate();
@@ -52,6 +71,10 @@ sendButton.addEventListener('click', function() {
 
 var connectButton = document.getElementById('connectButton');
 connectButton.addEventListener('click', function() {
+    if(client != undefined) {
+        return;
+    }
+
     conversationId = document.getElementById('conversation-id').value;
     if (!conversationId.trim()) {
         console.log("pusty room")

@@ -24,7 +24,6 @@ public class ChatMessageController {
 
     @MessageMapping("/chat/{conversationId}")
     public void handleChatMessage(@Payload ChatMessage chatMessage, @DestinationVariable String conversationId) {
-        System.out.println(chatMessage.toString() + "\n" + conversationId);
         messagingTemplate.convertAndSend("/topic/messages/" + conversationId, chatMessage);
     }
 }
