@@ -74,6 +74,7 @@ function connect() {
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
         onConnect: function() {
+            console.log(`/user/topic/messages/${conversationId}`)
             client.subscribe(`/user/topic/messages/${conversationId}`, receivedMessage => {
             console.log(receivedMessage);
             var receivedMessageBody = JSON.parse(receivedMessage.body);
