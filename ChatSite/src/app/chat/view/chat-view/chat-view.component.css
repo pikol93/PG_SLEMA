@@ -37,5 +37,23 @@
     color: #eee;
     cursor: pointer;
   }
+
+  .message-return-button:hover {
+    background-color: #222;
+  }
   
+  .message-input-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .message-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
   
