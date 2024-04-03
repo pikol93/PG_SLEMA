@@ -20,57 +20,33 @@ public class ChatMessageDefaultController implements ChatMessageController {
 
     private final MessageService messageService;
 
-    private final ConversationService conversationService;
-
     private final SimpMessagingTemplate messagingTemplate;
 
     private final ReceiveMessageAsChatMessageFunction receiveToMessage;
 
     private final MessageToResponse messageToResponse;
 
-    private final ReceivedChatMessageConversationMapper conversationMapper;
-
     @Autowired
     public ChatMessageDefaultController(MessageService messageService,
-                                        ConversationService conversationService,
                                         SimpMessagingTemplate messagingTemplate,
                                         ReceiveMessageAsChatMessageFunction receiveToMessage,
-                                        MessageToResponse messageToResponse,
-                                        ReceivedChatMessageConversationMapper conversationMapper) {
-        this.conversationService = conversationService;
+                                        MessageToResponse messageToResponse) {
         this.messagingTemplate = messagingTemplate;
         this.messageService = messageService;
         this.receiveToMessage = receiveToMessage;
         this.messageToResponse = messageToResponse;
-        this.conversationMapper = conversationMapper;
     }
 
     @Override
     public void handleChatMessage(ReceivedChatMessage receivedChatMessage, String conversationId) {
         UUID messageId = UUID.randomUUID();
-        Conversation conversation = getOrCreateNewConversationForMessage(receivedChatMessage);
-        Message message = receiveToMessage.apply(messageId, receivedChatMessage);
-        message.setConversation(conversation);
-        messageService.create(message);
+        messageService.create(receiveToMessage.apply(messageId, receivedChatMessage));
         Optional<Message> createdMessage = messageService.find(messageId);
-        createdMessage.ifPresent(msg -> sendChatMessage(conversationId, msg));
+        createdMessage.ifPresent(message -> sendChatMessage(conversationId, message));
     }
 
     private void sendChatMessage(String conversationId, Message message) {
         messagingTemplate.convertAndSend("/topic/messages/" + conversationId,
                 messageToResponse.apply(message));
-    }
-
-    private Conversation getOrCreateNewConversationForMessage(ReceivedChatMessage message) {
-        ReceivedChatMessage.Conversation messageConversation = message.getConversation();
-        Optional<Conversation> conversation = conversationService.find(messageConversation.getId());
-        if(conversation.isEmpty()) {
-            Conversation createdConversation = conversationMapper.apply(message.getSenderId(), messageConversation);
-            conversationService.create(createdConversation);
-            return createdConversation;
-        }
-        else {
-            return conversation.get();
-        }
     }
 }

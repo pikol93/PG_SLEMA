@@ -113,7 +113,10 @@ function sendMessage(client, senderId, roomId) {
     var message = {
         content: document.getElementById('message-input').value,
         senderId: senderId,
-        conversationId: roomId,
+        conversation: {
+            id: roomId,
+            title: 'Default random name'
+        },
         dateTime: currentDate
     };
 
