@@ -11,8 +11,7 @@ import pg.slema.message.service.MessageService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -24,7 +23,7 @@ public class InitializeData implements InitializingBean {
 
     private final ConversationService conversationService;
 
-    private static int minutesCounter = 0;
+    private static int secondsCounter = 0;
 
     private final MessageService messageService;
 
@@ -136,7 +135,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToFirstConversation() {
-        minutesCounter = 3;
+        secondsCounter = 3;
         User firstUser = userService.findAll().get(0);
         Conversation firstConversation = conversationService.findAll().get(0);
 
@@ -152,7 +151,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToSecondConversation() {
-        minutesCounter = 2;
+        secondsCounter = 2;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         Conversation secondConversation = conversationService.findAll().get(1);
@@ -187,7 +186,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToThirdConversation() {
-        minutesCounter = 4;
+        secondsCounter = 4;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         User thirdUser = userService.findAll().get(2);
@@ -259,7 +258,7 @@ public class InitializeData implements InitializingBean {
     }
 
     private void addMessagesToFourthConversation() {
-        minutesCounter = 0;
+        secondsCounter = 0;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
         Conversation fourthConversation = conversationService.findAll().get(3);
@@ -285,9 +284,8 @@ public class InitializeData implements InitializingBean {
     }
     
     @SneakyThrows
-    private LocalDateTime simulateMessageDelay() {
-        int secondsDelayTime = new Random().nextInt(5);
-        int minutesDelayTime = minutesCounter++;
-        return LocalDateTime.now().plusSeconds(secondsDelayTime).plusMinutes(minutesDelayTime);
+    private ZonedDateTime simulateMessageDelay() {
+        int secondsDelayTime = secondsCounter += 10;
+        return ZonedDateTime.now().plusSeconds(secondsDelayTime);
     }
 }

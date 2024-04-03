@@ -1,6 +1,6 @@
 export function formatDate(dateTimeStr: string): string {
     const currentDate = new Date();
-    const messageDate = new Date(`${dateTimeStr}Z`);
+    const messageDate = new Date(`${dateTimeStr}`);
 
     const diffTimeMs = Math.abs(currentDate.getTime() - messageDate.getTime()); 
     const diffDays = Math.floor(diffTimeMs / (1000 * 60 * 60 * 24));
@@ -21,7 +21,7 @@ export function formatDate(dateTimeStr: string): string {
 
 
 export function formatTime(dateTimeStr: string) : string {
-    const dateTime = new Date(`${dateTimeStr}Z`);
+    const dateTime = new Date(`${dateTimeStr}`);
     const hours = ('0' + dateTime.getHours()).slice(-2);
     const minutes = ('0' + dateTime.getMinutes()).slice(-2);
     return `${hours}:${minutes}`;

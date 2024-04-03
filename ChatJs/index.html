@@ -16,19 +16,20 @@
 </head>
 <body>
 
-    <div class="message-container" id="message-container">
-        <p>pomoc: 5f4f9330-6c5a-40aa-a3a5-e2e28882203a</p>
+    <p>Jestem w konwersacji nr. 3</p>
+    <p id="conversation-id">5f4f9330-6c5a-40aa-a3a5-e2e28882203a</p>
+    <p>Na backendzie udaję voluntera</p>
+    <p id="user-id">aac53da7-849a-4b93-8822-9006c494ca62</p>
         <!-- Tutaj będą wyświetlane otrzymane wiadomości -->
     </div>
     <form id="message-form">
-        <input type="text" id="user-name" placeholder="Nazwa usera">
-        <input type="text" id="conversation-id" placeholder="Numer pokoju">
         <input type="text" id="message-input" placeholder="Wpisz wiadomość...">
         <button type="button" id="sendButton">Wyślij</button>
         <button type="button" id="connectButton">Połącz</button>
         <button type="button" id="disconnectButton">Odłącz</button>
 
     </form>
+    <div class="message-container" id="message-container">
     <!-- Dołączanie skryptu JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
     <script src="script.js"></script>

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Singular;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ public class GetConversationsResponse {
 
         private String content;
 
-        private LocalDateTime dateTime;
+        private ZonedDateTime dateTime;
 
         private User sender;
     }

@@ -27,6 +27,10 @@ public class MessageDefaultService implements MessageService {
         this.messageComparator = messageComparator;
     }
 
+    public Optional<Message> find(UUID messageId) {
+        return messageRepository.findById(messageId);
+    }
+
     @Override
     public List<Message> findAllByConversation(UUID conversationId) {
         List<Message> messages = messageRepository.findMessagesByConversationId(conversationId);
