@@ -18,7 +18,7 @@ public class ReceiveMessageAsChatMessageFunction implements BiFunction<UUID, Rec
                 .id(messageId)
                 .content(receivedChatMessage.getContent())
                 .dateTime(receivedChatMessage.getDateTime())
-                .conversation(createConversation(receivedChatMessage.getConversationId()))
+                .conversation(createConversation(receivedChatMessage.getConversation().getId()))
                 .sender(createSender(receivedChatMessage.getSenderId()))
                 .build();
     }

@@ -6,6 +6,7 @@ import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.repository.ConversationRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,11 @@ public class ConversationDefaultService implements ConversationService {
     @Autowired
     public ConversationDefaultService(ConversationRepository conversationRepository) {
         this.conversationRepository = conversationRepository;
+    }
+
+    @Override
+    public Optional<Conversation> find(UUID id) {
+        return conversationRepository.findById(id);
     }
 
     @Override

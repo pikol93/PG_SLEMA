@@ -286,6 +286,6 @@ public class InitializeData implements InitializingBean {
     @SneakyThrows
     private ZonedDateTime simulateMessageDelay() {
         int secondsDelayTime = secondsCounter += 10;
-        return ZonedDateTime.now().plusSeconds(secondsDelayTime);
+        return ZonedDateTime.now().plusSeconds(secondsDelayTime).minusDays(1);
     }
 }
