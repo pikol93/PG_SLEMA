@@ -13,7 +13,6 @@ import pg.slema.user.service.UserService;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -82,17 +81,17 @@ public class InitializeData implements InitializingBean {
         if(userService.findAll().isEmpty()) {
             User admin = User.builder()
                     .id(UUID.fromString("54c53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Admin")
+                    .name("Admin")
                     .build();
 
             User volunteer = User.builder()
                     .id(UUID.fromString("aac53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Volunteer")
+                    .name("Volunteer")
                     .build();
 
             User typicalUser = User.builder()
                     .id(UUID.fromString("bbc53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Typical user")
+                    .name("Typical user")
                     .build();
             userService.create(admin);
             userService.create(volunteer);

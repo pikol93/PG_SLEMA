@@ -38,7 +38,7 @@ public class ConversationsToResponse implements Function<List<Conversation>, Get
 
     private GetConversationsResponse.User fromUser(User user) {
         return GetConversationsResponse.User.builder()
-                .name(user.getNickname())
+                .name(user.getName())
                 .build();
     }
 }

@@ -21,7 +21,19 @@ public class User {
     @Id
     private UUID id;
 
-    private String nickname;
+    private String name;
+
+    private String login;
+
+    private String password;
+
+    private String email;
+
+    private String sex;
+
+    private boolean isBanned;
+
+    private boolean isEmailConfirmed;
 
     @ManyToMany(mappedBy = "participants")
     @ToString.Exclude

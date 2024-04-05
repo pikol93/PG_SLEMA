@@ -13,7 +13,7 @@ public class UserToResponse implements Function<User, GetUserResponse> {
     public GetUserResponse apply(User user) {
         return GetUserResponse.builder()
                 .id(user.getId())
-                .name(user.getNickname())
+                .name(user.getName())
                 .build();
     }
 }
