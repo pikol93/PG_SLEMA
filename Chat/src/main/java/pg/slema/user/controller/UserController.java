@@ -20,4 +20,10 @@ public interface UserController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     GetUserResponse getUser(@PathVariable("userId") UUID userId);
+
+    @RequestMapping("/api/conversations/{conversationId}/users")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    GetUsersResponse getConversationUsers(@PathVariable("conversationId") UUID conversationId);
+
 }

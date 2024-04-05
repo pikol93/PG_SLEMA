@@ -8,7 +8,9 @@ import java.util.UUID;
 
 public interface UserService {
     List<User> findAll();
+    List<User> findAllByConversation(UUID conversationId);
     Optional<User> find(UUID userId);
     void create(User user);
     void replace(User user);
+
 }
