@@ -11,4 +11,12 @@ export class ConversationService {
   getConversations(): Observable<Conversations> {
     return this.http.get<Conversations>(`/api/conversations`);
   }
+
+  getInitatedConversationsForUser(userId: string): Observable<Conversations>{
+    return this.http.get<Conversations>(`/api/users/${userId}/conversations?role=initiator`);
+  }
+
+  getParticipatedConversationsForUser(userId: string): Observable<Conversations>{
+    return this.http.get<Conversations>(`/api/users/${userId}/conversations?role=participant`);
+  }
 }
