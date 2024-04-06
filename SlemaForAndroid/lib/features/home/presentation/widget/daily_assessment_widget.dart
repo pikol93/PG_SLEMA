@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
+import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/utils/date/date.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class DailyAssessmentWidget extends StatefulWidget {
-  final AssessmentsService assessmentsService;
+  final AssessmentFactory factory;
+  final AssessmentsService service;
 
   const DailyAssessmentWidget({
     super.key,
-    required this.assessmentsService,
+    required this.factory,
+    required this.service,
   });
 
   @override
   State<StatefulWidget> createState() => DailyAssessmentWidgetState();
 }
 
-class DailyAssessmentWidgetState extends State<DailyAssessmentWidget> {
+class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
+    with Logger {
   late Future<Assessment?> mostRecentAssessmentFuture;
 
   @override
   void initState() {
     super.initState();
 
-    mostRecentAssessmentFuture =
-        widget.assessmentsService.getMostRecentAssessment();
+    mostRecentAssessmentFuture = widget.service.getMostRecentAssessment();
   }
 
   @override
@@ -32,8 +37,13 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget> {
     return DefaultContainer(
       shadow: false,
       padding: const EdgeInsets.all(15),
-      child: FutureBuilder(
-          future: mostRecentAssessmentFuture, builder: _futureBuilder),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FutureBuilder(
+              future: mostRecentAssessmentFuture, builder: _futureBuilder),
+        ],
+      ),
     );
   }
 
@@ -48,28 +58,55 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget> {
     Assessment? displayedAssessments = snapshot.data;
     if (displayedAssessments == null ||
         !displayedAssessments.intakeDate.isToday) {
-      return _buildAssessmentNotDone();
+      return _buildAssessmentNotDone(context);
     }
 
-    return _buildAssessmentDone();
+    return _buildAssessmentDone(context);
   }
 
   Widget _buildWaiting() {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          child: CircularProgressIndicator(),
-        ),
-      ],
+    return const SizedBox(
+      child: CircularProgressIndicator(),
     );
   }
 
-  Widget _buildAssessmentNotDone() {
-    return const Text("not done");
+  Widget _buildAssessmentNotDone(
+    BuildContext context,
+  ) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Text(
+        "Wypełnij raport zdrowotny!",
+        style: Theme.of(context).textTheme.labelMedium!.copyWith(
+              color: Theme.of(context).primaryColor,
+            ),
+      ),
+    );
   }
 
-  Widget _buildAssessmentDone() {
-    return const Text("done");
+  Widget _buildAssessmentDone(
+    BuildContext context,
+  ) {
+    return Text(
+      "Raport został już dzisiaj wypełniony",
+      style: Theme.of(context).textTheme.labelMedium!.copyWith(
+            color: Theme.of(context).primaryColor,
+          ),
+    );
+  }
+
+  void onPressed() {
+    widget.factory.generateWithUniqueId().then(
+          (assessment) => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AssessmentScreen(
+                assessment: assessment,
+                assessmentsService: widget.service,
+                isModification: false,
+              ),
+            ),
+          ),
+        );
   }
 }
