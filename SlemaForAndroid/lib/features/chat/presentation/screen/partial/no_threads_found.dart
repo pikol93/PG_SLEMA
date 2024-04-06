@@ -6,22 +6,20 @@ class NoThreadsFound extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Żaden wątek nie został jeszcze utworzony...",
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  height: 0.75,
-                ),
-            textAlign: TextAlign.center,
-          ),
-          Container(height: 30),
-          DefaultCircularButton(onPressed: () {}, label: "Utwórz wątek"),
-          Container(height: 50),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Żaden wątek nie został jeszcze utworzony...",
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                height: 0.75,
+              ),
+          textAlign: TextAlign.center,
+        ),
+        Container(height: 30),
+        DefaultCircularButton(onPressed: () {}, label: "Utwórz wątek"),
+        Container(height: 50),
+      ],
     );
   }
 }

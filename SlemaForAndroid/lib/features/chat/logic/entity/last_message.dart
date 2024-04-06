@@ -1,0 +1,4 @@
+class LastMessage {
+  //TODO
+  LastMessage();
+}

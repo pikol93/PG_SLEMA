@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/home/presentation/widget/labeled_divider.dart';
+import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/motivation/presentation/widget/motivation_daily.dart';
 import 'package:pg_slema/features/upcoming_events/presentation/widget/upcoming_events_widget.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
@@ -20,7 +20,7 @@ class HomeScreenState extends State<HomeScreen> {
         const WhiteAppBar(
           titleText: "Dzień dobry!",
         ),
-        const LabeledDivider(label: "Dzienny raport zdrowotny"),
+        const LabeledSectionDivider(label: "Dzienny raport zdrowotny"),
         const SizedBox(
           height: 5.0,
         ),
@@ -38,7 +38,7 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5.0,
         ),
-        const LabeledDivider(label: "Nadchodzące wydarzenia"),
+        const LabeledSectionDivider(label: "Nadchodzące wydarzenia"),
         const SizedBox(
           height: 5.0,
         ),
@@ -46,7 +46,7 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5.0,
         ),
-        const LabeledDivider(label: "Dla ciebie"),
+        const LabeledSectionDivider(label: "Dla ciebie"),
         const SizedBox(
           height: 5.0,
         ),

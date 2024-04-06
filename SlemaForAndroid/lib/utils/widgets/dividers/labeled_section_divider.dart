@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class LabeledDivider extends StatelessWidget {
+class LabeledSectionDivider extends StatelessWidget {
   final String label;
-  const LabeledDivider({super.key, required this.label});
+  const LabeledSectionDivider({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class LabeledDivider extends StatelessWidget {
           ),
         ),
         child: Container(
-          padding: const EdgeInsets.only(left: 20.0),
+          padding: const EdgeInsets.only(left: 20.0, top: 3.0),
           width: MediaQuery.of(context).size.width * 0.75,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
@@ -29,7 +29,7 @@ class LabeledDivider extends StatelessWidget {
           child: Text(
             label,
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary, height: 1.0),
+                color: Theme.of(context).colorScheme.onPrimary, height: 0.75),
           ),
         ),
       ),

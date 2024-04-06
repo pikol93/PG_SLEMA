@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/menu/presentation/widget/menu_screen_button.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
-import 'package:pg_slema/utils/widgets/menu_option_divider.dart';
+import 'package:pg_slema/utils/widgets/dividers/menu_option_divider.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
