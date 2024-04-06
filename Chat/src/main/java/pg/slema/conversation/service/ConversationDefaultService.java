@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.repository.ConversationRepository;
+import pg.slema.user.entity.User;
+import pg.slema.user.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,4 +50,15 @@ public class ConversationDefaultService implements ConversationService {
     public void replace(Conversation conversation) {
         conversationRepository.save(conversation);
     }
+
+    @Override
+    public void addParticipantToConversationIfNecessary(Conversation conversation, User user) {
+        List<User> participants = conversation.getParticipants();
+        if(!participants.contains(user)) {
+            participants.add(user);
+            conversation.setParticipants(participants);
+            conversationRepository.save(conversation);
+        }
+    }
+
 }
