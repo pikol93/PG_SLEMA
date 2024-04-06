@@ -31,8 +31,17 @@ public class UserDefaultService implements UserService {
     public List<User> findAllByConversation(UUID conversationId) {
         List<User> users = repository.findAll();
         return users.stream()
-                .filter(user -> getUserConversationsIds(user).contains(conversationId))
+                .filter(user -> getConversationsIds(getUserConversations(user))
+                        .contains(conversationId))
                 .toList();
+    }
+
+    @Override
+    public List<User> findParticipantsByConversation(UUID conversationId) {
+        List<User> users = repository.findAll();
+        return users.stream()
+                .filter(user -> getConversationsIds(user.getParticipatedConversations()).contains(conversationId))
+                .collect(Collectors.toList());
     }
 
     public Optional<User> find(UUID userID) {
@@ -49,8 +58,7 @@ public class UserDefaultService implements UserService {
         repository.save(user);
     }
 
-    private List<UUID> getUserConversationsIds(User user) {
-        List<Conversation> conversations = getUserConversations(user);
+    private List<UUID> getConversationsIds(List<Conversation> conversations) {
         return conversations.stream()
                 .map(Conversation::getId)
                 .collect(Collectors.toList());

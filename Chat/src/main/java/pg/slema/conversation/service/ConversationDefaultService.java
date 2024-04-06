@@ -50,15 +50,4 @@ public class ConversationDefaultService implements ConversationService {
     public void replace(Conversation conversation) {
         conversationRepository.save(conversation);
     }
-
-    @Override
-    public void addParticipantToConversationIfNecessary(Conversation conversation, User user) {
-        List<User> participants = conversation.getParticipants();
-        if(!participants.contains(user)) {
-            participants.add(user);
-            conversation.setParticipants(participants);
-            conversationRepository.save(conversation);
-        }
-    }
-
 }

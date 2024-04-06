@@ -1,5 +1,6 @@
 package pg.slema.conversation.factory;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pg.slema.chat.dto.ReceivedChatMessage;
@@ -9,6 +10,7 @@ import pg.slema.conversation.service.ConversationService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,6 +31,7 @@ public class ConversationFactoryImpl implements ConversationFactory {
         this.conversationMapper = conversationMapper;
     }
 
+    @Transactional
     @Override
     public Conversation getConversationForReceivedMessage(ReceivedChatMessage message) {
         ReceivedChatMessage.Conversation messageConversation = message.getConversation();
@@ -40,15 +43,29 @@ public class ConversationFactoryImpl implements ConversationFactory {
         }
 
         if(conversation.isEmpty()) {
-            Conversation createdConversation = conversationMapper.apply(message.getSenderId(), messageConversation);
-            createdConversation.setInitiator(sender.get());
-            conversationService.create(createdConversation);
-            return createdConversation;
+            return createNewConversation(sender.get(), messageConversation);
         }
         else {
             Conversation existingConversation = conversation.get();
-            conversationService.addParticipantToConversationIfNecessary(existingConversation, sender.get());
+            addParticipantToConversationIfNecessary(existingConversation, sender.get());
             return existingConversation;
+        }
+    }
+
+    private Conversation createNewConversation(User initiator,
+                                               ReceivedChatMessage.Conversation messageConversation) {
+        Conversation createdConversation = conversationMapper.apply(initiator.getId(), messageConversation);
+        createdConversation.setInitiator(initiator);
+        conversationService.create(createdConversation);
+        return createdConversation;
+    }
+
+    private void addParticipantToConversationIfNecessary(Conversation conversation, User user) {
+        List<User> participants = userService.findParticipantsByConversation(conversation.getId());
+        if(!participants.contains(user)) {
+            participants.add(user);
+            conversation.setParticipants(participants);
+            conversationService.replace(conversation);
         }
     }
 }

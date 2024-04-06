@@ -14,5 +14,4 @@ public interface ConversationService {
     List<Conversation> findAllByParticipant(UUID userId);
     void create(Conversation conversation);
     void replace(Conversation conversation);
-    void addParticipantToConversationIfNecessary(Conversation conversation, User user);
 }
