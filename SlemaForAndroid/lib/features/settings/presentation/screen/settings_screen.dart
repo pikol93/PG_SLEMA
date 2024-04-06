@@ -18,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             children: [
               NavigatorPushLinkButton(
-                iconData: Icons.accessible_forward,
+                iconData: Icons.build,
                 label: 'Development',
                 builder: (BuildContext context) {
                   return const DeveloperSettingsScreen();
