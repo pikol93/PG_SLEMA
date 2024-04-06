@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({super.key});
+class WhiteAppBar extends StatelessWidget {
+  final String titleText;
+
+  const WhiteAppBar({
+    super.key,
+    required this.titleText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,7 @@ class HomeAppBar extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               fontSize: Theme.of(context).textTheme.displayLarge?.fontSize,
             ),
-        title: const Text("Dzień dobry!"),
+        title: Text(titleText),
       ),
     );
   }

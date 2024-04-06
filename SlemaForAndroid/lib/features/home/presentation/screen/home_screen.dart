@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/home/presentation/widget/home_app_bar.dart';
 import 'package:pg_slema/features/home/presentation/widget/labeled_divider.dart';
 import 'package:pg_slema/features/motivation/presentation/widget/motivation_daily.dart';
 import 'package:pg_slema/features/upcoming_events/presentation/widget/upcoming_events_widget.dart';
+import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,7 +20,9 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 20.0,
         ),
-        const HomeAppBar(),
+        const WhiteAppBar(
+          titleText: "Dzień dobry!",
+        ),
         const SizedBox(
           height: 20.0,
         ),
