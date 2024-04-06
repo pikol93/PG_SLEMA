@@ -8,16 +8,15 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
+import 'package:provider/provider.dart';
 
 class AssessmentScreen extends StatefulWidget {
   final Assessment assessment;
-  final AssessmentsService assessmentsService;
   final bool isModification;
 
   const AssessmentScreen({
     super.key,
     required this.assessment,
-    required this.assessmentsService,
     required this.isModification,
   });
 
@@ -102,7 +101,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
 
   void onBackPressed() {
     logger.debug("Assessment screen back button pressed");
-    widget.assessmentsService.saveEntry(assessment);
+    Provider.of<AssessmentsService>(context, listen: false)
+        .saveEntry(assessment);
     Navigator.pop(context);
   }
 

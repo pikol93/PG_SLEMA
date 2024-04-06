@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Chat</title>
+    <style>
+        /* Dodaj tutaj swoje style CSS */
+        .message-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <p>Jestem w konwersacji nr. 3</p>
+    <p id="conversation-id">5f4f9330-6c5a-40aa-a3a5-e2e28882203a</p>
+    <p>Na backendzie udaję voluntera</p>
+    <p id="user-id">aac53da7-849a-4b93-8822-9006c494ca62</p>
+        <!-- Tutaj będą wyświetlane otrzymane wiadomości -->
+    </div>
+    <form id="message-form">
+        <input type="text" id="message-input" placeholder="Wpisz wiadomość...">
+        <button type="button" id="sendButton">Wyślij</button>
+        <button type="button" id="connectButton">Połącz</button>
+        <button type="button" id="disconnectButton">Odłącz</button>
+
+    </form>
+    <div class="message-container" id="message-container">
+    <!-- Dołączanie skryptu JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@5.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

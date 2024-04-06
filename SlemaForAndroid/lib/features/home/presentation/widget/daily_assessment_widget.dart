@@ -102,7 +102,6 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
             MaterialPageRoute(
               builder: (context) => AssessmentScreen(
                 assessment: assessment,
-                assessmentsService: widget.service,
                 isModification: false,
               ),
             ),

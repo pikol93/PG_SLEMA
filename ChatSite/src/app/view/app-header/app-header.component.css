@@ -1,0 +1,20 @@
+/* Styl dla nagłówka */
+header {
+    background-color: #333;
+    padding: 20px; 
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  header > a, header > a:link, header > a:visited, header > a:active {
+    color: #fff; 
+  }
+
+  header > a:hover {
+    color: #ccc;
+  }
+  
+  .header-name {
+    margin: 0;
+  }
+  

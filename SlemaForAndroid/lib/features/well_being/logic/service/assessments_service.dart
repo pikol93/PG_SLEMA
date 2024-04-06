@@ -13,4 +13,7 @@ abstract class AssessmentsService {
 
   /// Gets the assessment change notifier. The notifier is invoked when the list of assessment changes.
   ChangeNotifier getAssessmentChangeNotifier();
+
+  /// Clears all assessments that are currently registered.
+  void clearAllAssessments();
 }

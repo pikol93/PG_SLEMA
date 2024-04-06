@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MenuScreenDivider extends StatelessWidget {
-  const MenuScreenDivider({super.key});
+class MenuOptionDivider extends StatelessWidget {
+  const MenuOptionDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

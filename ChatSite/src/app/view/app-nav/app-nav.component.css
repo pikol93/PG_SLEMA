@@ -1,0 +1,24 @@
+.navigation-menu {
+    background-color: #666;
+    padding: 10px 0;
+  }
+  
+  .menu-item {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  
+  .menu-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
+  
+  .menu-link:hover {
+    background-color: #555;
+  }
+  
+  .active {
+    background-color: #888;
+  }
+  

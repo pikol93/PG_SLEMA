@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
-import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class SingleAssessmentWidget extends StatefulWidget {
   final Assessment assessment;
-  final AssessmentsService assessmentsService;
 
   const SingleAssessmentWidget({
     super.key,
     required this.assessment,
-    required this.assessmentsService,
   });
 
   @override
@@ -73,8 +70,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
         builder: (context) {
           return AssessmentScreen(
             assessment: widget.assessment,
-            assessmentsService: widget.assessmentsService,
-            isModification: true,
+              isModification: true,
           );
         },
       ),

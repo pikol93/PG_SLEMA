@@ -5,6 +5,7 @@ import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
+import 'package:pg_slema/features/settings/presentation/screen/settings_screen.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/all_assessments_screen.dart';
@@ -14,13 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final AssessmentsService assessmentsService;
-  final AssessmentFactory assessmentFactory;
-
   const MainScreen({
     super.key,
-    required this.assessmentsService,
-    required this.assessmentFactory,
   });
 
   @override
@@ -31,6 +27,10 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
+    final assessmentFactory =
+        Provider.of<AssessmentFactory>(context, listen: false);
+    final assessmentsService =
+        Provider.of<AssessmentsService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -77,9 +77,10 @@ class MainScreenState extends State<MainScreen> {
         const ExercisesScreen(),
         const PicturesScreen(),
         AllAssessmentsScreen(
-          service: widget.assessmentsService,
-          factory: widget.assessmentFactory,
+          service: assessmentsService,
+          factory: assessmentFactory,
         ),
+        const SettingsScreen(),
       ][controller.currentIndex],
     );
   }
