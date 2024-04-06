@@ -14,13 +14,8 @@ import 'package:provider/provider.dart';
 import 'package:pg_slema/features/menu/presentation/screen/menu_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final AssessmentsService assessmentsService;
-  final AssessmentFactory assessmentFactory;
-
   const MainScreen({
     super.key,
-    required this.assessmentsService,
-    required this.assessmentFactory,
   });
 
   @override
@@ -31,6 +26,10 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
+    final assessmentFactory =
+        Provider.of<AssessmentFactory>(context, listen: false);
+    final assessmentsService =
+        Provider.of<AssessmentsService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -74,8 +73,8 @@ class MainScreenState extends State<MainScreen> {
         const ExercisesScreen(),
         const PicturesScreen(),
         AllAssessmentsScreen(
-          service: widget.assessmentsService,
-          factory: widget.assessmentFactory,
+          service: assessmentsService,
+          factory: assessmentFactory,
         ),
       ][controller.currentIndex],
     );
