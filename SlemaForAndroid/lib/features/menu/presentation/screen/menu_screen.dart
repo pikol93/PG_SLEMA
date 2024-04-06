@@ -56,6 +56,12 @@ class MenuScreen extends StatelessWidget {
           label: 'Raport',
           destinationIndex: 7,
         ),
+        const MenuOptionDivider(),
+        const MenuScreenButton(
+          iconData: Icons.settings,
+          label: "Ustawienia",
+          destinationIndex: 8,
+        ),
         const MenuOptionDivider()
       ],
     );

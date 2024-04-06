@@ -5,6 +5,7 @@ import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
+import 'package:pg_slema/features/settings/presentation/screen/settings_screen.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/all_assessments_screen.dart';
@@ -74,6 +75,7 @@ class MainScreenState extends State<MainScreen> {
           service: assessmentsService,
           factory: assessmentFactory,
         ),
+        const SettingsScreen(),
       ][controller.currentIndex],
     );
   }

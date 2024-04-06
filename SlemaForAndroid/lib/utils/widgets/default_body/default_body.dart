@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class DefaultBody extends StatelessWidget {
   final Widget child;
-  final double _mainWidgetsPaddingHorizontal = 24.0;
-  const DefaultBody({super.key, required this.child});
+  final double mainWidgetsPaddingHorizontal;
+
+  const DefaultBody({
+    super.key,
+    required this.child,
+    this.mainWidgetsPaddingHorizontal = 24.0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class DefaultBody extends StatelessWidget {
         child: Material(
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: _mainWidgetsPaddingHorizontal,
+              horizontal: mainWidgetsPaddingHorizontal,
             ),
             child: child,
           ),
