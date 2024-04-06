@@ -3,7 +3,7 @@ import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_entries.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/modify_symptoms/symptoms_bottom_bar.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class ModifySymptomsScreen extends StatefulWidget {
