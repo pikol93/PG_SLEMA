@@ -70,7 +70,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
         builder: (context) {
           return AssessmentScreen(
             assessment: widget.assessment,
-              isModification: true,
+            isModification: true,
           );
         },
       ),

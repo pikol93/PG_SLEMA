@@ -68,8 +68,8 @@ class MainScreenState extends State<MainScreen> {
       body: <Widget>[
         const CalendarScreen(),
         HomeScreen(
-          assessmentFactory: widget.assessmentFactory,
-          assessmentService: widget.assessmentsService,
+          assessmentFactory: assessmentFactory,
+          assessmentService: assessmentsService,
         ),
         const MenuScreen(),
         const AllMedicinesScreen(),
