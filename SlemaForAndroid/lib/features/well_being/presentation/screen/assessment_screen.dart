@@ -96,7 +96,8 @@ class _AssessmentScreenState extends State<AssessmentScreen> with Logger {
 
   void onBackPressed() {
     logger.debug("Assessment screen back button pressed");
-    Provider.of<AssessmentsService>(context).saveEntry(assessment);
+    Provider.of<AssessmentsService>(context, listen: false)
+        .saveEntry(assessment);
     Navigator.pop(context);
   }
 

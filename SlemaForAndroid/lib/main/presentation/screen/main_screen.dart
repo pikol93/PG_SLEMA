@@ -26,8 +26,10 @@ class MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Provider.of<MainScreenController>(context);
-    final assessmentFactory = Provider.of<AssessmentFactory>(context);
-    final assessmentsService = Provider.of<AssessmentsService>(context);
+    final assessmentFactory =
+        Provider.of<AssessmentFactory>(context, listen: false);
+    final assessmentsService =
+        Provider.of<AssessmentsService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
