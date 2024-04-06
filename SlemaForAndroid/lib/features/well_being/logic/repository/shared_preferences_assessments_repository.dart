@@ -78,6 +78,16 @@ class SharedPreferencesAssessmentsRepository
         .protectRead(() async => loadedAssessments.firstOrNull);
   }
 
+  @override
+  Future clearAllAssessments() async {
+    await assessmentsRwLock.protectWrite(() async {
+      loadedAssessments.clear();
+    });
+
+    await _saveToSharedPreferences();
+    logger.debug("Finished clearing all assessments.");
+  }
+
   /// Creates a new instance of [SharedPreferencesAssessmentsRepository]. Serves as a workaround for dart not allowing async ctors.
   static Future<SharedPreferencesAssessmentsRepository> create() async {
     final self = SharedPreferencesAssessmentsRepository._();

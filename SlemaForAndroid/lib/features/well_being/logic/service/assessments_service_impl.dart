@@ -22,4 +22,9 @@ class AssessmentsServiceImpl implements AssessmentsService {
   ChangeNotifier getAssessmentChangeNotifier() {
     return repository.getAssessmentChangeNotifier();
   }
+
+  @override
+  void clearAllAssessments() {
+    repository.clearAllAssessments();
+  }
 }

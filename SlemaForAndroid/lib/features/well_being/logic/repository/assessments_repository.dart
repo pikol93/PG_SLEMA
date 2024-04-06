@@ -18,4 +18,7 @@ abstract class AssessmentsRepository {
 
   /// Gets the most recent assessment stored in the repository. Returns null if no assessment is present.
   Future<Assessment?> getMostRecentAssessment();
+
+  /// Clears all assessments stored in the repository.
+  Future clearAllAssessments();
 }
