@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/menu/presentation/widget/menu_screen_button.dart';
-import 'package:pg_slema/features/well_being/presentation/widget/menu_option_divider.dart';
+import 'package:pg_slema/utils/widgets/menu_option_divider.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});

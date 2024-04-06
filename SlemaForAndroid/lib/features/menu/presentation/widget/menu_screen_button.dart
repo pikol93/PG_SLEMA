@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/well_being/presentation/widget/link_button.dart';
+import 'package:pg_slema/utils/widgets/link_button.dart';
 import 'package:provider/provider.dart';
 import 'package:pg_slema/main/presentation/controller/main_screen_controller.dart';
 
