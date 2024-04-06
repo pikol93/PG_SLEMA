@@ -7,7 +7,7 @@ import 'package:pg_slema/utils/widgets/forms/save_button.dart';
 import 'package:pg_slema/features/ingredient/logic/entity/ingredient_category.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal.dart';
 import 'package:pg_slema/features/meal/logic/entity/meal_time.dart';
-import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 
 class UpdateMealsScreen extends StatefulWidget {
   final ValueChanged<Map<MealTime, Meal>> onMealsUpdated;

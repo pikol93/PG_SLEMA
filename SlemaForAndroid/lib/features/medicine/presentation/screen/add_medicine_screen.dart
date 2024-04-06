@@ -10,7 +10,7 @@ import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/notification/presentation/widget/manage_notifications_widget.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/frequency_list.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
-import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class AddMedicineScreen extends StatefulWidget {
