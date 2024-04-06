@@ -3,7 +3,7 @@ import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_duration_picker.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_intensity_picker.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/date_picker_controller.dart';
-import 'package:pg_slema/utils/widgets/default_appbar/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/add_exercise_controller.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/forms/save_button.dart';
