@@ -21,6 +21,8 @@ public class UsersToResponse implements Function<List<User>, GetUsersResponse> {
         return GetUsersResponse.User.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .isBanned(user.isBanned())
+                .isEmailConfirmed(user.isEmailConfirmed())
                 .build();
     }
 }

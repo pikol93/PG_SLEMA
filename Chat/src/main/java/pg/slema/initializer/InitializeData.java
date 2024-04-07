@@ -93,9 +93,17 @@ public class InitializeData implements InitializingBean {
                     .id(UUID.fromString("bbc53da7-849a-4b93-8822-9006c494ca62"))
                     .name("Typical user")
                     .build();
+
+            User bannedAuthorizedUser = User.builder()
+                    .id(UUID.fromString("bbd53da7-849a-4b93-8822-9006c494ca62"))
+                    .name("Banned authorized user")
+                    .isBanned(true)
+                    .isEmailConfirmed(true)
+                    .build();
             userService.create(admin);
             userService.create(volunteer);
             userService.create(typicalUser);
+            userService.create(bannedAuthorizedUser);
         }
     }
     private void bindFirstConversation() {
@@ -108,9 +116,10 @@ public class InitializeData implements InitializingBean {
     private void bindSecondConversation() {
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
-        Conversation second = conversationService.findAll().get(1); //Second initialized, first participate
+        User fourthUser = userService.findAll().get(3);
+        Conversation second = conversationService.findAll().get(1); //Second initialized, first and banned participate
         second.setInitiator(secondUser);
-        second.setParticipants(List.of(firstUser));
+        second.setParticipants(List.of(firstUser, fourthUser));
         conversationService.replace(second);
     }
 
@@ -153,6 +162,7 @@ public class InitializeData implements InitializingBean {
         secondsCounter = 2;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
+        User fourthUser = userService.findAll().get(3);
         Conversation secondConversation = conversationService.findAll().get(1);
 
         Message firstMessage = Message.builder()
@@ -179,9 +189,18 @@ public class InitializeData implements InitializingBean {
                 .dateTime(simulateMessageDelay())
                 .build();
 
+        Message fourthMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(fourthUser)
+                .conversation(secondConversation)
+                .content("Ganczarenko")
+                .dateTime(simulateMessageDelay())
+                .build();
+
         messageService.create(firstMessage);
         messageService.create(secondMessage);
         messageService.create(thirdMessage);
+        messageService.create(fourthMessage);
     }
 
     private void addMessagesToThirdConversation() {
