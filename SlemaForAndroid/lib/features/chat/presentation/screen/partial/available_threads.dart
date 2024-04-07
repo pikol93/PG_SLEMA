@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/presentation/screen/add_thread_screen.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
@@ -7,10 +8,15 @@ import 'package:pg_slema/features/chat/logic/service/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
 
-class AvailableThreads extends StatelessWidget {
+class AvailableThreads extends StatefulWidget {
   final ThreadsService threadsService;
   const AvailableThreads({super.key, required this.threadsService});
 
+  @override
+  State<AvailableThreads> createState() => _AvailableThreadsState();
+}
+
+class _AvailableThreadsState extends State<AvailableThreads> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -18,12 +24,12 @@ class AvailableThreads extends StatelessWidget {
         children: [
           const LabeledSectionDivider(label: "Dzienny raport zdrowotny"),
           FutureBuilder(
-            future: threadsService.getAll(),
+            future: widget.threadsService.getAll(),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Thread>> snapshot) {
               if (snapshot.hasData) {
                 return DefaultBodyWithFloatingActionButton(
-                  onFloatingButtonPressed: () {},
+                  onFloatingButtonPressed: _openAddingMedicinesScreen,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
@@ -48,6 +54,15 @@ class AvailableThreads extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  void _openAddingMedicinesScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const AddThreadScreen(),
       ),
     );
   }
