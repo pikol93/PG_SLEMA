@@ -41,7 +41,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
                   Icons.edit,
                   color: Theme.of(context).primaryColor,
                 ),
-                onPressed: onEditPressed,
+                onPressed: _onEditPressed,
               ),
             ],
           ),
@@ -67,7 +67,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
     );
   }
 
-  void onEditPressed() {
+  void _onEditPressed() {
     logger.debug("Edit pressed for assessment: ${widget.assessment.id}");
     Navigator.push(
       buildContext!,
