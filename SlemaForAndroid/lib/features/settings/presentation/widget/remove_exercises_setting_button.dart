@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/settings/presentation/widget/setting_button.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
+import 'package:provider/provider.dart';
 
 class RemoveExercisesSettingButton extends StatelessWidget with Logger {
   const RemoveExercisesSettingButton({super.key});
@@ -17,6 +19,8 @@ class RemoveExercisesSettingButton extends StatelessWidget with Logger {
 
   void onConfirmPressed(BuildContext context) {
     logger.debug("Remove exercises confirm button pressed.");
-    // TODO: Add action
+    Provider
+        .of<ExerciseService>(context, listen: false)
+        .deleteAllExercises();
   }
 }
