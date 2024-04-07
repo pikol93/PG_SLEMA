@@ -171,7 +171,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
         Row(
           children: [
             _buildSleepContainer(
-              widget.assessment.sleepDuration.buttonTextRepresentation,
+              widget.assessment.sleepDuration.hourTextRepresentation,
             ),
             const SizedBox(width: 8.0),
             _buildSleepContainer(
@@ -196,7 +196,7 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
-        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
