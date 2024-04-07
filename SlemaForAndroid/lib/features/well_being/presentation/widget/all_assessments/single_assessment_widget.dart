@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
+import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
@@ -31,6 +32,10 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              SizedBox(
+                height: 32.0,
+                child: widget.assessment.wellBeing.icon,
+              ),
               IconButton(
                 icon: Icon(
                   Icons.edit,
