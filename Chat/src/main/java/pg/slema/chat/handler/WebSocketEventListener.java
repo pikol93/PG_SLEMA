@@ -42,6 +42,9 @@ public class WebSocketEventListener {
             Principal user = headers.getUser();
             sendInformationAboutChatHistory(destination, Objects.requireNonNull(user));
         }
+//        if(isItSubscribeForChatMembers(headers)) {
+//
+//        }
     }
 
     private boolean isItSubscribeForChat(SimpMessageHeaderAccessor headers) {

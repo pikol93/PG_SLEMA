@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import pg.slema.chat.dto.ReceivedChatMessage;
 import pg.slema.chat.mapper.ReceivedChatMessageConversationMapper;
 import pg.slema.conversation.entity.Conversation;
+import pg.slema.conversation.notifier.ConversationChangesNotifier;
 import pg.slema.conversation.service.ConversationService;
 import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Component
 public class ConversationFactoryImpl implements ConversationFactory {
@@ -23,12 +23,15 @@ public class ConversationFactoryImpl implements ConversationFactory {
 
     private final ReceivedChatMessageConversationMapper conversationMapper;
 
+    private final ConversationChangesNotifier changesNotifier;
+
     @Autowired
     public ConversationFactoryImpl(ConversationService conversationService,
-                                   UserService userService, ReceivedChatMessageConversationMapper conversationMapper) {
+                                   UserService userService, ReceivedChatMessageConversationMapper conversationMapper, ConversationChangesNotifier changesNotifier) {
         this.conversationService = conversationService;
         this.userService = userService;
         this.conversationMapper = conversationMapper;
+        this.changesNotifier = changesNotifier;
     }
 
     @Transactional
@@ -57,6 +60,7 @@ public class ConversationFactoryImpl implements ConversationFactory {
         Conversation createdConversation = conversationMapper.apply(initiator.getId(), messageConversation);
         createdConversation.setInitiator(initiator);
         conversationService.create(createdConversation);
+        changesNotifier.notifyListenersAboutConversationCreation(createdConversation);
         return createdConversation;
     }
 
@@ -66,6 +70,7 @@ public class ConversationFactoryImpl implements ConversationFactory {
             participants.add(user);
             conversation.setParticipants(participants);
             conversationService.replace(conversation);
+            changesNotifier.notifyListenersAboutChangesInParticipants(conversation);
         }
     }
 }

@@ -9,11 +9,14 @@ import { ChatService, createChatService } from '../../service/chat.service';
 import { Message as StompMessage } from '@stomp/stompjs';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { MessageListComponent } from '../../../message/view/message-list/message-list.component';
+import { Users } from '../../../user/model/users';
+import { UserConversationMembersComponent } from '../../../user/view/user-conversation-members/user-conversation-members.component';
 
 @Component({
   selector: 'app-chat-view',
   standalone: true,
-  imports: [CommonModule, NgFor, FormsModule],
+  imports: [CommonModule, NgFor, FormsModule, MessageListComponent, UserConversationMembersComponent],
   templateUrl: './chat-view.component.html',
   styleUrl: './chat-view.component.css',
   providers: [{
@@ -27,6 +30,9 @@ export class ChatViewComponent {
   conversationTitle: string = "Nowa";
   messages: Messages = {
     messages: []
+  };
+  members: Users = {
+    users: []
   };
   subscribedTopics: Subscription[] = [];
 
@@ -43,6 +49,10 @@ export class ChatViewComponent {
       this.messages.messages.push(JSON.parse(message.body));
     })
     this.subscribedTopics.push(newMessagesTopic);
+    let conversationMembersTopic = this.service.watch({destination: `/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
+      this.members = JSON.parse(message.body);
+    })
+    this.subscribedTopics.push(conversationMembersTopic);
   }
 
   goBack(): void {
