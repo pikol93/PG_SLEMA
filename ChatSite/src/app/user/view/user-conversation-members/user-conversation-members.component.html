@@ -1,8 +1,13 @@
-<p>Członkowie konwersacji: </p>
-<div *ngFor="let member of members.users">
-    <p>ID: {{ member.id }}</p>
-    <p>Name: {{ member.name }}</p>
-    <p *ngIf="member.banned">Banned</p>
-    <p *ngIf="member.emailConfirmed">Email confirmed</p>
+<!-- user-conversation-members.component.html -->
+<div class="user-conversation-container">
+    <p class="conversation-title">Członkowie konwersacji</p>
+    <div *ngFor="let member of members.users" class="member-details">
+        <div class="member-info">
+            <p class="member-name">{{ member.name }}</p>
+        </div>
+        <div class="member-status">
+            <p class="status-banned" *ngIf="member.banned">Zbanowany</p>
+            <p class="status-email-confirmed" *ngIf="member.emailConfirmed">Email potwierdzony</p>
+        </div>
+    </div>
 </div>
-  

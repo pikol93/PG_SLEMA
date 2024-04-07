@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { MessageService } from '../../service/message.service';
 import { Messages } from '../../model/messages';
-import { CommonModule, NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { formatTime, formatDate } from '../../../utils/DateFormatUtils';
 
 @Component({
   selector: 'app-message-list',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [NgFor, NgClass],
   templateUrl: './message-list.component.html',
   styleUrl: './message-list.component.css',
   providers: [MessageService]
