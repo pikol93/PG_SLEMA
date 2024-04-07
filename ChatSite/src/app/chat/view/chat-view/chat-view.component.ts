@@ -49,10 +49,14 @@ export class ChatViewComponent {
       this.messages.messages.push(JSON.parse(message.body));
     })
     this.subscribedTopics.push(newMessagesTopic);
-    let conversationMembersTopic = this.service.watch({destination: `/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
+    let newConversationMembersTopic = this.service.watch({destination: `/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
       this.members = JSON.parse(message.body);
     })
-    this.subscribedTopics.push(conversationMembersTopic);
+    this.subscribedTopics.push(newConversationMembersTopic);
+    let currentConversationMembersTopic = this.service.watch({destination: `/user/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
+      this.members = JSON.parse(message.body);
+    })
+    this.subscribedTopics.push(currentConversationMembersTopic);
   }
 
   goBack(): void {

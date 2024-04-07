@@ -1,6 +1,6 @@
 <button class="message-return-button" (click)="goBack()">Powrót</button>
-<app-message-list [messages]="messages" [currentUserId]="currentUserId"></app-message-list>
 <app-user-conversation-members [members]="members"></app-user-conversation-members>
+<app-message-list [messages]="messages" [currentUserId]="currentUserId"></app-message-list>
 
 <div class="message-input-container">
   <input class="message-input" type="text" [(ngModel)]="messageContent" placeholder="Wpisz wiadomość...">

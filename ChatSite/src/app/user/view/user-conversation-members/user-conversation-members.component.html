@@ -1,0 +1,8 @@
+<p>Członkowie konwersacji: </p>
+<div *ngFor="let member of members.users">
+    <p>ID: {{ member.id }}</p>
+    <p>Name: {{ member.name }}</p>
+    <p *ngIf="member.banned">Banned</p>
+    <p *ngIf="member.emailConfirmed">Email confirmed</p>
+</div>
+  
