@@ -75,8 +75,8 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
   Widget _buildAssessmentNotDone(
     BuildContext context,
   ) {
-    return TextButton(
-      onPressed: onPressed,
+    return InkWell(
+      onTap: onPressed,
       child: Text(
         "Dotknij, aby wypełnić dzisiejszy raport zdrowotny",
         softWrap: true,
