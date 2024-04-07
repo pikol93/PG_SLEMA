@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/presentation/screen/partial/no_threads_found.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/chat/logic/service/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
+import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
 
 class AvailableThreads extends StatelessWidget {
   final ThreadsService threadsService;
@@ -31,9 +33,11 @@ class AvailableThreads extends StatelessWidget {
                     },
                   );
                 } else if (snapshot.hasError) {
-                  return const Text('Error...');
+                  return const VerticallyCenteredTextInformation(
+                      textInformation: 'Błąd podczas pobierania informacji...');
                 } else {
-                  return const Text('Awaiting result...');
+                  return const VerticallyCenteredTextInformation(
+                      textInformation: 'Próbuję pobrać informacje...');
                 }
               },
             ),
