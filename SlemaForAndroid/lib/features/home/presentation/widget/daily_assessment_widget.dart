@@ -29,7 +29,20 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
   void initState() {
     super.initState();
 
-    mostRecentAssessmentFuture = widget.service.getMostRecentAssessment();
+    widget.service
+        .getAssessmentChangeNotifier()
+        .addListener(_onAssessmentsChanged);
+
+    _onAssessmentsChanged();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    widget.service
+        .getAssessmentChangeNotifier()
+        .removeListener(_onAssessmentsChanged);
   }
 
   @override
@@ -113,5 +126,12 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
             ),
           ),
         );
+  }
+
+  void _onAssessmentsChanged() {
+    logger.debug("Assessments changed. Resetting future.");
+    setState(() {
+      mostRecentAssessmentFuture = widget.service.getMostRecentAssessment();
+    });
   }
 }
