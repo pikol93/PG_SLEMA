@@ -40,8 +40,10 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FutureBuilder(
-              future: mostRecentAssessmentFuture, builder: _futureBuilder),
+          Expanded(
+            child: FutureBuilder(
+                future: mostRecentAssessmentFuture, builder: _futureBuilder),
+          ),
         ],
       ),
     );
@@ -77,6 +79,8 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
       onPressed: onPressed,
       child: Text(
         "Wypełnij raport zdrowotny!",
+        softWrap: true,
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.labelMedium!.copyWith(
               color: Theme.of(context).primaryColor,
             ),
@@ -89,6 +93,8 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
   ) {
     return Text(
       "Raport został już dzisiaj wypełniony",
+      softWrap: true,
+      textAlign: TextAlign.center,
       style: Theme.of(context).textTheme.labelMedium!.copyWith(
             color: Theme.of(context).primaryColor,
           ),
