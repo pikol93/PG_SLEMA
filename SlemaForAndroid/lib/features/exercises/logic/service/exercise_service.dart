@@ -25,4 +25,8 @@ class ExerciseService {
   Future deleteExercise(String id) async {
     await repository.deleteExercise(id);
   }
+
+  Future deleteAllExercises() {
+    return repository.deleteAllExercises();
+  }
 }
