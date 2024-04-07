@@ -78,7 +78,7 @@ class DailyAssessmentWidgetState extends State<DailyAssessmentWidget>
     return TextButton(
       onPressed: onPressed,
       child: Text(
-        "Wypełnij raport zdrowotny!",
+        "Dotknij, aby wypełnić dzisiejszy raport zdrowotny",
         softWrap: true,
         textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.labelMedium!.copyWith(
