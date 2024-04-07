@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/settings/presentation/widget/setting_button.dart';
-import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:provider/provider.dart';
 
 class RemoveExercisesSettingButton extends StatelessWidget with Logger {
   const RemoveExercisesSettingButton({super.key});
