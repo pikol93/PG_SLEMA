@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
@@ -88,33 +90,47 @@ class ExerciseWidget extends StatelessWidget {
     TextStyle keyStyle,
     TextStyle valueStyle,
   ) {
+    final dataSections = [
+      ("Nazwa:", exercise.name),
+      ("Czas trwania:", exercise.exerciseDuration.textRepresentation),
+      ("Intensywność:", exercise.intensity.labelTextRepresentation),
+    ]
+        .map(
+          (entry) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  entry.$1,
+                  style: keyStyle,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        entry.$2,
+                        softWrap: true,
+                        style: valueStyle,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+        .toList(growable: false);
+
     return Row(
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Text("Nazwa:", style: keyStyle),
-                Text(exercise.name, style: valueStyle),
-              ],
-            ),
-            const SizedBox(height: spacingBetweenDataValues),
-            Row(
-              children: [
-                Text("Czas trwania:", style: keyStyle),
-                Text("TODO", style: valueStyle),
-              ],
-            ),
-            const SizedBox(height: spacingBetweenDataValues),
-            Row(
-              children: [
-                Text("Intensywność:", style: keyStyle),
-                Text("TODO", style: valueStyle),
-              ],
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: dataSections,
+          ),
         )
       ],
     );
