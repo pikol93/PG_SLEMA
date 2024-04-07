@@ -4,6 +4,7 @@ import 'package:pg_slema/features/medicine/presentation/controller/medicine_scre
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/single_medicine_widget.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/add_medicine_screen.dart';
 
@@ -39,28 +40,19 @@ class _AllMedicinesScreenState extends State<AllMedicinesScreen> {
     return Column(
       children: [
         const WhiteAppBar(titleText: "Lekarstwa"),
-        Expanded(
-          child: Stack(children: [
-            Flex(direction: Axis.vertical, children: [
-              DefaultBody(
-                child: ListView.builder(
-                  itemCount: _controller.medicines.length,
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SingleMedicineWidget(
-                      medicine: _controller.medicines[index],
-                      onMedicineDeleted: onMedicineDeleted,
-                      onMedicineEdited: onMedicineEdited,
-                    ).build(context);
-                  },
-                ),
-              ),
-            ]),
-            DefaultFloatingActionButton(
-              onPressed: openAddingMedicinesScreen,
-              child: const Icon(Icons.add),
-            )
-          ]),
+        DefaultBodyWithFloatingActionButton(
+          onFloatingButtonPressed: openAddingMedicinesScreen,
+          child: ListView.builder(
+            itemCount: _controller.medicines.length,
+            padding: EdgeInsets.zero,
+            itemBuilder: (BuildContext context, int index) {
+              return SingleMedicineWidget(
+                medicine: _controller.medicines[index],
+                onMedicineDeleted: onMedicineDeleted,
+                onMedicineEdited: onMedicineEdited,
+              ).build(context);
+            },
+          ),
         ),
       ],
     );

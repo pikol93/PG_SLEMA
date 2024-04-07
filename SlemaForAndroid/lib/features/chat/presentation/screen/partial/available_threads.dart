@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/chat/presentation/screen/partial/no_threads_found.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/chat/logic/service/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
@@ -17,13 +17,14 @@ class AvailableThreads extends StatelessWidget {
       child: Column(
         children: [
           const LabeledSectionDivider(label: "Dzienny raport zdrowotny"),
-          DefaultBody(
-            child: FutureBuilder(
-              future: threadsService.getAll(),
-              builder:
-                  (BuildContext context, AsyncSnapshot<List<Thread>> snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(
+          FutureBuilder(
+            future: threadsService.getAll(),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Thread>> snapshot) {
+              if (snapshot.hasData) {
+                return DefaultBodyWithFloatingActionButton(
+                  onFloatingButtonPressed: () {},
+                  child: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: snapshot.data?.length,
@@ -31,16 +32,20 @@ class AvailableThreads extends StatelessWidget {
                       return AvailableThreadOverview(
                           thread: snapshot.data!.elementAt(index));
                     },
-                  );
-                } else if (snapshot.hasError) {
-                  return const VerticallyCenteredTextInformation(
-                      textInformation: 'Błąd podczas pobierania informacji...');
-                } else {
-                  return const VerticallyCenteredTextInformation(
-                      textInformation: 'Próbuję pobrać informacje...');
-                }
-              },
-            ),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return const DefaultBody(
+                  child: VerticallyCenteredTextInformation(
+                      textInformation: 'Błąd podczas pobierania informacji...'),
+                );
+              } else {
+                return const DefaultBody(
+                  child: VerticallyCenteredTextInformation(
+                      textInformation: 'Próbuję pobrać informacje...'),
+                );
+              }
+            },
           ),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:pg_slema/features/exercises/presentation/screen/add_exercise_scr
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
 import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
 
 class ExercisesScreen extends StatefulWidget {
@@ -37,28 +38,16 @@ class ExercisesScreenState extends State<ExercisesScreen> {
   Widget build(BuildContext context) {
     return Column(children: [
       const DefaultAppBar(title: "Ćwiczenia"),
-      Expanded(
-        child: Stack(
-          children: [
-            Flex(
-              direction: Axis.vertical,
-              children: [
-                DefaultBody(
-                  child: ListView.builder(
-                    itemCount: _controller.exercises.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      return ExerciseWidget(
-                              exercise: _controller.exercises.elementAt(index))
-                          .build(context);
-                    },
-                  ),
-                ),
-              ],
-            ),
-            DefaultFloatingActionButton(
-                onPressed: openAddExerciseScreen, child: const Icon(Icons.add))
-          ],
+      DefaultBodyWithFloatingActionButton(
+        onFloatingButtonPressed: openAddExerciseScreen,
+        child: ListView.builder(
+          itemCount: _controller.exercises.length,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return ExerciseWidget(
+              exercise: _controller.exercises.elementAt(index),
+            ).build(context);
+          },
         ),
       ),
     ]);

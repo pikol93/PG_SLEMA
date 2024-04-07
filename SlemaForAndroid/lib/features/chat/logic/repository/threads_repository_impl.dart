@@ -26,7 +26,7 @@ class ThreadsRepositoryImpl implements ThreadsRepository {
     ];
 
     return Future.delayed(
-      const Duration(milliseconds: 1000),
+      const Duration(milliseconds: 500),
       () => threads.map((e) => ThreadDtoConverter.fromDto(e)).toList(),
     );
   }
