@@ -10,6 +10,15 @@ enum ExerciseIntensity {
 }
 
 extension ExerciseIntensityExtension on ExerciseIntensity {
+  static ExerciseIntensity? fromDtoRepresentation(String value) {
+    return ExerciseIntensity.values
+        .firstWhere((element) => value == element.dtoRepresentation);
+  }
+
+  String get dtoRepresentation {
+    return toString();
+  }
+
   String get labelTextRepresentation {
     switch (this) {
       case ExerciseIntensity.veryGentle:

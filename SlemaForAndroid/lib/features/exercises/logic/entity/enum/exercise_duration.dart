@@ -7,6 +7,15 @@ enum ExerciseDuration {
 }
 
 extension ExerciseDurationExtension on ExerciseDuration {
+  static ExerciseDuration? fromDtoRepresentation(String value) {
+    return ExerciseDuration.values
+        .firstWhere((element) => value == element.dtoRepresentation);
+  }
+
+  String get dtoRepresentation {
+    return toString();
+  }
+
   String get labelTextRepresentation {
     switch (this) {
       case ExerciseDuration.upTo15:

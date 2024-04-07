@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise_dto.dart';
 import 'package:pg_slema/utils/data/converter.dart';
 import 'package:pg_slema/utils/json/json_parser.dart';
@@ -25,8 +27,8 @@ class ExerciseDtoToJsonConverter
     return ExerciseDto(
         json['id'],
         json['name'] ?? '',
-        json['intensity '] ?? 50,
-        json['exerciseDuration'] ?? 1,
+        json['intensity '] ?? ExerciseIntensity.moderate.dtoRepresentation,
+        json['exerciseDuration'] ?? ExerciseDuration.upTo15.dtoRepresentation,
         DateTime.parse(exerciseDate),
         exerciseTime);
   }
