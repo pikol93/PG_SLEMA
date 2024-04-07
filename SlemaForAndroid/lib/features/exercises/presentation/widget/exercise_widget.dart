@@ -10,6 +10,7 @@ class ExerciseWidget extends StatelessWidget {
   static const double dateTextHeightOverride = 0.5;
   static const double dateIconValuesHorizontalSpacing = 12.0;
   static const double topOffsetDateValues = dateIconSize / 6.0;
+  static const double spacingBetweenDateKeyAndValue = 8.0;
   static const double spacingBetweenDateValues = 8.0;
   static const double spacingBetweenDataValues = 16.0;
 
@@ -69,6 +70,7 @@ class ExerciseWidget extends StatelessWidget {
             Row(
               children: [
                 Text("Data:", style: keyStyle),
+                const SizedBox(width: spacingBetweenDateKeyAndValue),
                 Text(exercise.exerciseDate.toDateString(), style: valueStyle),
               ],
             ),
@@ -76,6 +78,7 @@ class ExerciseWidget extends StatelessWidget {
             Row(
               children: [
                 Text("Godzina:", style: keyStyle),
+                const SizedBox(width: spacingBetweenDateKeyAndValue),
                 Text(exercise.exerciseTime.format(context), style: valueStyle),
               ],
             ),
