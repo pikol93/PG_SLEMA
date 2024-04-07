@@ -10,20 +10,18 @@ class Setting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              child,
-            ],
-          ),
-          const Divider(
-            thickness: 2.0,
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            child,
+          ],
+        ),
+        const Divider(
+          thickness: 2.0,
+        ),
+      ],
     );
   }
 }
