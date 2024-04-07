@@ -14,7 +14,6 @@ class ThreadsServiceImpl implements ThreadsService {
 
   @override
   Future<List<Thread>> getAll() {
-    print("Service");
     // TODO
     return threadsRepository.getAll();
   }
