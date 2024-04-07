@@ -14,6 +14,11 @@ class AssessmentsServiceImpl implements AssessmentsService {
   }
 
   @override
+  Future<Assessment?> getMostRecentAssessment() {
+    return repository.getMostRecentAssessment();
+  }
+
+  @override
   Future saveEntry(Assessment assessment) {
     return repository.save(assessment);
   }

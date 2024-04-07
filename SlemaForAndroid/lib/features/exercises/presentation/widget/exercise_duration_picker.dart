@@ -4,7 +4,7 @@ import 'package:pg_slema/utils/widgets/default_container/default_container.dart'
 import 'package:pg_slema/utils/widgets/default_container/container_divider.dart';
 
 class ExerciseDurationPicker extends StatefulWidget {
-  final ValueChanged<int> onDurationChanged;
+  final ValueChanged<ExerciseDuration> onDurationChanged;
   const ExerciseDurationPicker({super.key, required this.onDurationChanged});
 
   @override
@@ -38,8 +38,8 @@ class _ExerciseDurationPickerState extends State<ExerciseDurationPicker> {
               setState(() {
                 _currentSliderValue = value;
               });
-              widget.onDurationChanged(
-                  _currentSliderValue.toExerciseDuration().intRepresentation);
+              widget
+                  .onDurationChanged(_currentSliderValue.toExerciseDuration());
             },
           ),
         ],

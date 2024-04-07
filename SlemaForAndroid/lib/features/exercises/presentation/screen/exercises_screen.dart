@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/add_exercise_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
@@ -7,30 +8,28 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
 
 class ExercisesScreen extends StatefulWidget {
-  const ExercisesScreen({super.key});
+  final ExerciseService service;
+
+  const ExercisesScreen({
+    super.key,
+    required this.service,
+  });
 
   @override
   State<StatefulWidget> createState() => ExercisesScreenState();
 }
 
 class ExercisesScreenState extends State<ExercisesScreen> {
-  late final AllExercisesController _controller;
+  late AllExercisesController _controller;
 
-  ExercisesScreenState() {
-    _controller = AllExercisesController(_onExercisesChanged);
+  @override
+  void initState() {
     super.initState();
-    _controller.initializeExercises();
-  }
-
-  void openAddExerciseScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddExerciseScreen(
-          onExerciseAdded: _controller.onExerciseCreated,
-        ),
-      ),
+    _controller = AllExercisesController(
+      exerciseService: widget.service,
+      onExercisesChanged: _onExercisesChanged,
     );
+    _controller.initializeExercises();
   }
 
   @override
@@ -58,11 +57,22 @@ class ExercisesScreenState extends State<ExercisesScreen> {
               ],
             ),
             DefaultFloatingActionButton(
-                onPressed: openAddExerciseScreen, child: const Icon(Icons.add))
+                onPressed: _openAddExerciseScreen, child: const Icon(Icons.add))
           ],
         ),
       ),
     ]);
+  }
+
+  void _openAddExerciseScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddExerciseScreen(
+          onExerciseAdded: _controller.onExerciseCreated,
+        ),
+      ),
+    );
   }
 
   void _onExercisesChanged() {
