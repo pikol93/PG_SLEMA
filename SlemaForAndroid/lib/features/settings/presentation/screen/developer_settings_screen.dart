@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pg_slema/features/settings/presentation/widget/remove_assessments_setting_button.dart';
+import 'package:pg_slema/features/settings/presentation/widget/remove_exercises_setting_button.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -25,6 +26,7 @@ class DeveloperSettingsScreenState extends State<DeveloperSettingsScreen>
             child: Column(
               children: [
                 RemoveAssessmentsSettingButton(),
+                RemoveExercisesSettingButton(),
               ],
             ),
           ),
