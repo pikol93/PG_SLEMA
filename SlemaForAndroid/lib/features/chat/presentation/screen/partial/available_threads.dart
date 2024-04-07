@@ -22,7 +22,7 @@ class _AvailableThreadsState extends State<AvailableThreads> {
     return Expanded(
       child: Column(
         children: [
-          const LabeledSectionDivider(label: "Dzienny raport zdrowotny"),
+          const LabeledSectionDivider(label: "Dostępne wątki"),
           FutureBuilder(
             future: widget.threadsService.getAll(),
             builder:
