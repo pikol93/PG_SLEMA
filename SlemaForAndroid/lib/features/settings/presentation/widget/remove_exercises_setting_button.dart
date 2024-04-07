@@ -19,8 +19,6 @@ class RemoveExercisesSettingButton extends StatelessWidget with Logger {
 
   void onConfirmPressed(BuildContext context) {
     logger.debug("Remove exercises confirm button pressed.");
-    Provider
-        .of<ExerciseService>(context, listen: false)
-        .deleteAllExercises();
+    Provider.of<ExerciseService>(context, listen: false).deleteAllExercises();
   }
 }
