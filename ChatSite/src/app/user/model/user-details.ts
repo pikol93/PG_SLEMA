@@ -3,6 +3,6 @@ export interface UserDetails {
     name: string;
     email: string;
     sex: string;
-    isBanned: boolean;
-    isEmailConfirmed: boolean;
+    banned: boolean;
+    emailConfirmed: boolean;
 }

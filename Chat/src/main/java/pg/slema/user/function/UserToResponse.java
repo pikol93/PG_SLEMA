@@ -14,6 +14,10 @@ public class UserToResponse implements Function<User, GetUserResponse> {
         return GetUserResponse.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .isBanned(user.isBanned())
+                .isEmailConfirmed(user.isEmailConfirmed())
+                .email(user.getEmail())
+                .sex(user.getSex())
                 .build();
     }
 }

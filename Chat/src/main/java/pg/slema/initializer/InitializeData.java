@@ -82,21 +82,30 @@ public class InitializeData implements InitializingBean {
             User admin = User.builder()
                     .id(UUID.fromString("54c53da7-849a-4b93-8822-9006c494ca62"))
                     .name("Admin")
+                    .email("adminos@wp.pl")
+                    .sex("Mężczyzna")
                     .build();
 
             User volunteer = User.builder()
                     .id(UUID.fromString("aac53da7-849a-4b93-8822-9006c494ca62"))
                     .name("Volunteer")
+                    .isEmailConfirmed(true)
+                    .email("szturmowiec@wp.pl")
+                    .sex("Inne")
                     .build();
 
             User typicalUser = User.builder()
                     .id(UUID.fromString("bbc53da7-849a-4b93-8822-9006c494ca62"))
                     .name("Typical user")
+                    .email("typical@gan.com")
+                    .sex("Kobieta")
                     .build();
 
             User bannedAuthorizedUser = User.builder()
                     .id(UUID.fromString("bbd53da7-849a-4b93-8822-9006c494ca62"))
                     .name("Banned authorized user")
+                    .email("ganczar@gan.pl")
+                    .sex("Mężczyzna")
                     .isBanned(true)
                     .isEmailConfirmed(true)
                     .build();

@@ -44,17 +44,20 @@
     font-weight: bold;
   }
   
-  .btn-ban, .btn-unban {
+  .user-link {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 8px 20px;
     background-color: #555;
     color: #fff;
-    border: none;
-    padding: 8px 16px;
+    text-decoration: none;
     border-radius: 5px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .btn-ban:hover, .btn-unban:hover {
+  .user-link:hover {
     background-color: #222;
   }
   

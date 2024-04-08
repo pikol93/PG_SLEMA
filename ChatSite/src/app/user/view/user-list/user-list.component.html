@@ -8,8 +8,7 @@
           <p class="user-name">{{ user.name }}</p>
           <p *ngIf="user.banned" class="banned">Status: Zbanowany</p>
           <p *ngIf="user.emailConfirmed" class="email-confirmed">Status: Email potwierdzony</p>
-          <button class="btn-ban" *ngIf="!user.banned">Zbanuj</button>
-          <button class="btn-unban" *ngIf="user.banned">Odbanuj</button>
+          <a class="user-link" routerLink="/users/{{user.id}}" routerLinkActive="active" ariaCurrentWhenActive="page">Szczegóły</a>
         </div>
       </li>
     </ul>

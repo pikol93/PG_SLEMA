@@ -1,1 +1,30 @@
-<p>user-details works!</p>
+<button class="return-button" (click)="goBack()">Powrót</button>
+<div class="user-details-container">
+    <div *ngIf="userDetails" class="user-details">
+      <div class="detail-row">
+        <span class="detail-label">ID:</span>
+        <span class="detail-value">{{ userDetails.id }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Nazwa:</span>
+        <span class="detail-value">{{ userDetails.name }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Email:</span>
+        <span class="detail-value">{{ userDetails.email }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Płeć:</span>
+        <span class="detail-value">{{ userDetails.sex }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Zbanowany:</span>
+        <span class="detail-value">{{ userDetails.banned ? 'Tak' : 'Nie' }}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Potwierdzono email:</span>
+        <span class="detail-value">{{ userDetails.emailConfirmed ? 'Tak' : 'Nie' }}</span>
+      </div>
+    </div>
+  </div>
+  
