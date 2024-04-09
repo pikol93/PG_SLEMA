@@ -57,3 +57,11 @@
     font-size: 14px;
   }
   
+  .conversation-title {
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie w poziomie */
+    align-items: center; /* Wyśrodkowanie w pionie */
+}
+  

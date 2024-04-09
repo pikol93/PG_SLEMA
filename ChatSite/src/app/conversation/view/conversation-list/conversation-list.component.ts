@@ -4,8 +4,9 @@ import { Conversations } from '../../model/conversations';
 import { CommonModule, NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { formatDate, formatTime } from '../../../utils/DateFormatUtils';
+import {v4 as uuidv4 } from 'uuid';
 
-@Component({
+@Component({  
   selector: 'app-conversation-list',
   standalone: true,
   imports: [RouterLink, CommonModule, NgFor],
@@ -30,5 +31,9 @@ export class ConversationListComponent {
 
   formatTime(dateTimeStr: string) : string {
     return formatTime(dateTimeStr);
+  }
+
+  generateRandomId(): string {
+    return uuidv4();
   }
 }

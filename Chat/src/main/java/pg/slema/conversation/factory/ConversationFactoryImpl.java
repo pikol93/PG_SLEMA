@@ -66,7 +66,8 @@ public class ConversationFactoryImpl implements ConversationFactory {
 
     private void addParticipantToConversationIfNecessary(Conversation conversation, User user) {
         List<User> participants = userService.findParticipantsByConversation(conversation.getId());
-        if(!participants.contains(user)) {
+        User initiator = conversation.getInitiator();
+        if(!user.equals(initiator) && !participants.contains(user)) {
             participants.add(user);
             conversation.setParticipants(participants);
             conversationService.replace(conversation);

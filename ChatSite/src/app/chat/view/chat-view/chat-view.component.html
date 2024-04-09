@@ -1,4 +1,10 @@
 <button class="message-return-button" (click)="goBack()">Powrót</button>
+
+<div class="message-input-container">
+  <input *ngIf="messages.messages.length === 0" class="message-input" type="text" [(ngModel)]="conversationTitle" placeholder="Wpisz tytuł konwersacji">
+  <h2 *ngIf="messages.messages.length > 0" class="conversation-title">{{conversationTitle}}</h2>
+</div>
+
 <app-user-conversation-members [members]="members"></app-user-conversation-members>
 <app-message-list [messages]="messages" [currentUserId]="currentUserId"></app-message-list>
 

@@ -1,4 +1,4 @@
-import { CommonModule, NgFor} from '@angular/common';
+import { CommonModule, NgFor, NgIf} from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Messages } from '../../../message/model/messages';
@@ -16,7 +16,7 @@ import { UserConversationMembersComponent } from '../../../user/view/user-conver
 @Component({
   selector: 'app-chat-view',
   standalone: true,
-  imports: [CommonModule, NgFor, FormsModule, MessageListComponent, UserConversationMembersComponent],
+  imports: [CommonModule, NgFor, NgIf, FormsModule, MessageListComponent, UserConversationMembersComponent],
   templateUrl: './chat-view.component.html',
   styleUrl: './chat-view.component.css',
   providers: [{
@@ -27,7 +27,7 @@ export class ChatViewComponent {
   conversationId: string = "";
   messageContent: string = "";
   currentUserId: string = "bbc53da7-849a-4b93-8822-9006c494ca62";
-  conversationTitle: string = "Nowa";
+  conversationTitle: string = "TODO get conversation";
   messages: Messages = {
     messages: []
   };
