@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/add_thread_screen.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -62,7 +63,9 @@ class _AvailableThreadsState extends State<AvailableThreads> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const AddThreadScreen(),
+        builder: (context) => AddThreadScreen(
+          controller: AddThreadController(),
+        ),
       ),
     );
   }
