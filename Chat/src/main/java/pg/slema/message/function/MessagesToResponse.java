@@ -29,7 +29,6 @@ public class MessagesToResponse implements Function<List<Message>, GetMessagesRe
 
     private GetMessagesResponse.User fromUser(User user) {
         return GetMessagesResponse.User.builder()
-                .id(user.getId())
                 .name(user.getName())
                 .build();
     }

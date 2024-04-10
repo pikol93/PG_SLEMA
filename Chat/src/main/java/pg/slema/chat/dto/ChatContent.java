@@ -1,17 +1,16 @@
-package pg.slema.message.dto;
+package pg.slema.chat.dto;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.Singular;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @Builder
-public class GetMessagesResponse {
+public class ChatContent {
 
     @Data
     @Builder
@@ -24,8 +23,6 @@ public class GetMessagesResponse {
     @Builder
     public static class Message {
 
-        private UUID id;
-
         private String content;
 
         private User sender;
@@ -33,6 +30,18 @@ public class GetMessagesResponse {
         private ZonedDateTime dateTime;
     }
 
+    @Data
+    @Builder
+    public static class Conversation {
+
+        private String title;
+
+        @Singular
+        private List<User> members;
+    }
+
     @Singular
     private List<Message> messages;
+
+    private Conversation conversation;
 }
