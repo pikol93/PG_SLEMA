@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Users } from '../../model/users';
 import { NgFor, NgIf } from '@angular/common';
+import { ChatMembers } from '../../../chat/model/chat-members';
 
 @Component({
   selector: 'app-user-conversation-members',
@@ -11,8 +12,8 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class UserConversationMembersComponent {
 
-  @Input() members: Users = {
-    users: []
+  @Input() members: ChatMembers = {
+    members: []
   }
 
 }
