@@ -57,7 +57,7 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
     if ((_formKey.currentState?.validate() ?? true) &
         widget.controller.isValid()) {
       print("TODO - you've just sent a message, handle it");
-      widget.messagesService.sendMessage(widget.controller.createChatMessage());
+      //widget.messagesService.sendMessage(widget.controller.createChatMessage());
       _moveToThreadChatScreen();
     }
   }
