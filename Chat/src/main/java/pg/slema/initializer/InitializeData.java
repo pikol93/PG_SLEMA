@@ -36,7 +36,7 @@ public class InitializeData implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         initializeUsers();
         initializeConversations();
         bindFirstConversation();

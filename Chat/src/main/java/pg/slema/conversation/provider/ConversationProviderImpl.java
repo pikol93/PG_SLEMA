@@ -8,7 +8,6 @@ import pg.slema.conversation.service.ConversationService;
 import pg.slema.user.entity.User;
 import pg.slema.user.manager.ParticipantsManager;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

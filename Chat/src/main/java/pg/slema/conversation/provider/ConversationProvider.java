@@ -1,6 +1,5 @@
 package pg.slema.conversation.provider;
 
-import jakarta.transaction.Transactional;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.user.entity.User;
 
