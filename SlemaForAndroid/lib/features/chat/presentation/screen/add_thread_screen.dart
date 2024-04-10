@@ -15,26 +15,43 @@ class AddThreadScreen extends StatefulWidget {
 }
 
 class _AddThreadScreenState extends State<AddThreadScreen> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return UnfocusOnChildrenTap(
-      child: Column(
-        children: [
-          const DefaultAppBar(title: "Utwórz wątek"),
-          DefaultBody(
-            child: Column(
-              children: [
-                Container(height: 20),
-                CustomTextFormField(
-                  onChanged: (value) => widget.controller.thread = value,
-                  label: "Nazwij wątek",
-                ),
-              ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            const DefaultAppBar(title: "Utwórz wątek"),
+            DefaultBody(
+              child: Column(
+                children: [
+                  Container(height: 20),
+                  CustomTextFormField(
+                    onChanged: _onThreadNameChanged,
+                    label: "Nazwij wątek",
+                  ),
+                ],
+              ),
             ),
-          ),
-          const ChatMessageInput(),
-        ],
+            ChatMessageInput(onSendPressed: _onThreadAdded),
+          ],
+        ),
       ),
     );
+  }
+
+  void _onThreadNameChanged(String newName) {
+    widget.controller.threadName = newName.trim(); //Blank messages not allowed
+  }
+
+  void _onThreadAdded(String message) {
+    widget.controller.message = message.trim(); //Blank messages not allowed
+    //Additional validation using form
+    if ((_formKey.currentState?.validate() ?? true) &
+        widget.controller.isValid()) {
+      print("TODO - you've just sent a message, handle it");
+    }
   }
 }

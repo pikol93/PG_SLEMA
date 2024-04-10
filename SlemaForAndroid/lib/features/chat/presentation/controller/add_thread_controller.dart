@@ -1,3 +1,8 @@
 class AddThreadController {
-  String thread = "Wątek";
+  String threadName = "";
+  String message = "";
+
+  bool isValid() {
+    return threadName.isNotEmpty;
+  }
 }

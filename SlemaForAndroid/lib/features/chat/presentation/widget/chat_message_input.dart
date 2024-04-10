@@ -1,10 +1,16 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/chat/presentation/widget/chat_message_text_form_field.dart';
 
-class ChatMessageInput extends StatelessWidget {
+import 'package:pg_slema/utils/log/logger_mixin.dart';
+
+class ChatMessageInput extends StatelessWidget with Logger {
   final double _defaultM3BottomAppBarHeight = 80.0;
   final double _maxBottomAppBarHeightScaleFactor = 1.5;
-  const ChatMessageInput({super.key});
+  final TextEditingController textEditingController = TextEditingController();
+  final ValueSetter<String>? onSendPressed;
+  ChatMessageInput({super.key, this.onSendPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +27,12 @@ class ChatMessageInput extends StatelessWidget {
               children: [
                 Container(width: 20),
                 ChatMessageTextFormField(
-                  maxHeight: _defaultM3BottomAppBarHeight *
-                      _maxBottomAppBarHeightScaleFactor,
-                ),
+                    maxHeight: _defaultM3BottomAppBarHeight *
+                        _maxBottomAppBarHeightScaleFactor,
+                    controller: textEditingController),
                 Container(width: 10),
                 IconButton(
-                  onPressed: onSendIconPressed,
+                  onPressed: onSendIconButtonPressed,
                   icon: const Icon(Icons.send),
                 ),
                 Container(width: 10),
@@ -39,5 +45,10 @@ class ChatMessageInput extends StatelessWidget {
     );
   }
 
-  void onSendIconPressed() {}
+  void onSendIconButtonPressed() {
+    if (onSendPressed == null) {
+      return;
+    }
+    onSendPressed!(textEditingController.text);
+  }
 }
