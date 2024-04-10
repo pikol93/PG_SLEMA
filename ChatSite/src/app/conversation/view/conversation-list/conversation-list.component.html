@@ -1,5 +1,5 @@
 <!-- conversations.component.html -->
-<a class="new-conversation" routerLink="/conversations/{{generateRandomId()}}/chat" routerLinkActive="active" ariaCurrentWhenActive="page">Nowa konwersacja</a>
+<a class="new-conversation" routerLink="/conversations/{{generateRandomId()}}/new" routerLinkActive="active" ariaCurrentWhenActive="page">Nowa konwersacja</a>
 <div class="conversation-list">
   <div *ngFor="let conversation of conversations?.conversations" class="conversation-container">
     <div class="conversation-header">

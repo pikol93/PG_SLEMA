@@ -1,0 +1,15 @@
+<button class="message-return-button" (click)="goBack()">Powrót</button>
+
+<div class="new-conversation-form">
+  <div class="form-group">
+    <label for="titleInput" class="form-label">Tytuł:</label>
+    <input type="text" id="titleInput" class="form-input" [(ngModel)]="title" placeholder="Wpisz tytuł...">
+  </div>
+
+  <div class="form-group">
+    <label for="contentInput" class="form-label">Treść:</label>
+    <textarea id="contentInput" class="form-textarea" [(ngModel)]="content" placeholder="Wpisz wiadomość..."></textarea>
+  </div>
+  
+  <button class="form-button" (click)="sendMessage()">Wyślij</button>
+</div>

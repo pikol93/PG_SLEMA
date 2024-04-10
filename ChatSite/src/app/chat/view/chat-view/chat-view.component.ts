@@ -1,5 +1,5 @@
 import { CommonModule, NgFor, NgIf} from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Messages } from '../../../message/model/messages';
 import { Location } from '@angular/common';
@@ -26,7 +26,7 @@ import { ChatMembers } from '../../model/chat-members';
     useFactory: createChatService}]
 })
 export class ChatViewComponent {
-  conversationId: string = "";
+  @Input('id') conversationId: string = "";
   messageContent: string = "";
   currentUserId: string = "bbc53da7-849a-4b93-8822-9006c494ca62";
   conversationTitle: string = "";
@@ -38,11 +38,10 @@ export class ChatViewComponent {
   };
   subscribedTopics: Subscription[] = [];
 
-  constructor(private service: ChatService, private route: ActivatedRoute, private location: Location) {
+  constructor(private service: ChatService, private location: Location) {
   }
 
   ngOnInit(): void {
-    this.conversationId = this.route.snapshot.paramMap.get('id') ?? '';
     let historyTopic = this.service.watch({destination: `/user/topic/history/${this.conversationId}`}).subscribe((message: StompMessage) => {
       let body : ChatContent = JSON.parse(message.body);
       this.messages.messages = body.messages;
@@ -67,10 +66,7 @@ export class ChatViewComponent {
   sendMessage(): void {
     let chatMessage : ChatMessage = {
       senderId: this.currentUserId,
-      conversation: {
-        id: this.conversationId,
-        title: this.conversationTitle
-      },
+      conversationId: this.conversationId, 
       content: this.messageContent,
       dateTime: new Date(),
     }
