@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/chat/logic/entity/chat_message.dart';
 import 'package:pg_slema/features/chat/logic/service/messages/messages_service.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';

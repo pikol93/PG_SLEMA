@@ -9,6 +9,7 @@ import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
+import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
 
 class AvailableThreads extends StatefulWidget {
   final ThreadsService threadsService;
@@ -40,7 +41,9 @@ class _AvailableThreadsState extends State<AvailableThreads> {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
                       return AvailableThreadOverview(
-                          thread: snapshot.data!.elementAt(index));
+                        thread: snapshot.data!.elementAt(index),
+                        onThreadPressed: _onThreadPressed,
+                      );
                     },
                   ),
                 );
@@ -72,5 +75,10 @@ class _AvailableThreadsState extends State<AvailableThreads> {
         ),
       ),
     );
+  }
+
+  void _onThreadPressed() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const ThreadChatScreen()));
   }
 }
