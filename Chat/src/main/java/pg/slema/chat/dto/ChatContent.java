@@ -14,20 +14,11 @@ public class ChatContent {
 
     @Data
     @Builder
-    public static class User {
-
-        private UUID id;
-
-        private String name;
-    }
-
-    @Data
-    @Builder
     public static class Message {
 
         private String content;
 
-        private User sender;
+        private ChatMember sender;
 
         private ZonedDateTime dateTime;
     }
@@ -39,7 +30,7 @@ public class ChatContent {
         private String title;
 
         @Singular
-        private List<User> members;
+        private List<ChatMember> members;
     }
 
     @Singular

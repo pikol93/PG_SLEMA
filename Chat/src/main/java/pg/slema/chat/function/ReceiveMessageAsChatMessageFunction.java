@@ -3,7 +3,7 @@ package pg.slema.chat.function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pg.slema.chat.dto.ReceivedChatMessage;
-import pg.slema.conversation.factory.ConversationFactory;
+import pg.slema.conversation.provider.ConversationProvider;
 import pg.slema.message.entity.Message;
 import pg.slema.user.entity.User;
 
@@ -13,21 +13,22 @@ import java.util.function.BiFunction;
 @Component
 public class ReceiveMessageAsChatMessageFunction implements BiFunction<UUID, ReceivedChatMessage, Message> {
 
-    private final ConversationFactory conversationFactory;
+    private final ConversationProvider conversationProvider;
 
     @Autowired
-    public ReceiveMessageAsChatMessageFunction(ConversationFactory conversationFactory) {
-        this.conversationFactory = conversationFactory;
+    public ReceiveMessageAsChatMessageFunction(ConversationProvider conversationProvider) {
+        this.conversationProvider = conversationProvider;
     }
 
     @Override
     public Message apply(UUID messageId, ReceivedChatMessage receivedChatMessage) {
+        User sender = createSender(receivedChatMessage.getSenderId());
         return Message.builder()
                 .id(messageId)
                 .content(receivedChatMessage.getContent())
                 .dateTime(receivedChatMessage.getDateTime())
-                .conversation(conversationFactory.getConversationForReceivedMessage(receivedChatMessage))
-                .sender(createSender(receivedChatMessage.getSenderId()))
+                .conversation(conversationProvider.getConversationForMember(receivedChatMessage.getConversationId(), sender))
+                .sender(sender)
                 .build();
     }
 

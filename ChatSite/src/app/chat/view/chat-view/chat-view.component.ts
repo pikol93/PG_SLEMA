@@ -13,6 +13,7 @@ import { MessageListComponent } from '../../../message/view/message-list/message
 import { Users } from '../../../user/model/users';
 import { UserConversationMembersComponent } from '../../../user/view/user-conversation-members/user-conversation-members.component';
 import { ChatContent } from '../../model/chat-content';
+import { ChatMembers } from '../../model/chat-members';
 
 @Component({
   selector: 'app-chat-view',
@@ -32,8 +33,8 @@ export class ChatViewComponent {
   messages: Messages = {
     messages: []
   };
-  members: Users = {
-    users: []
+  members: ChatMembers = {
+    members: []
   };
   subscribedTopics: Subscription[] = [];
 
@@ -46,7 +47,7 @@ export class ChatViewComponent {
       let body : ChatContent = JSON.parse(message.body);
       this.messages.messages = body.messages;
       this.conversationTitle = body.conversation.title;
-      this.members.users = body.conversation.members;
+      this.members.members = body.conversation.members;
     })
     this.subscribedTopics.push(historyTopic);
     let newMessagesTopic = this.service.watch({destination: `/topic/messages/${this.conversationId}`}).subscribe((message: StompMessage) => {
@@ -54,7 +55,7 @@ export class ChatViewComponent {
     })
     this.subscribedTopics.push(newMessagesTopic);
     let newConversationMembersTopic = this.service.watch({destination: `/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
-      this.members = JSON.parse(message.body);
+      this.members.members.push(JSON.parse(message.body));
     })
     this.subscribedTopics.push(newConversationMembersTopic);
   }
