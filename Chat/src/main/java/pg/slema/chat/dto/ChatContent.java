@@ -16,6 +16,8 @@ public class ChatContent {
     @Builder
     public static class User {
 
+        private UUID id;
+
         private String name;
     }
 

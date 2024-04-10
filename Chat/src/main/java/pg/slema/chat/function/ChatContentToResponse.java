@@ -29,6 +29,7 @@ public class ChatContentToResponse implements TriFunction<Conversation, List<Use
 
     private ChatContent.User toUser(User user) {
         return ChatContent.User.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .build();
     }

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { MessageListComponent } from '../../../message/view/message-list/message-list.component';
 import { Users } from '../../../user/model/users';
 import { UserConversationMembersComponent } from '../../../user/view/user-conversation-members/user-conversation-members.component';
+import { ChatContent } from '../../model/chat-content';
 
 @Component({
   selector: 'app-chat-view',
@@ -27,7 +28,7 @@ export class ChatViewComponent {
   conversationId: string = "";
   messageContent: string = "";
   currentUserId: string = "bbc53da7-849a-4b93-8822-9006c494ca62";
-  conversationTitle: string = "TODO get conversation";
+  conversationTitle: string = "";
   messages: Messages = {
     messages: []
   };
@@ -41,8 +42,11 @@ export class ChatViewComponent {
 
   ngOnInit(): void {
     this.conversationId = this.route.snapshot.paramMap.get('id') ?? '';
-    let historyTopic = this.service.watch({destination: `/user/topic/messages/${this.conversationId}`}).subscribe((message: StompMessage) => {
-      this.messages = JSON.parse(message.body);
+    let historyTopic = this.service.watch({destination: `/user/topic/history/${this.conversationId}`}).subscribe((message: StompMessage) => {
+      let body : ChatContent = JSON.parse(message.body);
+      this.messages.messages = body.messages;
+      this.conversationTitle = body.conversation.title;
+      this.members.users = body.conversation.members;
     })
     this.subscribedTopics.push(historyTopic);
     let newMessagesTopic = this.service.watch({destination: `/topic/messages/${this.conversationId}`}).subscribe((message: StompMessage) => {
@@ -53,10 +57,6 @@ export class ChatViewComponent {
       this.members = JSON.parse(message.body);
     })
     this.subscribedTopics.push(newConversationMembersTopic);
-    let currentConversationMembersTopic = this.service.watch({destination: `/user/topic/conversations/${this.conversationId}/users`}).subscribe((message: StompMessage) => {
-      this.members = JSON.parse(message.body);
-    })
-    this.subscribedTopics.push(currentConversationMembersTopic);
   }
 
   goBack(): void {
