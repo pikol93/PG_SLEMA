@@ -1,5 +1,5 @@
-import 'package:pg_slema/features/chat/logic/repository/threads_repository.dart';
-import 'package:pg_slema/features/chat/logic/service/threads_service.dart';
+import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository.dart';
+import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
 
 class ThreadsServiceImpl implements ThreadsService {

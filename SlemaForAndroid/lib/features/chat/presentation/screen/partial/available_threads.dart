@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/logic/service/messages/messages_service.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/add_thread_screen.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
-import 'package:pg_slema/features/chat/logic/service/threads_service.dart';
+import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
 
 class AvailableThreads extends StatefulWidget {
   final ThreadsService threadsService;
-  const AvailableThreads({super.key, required this.threadsService});
+  final MessagesService messagesService;
+  const AvailableThreads(
+      {super.key, required this.threadsService, required this.messagesService});
 
   @override
   State<AvailableThreads> createState() => _AvailableThreadsState();
@@ -65,6 +68,7 @@ class _AvailableThreadsState extends State<AvailableThreads> {
       MaterialPageRoute(
         builder: (context) => AddThreadScreen(
           controller: AddThreadController(),
+          messagesService: widget.messagesService,
         ),
       ),
     );

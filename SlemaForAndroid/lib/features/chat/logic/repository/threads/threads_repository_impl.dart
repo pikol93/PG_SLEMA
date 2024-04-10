@@ -1,6 +1,6 @@
 import 'package:pg_slema/features/chat/logic/converter/thread_dto_converter.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
-import 'package:pg_slema/features/chat/logic/repository/threads_repository.dart';
+import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread_dto.dart';
 import 'package:uuid/uuid.dart';
 
