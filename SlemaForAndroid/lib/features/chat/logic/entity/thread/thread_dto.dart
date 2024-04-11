@@ -1,4 +1,5 @@
 import 'package:pg_slema/utils/data/dto.dart';
+import 'package:uuid/uuid.dart';
 
 class ThreadDto implements Dto {
   @override
@@ -46,13 +47,15 @@ class ThreadDto implements Dto {
     );
   }
 
-  static Map<String, dynamic> toJson(ThreadDto dto) => {
-        'id': dto.id,
-        'title': dto.title,
-        'lastMessage': {
-          'content': dto.lastMessageContent,
-          'dateTime': dto.lastMessageDateTime,
-          'sender': {'name': dto.lastMessageSenderName}
+  Map<String, dynamic> toJson(String userId) => {
+        'title': title,
+        'initiatorId': userId,
+        'message': {
+          'senderId': userId,
+          'conversationId': id,
+          'content': lastMessageContent,
+          'dateTime': lastMessageDateTime,
+          'sender': {'name': lastMessageSenderName}
         }
       };
 }

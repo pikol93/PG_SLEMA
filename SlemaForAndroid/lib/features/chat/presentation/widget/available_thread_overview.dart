@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/chat/logic/entity/thread.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 import 'package:pg_slema/utils/date/date.dart';
 import 'package:intl/intl.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container_with_on_tap.dart';

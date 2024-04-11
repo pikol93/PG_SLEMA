@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/chat/logic/entity/chat_message.dart';
+import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.dart';
 import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository.dart';
 
 class MessagesRepositoryImpl implements MessagesRepository {

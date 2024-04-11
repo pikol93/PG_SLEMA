@@ -1,6 +1,6 @@
-import 'package:pg_slema/features/chat/logic/entity/thread_dto.dart';
-import 'package:pg_slema/features/chat/logic/entity/last_message.dart';
-import 'package:pg_slema/features/chat/logic/entity/thread.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread_dto.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/last_message.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 
 class ThreadDtoConverter {
   static Thread fromDto(ThreadDto dto) {
@@ -20,7 +20,8 @@ class ThreadDtoConverter {
       thread.id,
       thread.title,
       thread.lastMessage.content,
-      thread.lastMessage.dateTime.toIso8601String(),
+      //thread.lastMessage.dateTime.toIso8601String(), TODO:
+      "2012-06-30T12:30:40+01:00[Europe/London]",
       thread.lastMessage.senderName,
     );
   }

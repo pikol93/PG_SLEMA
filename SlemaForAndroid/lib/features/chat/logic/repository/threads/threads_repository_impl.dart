@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:pg_slema/features/chat/logic/converter/thread_dto_converter.dart';
-import 'package:pg_slema/features/chat/logic/entity/thread.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository.dart';
-import 'package:pg_slema/features/chat/logic/entity/thread_dto.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread_dto.dart';
 import 'package:pg_slema/features/chat/logic/repository/network_repository.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
+import 'package:uuid/uuid.dart';
 
 class ThreadsRepositoryImpl
     with NetworkRepository, Logger
@@ -27,9 +28,18 @@ class ThreadsRepositoryImpl
       logger.error(e);
     }
 
-    return Future.delayed(
-      const Duration(milliseconds: 0),
-      () => [],
-    );
+    return Future.value([]);
+  }
+
+  @override
+  Future<Response?> createThread(Thread thread, String userId) {
+    try {
+      return dio.put("/api/conversations/${thread.id}",
+          data: ThreadDtoConverter.toDto(thread).toJson(userId));
+    } catch (e) {
+      logger.error(e);
+    }
+
+    return Future.value(null);
   }
 }

@@ -1,17 +1,25 @@
-import 'package:pg_slema/features/chat/logic/entity/chat_message.dart';
-import 'package:uuid/v4.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/last_message.dart';
+import 'package:uuid/uuid.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 
 class AddThreadController {
-  String threadName = "";
+  String threadTitle = "";
   String message = "";
 
   bool isValid() {
-    return threadName.isNotEmpty;
+    return threadTitle.isNotEmpty & message.isNotEmpty;
   }
 
-  ChatMessage createChatMessage() {
-    //TODO
-    return ChatMessage(UuidV4().toString(), message, DateTime.now(),
-        UuidV4().toString(), threadName);
+  Thread createNewThreadWithRandomID() {
+    //TODO Add user
+    return Thread(
+      const Uuid().v4(),
+      threadTitle,
+      LastMessage(
+        message,
+        "UserTODO",
+        DateTime.now(),
+      ),
+    );
   }
 }

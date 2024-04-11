@@ -7,7 +7,7 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
-import 'package:pg_slema/features/chat/logic/entity/thread.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
 
@@ -71,7 +71,7 @@ class _AvailableThreadsState extends State<AvailableThreads> {
       MaterialPageRoute(
         builder: (context) => AddThreadScreen(
           controller: AddThreadController(),
-          messagesService: widget.messagesService,
+          threadsService: widget.threadsService,
         ),
       ),
     );

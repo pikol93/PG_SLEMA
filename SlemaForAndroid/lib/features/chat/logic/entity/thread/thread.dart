@@ -1,4 +1,4 @@
-import 'package:pg_slema/features/chat/logic/entity/last_message.dart';
+import 'package:pg_slema/features/chat/logic/entity/thread/last_message.dart';
 
 class Thread {
   final String id;
