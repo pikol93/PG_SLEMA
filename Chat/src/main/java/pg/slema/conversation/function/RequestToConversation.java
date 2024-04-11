@@ -20,17 +20,6 @@ public class RequestToConversation implements BiFunction<UUID, PutConversationRe
                 .initiator(User.builder()
                         .id(request.getInitiatorId())
                         .build())
-                .lastMessage(Message.builder()
-                        .sender(User.builder()
-                                .id(request.getMessage().getSenderId())
-                                .build())
-                        .conversation(Conversation.builder()
-                                .id(request.getMessage().getConversationId())
-                                .build())
-                        .dateTime(request.getMessage().getDateTime())
-                        .content(request.getMessage().getContent())
-                        .id(UUID.randomUUID())
-                        .build())
                 .build();
     }
 }

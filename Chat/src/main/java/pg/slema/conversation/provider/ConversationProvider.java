@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface ConversationProvider {
     @Transactional
-    Conversation getConversationForMember(UUID conversationId, UUID userId);
+    Conversation getConversationForMember(UUID conversationId, User member);
 }

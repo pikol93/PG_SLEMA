@@ -27,8 +27,6 @@ public class WebSocketEventListener {
 
     private final MessageService messageService;
 
-    private final UserService userService;
-
     private final ConversationService conversationService;
 
     private final SimpMessagingTemplate messagingTemplate;
@@ -37,12 +35,10 @@ public class WebSocketEventListener {
 
     @Autowired
     public WebSocketEventListener(MessageService messageService,
-                                  UserService userService,
                                   ConversationService conversationService,
                                   SimpMessagingTemplate messagingTemplate,
                                   ChatContentToResponse chatContentToResponse) {
         this.messageService = messageService;
-        this.userService = userService;
         this.conversationService = conversationService;
         this.messagingTemplate = messagingTemplate;
         this.chatContentToResponse = chatContentToResponse;
@@ -82,8 +78,10 @@ public class WebSocketEventListener {
             throw new IllegalArgumentException("Incorrect conversation ID");
         }
 
+        List<User> users = new LinkedList<>(conversation.get().getParticipants());
+        users.add(0, conversation.get().getInitiator());
+
         List<Message> messages = messageService.findAllByConversation(conversationId);
-        List<User> users = userService.findAllByConversation(conversationId);
         return chatContentToResponse.apply(conversation.get(), users, messages);
     }
 

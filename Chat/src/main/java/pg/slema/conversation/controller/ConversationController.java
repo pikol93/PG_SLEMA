@@ -7,6 +7,7 @@ import pg.slema.conversation.dto.PutConversationRequest;
 
 import java.util.UUID;
 
+@CrossOrigin(origins = "*")
 public interface ConversationController {
     @GetMapping("/api/conversations")
     @ResponseStatus(HttpStatus.OK)

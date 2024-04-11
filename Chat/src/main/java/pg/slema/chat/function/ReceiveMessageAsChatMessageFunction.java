@@ -22,13 +22,14 @@ public class ReceiveMessageAsChatMessageFunction implements BiFunction<UUID, Rec
 
     @Override
     public Message apply(UUID messageId, ReceivedChatMessage receivedChatMessage) {
+        User sender = createSender(receivedChatMessage.getSenderId());
         return Message.builder()
                 .id(messageId)
                 .content(receivedChatMessage.getContent())
                 .dateTime(receivedChatMessage.getDateTime())
                 .conversation(conversationProvider.getConversationForMember(receivedChatMessage.getConversationId(),
-                        receivedChatMessage.getSenderId()))
-                .sender(createSender(receivedChatMessage.getSenderId()))
+                        sender  ))
+                .sender(sender)
                 .build();
     }
 

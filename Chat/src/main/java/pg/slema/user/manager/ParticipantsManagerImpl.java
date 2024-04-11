@@ -8,6 +8,8 @@ import pg.slema.user.entity.User;
 import pg.slema.user.service.UserService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class ParticipantsManagerImpl implements ParticipantsManager {
@@ -30,11 +32,24 @@ public class ParticipantsManagerImpl implements ParticipantsManager {
     public void addParticipantIfNecessary(User user, Conversation conversation) {
         List<User> participants = userService.findParticipantsByConversation(conversation.getId());
         User initiator = conversation.getInitiator();
-        if(!user.equals(initiator) && !participants.contains(user)) {
+        if(!user.getId().equals(initiator.getId()) && participants
+                .stream().map(User::getId)
+                .noneMatch(id -> id.equals(user.getId()))) {
             participants.add(user);
             conversation.setParticipants(participants);
             conversationService.replace(conversation);
-            newParticipantsNotifier.notifyAboutNewParticipant(conversation.getId(), user);
+            notifyAboutNewParticipant(user.getId(), conversation.getId());
         }
+    }
+
+    private void notifyAboutNewParticipant(UUID userId, UUID conversationId) {
+
+        Optional<User> user = userService.find(userId);
+
+        if(user.isEmpty()) {
+            throw new RuntimeException("User doesn't exist");
+        }
+
+        newParticipantsNotifier.notifyAboutNewParticipant(conversationId, user.get());
     }
 }
