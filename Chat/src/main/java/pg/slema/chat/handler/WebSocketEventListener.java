@@ -11,12 +11,9 @@ import pg.slema.chat.dto.ChatContent;
 import pg.slema.chat.function.ChatContentToResponse;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.service.ConversationService;
-import pg.slema.message.dto.GetMessagesResponse;
 import pg.slema.message.entity.Message;
 import pg.slema.message.service.MessageService;
-import pg.slema.user.dto.GetUsersResponse;
 import pg.slema.user.entity.User;
-import pg.slema.user.service.UserService;
 
 import java.security.Principal;
 import java.util.*;
