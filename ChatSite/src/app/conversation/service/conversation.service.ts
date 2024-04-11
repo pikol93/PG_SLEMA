@@ -22,6 +22,6 @@ export class ConversationService {
   }
   
   putConversation(uuid: string, conversation: NewConversation) : Observable<any> {
-    return this.http.put<void>(`/api/conversations/${uuid}`, conversation);
+    return this.http.put<void>(`http://chat-backend/api/conversations/${uuid}`, conversation);
   }
 }
