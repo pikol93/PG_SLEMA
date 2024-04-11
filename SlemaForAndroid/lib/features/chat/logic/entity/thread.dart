@@ -5,4 +5,11 @@ class Thread {
   final String title;
   final LastMessage lastMessage;
   Thread(this.id, this.title, this.lastMessage);
+
+  @override
+  String toString() {
+    return "id: $id\n"
+        "title: $title\n"
+        "LastMessage: $lastMessage\n";
+  }
 }

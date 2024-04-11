@@ -1,33 +1,35 @@
+import 'package:dio/dio.dart';
 import 'package:pg_slema/features/chat/logic/converter/thread_dto_converter.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread_dto.dart';
-import 'package:uuid/uuid.dart';
+import 'package:pg_slema/features/chat/logic/repository/network_repository.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class ThreadsRepositoryImpl implements ThreadsRepository {
+class ThreadsRepositoryImpl
+    with NetworkRepository, Logger
+    implements ThreadsRepository {
+  late final Dio dio;
+  ThreadsRepositoryImpl() {
+    dio = createDioInstance();
+  }
+
   @override
-  Future<List<Thread>> getAll() {
-    // TODO get from server
-    List<ThreadDto> threads = [
-      ThreadDto(
-        const Uuid().toString(),
-        "Watek1",
-        "Tutaj napisalem bardzo dlugą wiadomość, użyj ellipsis..........",
-        DateTime.now().toIso8601String(),
-        "Ty",
-      ),
-      ThreadDto(
-        const Uuid().toString(),
-        "Watek2",
-        "Tutaj otrzymana krótsza wiadomość",
-        DateTime.now().toIso8601String(),
-        "Wolontariusz Serwer Marek",
-      ),
-    ];
+  Future<List<Thread>> getAll() async {
+    try {
+      return dio.get("/api/conversations").then((response) {
+        return (response.data['conversations'] ?? [])
+            .map<Thread>((thread) =>
+                ThreadDtoConverter.fromDto(ThreadDto.fromJson(thread)))
+            .toList();
+      });
+    } catch (e) {
+      logger.error(e);
+    }
 
     return Future.delayed(
-      const Duration(milliseconds: 500),
-      () => threads.map((e) => ThreadDtoConverter.fromDto(e)).toList(),
+      const Duration(milliseconds: 0),
+      () => [],
     );
   }
 }
