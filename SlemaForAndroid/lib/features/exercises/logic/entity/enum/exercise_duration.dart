@@ -6,23 +6,16 @@ enum ExerciseDuration {
   over120,
 }
 
-extension DoubleDurationExtension on double {
-  ExerciseDuration toExerciseDuration() {
-    if (this <= 0.2) {
-      return ExerciseDuration.upTo15;
-    } else if (this <= 0.4) {
-      return ExerciseDuration.upTo30;
-    } else if (this <= 0.6) {
-      return ExerciseDuration.upTo60;
-    } else if (this <= 0.8) {
-      return ExerciseDuration.upTo120;
-    } else {
-      return ExerciseDuration.over120;
-    }
-  }
-}
-
 extension ExerciseDurationExtension on ExerciseDuration {
+  static ExerciseDuration? fromDtoRepresentation(String value) {
+    return ExerciseDuration.values
+        .firstWhere((element) => value == element.dtoRepresentation);
+  }
+
+  String get dtoRepresentation {
+    return toString();
+  }
+
   String get labelTextRepresentation {
     switch (this) {
       case ExerciseDuration.upTo15:
@@ -71,6 +64,22 @@ extension ExerciseDurationExtension on ExerciseDuration {
         return 100;
       default:
         throw ArgumentError("Unexpected argument \"$this\"");
+    }
+  }
+}
+
+extension DoubleExerciseDurationExtension on double {
+  ExerciseDuration toExerciseDuration() {
+    if (this <= 0.2) {
+      return ExerciseDuration.upTo15;
+    } else if (this <= 0.4) {
+      return ExerciseDuration.upTo30;
+    } else if (this <= 0.6) {
+      return ExerciseDuration.upTo60;
+    } else if (this <= 0.8) {
+      return ExerciseDuration.upTo120;
+    } else {
+      return ExerciseDuration.over120;
     }
   }
 }

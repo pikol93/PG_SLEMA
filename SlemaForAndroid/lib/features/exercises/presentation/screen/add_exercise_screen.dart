@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.dart';
+import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_duration_picker.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_intensity_picker.dart';
@@ -91,11 +93,11 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
     _exerciseController.exerciseTime = timeOfDay;
   }
 
-  void _onDurationChanged(int duration) {
+  void _onDurationChanged(ExerciseDuration duration) {
     _exerciseController.exerciseDuration = duration;
   }
 
-  void _onIntensityChanged(int intensity) {
+  void _onIntensityChanged(ExerciseIntensity intensity) {
     _exerciseController.intensity = intensity;
   }
 

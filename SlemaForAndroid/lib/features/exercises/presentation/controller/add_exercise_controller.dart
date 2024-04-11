@@ -7,8 +7,8 @@ import 'package:uuid/uuid.dart';
 class AddExerciseController {
   String _exerciseId = const Uuid().v4();
   String name = "";
-  int intensity = ExerciseIntensity.veryGentle.intRepresentation;
-  int exerciseDuration = ExerciseDuration.upTo15.intRepresentation;
+  ExerciseIntensity intensity = ExerciseIntensity.veryGentle;
+  ExerciseDuration exerciseDuration = ExerciseDuration.upTo15;
   DateTime exerciseDate = DateTime.now();
   TimeOfDay exerciseTime = TimeOfDay.now();
 

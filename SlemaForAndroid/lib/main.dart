@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pg_slema/features/exercises/logic/converter/exercise_to_dto_converter.dart';
+import 'package:pg_slema/features/exercises/logic/repository/shared_preferences_exercise_repository.dart';
+import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/assessment_factory_impl.dart';
@@ -33,17 +36,22 @@ Future<void> main() async {
   final assessmentFactory =
       AssessmentFactoryImpl(repository: assessmentsRepository);
 
+  var exercisesConverter = ExerciseToDtoConverter();
+  final exerciseRepository =
+      SharedPreferencesExerciseRepository(exercisesConverter);
+  final exerciseService = ExerciseService(exerciseRepository);
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MainScreenController()),
         ChangeNotifierProvider(
-            create: (context) => MotivationScreenController()),
+          create: (context) => MotivationScreenController(),
+        ),
         Provider<AssessmentsRepository>(create: (_) => assessmentsRepository),
         Provider<AssessmentsService>(create: (_) => assessmentsService),
-        Provider<AssessmentFactory>(
-          create: (_) => assessmentFactory,
-        ),
+        Provider<AssessmentFactory>(create: (_) => assessmentFactory),
+        Provider<ExerciseService>(create: (_) => exerciseService),
       ],
       child: MaterialApp(
         theme: lightTheme,

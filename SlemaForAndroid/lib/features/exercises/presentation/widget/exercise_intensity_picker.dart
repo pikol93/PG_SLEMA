@@ -5,7 +5,7 @@ import 'package:pg_slema/utils/widgets/default_container/container_divider.dart'
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class ExerciseIntensityPicker extends StatefulWidget {
-  final ValueChanged<int> onIntensityChanged;
+  final ValueChanged<ExerciseIntensity> onIntensityChanged;
   const ExerciseIntensityPicker({super.key, required this.onIntensityChanged});
 
   @override
@@ -44,8 +44,7 @@ class _ExerciseIntensityPickerState extends State<ExerciseIntensityPicker> {
   }
 
   void _onIntensityChanged(double sliderValue) {
-    widget.onIntensityChanged(
-        sliderValue.toExerciseIntensity().intRepresentation);
+    widget.onIntensityChanged(sliderValue.toExerciseIntensity());
 
     setState(() {
       _label = sliderValue.toExerciseIntensity().labelTextRepresentation;

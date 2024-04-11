@@ -41,4 +41,11 @@ class SharedPreferencesExerciseRepository
     final dto = exerciseConverter.toDto(exercise);
     await updateDto(dto);
   }
+
+  @override
+  Future deleteAllExercises() async {
+    final dtoList = await getAllDto();
+    final ids = dtoList.map((e) => e.id).toList(growable: false);
+    await deleteAllFrom(ids);
+  }
 }

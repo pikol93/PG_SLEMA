@@ -10,4 +10,6 @@ mixin ExerciseRepository {
   Future updateExercise(Exercise exercise);
 
   Future deleteExercise(String id);
+
+  Future deleteAllExercises();
 }

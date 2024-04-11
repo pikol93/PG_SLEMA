@@ -5,8 +5,8 @@ class ExerciseDto with Dto {
   @override
   final String id;
   final String name;
-  final int intensity;
-  final int exerciseDuration;
+  final String intensity;
+  final String exerciseDuration;
   final DateTime exerciseDate;
   final TimeOfDay exerciseTime;
 

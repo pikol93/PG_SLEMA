@@ -9,23 +9,16 @@ enum ExerciseIntensity {
   veryIntense,
 }
 
-extension DoubleDurationExtension on double {
-  ExerciseIntensity toExerciseIntensity() {
-    if (this <= 0.2) {
-      return ExerciseIntensity.veryGentle;
-    } else if (this <= 0.4) {
-      return ExerciseIntensity.gentle;
-    } else if (this <= 0.6) {
-      return ExerciseIntensity.moderate;
-    } else if (this <= 0.8) {
-      return ExerciseIntensity.intense;
-    } else {
-      return ExerciseIntensity.veryIntense;
-    }
+extension ExerciseIntensityExtension on ExerciseIntensity {
+  static ExerciseIntensity? fromDtoRepresentation(String value) {
+    return ExerciseIntensity.values
+        .firstWhere((element) => value == element.dtoRepresentation);
   }
-}
 
-extension ExerciseDurationExtension on ExerciseIntensity {
+  String get dtoRepresentation {
+    return toString();
+  }
+
   String get labelTextRepresentation {
     switch (this) {
       case ExerciseIntensity.veryGentle:
@@ -96,6 +89,22 @@ extension ExerciseDurationExtension on ExerciseIntensity {
             ExerciseIntensityColors.orange, ExerciseIntensityColors.red, value);
       default:
         throw ArgumentError("Unexpected argument \"$this\"");
+    }
+  }
+}
+
+extension DoubleExerciseIntensityExtension on double {
+  ExerciseIntensity toExerciseIntensity() {
+    if (this <= 0.2) {
+      return ExerciseIntensity.veryGentle;
+    } else if (this <= 0.4) {
+      return ExerciseIntensity.gentle;
+    } else if (this <= 0.6) {
+      return ExerciseIntensity.moderate;
+    } else if (this <= 0.8) {
+      return ExerciseIntensity.intense;
+    } else {
+      return ExerciseIntensity.veryIntense;
     }
   }
 }
