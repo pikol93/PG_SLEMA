@@ -45,7 +45,8 @@ class _AvailableThreadsState extends State<AvailableThreads> {
                       return AvailableThreadOverview(
                         thread: snapshot.data!.elementAt(index),
                         onThreadPressed: () => _onThreadPressed(
-                            snapshot.data!.elementAt(index).id),
+                            snapshot.data!.elementAt(index).id,
+                            snapshot.data!.elementAt(index).title),
                       );
                     },
                   ),
@@ -80,14 +81,17 @@ class _AvailableThreadsState extends State<AvailableThreads> {
     );
   }
 
-  void _onThreadPressed(String threadID) {
+  void _onThreadPressed(String threadID, String threadTitle) {
     //TODO fix this service instantiation
     MessagesService m = MessagesServiceImpl(MessagesRepositoryImpl(threadID));
 
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                ThreadChatScreen(messagesService: m, threadID: threadID)));
+            builder: (context) => ThreadChatScreen(
+                  messagesService: m,
+                  threadID: threadID,
+                  threadTitle: threadTitle,
+                )));
   }
 }

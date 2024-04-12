@@ -81,7 +81,7 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
         return;
       }
 
-      _moveToThreadChatScreen(t.id);
+      _moveToThreadChatScreen(t.id, t.title);
     }
   }
 
@@ -106,7 +106,7 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
     return true;
   }
 
-  void _moveToThreadChatScreen(String threadID) {
+  void _moveToThreadChatScreen(String threadID, String threadTitle) {
     //TODO fix this service instantiation
     MessagesService m = MessagesServiceImpl(MessagesRepositoryImpl(threadID));
 
@@ -114,7 +114,10 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                ThreadChatScreen(messagesService: m, threadID: threadID)));
+            builder: (context) => ThreadChatScreen(
+                  messagesService: m,
+                  threadID: threadID,
+                  threadTitle: threadTitle,
+                )));
   }
 }
