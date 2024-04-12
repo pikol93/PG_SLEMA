@@ -20,8 +20,7 @@ class ThreadDtoConverter {
       thread.id,
       thread.title,
       thread.lastMessage.content,
-      //thread.lastMessage.dateTime.toIso8601String(), TODO:
-      "2012-06-30T12:30:40+01:00[Europe/London]",
+      "${thread.lastMessage.dateTime.toIso8601String()}Z", //TODO
       thread.lastMessage.senderName,
     );
   }

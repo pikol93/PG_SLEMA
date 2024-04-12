@@ -11,8 +11,6 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository_impl.dart';
 
 class AllThreadsScreen extends StatelessWidget {
-  final MessagesService messagesService =
-      MessagesServiceImpl(MessagesRepositoryImpl());
   final ThreadsService threadsService =
       ThreadsServiceImpl(ThreadsRepositoryImpl());
   AllThreadsScreen({super.key});
@@ -25,10 +23,7 @@ class AllThreadsScreen extends StatelessWidget {
           titleText: "Konsultacje",
         ),
         if (threadsService.isAnyThreadAvailable())
-          AvailableThreads(
-            threadsService: threadsService,
-            messagesService: messagesService,
-          )
+          AvailableThreads(threadsService: threadsService)
         else
           const DefaultBody(child: NoThreadsFound()),
       ],

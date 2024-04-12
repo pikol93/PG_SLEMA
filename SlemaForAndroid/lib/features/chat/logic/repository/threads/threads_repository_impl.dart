@@ -5,7 +5,6 @@ import 'package:pg_slema/features/chat/logic/repository/threads/threads_reposito
 import 'package:pg_slema/features/chat/logic/entity/thread/thread_dto.dart';
 import 'package:pg_slema/features/chat/logic/repository/network_repository.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:uuid/uuid.dart';
 
 class ThreadsRepositoryImpl
     with NetworkRepository, Logger
