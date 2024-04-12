@@ -31,7 +31,7 @@ class ThreadDto implements Dto {
     String senderName = '';
     if (lastMessage.isNotEmpty) {
       content = lastMessage['content'];
-      dateTime = lastMessage['intakeDate'] ?? DateTime.now().toString();
+      dateTime = lastMessage['dateTime'] ?? DateTime.now().toString();
       Map<String, dynamic> sender = lastMessage['sender'];
       if (lastMessage.isNotEmpty) {
         senderName = sender['name'];
