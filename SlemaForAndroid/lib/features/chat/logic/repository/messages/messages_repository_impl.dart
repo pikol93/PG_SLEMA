@@ -16,14 +16,12 @@ class MessagesRepositoryImpl
   late StreamController<ChatMessage> _messageStreamController;
 
   MessagesRepositoryImpl(this.threadID) {
-    print("Tworze repozytorium!");
     _historyStreamController = StreamController<List<ChatMessage>>.broadcast();
     _messageStreamController = StreamController<ChatMessage>.broadcast();
     client = createAndActivateStompClient(_onConnect);
   }
 
   void dispose() {
-    print("Zabijam repozytorium!");
     _historyStreamController.close();
     _messageStreamController.close();
     client.deactivate();
@@ -46,15 +44,25 @@ class MessagesRepositoryImpl
             ChatMessageDto.fromJson(messageJson, threadID)))
         .toList();
 
+    if (_historyStreamController.isClosed) {
+      logger.error(
+          "Cannot add history to the history stream controller. HistoryStreamController is closed.");
+      return;
+    }
     _historyStreamController.add(messages);
   }
 
   void _onMessageReceived(StompFrame frame) {
     logger.info("Received new message in thread $threadID");
     dynamic jsonData = json.decode(frame.body ?? "");
-    ChatMessage message = jsonData.map<ChatMessage>((messageJson) =>
-        ChatMessageDtoConverter.fromDto(
-            ChatMessageDto.fromJson(messageJson, threadID)));
+    ChatMessage message = ChatMessageDtoConverter.fromDto(
+        ChatMessageDto.fromJson(jsonData, threadID));
+
+    if (_historyStreamController.isClosed) {
+      logger.error(
+          "Cannot add history to the message stream controller. MessageStreamController is closed.");
+      return;
+    }
 
     _messageStreamController.add(message);
   }
@@ -67,5 +75,16 @@ class MessagesRepositoryImpl
   @override
   StreamController<ChatMessage> getLastMessageStream() {
     return _messageStreamController;
+  }
+
+  @override
+  void sendMessage(ChatMessage chatMessage) {
+    client.send(
+        destination: '/app/chat/$threadID',
+        body: jsonEncode(
+            ChatMessageDtoConverter.toDto(chatMessage).toJson(threadID)),
+        headers: {});
+
+    logger.info("Sent message in thread $threadID");
   }
 }

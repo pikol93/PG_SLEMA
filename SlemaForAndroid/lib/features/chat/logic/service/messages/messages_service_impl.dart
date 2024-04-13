@@ -9,12 +9,18 @@ class MessagesServiceImpl implements MessagesService {
   MessagesServiceImpl(this.messagesRepository);
 
   @override
-  Stream<List<ChatMessage>> getHistoryStream() {
-    return messagesRepository.getHistoryStream().stream;
+  StreamController<List<ChatMessage>> getHistoryStream() {
+    return messagesRepository.getHistoryStream();
   }
 
   @override
-  Stream<ChatMessage> getLastMessageStream() {
-    return messagesRepository.getLastMessageStream().stream;
+  StreamController<ChatMessage> getLastMessageStream() {
+    return messagesRepository.getLastMessageStream();
+  }
+
+  @override
+  void sendMessage(ChatMessage chatMessage) {
+    if (chatMessage.content.isEmpty) return;
+    messagesRepository.sendMessage(chatMessage);
   }
 }

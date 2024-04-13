@@ -5,4 +5,5 @@ import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.da
 abstract class MessagesRepository {
   StreamController<List<ChatMessage>> getHistoryStream();
   StreamController<ChatMessage> getLastMessageStream();
+  void sendMessage(ChatMessage chatMessage);
 }

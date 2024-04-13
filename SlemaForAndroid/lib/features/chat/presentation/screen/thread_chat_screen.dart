@@ -1,5 +1,5 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository.dart';
 import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository_impl.dart';
 import 'package:pg_slema/features/chat/logic/service/messages/messages_service_impl.dart';
 import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
@@ -30,6 +30,19 @@ class ThreadChatScreen extends StatefulWidget {
 }
 
 class _ThreadChatScreenState extends State<ThreadChatScreen> {
+  final ScrollController _listScrollController = ScrollController();
+  late StreamController<List<ChatMessage>> _historyMessagesStreamController;
+  late StreamController<ChatMessage> _newMessageStreamController;
+  List<ChatMessage> _allMessages = [];
+  @override
+  void initState() {
+    super.initState();
+    _historyMessagesStreamController =
+        widget.messagesService.getHistoryStream();
+    _newMessageStreamController = widget.messagesService.getLastMessageStream();
+    _newMessageStreamController.stream.listen(_onMessageGet);
+  }
+
   @override
   void dispose() {
     widget.messagesRepository.dispose();
@@ -44,7 +57,7 @@ class _ThreadChatScreenState extends State<ThreadChatScreen> {
           DefaultAppBar(title: widget.threadTitle),
           DefaultBody(
             child: StreamBuilder(
-              stream: widget.messagesService.getHistoryStream(),
+              stream: _historyMessagesStreamController.stream,
               builder: (BuildContext context,
                   AsyncSnapshot<List<ChatMessage>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -56,21 +69,25 @@ class _ThreadChatScreenState extends State<ThreadChatScreen> {
                 } else if (!snapshot.hasData) {
                   return const Text("No data");
                 } else {
-                  return ListView.builder(
-                    itemCount: snapshot.data?.length ?? 0,
-                    prototypeItem: MessageBubble(
-                      message: snapshot.data!.first.content,
-                      isSentByMe: snapshot.data!.first.isSentByMe(widget.myID),
-                    ),
-                    itemBuilder: (context, index) {
-                      return MessageBubble(
-                        message: snapshot.data!.elementAt(index).content,
-                        isSentByMe: snapshot.data!
-                            .elementAt(index)
-                            .isSentByMe(widget.myID),
-                      );
-                    },
-                  );
+                  _allMessages = snapshot.data ?? [];
+                  Widget listView = ListView.builder(
+                      controller: _listScrollController,
+                      itemCount: _allMessages.length,
+                      prototypeItem: MessageBubble(
+                        message: _allMessages.first.content,
+                        isSentByMe: _allMessages.first.isSentByMe(widget.myID),
+                      ),
+                      itemBuilder: (context, index) {
+                        return MessageBubble(
+                          message: _allMessages.elementAt(index).content,
+                          isSentByMe: _allMessages
+                              .elementAt(index)
+                              .isSentByMe(widget.myID),
+                        );
+                      });
+
+                  _scrollDownListView();
+                  return listView;
                 }
               },
             ),
@@ -81,7 +98,27 @@ class _ThreadChatScreenState extends State<ThreadChatScreen> {
     );
   }
 
+  void _scrollDownListView() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final position = _listScrollController.position.maxScrollExtent;
+      _listScrollController.animateTo(
+        position,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
   void _onMessageSend(String message) {
-    setState(() {});
+    //TODO should it be here?
+    ChatMessage m =
+        ChatMessage(widget.myID, "TODO Sendername", message, DateTime.now());
+    widget.messagesService.sendMessage(m);
+  }
+
+  void _onMessageGet(ChatMessage newMessage) {
+    setState(() {
+      _allMessages.add(newMessage);
+    });
   }
 }
