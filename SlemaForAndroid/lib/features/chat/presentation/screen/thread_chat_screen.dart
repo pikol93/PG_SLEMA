@@ -17,7 +17,7 @@ class ThreadChatScreen extends StatefulWidget {
   late final MessagesService messagesService; //TODO sus
   final String threadID;
   final String threadTitle;
-  final String myID = ""; //TODO
+  final String myID = "54c53da7-849a-4b93-8822-9006c494ca62"; //TODO
 
   ThreadChatScreen(
       {super.key, required this.threadID, required this.threadTitle}) {
