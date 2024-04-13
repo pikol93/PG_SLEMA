@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/chat/presentation/widget/chat_message_text_form_field.dart';
-
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
 class ChatMessageInput extends StatelessWidget with Logger {

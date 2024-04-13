@@ -3,9 +3,7 @@ import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/controller/medicine_screen_controller.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/single_medicine_widget.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
-import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
-import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/add_medicine_screen.dart';
 
 class AllMedicinesScreen extends StatefulWidget {

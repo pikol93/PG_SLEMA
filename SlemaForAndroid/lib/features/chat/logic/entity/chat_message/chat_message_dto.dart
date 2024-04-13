@@ -1,5 +1,3 @@
-import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.dart';
-
 class ChatMessageDto {
   final String senderID;
   final String senderName;
@@ -19,7 +17,8 @@ class ChatMessageDto {
   static ChatMessageDto fromJson(Map<String, dynamic> json, String threadID) {
     // if (!json.containsKey('id')) {
     //   throw const FormatException("Missing 'id' key in JSON");
-    // } //TODO?
+    // }
+    // TODO?
 
     Map<String, dynamic> senderInfo = json['sender'];
     String senderName = '';

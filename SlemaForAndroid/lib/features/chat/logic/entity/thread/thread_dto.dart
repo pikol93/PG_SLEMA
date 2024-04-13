@@ -1,5 +1,4 @@
 import 'package:pg_slema/utils/data/dto.dart';
-import 'package:uuid/uuid.dart';
 
 class ThreadDto implements Dto {
   @override
