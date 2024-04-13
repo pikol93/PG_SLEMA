@@ -1,0 +1,40 @@
+.user-details-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-details {
+    margin-top: 20px;
+  }
+  
+  .detail-row {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .detail-label {
+    width: 120px;
+    font-weight: bold;
+  }
+  
+  .detail-value {
+    flex: 1;
+  }
+
+  .return-button {
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 12px 28px;
+    background-color: #444;
+    color: #eee;
+    cursor: pointer;
+  }
+
+  .return-button:hover {
+    background-color: #222;
+  }
+  

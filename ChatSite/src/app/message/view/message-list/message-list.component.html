@@ -1,5 +1,4 @@
 <!-- messages.component.html -->
-<button class="message-return-button" (click)="goBack()">Powrót</button>
 <div class="message-container">
     <div *ngFor="let message of messages?.messages" class="message-item" [ngClass]="{ 'message-sent': message.sender.id === currentUserId }">
       <div class="message-content">

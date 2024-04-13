@@ -17,8 +17,6 @@ public class GetMessagesResponse {
     @Builder
     public static class User {
 
-        private UUID id;
-
         private String name;
     }
 

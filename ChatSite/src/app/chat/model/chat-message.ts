@@ -1,9 +1,6 @@
 export interface ChatMessage {
     senderId: string;
-    conversation: {
-        id: string;
-        title: string;
-    }
+    conversationId: string;
     content: string;
     dateTime: Date;
 }

@@ -18,6 +18,10 @@ public class GetUsersResponse {
         private UUID id;
 
         private String name;
+
+        private boolean isBanned;
+
+        private boolean isEmailConfirmed;
     }
 
     @Singular

@@ -37,4 +37,9 @@ public class UserDefaultController implements UserController {
     public GetUserResponse getUser(UUID userId) {
         return service.find(userId).map(userToResponse).orElseThrow();
     }
+
+    @Override
+    public GetUsersResponse getConversationUsers(UUID conversationId) {
+        return usersToResponse.apply(service.findAllByConversation(conversationId));
+    }
 }

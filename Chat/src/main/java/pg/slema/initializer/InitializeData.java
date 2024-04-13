@@ -13,7 +13,6 @@ import pg.slema.user.service.UserService;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -37,7 +36,7 @@ public class InitializeData implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         initializeUsers();
         initializeConversations();
         bindFirstConversation();
@@ -82,21 +81,38 @@ public class InitializeData implements InitializingBean {
         if(userService.findAll().isEmpty()) {
             User admin = User.builder()
                     .id(UUID.fromString("54c53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Admin")
+                    .name("Admin")
+                    .email("adminos@wp.pl")
+                    .sex("Mężczyzna")
                     .build();
 
             User volunteer = User.builder()
                     .id(UUID.fromString("aac53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Volunteer")
+                    .name("Volunteer")
+                    .isEmailConfirmed(true)
+                    .email("szturmowiec@wp.pl")
+                    .sex("Inne")
                     .build();
 
             User typicalUser = User.builder()
                     .id(UUID.fromString("bbc53da7-849a-4b93-8822-9006c494ca62"))
-                    .nickname("Typical user")
+                    .name("Typical user")
+                    .email("typical@gan.com")
+                    .sex("Kobieta")
+                    .build();
+
+            User bannedAuthorizedUser = User.builder()
+                    .id(UUID.fromString("bbd53da7-849a-4b93-8822-9006c494ca62"))
+                    .name("Banned authorized user")
+                    .email("ganczar@gan.pl")
+                    .sex("Mężczyzna")
+                    .isBanned(true)
+                    .isEmailConfirmed(true)
                     .build();
             userService.create(admin);
             userService.create(volunteer);
             userService.create(typicalUser);
+            userService.create(bannedAuthorizedUser);
         }
     }
     private void bindFirstConversation() {
@@ -109,9 +125,10 @@ public class InitializeData implements InitializingBean {
     private void bindSecondConversation() {
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
-        Conversation second = conversationService.findAll().get(1); //Second initialized, first participate
+        User fourthUser = userService.findAll().get(3);
+        Conversation second = conversationService.findAll().get(1); //Second initialized, first and banned participate
         second.setInitiator(secondUser);
-        second.setParticipants(List.of(firstUser));
+        second.setParticipants(List.of(firstUser, fourthUser));
         conversationService.replace(second);
     }
 
@@ -154,6 +171,7 @@ public class InitializeData implements InitializingBean {
         secondsCounter = 2;
         User firstUser = userService.findAll().get(0);
         User secondUser = userService.findAll().get(1);
+        User fourthUser = userService.findAll().get(3);
         Conversation secondConversation = conversationService.findAll().get(1);
 
         Message firstMessage = Message.builder()
@@ -180,9 +198,18 @@ public class InitializeData implements InitializingBean {
                 .dateTime(simulateMessageDelay())
                 .build();
 
+        Message fourthMessage = Message.builder()
+                .id(UUID.randomUUID())
+                .sender(fourthUser)
+                .conversation(secondConversation)
+                .content("Ganczarenko")
+                .dateTime(simulateMessageDelay())
+                .build();
+
         messageService.create(firstMessage);
         messageService.create(secondMessage);
         messageService.create(thirdMessage);
+        messageService.create(fourthMessage);
     }
 
     private void addMessagesToThirdConversation() {
@@ -285,7 +312,7 @@ public class InitializeData implements InitializingBean {
     
     @SneakyThrows
     private ZonedDateTime simulateMessageDelay() {
-        int secondsDelayTime = secondsCounter += 10;
-        return ZonedDateTime.now().plusSeconds(secondsDelayTime).minusDays(1);
+        int secondsDelayTime = secondsCounter += 15;
+        return ZonedDateTime.now().plusSeconds(secondsDelayTime).minusDays(1).minusMinutes(30);
     }
 }

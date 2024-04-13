@@ -1,0 +1,29 @@
+.user-conversation-container {
+  padding: 10px;
+  border: 1px solid #999;
+  background-color: #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.member-details {
+  padding: 5px;
+  border-bottom: 1px solid #999;
+}
+
+.member-info p {
+  margin: 5px 0;
+}
+
+.status-banned {
+  color: red;
+  font-weight: bold;
+}
+
+.status-email-confirmed {
+  color: green;
+  font-weight: bold;
+}

@@ -1,36 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MessageService } from '../../service/message.service';
 import { Messages } from '../../model/messages';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule, NgFor } from '@angular/common';
-import { Location } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { formatTime, formatDate } from '../../../utils/DateFormatUtils';
 
 @Component({
   selector: 'app-message-list',
   standalone: true,
-  imports: [CommonModule, NgFor],
+  imports: [NgFor, NgClass],
   templateUrl: './message-list.component.html',
   styleUrl: './message-list.component.css',
   providers: [MessageService]
 })
 export class MessageListComponent {
   conversationId: string = "";
-  currentUserId: string = "bbc53da7-849a-4b93-8822-9006c494ca62";
+  @Input() currentUserId: string = "";
 
-  constructor(private service: MessageService, private route: ActivatedRoute, private location: Location) {
-  }
-
-  messages: Messages | undefined;
-
-  ngOnInit(): void {
-    this.conversationId = this.route.snapshot.paramMap.get('id') ?? '';
-    this.service.getMessagesInConversation(this.conversationId).subscribe(messages => this.messages = messages);
-  }
-
-  goBack(): void {
-    this.location.back();
-  }
+  @Input() messages: Messages | undefined;
 
   formatDate(dateTimeStr: string): string {
     return formatDate(dateTimeStr);

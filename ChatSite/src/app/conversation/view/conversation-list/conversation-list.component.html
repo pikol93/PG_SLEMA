@@ -1,4 +1,5 @@
 <!-- conversations.component.html -->
+<a class="new-conversation" routerLink="/conversations/{{generateRandomId()}}/new" routerLinkActive="active" ariaCurrentWhenActive="page">Nowa konwersacja</a>
 <div class="conversation-list">
   <div *ngFor="let conversation of conversations?.conversations" class="conversation-container">
     <div class="conversation-header">
@@ -9,7 +10,6 @@
       <p class="conversation-sender">{{ conversation.lastMessage.sender.name }}</p>
       <p class="conversation-message">{{ conversation.lastMessage.content }}</p>
     </div>
-    <a class="conversation-link" routerLink="/conversations/{{conversation.id}}/messages" routerLinkActive="active" ariaCurrentWhenActive="page">Historia</a>
     <a class="conversation-link" routerLink="/conversations/{{conversation.id}}/chat" routerLinkActive="active" ariaCurrentWhenActive="page">Czat</a>
   </div>
 </div>
