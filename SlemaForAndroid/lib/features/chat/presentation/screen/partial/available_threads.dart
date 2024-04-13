@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository_impl.dart';
-import 'package:pg_slema/features/chat/logic/service/messages/messages_service.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/add_thread_screen.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
@@ -9,9 +7,9 @@ import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_a
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
-import 'package:pg_slema/utils/widgets/vertically_centered_information.dart';
+import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_spinkit.dart';
+import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_text_information.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
-import 'package:pg_slema/features/chat/logic/service/messages/messages_service_impl.dart';
 
 class AvailableThreads extends StatefulWidget {
   final ThreadsService threadsService;
@@ -22,6 +20,14 @@ class AvailableThreads extends StatefulWidget {
 }
 
 class _AvailableThreadsState extends State<AvailableThreads> {
+  late Future<List<Thread>> _getThreads;
+
+  @override
+  void initState() {
+    super.initState();
+    _getThreads = widget.threadsService.getAll();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -30,7 +36,7 @@ class _AvailableThreadsState extends State<AvailableThreads> {
           const LabeledSectionDivider(label: "Dostępne wątki"),
           Container(height: 10),
           FutureBuilder(
-            future: widget.threadsService.getAll(),
+            future: _getThreads,
             builder:
                 (BuildContext context, AsyncSnapshot<List<Thread>> snapshot) {
               if (snapshot.hasData) {
@@ -58,8 +64,7 @@ class _AvailableThreadsState extends State<AvailableThreads> {
                 );
               } else {
                 return const DefaultBody(
-                  child: VerticallyCenteredTextInformation(
-                      textInformation: 'Próbuję pobrać informacje...'),
+                  child: VerticallyCenteredSpinkit(),
                 );
               }
             },
@@ -76,20 +81,23 @@ class _AvailableThreadsState extends State<AvailableThreads> {
         builder: (context) => AddThreadScreen(
           controller: AddThreadController(),
           threadsService: widget.threadsService,
+          onThreadAdded: _reloadThreads,
         ),
       ),
     );
   }
 
-  void _onThreadPressed(String threadID, String threadTitle) {
-    //TODO fix this service instantiation
-    MessagesService m = MessagesServiceImpl(MessagesRepositoryImpl(threadID));
+  void _reloadThreads() {
+    setState(() {
+      _getThreads = widget.threadsService.getAll();
+    });
+  }
 
+  void _onThreadPressed(String threadID, String threadTitle) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ThreadChatScreen(
-                  messagesService: m,
                   threadID: threadID,
                   threadTitle: threadTitle,
                 )));

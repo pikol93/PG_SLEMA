@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:pg_slema/features/chat/logic/converter/chat_message_dto_converter.dart';
 import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.dart';
@@ -11,8 +12,21 @@ class MessagesRepositoryImpl
     with WebsocketRepository, Logger
     implements MessagesRepository {
   final String threadID;
+  late StreamController<List<ChatMessage>> _historyStreamController;
+  late StreamController<ChatMessage> _messageStreamController;
+
   MessagesRepositoryImpl(this.threadID) {
+    print("Tworze repozytorium!");
+    _historyStreamController = StreamController<List<ChatMessage>>.broadcast();
+    _messageStreamController = StreamController<ChatMessage>.broadcast();
     client = createAndActivateStompClient(_onConnect);
+  }
+
+  void dispose() {
+    print("Zabijam repozytorium!");
+    _historyStreamController.close();
+    _messageStreamController.close();
+    client.deactivate();
   }
 
   void _onConnect(StompFrame frame) {
@@ -31,6 +45,8 @@ class MessagesRepositoryImpl
         .map<ChatMessage>((messageJson) => ChatMessageDtoConverter.fromDto(
             ChatMessageDto.fromJson(messageJson, threadID)))
         .toList();
+
+    _historyStreamController.add(messages);
   }
 
   void _onMessageReceived(StompFrame frame) {
@@ -39,23 +55,17 @@ class MessagesRepositoryImpl
     ChatMessage message = jsonData.map<ChatMessage>((messageJson) =>
         ChatMessageDtoConverter.fromDto(
             ChatMessageDto.fromJson(messageJson, threadID)));
+
+    _messageStreamController.add(message);
   }
 
   @override
-  Future<List<ChatMessage>> getAll() {
-    // TODO: implement getAll
-    throw UnimplementedError();
+  StreamController<List<ChatMessage>> getHistoryStream() {
+    return _historyStreamController;
   }
 
   @override
-  Future<ChatMessage> getLastMessage() {
-    // TODO: implement getLastMessage
-    throw UnimplementedError();
-  }
-
-  @override
-  Future save(ChatMessage message) {
-    // TODO: implement save
-    throw UnimplementedError();
+  StreamController<ChatMessage> getLastMessageStream() {
+    return _messageStreamController;
   }
 }

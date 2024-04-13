@@ -1,23 +1,20 @@
+import 'dart:async';
+
 import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.dart';
-import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository_impl.dart';
-import 'package:pg_slema/features/chat/logic/repository/websocket_repository.dart';
 import 'package:pg_slema/features/chat/logic/service/messages/messages_service.dart';
+import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository.dart';
 
 class MessagesServiceImpl implements MessagesService {
-  final MessagesRepositoryImpl messagesRepository;
+  final MessagesRepository messagesRepository;
   MessagesServiceImpl(this.messagesRepository);
+
   @override
-  Future<ChatMessage> getMessage() {
-    return messagesRepository.getLastMessage();
+  Stream<List<ChatMessage>> getHistoryStream() {
+    return messagesRepository.getHistoryStream().stream;
   }
 
   @override
-  Future<List<ChatMessage>> getMessages() {
-    return messagesRepository.getAll();
-  }
-
-  @override
-  Future sendMessage(ChatMessage message) {
-    return messagesRepository.save(message);
+  Stream<ChatMessage> getLastMessageStream() {
+    return messagesRepository.getLastMessageStream().stream;
   }
 }

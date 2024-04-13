@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository_impl.dart';
-import 'package:pg_slema/features/chat/logic/service/messages/messages_service.dart';
-import 'package:pg_slema/features/chat/logic/service/messages/messages_service_impl.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
@@ -18,8 +15,12 @@ import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 class AddThreadScreen extends StatefulWidget with Logger {
   final AddThreadController controller;
   final ThreadsService threadsService;
+  final VoidCallback onThreadAdded;
   const AddThreadScreen(
-      {super.key, required this.controller, required this.threadsService});
+      {super.key,
+      required this.controller,
+      required this.threadsService,
+      required this.onThreadAdded});
 
   @override
   State<AddThreadScreen> createState() => _AddThreadScreenState();
@@ -81,6 +82,7 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
         return;
       }
 
+      widget.onThreadAdded();
       _moveToThreadChatScreen(t.id, t.title);
     }
   }
@@ -107,15 +109,11 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
   }
 
   void _moveToThreadChatScreen(String threadID, String threadTitle) {
-    //TODO fix this service instantiation
-    MessagesService m = MessagesServiceImpl(MessagesRepositoryImpl(threadID));
-
     Navigator.pop(context);
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ThreadChatScreen(
-                  messagesService: m,
                   threadID: threadID,
                   threadTitle: threadTitle,
                 )));

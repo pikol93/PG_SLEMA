@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
-  final double _radius = 24.0;
+  final double _radius = 46.0;
   final double _colorOpacity = 0.8;
   final double _padding = 16.0;
   final String message;

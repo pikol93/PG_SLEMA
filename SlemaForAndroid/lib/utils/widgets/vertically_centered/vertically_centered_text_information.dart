@@ -17,6 +17,7 @@ class VerticallyCenteredTextInformation extends StatelessWidget {
               ),
           textAlign: TextAlign.center,
         ),
+        Container(height: 40),
       ],
     );
   }
