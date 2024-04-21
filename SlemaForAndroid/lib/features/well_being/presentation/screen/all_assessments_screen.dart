@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
-import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/features/well_being/presentation/widget/all_assessments/single_assessment_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
-import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
+import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class AllAssessmentsScreen extends StatefulWidget {
@@ -51,27 +50,13 @@ class _AllAssessmentsScreenState extends State<AllAssessmentsScreen>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const DefaultAppBar(title: "Raporty zdrowotne"),
+        const SizedBox(height: 20.0),
+        const WhiteAppBar(titleText: "Raporty"),
         DefaultBody(
           child: FutureBuilder(
             future: assessmentsFuture,
             builder: _futureBuilder,
           ),
-        ),
-        FloatingActionButton(
-          onPressed: () {
-            widget.factory.generateWithUniqueId().then(
-                  (assessment) => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AssessmentScreen(
-                        assessment: assessment,
-                      ),
-                    ),
-                  ),
-                );
-          },
-          child: const Icon(Icons.add),
         ),
       ],
     );

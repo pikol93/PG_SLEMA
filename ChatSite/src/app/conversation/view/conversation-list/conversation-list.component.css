@@ -67,4 +67,20 @@
   .conversation-link:hover {
     background-color: #222;
   }
-  
+
+.new-conversation {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    padding: 8px 15px;
+    background-color: #555;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.new-conversation:hover {
+    background-color: #222;
+}

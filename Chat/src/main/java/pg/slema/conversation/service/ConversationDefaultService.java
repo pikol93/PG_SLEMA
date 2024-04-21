@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pg.slema.conversation.entity.Conversation;
 import pg.slema.conversation.repository.ConversationRepository;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -14,9 +15,13 @@ public class ConversationDefaultService implements ConversationService {
 
     private final ConversationRepository conversationRepository;
 
+    private final Comparator<Conversation> conversationComparator;
+
     @Autowired
-    public ConversationDefaultService(ConversationRepository conversationRepository) {
+    public ConversationDefaultService(ConversationRepository conversationRepository,
+                                      Comparator<Conversation> conversationComparator) {
         this.conversationRepository = conversationRepository;
+        this.conversationComparator = conversationComparator;
     }
 
     @Override
@@ -26,17 +31,23 @@ public class ConversationDefaultService implements ConversationService {
 
     @Override
     public List<Conversation> findAll() {
-        return conversationRepository.findAll();
+        List<Conversation> conversations = conversationRepository.findAll();
+        conversations.sort(conversationComparator);
+        return conversations;
     }
 
     @Override
     public List<Conversation> findAllByInitiator(UUID userId) {
-        return conversationRepository.findConversationsByInitiatorId(userId);
+        List<Conversation> conversations = conversationRepository.findConversationsByInitiatorId(userId);
+        conversations.sort(conversationComparator);
+        return conversations;
     }
 
     @Override
     public List<Conversation> findAllByParticipant(UUID userId) {
-        return conversationRepository.findConversationsByParticipantsId(userId);
+        List<Conversation> conversations = conversationRepository.findConversationsByParticipantsId(userId);
+        conversations.sort(conversationComparator);
+        return conversations;
     }
 
     @Override

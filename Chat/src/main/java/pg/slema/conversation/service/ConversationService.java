@@ -1,6 +1,7 @@
 package pg.slema.conversation.service;
 
 import pg.slema.conversation.entity.Conversation;
+import pg.slema.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;

@@ -22,7 +22,7 @@ public class MessageToResponse implements Function<Message, GetMessageResponse> 
     private GetMessageResponse.User fromUser(User user) {
         return GetMessageResponse.User.builder()
                 .id(user.getId())
-                .name(user.getNickname())
+                .name(user.getName())
                 .build();
     }
 

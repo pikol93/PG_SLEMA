@@ -16,7 +16,7 @@ services:
   chat-frontend:
     build:
       context: ../../ChatSite
-      dockerfile: Dockerfile
+      dockerfile: ./dockerfiles/nginx.Dockerfile
     env_file:
       - ../../Enviromental/chat-front.env
     ports:
@@ -29,5 +29,12 @@ services:
     
   npm:
     image: node:18
+    volumes:
+      - ../../ChatSite:/app
+
+  ng:
+    build:
+      context: ../../ChatSite
+      dockerfile: ./dockerfiles/ng.Dockerfile
     volumes:
       - ../../ChatSite:/app

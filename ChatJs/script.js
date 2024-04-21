@@ -74,11 +74,10 @@ function connect() {
         heartbeatIncoming: 4000,
         heartbeatOutgoing: 4000,
         onConnect: function() {
-            console.log(`/user/topic/messages/${conversationId}`)
-            client.subscribe(`/user/topic/messages/${conversationId}`, receivedMessage => {
-            console.log(receivedMessage);
+            client.subscribe(`/user/topic/history/${conversationId}`, receivedMessage => {
             var receivedMessageBody = JSON.parse(receivedMessage.body);
             console.log('Otrzymano historię');
+            console.log(receivedMessageBody);
             var messages = receivedMessageBody.messages;
             var messageContainer = document.getElementById('message-container');
             messages.forEach(function(message) {
@@ -114,10 +113,7 @@ function sendMessage(client, senderId, roomId) {
     var message = {
         content: document.getElementById('message-input').value,
         senderId: senderId,
-        conversation: {
-            id: roomId,
-            title: 'Default random name'
-        },
+        conversationId: roomId,
         dateTime: currentDate
     };
 

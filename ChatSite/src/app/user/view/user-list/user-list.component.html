@@ -1,1 +1,16 @@
-<p>user-list works!</p>
+<div class="user-list">
+    <ul>
+      <li *ngFor="let user of users.users" class="user-item">
+        <div class="user-avatar">
+          <img src="assets/avatar.png" alt="Avatar">
+        </div>
+        <div class="user-details">
+          <p class="user-name">{{ user.name }}</p>
+          <p *ngIf="user.banned" class="banned">Status: Zbanowany</p>
+          <p *ngIf="user.emailConfirmed" class="email-confirmed">Status: Email potwierdzony</p>
+          <a class="user-link" routerLink="/users/{{user.id}}" routerLinkActive="active" ariaCurrentWhenActive="page">Szczegóły</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  

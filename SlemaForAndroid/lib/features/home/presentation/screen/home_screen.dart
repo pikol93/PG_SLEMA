@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/widgets/dividers/labeled_section_divider.dart';
+import 'package:pg_slema/features/home/presentation/widget/daily_assessment_widget.dart';
 import 'package:pg_slema/features/motivation/presentation/widget/motivation_daily.dart';
 import 'package:pg_slema/features/upcoming_events/presentation/widget/upcoming_events_widget.dart';
+import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
+import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final AssessmentFactory assessmentFactory;
+  final AssessmentsService assessmentService;
+
+  const HomeScreen({
+    super.key,
+    required this.assessmentFactory,
+    required this.assessmentService,
+  });
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -24,16 +34,9 @@ class HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 5.0,
         ),
-        DefaultContainer(
-          shadow: false,
-          padding: const EdgeInsets.all(15),
-          child: Text(
-            "Raport zdrowotny",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.labelMedium!.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
-          ),
+        DailyAssessmentWidget(
+          factory: widget.assessmentFactory,
+          service: widget.assessmentService,
         ),
         const SizedBox(
           height: 5.0,

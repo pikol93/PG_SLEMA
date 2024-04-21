@@ -20,7 +20,9 @@ public class UsersToResponse implements Function<List<User>, GetUsersResponse> {
     private GetUsersResponse.User toUser(User user) {
         return GetUsersResponse.User.builder()
                 .id(user.getId())
-                .name(user.getNickname())
+                .name(user.getName())
+                .isBanned(user.isBanned())
+                .isEmailConfirmed(user.isEmailConfirmed())
                 .build();
     }
 }

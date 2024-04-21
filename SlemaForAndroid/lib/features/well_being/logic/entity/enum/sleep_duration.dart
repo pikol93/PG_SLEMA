@@ -30,4 +30,8 @@ extension SleepDurationExtension on SleepDuration {
         throw ArgumentError("Unexpected argument \"$this\"");
     }
   }
+
+  String get hourTextRepresentation {
+    return "${buttonTextRepresentation}h";
+  }
 }

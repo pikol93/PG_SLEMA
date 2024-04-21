@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/calendar/presentation/screen/calendar_screen.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
+import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
@@ -32,6 +33,8 @@ class MainScreenState extends State<MainScreen> {
         Provider.of<AssessmentFactory>(context, listen: false);
     final assessmentsService =
         Provider.of<AssessmentsService>(context, listen: false);
+    final exercisesService =
+        Provider.of<ExerciseService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -68,11 +71,16 @@ class MainScreenState extends State<MainScreen> {
       ),
       body: <Widget>[
         const CalendarScreen(),
-        const HomeScreen(),
+        HomeScreen(
+          assessmentFactory: assessmentFactory,
+          assessmentService: assessmentsService,
+        ),
         const MenuScreen(),
         const AllMedicinesScreen(),
         const DietScreen(),
-        const ExercisesScreen(),
+        ExercisesScreen(
+          service: exercisesService,
+        ),
         const PicturesScreen(),
         AllAssessmentsScreen(
           service: assessmentsService,

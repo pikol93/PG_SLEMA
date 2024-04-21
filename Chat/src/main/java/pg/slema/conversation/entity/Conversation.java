@@ -28,22 +28,22 @@ public class Conversation {
     @JoinColumn(name = "initiator")
     private User initiator;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany
     @JoinTable(
             name = "participated_conversations",
             joinColumns = @JoinColumn(name = "conversation_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<User> participants;
+        private List<User> participants;
 
-    @OneToMany(mappedBy = "conversation", cascade = CascadeType.REMOVE)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Message> messages;
+        @OneToMany(mappedBy = "conversation", cascade = CascadeType.REMOVE)
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
+        private List<Message> messages;
 
-    @OneToOne
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Message lastMessage;
+        @OneToOne
+        @ToString.Exclude
+        @EqualsAndHashCode.Exclude
+        private Message lastMessage;
 }
