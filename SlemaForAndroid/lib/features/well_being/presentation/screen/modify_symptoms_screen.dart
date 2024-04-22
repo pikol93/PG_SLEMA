@@ -143,7 +143,20 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
   void onSymptomAddPressed(String value) {
     logger.debug("Symptom add: $value");
 
-    // TODO: Validate input
+    final validationErrorMessage = _validateSymptomToAdd(value);
+    if (validationErrorMessage != null) {
+      final theme = Theme.of(context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            validationErrorMessage,
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: theme.colorScheme.background,
+            ),
+          ),
+        ),
+      );
+    }
 
     final symptomEntries =
         assessment.symptomEntries.copyWithAdditionalEntry(value);
@@ -159,5 +172,21 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
     widget.onDataChanged((assessment) {
       return newAssessment;
     });
+  }
+
+  String? _validateSymptomToAdd(String value) {
+    // This should probably return an enum, but we're short on time so String is good enough
+    if (value.isEmpty) {
+      return "Nie można dodać pustego symptomu.";
+    }
+
+    final alreadyExists = assessment.symptomEntries.symptomEntries
+        .any((element) => element.name == value);
+
+    if (alreadyExists) {
+      return "Symptom o tej nazwie już istnieje.";
+    }
+
+    return null;
   }
 }
