@@ -33,40 +33,66 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Fix styling
+    final buttonColor = Theme.of(context).colorScheme.primary;
+    final textTheme = Theme.of(context).textTheme.labelMedium;
+
     return Scaffold(
       body: Column(
         children: [
           const DefaultAppBar(title: "Symptomy"),
           DefaultBody(
+            mainWidgetsPaddingHorizontal: 0.0,
             child: ListView.builder(
               itemCount: assessment.symptomEntries.symptomEntries.length,
               itemBuilder: (context, index) {
-                return Row(
+                return Column(
                   children: [
-                    IconButton(
-                      onPressed: () {
-                        onDeletePressed(index);
-                      },
-                      icon: const Icon(Icons.remove),
-                    ),
-                    Expanded(
-                      child: Text(
-                        assessment.symptomEntries.symptomEntries[index].name,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              onDeletePressed(index);
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: buttonColor,
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              assessment
+                                  .symptomEntries.symptomEntries[index].name,
+                              style: textTheme,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              onMoveUpPressed(index);
+                            },
+                            icon: Icon(
+                              Icons.keyboard_arrow_up,
+                              color: buttonColor,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              onMoveDownPressed(index);
+                            },
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: buttonColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        onMoveUpPressed(index);
-                      },
-                      icon: const Icon(Icons.arrow_upward),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        onMoveDownPressed(index);
-                      },
-                      icon: const Icon(Icons.arrow_downward),
-                    ),
+                    Divider(
+                      height: 0.0,
+                      thickness: 2.0,
+                      color: Theme.of(context).colorScheme.secondary,
+                    )
                   ],
                 );
               },
