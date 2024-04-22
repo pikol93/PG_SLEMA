@@ -15,6 +15,7 @@ class SymptomsBottomBar extends StatefulWidget {
 
 class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
   final double labelFontSize = 48.0;
+  final formKey = GlobalKey<FormState>();
 
   String value = "";
 
@@ -36,15 +37,17 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
             ),
             Expanded(
               // TODO: This settings seem to make no difference. Fix displaying the text.
-              child: TextFormField(
-                onChanged: onChanged,
-                // TODO: Fix text not disappearing after clicking the add button.
-                initialValue: value,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(
-                    fontSize: labelFontSize,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+              child: Form(
+                key: formKey,
+                child: TextFormField(
+                  onChanged: onChanged,
+                  initialValue: value,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(
+                      fontSize: labelFontSize,
+                      fontWeight: FontWeight.w700,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
                 ),
               ),
@@ -63,6 +66,7 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
     logger.debug("Pressed add button.");
     widget.onSymptomAddPressed(value);
     setState(() {
+      formKey.currentState?.reset();
       value = "";
     });
   }
