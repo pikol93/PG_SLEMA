@@ -21,38 +21,35 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 64.0,
-        maxHeight: 64.0,
-      ),
-      color: Theme.of(context).primaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: onAddPressed,
-              icon: const Icon(Icons.add),
-            ),
-            Expanded(
-              // TODO: This settings seem to make no difference. Fix displaying the text.
-              child: Form(
-                key: formKey,
+    return Form(
+      key: formKey,
+      child: Container(
+        constraints: const BoxConstraints(
+          minHeight: 64.0,
+          maxHeight: 64.0,
+        ),
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: onAddPressed,
+                icon: const Icon(Icons.add),
+              ),
+              Expanded(
                 child: TextFormField(
+                  textAlignVertical: TextAlignVertical.bottom,
                   onChanged: onChanged,
                   initialValue: value,
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(
-                      fontSize: labelFontSize,
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                  style: Theme.of(context).textTheme.labelSmall,
+                  decoration: const InputDecoration(
+                    hintText: "Wprowadź nazwę symptomu",
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
