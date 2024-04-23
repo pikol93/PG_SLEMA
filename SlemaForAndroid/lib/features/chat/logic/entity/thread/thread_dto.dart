@@ -12,11 +12,11 @@ class ThreadDto implements Dto {
 
   @override
   String toString() {
-    return "id: $id\n"
-        "title: $title\n"
-        "LastMessageContent: $lastMessageContent\n"
-        "LastMessageDateTime: $lastMessageDateTime\n"
-        "LastMessageSenderName: $lastMessageSenderName\n";
+    return "id: $id, "
+        "title: $title, "
+        "LastMessageContent: $lastMessageContent, "
+        "LastMessageDateTime: $lastMessageDateTime, "
+        "LastMessageSenderName: $lastMessageSenderName";
   }
 
   static ThreadDto fromJson(Map<String, dynamic> json) {

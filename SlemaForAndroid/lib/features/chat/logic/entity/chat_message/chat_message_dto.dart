@@ -8,10 +8,10 @@ class ChatMessageDto {
 
   @override
   String toString() {
-    return "senderName: $senderName\n"
-        "senderID: $senderID\n"
-        "dateTime: $dateTime\n"
-        "content: $content\n";
+    return "senderName: $senderName, "
+        "senderID: $senderID, "
+        "dateTime: $dateTime, "
+        "content: $content";
   }
 
   static ChatMessageDto fromJson(Map<String, dynamic> json, String threadID) {

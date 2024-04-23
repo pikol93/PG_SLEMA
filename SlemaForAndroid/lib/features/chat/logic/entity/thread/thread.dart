@@ -8,8 +8,8 @@ class Thread {
 
   @override
   String toString() {
-    return "id: $id\n"
-        "title: $title\n"
-        "LastMessage: $lastMessage\n";
+    return "id: $id, "
+        "title: $title, "
+        "LastMessage: $lastMessage";
   }
 }
