@@ -12,7 +12,7 @@ import 'package:pg_slema/utils/widgets/unfocus_on_children_tap.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 
-class AddThreadScreen extends StatefulWidget with Logger {
+class AddThreadScreen extends StatefulWidget {
   final AddThreadController controller;
   final ThreadsService threadsService;
   final VoidCallback onThreadAdded;
@@ -26,7 +26,7 @@ class AddThreadScreen extends StatefulWidget with Logger {
   State<AddThreadScreen> createState() => _AddThreadScreenState();
 }
 
-class _AddThreadScreenState extends State<AddThreadScreen> {
+class _AddThreadScreenState extends State<AddThreadScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -92,14 +92,14 @@ class _AddThreadScreenState extends State<AddThreadScreen> {
       return false;
     }
     if (response.statusCode == null) {
-      widget.logger.error("Reponse status code is null. "
+      logger.error("Reponse status code is null. "
           "As stated in the Dio library - "
           "this only happens when creating Response manually "
           "- shouldn't happen.");
       return false;
     }
     if (response.statusCode == 400) {
-      widget.logger.error("Status code response == 400."
+      logger.error("Status code response == 400."
           " This may be caused by lack of title or message,"
           "however UI shouldn't let it happen");
       return false;
