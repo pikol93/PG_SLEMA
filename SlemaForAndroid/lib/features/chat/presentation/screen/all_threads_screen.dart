@@ -19,10 +19,11 @@ class AllThreadsScreen extends StatelessWidget {
         const WhiteAppBar(
           titleText: "Konsultacje",
         ),
-        if (threadsService.isAnyThreadAvailable())
-          AvailableThreads(threadsService: threadsService)
-        else
+        if (threadsService.isAnyThreadAvailable()) ...[
+          AvailableThreads(threadsService: threadsService),
+        ] else ...[
           const DefaultBody(child: NoThreadsFound()),
+        ]
       ],
     );
   }
