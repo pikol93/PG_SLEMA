@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 class TimeOfDayPicker extends StatefulWidget {
   final ValueChanged<TimeOfDay> onTimeSelected;
 
+  final TimeOfDay? initialValue;
+
   const TimeOfDayPicker({
     super.key,
     required this.onTimeSelected,
+    this.initialValue,
   });
 
   @override
@@ -13,7 +16,14 @@ class TimeOfDayPicker extends StatefulWidget {
 }
 
 class _TimeOfDayPickerState extends State<TimeOfDayPicker> {
-  late TimeOfDay _selectedTime = TimeOfDay.now();
+  late TimeOfDay _selectedTime;
+
+  @override
+  void initState() {
+    super.initState();
+    final initialValue = widget.initialValue ?? TimeOfDay.now();
+    _selectedTime = initialValue;
+  }
 
   @override
   Widget build(BuildContext context) {
