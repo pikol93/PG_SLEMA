@@ -49,8 +49,9 @@ class ExercisesScreenState extends State<ExercisesScreen> {
                     padding: EdgeInsets.zero,
                     itemBuilder: (context, index) {
                       return ExerciseWidget(
-                              exercise: _controller.exercises.elementAt(index))
-                          .build(context);
+                        exercise: _controller.exercises.elementAt(index),
+                        controller: _controller,
+                      );
                     },
                   ),
                 ),

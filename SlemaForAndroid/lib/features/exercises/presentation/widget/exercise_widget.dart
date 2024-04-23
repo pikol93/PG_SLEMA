@@ -2,10 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.dart';
 import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
+import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
+import 'package:pg_slema/features/exercises/presentation/screen/add_exercise_screen.dart';
 import 'package:pg_slema/utils/date/date.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
+import 'package:pg_slema/utils/widgets/popup_menu_edit_delete_button.dart';
 
-class ExerciseWidget extends StatelessWidget {
+class ExerciseWidget extends StatefulWidget {
+  final Exercise exercise;
+  final AllExercisesController controller;
+
+  const ExerciseWidget({
+    super.key,
+    required this.exercise,
+    required this.controller,
+  });
+
+  @override
+  State<StatefulWidget> createState() => ExerciseWidgetState();
+}
+
+class ExerciseWidgetState extends State<ExerciseWidget> with Logger {
   static const double dateIconSize = 48.0;
   static const double dateTextHeightOverride = 0.5;
   static const double dateIconValuesHorizontalSpacing = 12.0;
@@ -13,10 +31,6 @@ class ExerciseWidget extends StatelessWidget {
   static const double spacingBetweenDateKeyAndValue = 8.0;
   static const double spacingBetweenDateValues = 8.0;
   static const double spacingBetweenDataValues = 16.0;
-
-  final Exercise exercise;
-
-  const ExerciseWidget({super.key, required this.exercise});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +85,10 @@ class ExerciseWidget extends StatelessWidget {
               children: [
                 Text("Data:", style: keyStyle),
                 const SizedBox(width: spacingBetweenDateKeyAndValue),
-                Text(exercise.exerciseDate.toDateString(), style: valueStyle),
+                Text(
+                  widget.exercise.exerciseDate.toDateString(),
+                  style: valueStyle,
+                ),
               ],
             ),
             const SizedBox(height: spacingBetweenDateValues),
@@ -79,11 +96,19 @@ class ExerciseWidget extends StatelessWidget {
               children: [
                 Text("Godzina:", style: keyStyle),
                 const SizedBox(width: spacingBetweenDateKeyAndValue),
-                Text(exercise.exerciseTime.format(context), style: valueStyle),
+                Text(
+                  widget.exercise.exerciseTime.format(context),
+                  style: valueStyle,
+                ),
               ],
             ),
           ],
-        )
+        ),
+        const Expanded(child: Column()),
+        PopupMenuEditDeleteButton(
+          onEditPressed: _onEditPressed,
+          onDeletePressed: _onDeletePressed,
+        ),
       ],
     );
   }
@@ -94,9 +119,9 @@ class ExerciseWidget extends StatelessWidget {
     TextStyle valueStyle,
   ) {
     final dataSections = [
-      ("Nazwa:", exercise.name),
-      ("Czas trwania:", exercise.exerciseDuration.textRepresentation),
-      ("Intensywność:", exercise.intensity.labelTextRepresentation),
+      ("Nazwa:", widget.exercise.name),
+      ("Czas trwania:", widget.exercise.exerciseDuration.textRepresentation),
+      ("Intensywność:", widget.exercise.intensity.labelTextRepresentation),
     ]
         .map(
           (entry) => Padding(
@@ -137,5 +162,21 @@ class ExerciseWidget extends StatelessWidget {
         )
       ],
     );
+  }
+
+  void _onEditPressed() {
+    logger.debug("Exercise edit pressed");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddExerciseScreen(
+          onExerciseAdded: widget.controller.onExerciseUpdated,
+        ),
+      ),
+    );
+  }
+
+  void _onDeletePressed() {
+    logger.debug("Exercise delete pressed");
   }
 }
