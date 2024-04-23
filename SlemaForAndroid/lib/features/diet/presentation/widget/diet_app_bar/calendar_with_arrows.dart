@@ -36,9 +36,9 @@ class _CalendarWithArrowsState extends State<CalendarWithArrows> {
           child: CalendarExactDatePicker(
             onDatePicked: _onDatePicked,
             controller: DatePickerController(
-              controller.firstDate,
-              controller.lastDate,
-              controller.pickedDate,
+              allowedFirstDate: controller.firstDate,
+              allowedLastDate: controller.lastDate,
+              initialDate: controller.pickedDate,
             ),
           ),
         ),

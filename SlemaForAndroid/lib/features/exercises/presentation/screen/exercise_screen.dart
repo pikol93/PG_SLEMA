@@ -31,9 +31,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   final _formKey = GlobalKey<FormState>();
   final _exerciseController = AddExerciseController();
   final _dateController = DatePickerController(
-    DateTime.now().subtract(const Duration(days: 365)),
-    DateTime.now(),
-    DateTime.now(),
+    allowedFirstDate: DateTime.now().subtract(const Duration(days: 365)),
+    allowedLastDate: DateTime.now(),
+    initialDate: DateTime.now(),
   );
 
   late String _title;

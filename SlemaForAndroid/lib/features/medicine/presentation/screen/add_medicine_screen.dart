@@ -15,6 +15,7 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
+
   const AddMedicineScreen({super.key, required this.onMedicineAdded});
 
   @override
@@ -133,12 +134,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
       children: [
         if (_controller.canDateBePicked) ...[
           DatePicker(
-              onDateSelected: (date) => _controller.intakeDate = date,
-              controller: DatePickerController(
-                  DateTime.now(),
-                  DateTime.now().add(const Duration(days: 365)),
-                  DateTime.now()),
-              label: "Data przyjęcia"),
+            label: "Data przyjęcia",
+            onDateSelected: (date) => _controller.intakeDate = date,
+            controller: DatePickerController(
+              allowedFirstDate: DateTime.now(),
+              allowedLastDate: DateTime.now().add(const Duration(days: 365)),
+              initialDate: DateTime.now(),
+            ),
+          ),
           const SizedBox(height: 20),
         ]
       ],
