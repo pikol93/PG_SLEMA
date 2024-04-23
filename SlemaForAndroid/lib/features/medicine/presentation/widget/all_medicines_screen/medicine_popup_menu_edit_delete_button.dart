@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/edit_medicine_screen.dart';
 
-class PopupMenuEditDeleteButton extends StatelessWidget {
+class MedicinePopupMenuEditDeleteButton extends StatelessWidget {
   final VoidCallback onDeletePressed;
   final ValueChanged<Medicine> onMedicineChanged;
   final ValueGetter<Medicine> medicineProvider;
-  const PopupMenuEditDeleteButton(
+  const MedicinePopupMenuEditDeleteButton(
       {super.key,
       required this.onDeletePressed,
       required this.onMedicineChanged,

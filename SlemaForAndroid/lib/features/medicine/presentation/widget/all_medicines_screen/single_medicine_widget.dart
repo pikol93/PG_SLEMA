@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
 import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/single_medicine_label.dart';
-import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/popup_menu_edit_delete_button.dart';
+import 'package:pg_slema/features/medicine/presentation/widget/all_medicines_screen/medicine_popup_menu_edit_delete_button.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
 
 class SingleMedicineWidget extends StatelessWidget {
@@ -38,7 +38,7 @@ class SingleMedicineWidget extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            PopupMenuEditDeleteButton(
+            MedicinePopupMenuEditDeleteButton(
                 onMedicineChanged: onMedicineEdited,
                 medicineProvider: () => medicine,
                 onDeletePressed: () => onMedicineDeleted(medicine)),
