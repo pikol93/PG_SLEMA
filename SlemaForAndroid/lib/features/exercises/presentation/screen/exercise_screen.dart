@@ -13,15 +13,15 @@ import 'package:pg_slema/utils/widgets/forms/text_input.dart';
 import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 import 'package:pg_slema/utils/widgets/time_of_day_picker/time_of_day_picker.dart';
 
-class AddExerciseScreen extends StatefulWidget {
+class ExerciseScreen extends StatefulWidget {
   final ValueChanged<Exercise> onExerciseAdded;
-  const AddExerciseScreen({super.key, required this.onExerciseAdded});
+  const ExerciseScreen({super.key, required this.onExerciseAdded});
 
   @override
-  State<StatefulWidget> createState() => _AddExerciseScreenState();
+  State<StatefulWidget> createState() => _ExerciseScreenState();
 }
 
-class _AddExerciseScreenState extends State<AddExerciseScreen> {
+class _ExerciseScreenState extends State<ExerciseScreen> {
   final _exerciseController = AddExerciseController();
   final _dateController = DatePickerController(
     DateTime.now().subtract(const Duration(days: 365)),

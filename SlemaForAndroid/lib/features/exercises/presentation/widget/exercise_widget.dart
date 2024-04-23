@@ -3,7 +3,7 @@ import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_duration.
 import 'package:pg_slema/features/exercises/logic/entity/enum/exercise_intensity.dart';
 import 'package:pg_slema/features/exercises/logic/entity/exercise.dart';
 import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
-import 'package:pg_slema/features/exercises/presentation/screen/add_exercise_screen.dart';
+import 'package:pg_slema/features/exercises/presentation/screen/exercise_screen.dart';
 import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
@@ -169,7 +169,7 @@ class ExerciseWidgetState extends State<ExerciseWidget> with Logger {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => AddExerciseScreen(
+        builder: (context) => ExerciseScreen(
           onExerciseAdded: widget.controller.onExerciseUpdated,
         ),
       ),
