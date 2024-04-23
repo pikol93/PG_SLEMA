@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/calendar/presentation/screen/calendar_screen.dart';
+import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
@@ -85,6 +86,7 @@ class MainScreenState extends State<MainScreen> {
           service: assessmentsService,
           factory: assessmentFactory,
         ),
+        AllThreadsScreen(),
         const SettingsScreen(),
       ][controller.currentIndex],
     );
