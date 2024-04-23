@@ -170,7 +170,8 @@ class ExerciseWidgetState extends State<ExerciseWidget> with Logger {
       context,
       MaterialPageRoute(
         builder: (context) => ExerciseScreen(
-          onExerciseAdded: widget.controller.onExerciseUpdated,
+          onExerciseSaved: widget.controller.onExerciseUpdated,
+          exercise: widget.exercise,
         ),
       ),
     );

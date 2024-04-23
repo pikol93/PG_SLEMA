@@ -14,14 +14,21 @@ import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 import 'package:pg_slema/utils/widgets/time_of_day_picker/time_of_day_picker.dart';
 
 class ExerciseScreen extends StatefulWidget {
-  final ValueChanged<Exercise> onExerciseAdded;
-  const ExerciseScreen({super.key, required this.onExerciseAdded});
+  final ValueChanged<Exercise> onExerciseSaved;
+  final Exercise? exercise;
+
+  const ExerciseScreen({
+    super.key,
+    required this.onExerciseSaved,
+    this.exercise,
+  });
 
   @override
   State<StatefulWidget> createState() => _ExerciseScreenState();
 }
 
 class _ExerciseScreenState extends State<ExerciseScreen> {
+  final _formKey = GlobalKey<FormState>();
   final _exerciseController = AddExerciseController();
   final _dateController = DatePickerController(
     DateTime.now().subtract(const Duration(days: 365)),
@@ -29,12 +36,25 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     DateTime.now(),
   );
 
-  final _formKey = GlobalKey<FormState>();
+  late String _title;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.exercise != null) {
+      _exerciseController.initFromExercise(widget.exercise!);
+      _title = "Edytuj ćwiczenie";
+    } else {
+      _title = "Dodaj ćwiczenie";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const DefaultAppBar(title: "Dodaj ćwiczenie"),
+        DefaultAppBar(title: _title),
         DefaultBody(
           child: Form(
             key: _formKey,
@@ -103,6 +123,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   void _onSaveButtonClicked() {
     var exercise = _exerciseController.createExercise();
-    widget.onExerciseAdded(exercise);
+    widget.onExerciseSaved(exercise);
   }
 }

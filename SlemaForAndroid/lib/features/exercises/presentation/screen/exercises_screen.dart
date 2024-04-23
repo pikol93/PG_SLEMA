@@ -70,7 +70,7 @@ class ExercisesScreenState extends State<ExercisesScreen> {
       context,
       MaterialPageRoute(
         builder: (context) => ExerciseScreen(
-          onExerciseAdded: _controller.onExerciseCreated,
+          onExerciseSaved: _controller.onExerciseCreated,
         ),
       ),
     );
