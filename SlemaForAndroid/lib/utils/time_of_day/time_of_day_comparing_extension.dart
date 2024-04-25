@@ -7,4 +7,12 @@ extension TimeOfDayComparators on TimeOfDay {
     if (minute > other.minute) return true;
     return false;
   }
+
+  int compareTo(TimeOfDay other) {
+    if (hour < other.hour) return -1;
+    if (hour > other.hour) return 1;
+    if (minute < other.minute) return -1;
+    if (minute > other.minute) return 1;
+    return 0;
+  }
 }
