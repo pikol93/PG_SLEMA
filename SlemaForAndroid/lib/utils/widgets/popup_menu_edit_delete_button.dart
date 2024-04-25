@@ -1,27 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/medicine/logic/entity/medicine.dart';
-import 'package:pg_slema/features/medicine/presentation/screen/edit_medicine_screen.dart';
 
 class PopupMenuEditDeleteButton extends StatelessWidget {
+  final VoidCallback onEditPressed;
   final VoidCallback onDeletePressed;
-  final ValueChanged<Medicine> onMedicineChanged;
-  final ValueGetter<Medicine> medicineProvider;
-  const PopupMenuEditDeleteButton(
-      {super.key,
-      required this.onDeletePressed,
-      required this.onMedicineChanged,
-      required this.medicineProvider});
 
-  void onEditPressed(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EditMedicineScreen(
-            onMedicineChanged: onMedicineChanged,
-            medicine: medicineProvider(),
-          ),
-        ));
-  }
+  const PopupMenuEditDeleteButton({
+    super.key,
+    required this.onEditPressed,
+    required this.onDeletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +16,7 @@ class PopupMenuEditDeleteButton extends StatelessWidget {
       itemBuilder: (context) {
         return [
           PopupMenuItem(
-            value: () {
-              onEditPressed(context);
-            },
+            value: onEditPressed,
             child: Text(
               'Edytuj',
               style: Theme.of(context).textTheme.labelMedium,

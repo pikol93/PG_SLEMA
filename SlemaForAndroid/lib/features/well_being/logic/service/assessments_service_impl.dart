@@ -24,6 +24,11 @@ class AssessmentsServiceImpl implements AssessmentsService {
   }
 
   @override
+  Future deleteEntry(int id) {
+    return repository.delete(id);
+  }
+
+  @override
   ChangeNotifier getAssessmentChangeNotifier() {
     return repository.getAssessmentChangeNotifier();
   }
