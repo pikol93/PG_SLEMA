@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pg_slema/features/calendar/presentation/screen/calendar_screen.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
@@ -43,9 +42,9 @@ class MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             CustomNavigationDestination(
-              icon: Icons.calendar_month_outlined,
-              selectedIcon: Icons.calendar_month,
-              label: 'Kalendarz',
+              icon: Icons.restaurant_menu_outlined,
+              selectedIcon: Icons.restaurant_menu,
+              label: 'Dieta',
               onPressed: controller.onTabTapped,
               currentSelectedIndex: controller.currentIndex,
               destinationIndex: 0,
@@ -70,7 +69,7 @@ class MainScreenState extends State<MainScreen> {
         ),
       ),
       body: <Widget>[
-        const CalendarScreen(),
+        const DietScreen(),
         HomeScreen(
           assessmentFactory: assessmentFactory,
           assessmentService: assessmentsService,
