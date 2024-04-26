@@ -34,7 +34,6 @@ class ExercisesScreenState extends State<ExercisesScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const SizedBox(height: 20.0),
       const WhiteAppBar(titleText: "Ćwiczenia"),
       DefaultBodyWithFloatingActionButton(
         onFloatingButtonPressed: _openAddExerciseScreen,
