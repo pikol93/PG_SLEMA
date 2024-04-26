@@ -15,6 +15,8 @@ class WhiteAppBar extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: AppBar(
+          scrolledUnderElevation:
+              0.0, //Disable scrolling under color change effect
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           iconTheme: Theme.of(context).appBarTheme.iconTheme!.copyWith(
