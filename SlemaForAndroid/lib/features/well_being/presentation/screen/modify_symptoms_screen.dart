@@ -142,6 +142,7 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
 
   void onSymptomAddPressed(String value) {
     logger.debug("Symptom add: $value");
+    value = value.trim();
 
     final validationErrorMessage = _validateSymptomToAdd(value);
     if (validationErrorMessage != null) {
