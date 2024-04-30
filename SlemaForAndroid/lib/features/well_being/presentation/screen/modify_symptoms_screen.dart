@@ -156,6 +156,8 @@ class ModifySymptomsScreenState extends State<ModifySymptomsScreen>
           ),
         ),
       );
+
+      return;
     }
 
     final symptomEntries =
