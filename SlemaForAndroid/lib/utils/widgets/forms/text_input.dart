@@ -38,7 +38,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   String? validateInput(String? value) {
-    if (widget.isValueRequired && (value == null || value.isEmpty)) {
+    if (widget.isValueRequired && (value == null || value.trim().isEmpty)) {
       return 'Proszę uzupełnić to pole';
     }
     return null;
