@@ -51,6 +51,15 @@ public class ConversationDefaultService implements ConversationService {
     }
 
     @Override
+    public List<Conversation> findAllByNotAttended(UUID userId) {
+        List<Conversation> conversations = conversationRepository.findAll();
+        return conversations.stream().filter(c -> !c.getInitiator().getId().equals(userId) &&
+                        c.getParticipants().stream().noneMatch(u -> u.getId().equals(userId)))
+                .sorted(conversationComparator)
+                .toList();
+    }
+
+    @Override
     public void create(Conversation conversation) {
         conversationRepository.save(conversation);
     }
