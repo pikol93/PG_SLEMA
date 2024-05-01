@@ -60,6 +60,13 @@ public class ConversationDefaultService implements ConversationService {
     }
 
     @Override
+    public List<Conversation> findAllByNotInitiated(UUID userId) {
+        List<Conversation> conversations = conversationRepository.findConversationsByInitiatorIdNot(userId);
+        conversations.sort(conversationComparator);
+        return conversations;
+    }
+
+    @Override
     public void create(Conversation conversation) {
         conversationRepository.save(conversation);
     }

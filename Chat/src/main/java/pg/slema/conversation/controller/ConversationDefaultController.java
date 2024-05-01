@@ -53,6 +53,7 @@ public class ConversationDefaultController implements ConversationController {
             case "participant" -> conversationsToResponse.apply(conversationService.findAllByParticipant(userId));
             case "initiator" -> conversationsToResponse.apply(conversationService.findAllByInitiator(userId));
             case "not-attended" -> conversationsToResponse.apply(conversationService.findAllByNotAttended(userId));
+            case "not-initiated" -> conversationsToResponse.apply(conversationService.findAllByNotInitiated(userId));
             case null, default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         };
     }
