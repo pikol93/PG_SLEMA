@@ -15,41 +15,41 @@ class SymptomsBottomBar extends StatefulWidget {
 
 class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
   final double labelFontSize = 48.0;
+  final formKey = GlobalKey<FormState>();
 
   String value = "";
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        minHeight: 64.0,
-        maxHeight: 64.0,
-      ),
-      color: Theme.of(context).primaryColor,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            IconButton(
-              onPressed: onAddPressed,
-              icon: const Icon(Icons.add),
-            ),
-            Expanded(
-              // TODO: This settings seem to make no difference. Fix displaying the text.
-              child: TextFormField(
-                onChanged: onChanged,
-                // TODO: Fix text not disappearing after clicking the add button.
-                initialValue: value,
-                decoration: InputDecoration(
-                  labelStyle: TextStyle(
-                    fontSize: labelFontSize,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+    return Form(
+      key: formKey,
+      child: Container(
+        constraints: const BoxConstraints(
+          minHeight: 64.0,
+          maxHeight: 64.0,
+        ),
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: onAddPressed,
+                icon: const Icon(Icons.add),
+              ),
+              Expanded(
+                child: TextFormField(
+                  textAlignVertical: TextAlignVertical.bottom,
+                  onChanged: onChanged,
+                  initialValue: value,
+                  style: Theme.of(context).textTheme.labelSmall,
+                  decoration: const InputDecoration(
+                    hintText: "Wprowadź nazwę symptomu",
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -63,6 +63,7 @@ class SymptomsBottomBarState extends State<SymptomsBottomBar> with Logger {
     logger.debug("Pressed add button.");
     widget.onSymptomAddPressed(value);
     setState(() {
+      formKey.currentState?.reset();
       value = "";
     });
   }
