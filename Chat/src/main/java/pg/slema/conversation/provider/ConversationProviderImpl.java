@@ -31,7 +31,7 @@ public class ConversationProviderImpl implements ConversationProvider {
         Optional<Conversation> conversation = conversationService.find(conversationId);
 
         if(conversation.isEmpty()) {
-            throw new RuntimeException("Conversation doesn't exist"); //TODO make this exception checked
+            throw new RuntimeException("Conversation doesn't exist");
         }
         else {
             Conversation existingConversation = conversation.get();
