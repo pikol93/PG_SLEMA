@@ -11,8 +11,8 @@ public interface ConversationService {
     List<Conversation> findAll();
     List<Conversation> findAllByInitiator(UUID userId);
     List<Conversation> findAllByParticipant(UUID userId);
-    List<Conversation> findAllByNotAttended(UUID userId);
-    List<Conversation> findAllByNotInitiated(UUID userId);
+    List<Conversation> findAllNotAttendedByUser(UUID userId);
+    List<Conversation> findAllNotInitiatedByUser(UUID userId);
     void create(Conversation conversation);
     void replace(Conversation conversation);
 }
