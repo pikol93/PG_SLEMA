@@ -20,12 +20,7 @@ class AssessmentSymptomEntry extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AssessmentSubtitleText(text: symptomEntry.name),
-          ],
-        ),
+        AssessmentSubtitleText(text: symptomEntry.name),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

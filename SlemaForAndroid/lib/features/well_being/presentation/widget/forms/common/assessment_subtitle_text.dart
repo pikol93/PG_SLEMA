@@ -10,13 +10,17 @@ class AssessmentSubtitleText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Text(
-        text,
-        softWrap: true,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.labelMedium,
-      ),
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            text,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.labelMedium,
+          ),
+        ),
+      ],
     );
   }
 }
