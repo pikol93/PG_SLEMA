@@ -3,9 +3,8 @@ import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart'
 import 'package:pg_slema/features/exercises/presentation/controller/exercises_controller.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercise_screen.dart';
 import 'package:pg_slema/features/exercises/presentation/widget/exercise_widget.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
-import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
-import 'package:pg_slema/utils/widgets/default_floating_action_button/default_floating_action_button.dart';
 
 class ExercisesScreen extends StatefulWidget {
   final ExerciseService service;
@@ -35,31 +34,18 @@ class ExercisesScreenState extends State<ExercisesScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      const SizedBox(height: 20.0),
       const WhiteAppBar(titleText: "Ćwiczenia"),
-      Expanded(
-        child: Stack(
-          children: [
-            Flex(
-              direction: Axis.vertical,
-              children: [
-                DefaultBody(
-                  child: ListView.builder(
-                    itemCount: _controller.exercises.length,
-                    padding: EdgeInsets.zero,
-                    itemBuilder: (context, index) {
-                      return ExerciseWidget(
-                        exercise: _controller.exercises.elementAt(index),
-                        controller: _controller,
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-            DefaultFloatingActionButton(
-                onPressed: _openAddExerciseScreen, child: const Icon(Icons.add))
-          ],
+      DefaultBodyWithFloatingActionButton(
+        onFloatingButtonPressed: _openAddExerciseScreen,
+        child: ListView.builder(
+          itemCount: _controller.exercises.length,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            return ExerciseWidget(
+              exercise: _controller.exercises.elementAt(index),
+              controller: _controller,
+            );
+          },
         ),
       ),
     ]);

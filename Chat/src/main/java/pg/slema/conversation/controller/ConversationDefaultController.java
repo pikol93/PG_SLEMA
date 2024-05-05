@@ -49,13 +49,13 @@ public class ConversationDefaultController implements ConversationController {
 
     @Override
     public GetConversationsResponse getUserConversations(UUID userId, String role) {
-        if(role.equals("participant")) {
-            return conversationsToResponse.apply(conversationService.findAllByParticipant(userId));
-        } else if(role.equals("initiator")) {
-            return conversationsToResponse.apply(conversationService.findAllByInitiator(userId));
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        return switch (role) {
+            case "participant" -> conversationsToResponse.apply(conversationService.findAllByParticipant(userId));
+            case "initiator" -> conversationsToResponse.apply(conversationService.findAllByInitiator(userId));
+            case "not-attended" -> conversationsToResponse.apply(conversationService.findAllNotAttendedByUser(userId));
+            case "not-initiated" -> conversationsToResponse.apply(conversationService.findAllNotInitiatedByUser(userId));
+            case null, default -> throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        };
     }
 
     @Override

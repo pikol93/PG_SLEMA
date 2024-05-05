@@ -102,7 +102,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   }
 
   void _onNameChanged(String name) {
-    _exerciseController.name = name;
+    _exerciseController.name = name.trim();
   }
 
   void _onDateChanged(DateTime dateTime) {
