@@ -4,10 +4,13 @@ import 'package:pg_slema/features/well_being/logic/entity/enum/sleep_duration.da
 import 'package:pg_slema/features/well_being/logic/entity/enum/sleep_quality.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/symptom_value.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/well_being_variant.dart';
+import 'package:pg_slema/features/well_being/logic/service/assessments_service.dart';
 import 'package:pg_slema/features/well_being/presentation/screen/assessment_screen.dart';
 import 'package:pg_slema/utils/date/date.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/default_container/default_container.dart';
+import 'package:pg_slema/utils/widgets/popup_menu_edit_delete_button.dart';
+import 'package:provider/provider.dart';
 
 class SingleAssessmentWidget extends StatefulWidget {
   final Assessment assessment;
@@ -83,13 +86,10 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
               height: 32.0,
               child: widget.assessment.wellBeing.icon,
             ),
-            IconButton(
-              icon: Icon(
-                Icons.edit,
-                color: Theme.of(context).primaryColor,
-              ),
-              onPressed: _onEditPressed,
-            ),
+            PopupMenuEditDeleteButton(
+              onEditPressed: _onEditPressed,
+              onDeletePressed: _onDeletePressed,
+            )
           ],
         ),
       ],
@@ -218,5 +218,11 @@ class SingleAssessmentWidgetState extends State<SingleAssessmentWidget>
         },
       ),
     );
+  }
+
+  void _onDeletePressed() {
+    logger.debug("Delete pressed for assessment: ${widget.assessment.id}");
+    Provider.of<AssessmentsService>(context, listen: false)
+        .deleteEntry(widget.assessment.id);
   }
 }

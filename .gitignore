@@ -43,4 +43,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Visual Studio Code
+.vscode/
+
 devtools_options.yaml

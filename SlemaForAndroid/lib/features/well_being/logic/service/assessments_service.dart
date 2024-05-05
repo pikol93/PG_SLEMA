@@ -11,6 +11,9 @@ abstract class AssessmentsService {
   /// Saves an assessment in memory.
   Future saveEntry(Assessment assessment);
 
+  /// Removes an entry by the given ID
+  Future deleteEntry(int id);
+
   /// Gets the assessment change notifier. The notifier is invoked when the list of assessment changes.
   ChangeNotifier getAssessmentChangeNotifier();
 

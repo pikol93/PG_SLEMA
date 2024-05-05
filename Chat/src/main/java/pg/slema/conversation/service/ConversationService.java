@@ -1,7 +1,6 @@
 package pg.slema.conversation.service;
 
 import pg.slema.conversation.entity.Conversation;
-import pg.slema.user.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +11,8 @@ public interface ConversationService {
     List<Conversation> findAll();
     List<Conversation> findAllByInitiator(UUID userId);
     List<Conversation> findAllByParticipant(UUID userId);
+    List<Conversation> findAllNotAttendedByUser(UUID userId);
+    List<Conversation> findAllNotInitiatedByUser(UUID userId);
     void create(Conversation conversation);
     void replace(Conversation conversation);
 }

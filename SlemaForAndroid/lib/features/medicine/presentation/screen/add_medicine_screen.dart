@@ -12,6 +12,7 @@ import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/freq
 import 'package:pg_slema/features/medicine/presentation/widget/form_widgets/notification_manager.dart';
 import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
+import 'package:pg_slema/utils/widgets/unfocus_on_children_tap.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineAdded;
@@ -29,89 +30,93 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> with Logger {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const DefaultAppBar(title: "Dodaj lekarstwo"),
-        DefaultBody(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  SizedBox(height: _mainPaddingBetweenInputs),
-                  CustomTextFormField(
-                    label: "Nazwa",
-                    icon: null,
-                    onChanged: (value) => _controller.typedMedicineName = value,
-                  ),
-                  SizedBox(height: _mainPaddingBetweenInputs),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.only(right: _singleWidgetInRowPadding),
-                          child: CustomTextFormField(
-                            label: "Dawka",
-                            icon: Icons.vaccines,
-                            onChanged: (value) => _controller.typedDose = value,
-                            isValueRequired: false,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.only(left: _singleWidgetInRowPadding),
-                          child: CustomTextFormField(
-                            label: "Rodzaj",
-                            icon: Icons.medication_outlined,
-                            onChanged: (value) =>
-                                _controller.typedMedicineType = value,
-                            isValueRequired: false,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: _mainPaddingBetweenInputs),
-                  CustomTextFormField(
-                    label: "Jak używać",
-                    icon: Icons.water_drop_outlined,
-                    onChanged: (value) => _controller.typedIntakeType = value,
-                    isValueRequired: false,
-                  ),
-                  SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                  NotificationManager(
-                    switchValue: _controller.canNotificationsBePicked,
-                    onChanged: changeNotificationsAvailable,
-                  ),
-                  SizedBox(height: 2 * _mainPaddingBetweenInputs),
-                  if (_controller.canNotificationsBePicked) ...[
-                    FrequencyList(
-                      initialValue: _controller.frequency,
-                      onChanged: (frequency) =>
-                          _handleFrequencyChange(frequency),
+    return UnfocusOnChildrenTap(
+      child: Column(
+        children: [
+          const DefaultAppBar(title: "Dodaj lekarstwo"),
+          DefaultBody(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(height: _mainPaddingBetweenInputs),
+                    CustomTextFormField(
+                      label: "Nazwa",
+                      icon: null,
+                      onChanged: (value) =>
+                          _controller.typedMedicineName = value,
                     ),
                     SizedBox(height: _mainPaddingBetweenInputs),
-                    _createIntakeDataFieldIfPossible(),
-                    ManageNotificationsTimeWidget(
-                      controller: _controller,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                right: _singleWidgetInRowPadding),
+                            child: CustomTextFormField(
+                              label: "Dawka",
+                              icon: Icons.vaccines,
+                              onChanged: (value) =>
+                                  _controller.typedDose = value,
+                              isValueRequired: false,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                left: _singleWidgetInRowPadding),
+                            child: CustomTextFormField(
+                              label: "Rodzaj",
+                              icon: Icons.medication_outlined,
+                              onChanged: (value) =>
+                                  _controller.typedMedicineType = value,
+                              isValueRequired: false,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: _mainPaddingBetweenInputs),
+                    CustomTextFormField(
+                      label: "Jak używać",
+                      icon: Icons.water_drop_outlined,
+                      onChanged: (value) => _controller.typedIntakeType = value,
+                      isValueRequired: false,
+                    ),
+                    SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                    NotificationManager(
+                      switchValue: _controller.canNotificationsBePicked,
+                      onChanged: changeNotificationsAvailable,
+                    ),
+                    SizedBox(height: 2 * _mainPaddingBetweenInputs),
+                    if (_controller.canNotificationsBePicked) ...[
+                      FrequencyList(
+                        initialValue: _controller.frequency,
+                        onChanged: (frequency) =>
+                            _handleFrequencyChange(frequency),
+                      ),
+                      SizedBox(height: _mainPaddingBetweenInputs),
+                      _createIntakeDataFieldIfPossible(),
+                      ManageNotificationsTimeWidget(
+                        controller: _controller,
+                      ),
+                      SizedBox(height: _mainPaddingBetweenInputs),
+                    ],
+                    CustomSaveButton(
+                        formKey: _formKey,
+                        onSaved: () => _controller
+                            .createMedicine()
+                            .then(widget.onMedicineAdded)),
                     SizedBox(height: _mainPaddingBetweenInputs),
                   ],
-                  CustomSaveButton(
-                      formKey: _formKey,
-                      onSaved: () => _controller
-                          .createMedicine()
-                          .then(widget.onMedicineAdded)),
-                  SizedBox(height: _mainPaddingBetweenInputs),
-                ],
+                ),
               ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 

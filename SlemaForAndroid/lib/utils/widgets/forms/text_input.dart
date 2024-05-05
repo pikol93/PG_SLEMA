@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  final String label;
+  final String? label;
   final IconData? icon;
   final String? initialValue;
   final ValueChanged<String> onChanged;
@@ -9,9 +9,9 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField(
       {super.key,
-      required this.label,
-      required this.icon,
       required this.onChanged,
+      this.label,
+      this.icon,
       this.initialValue,
       this.isValueRequired = true});
 
@@ -38,7 +38,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 
   String? validateInput(String? value) {
-    if (widget.isValueRequired && (value == null || value.isEmpty)) {
+    if (widget.isValueRequired && (value == null || value.trim().isEmpty)) {
       return 'Proszę uzupełnić to pole';
     }
     return null;
@@ -60,7 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         fillColor: Theme.of(context).colorScheme.primaryContainer,
         label: Padding(
           padding: EdgeInsets.only(bottom: defaultTextBottomPadding),
-          child: Text(widget.label),
+          child: Text(widget.label ?? ""),
         ),
         labelStyle: Theme.of(context).textTheme.labelSmall,
         prefixIcon: widget.icon == null
