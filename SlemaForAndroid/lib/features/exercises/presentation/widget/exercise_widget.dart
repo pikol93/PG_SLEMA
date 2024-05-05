@@ -178,6 +178,7 @@ class ExerciseWidgetState extends State<ExerciseWidget> with Logger {
   }
 
   void _onDeletePressed() {
-    logger.debug("Exercise delete pressed");
+    logger.debug("Exercise delete pressed: ${widget.exercise.id}");
+    widget.controller.onExerciseDeleted(widget.exercise.id);
   }
 }
