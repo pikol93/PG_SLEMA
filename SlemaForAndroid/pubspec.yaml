@@ -54,6 +54,8 @@ dependencies:
   loader_overlay: ^4.0.0
   stomp_dart_client: ^1.0.3
   flutter_spinkit: ^5.2.1
+  google_sign_in: ^6.2.1
+  flutter_signin_button: ^2.0.0
 
 dev_dependencies:
   flutter_test:

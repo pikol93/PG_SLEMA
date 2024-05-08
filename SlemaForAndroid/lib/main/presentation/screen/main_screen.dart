@@ -85,7 +85,7 @@ class MainScreenState extends State<MainScreen> {
           service: assessmentsService,
           factory: assessmentFactory,
         ),
-        AllThreadsScreen(),
+        const AllThreadsScreen(),
         const SettingsScreen(),
       ][controller.currentIndex],
     );
