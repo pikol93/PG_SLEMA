@@ -135,6 +135,7 @@ ThemeData lightTheme = ThemeData(
             ? lightColorScheme.onPrimary
             : lightColorScheme.onSecondary,
       ),
+      dialBackgroundColor: lightColorScheme.secondaryContainer,
       padding: const EdgeInsets.all(25),
     ),
     datePickerTheme: DatePickerThemeData(
