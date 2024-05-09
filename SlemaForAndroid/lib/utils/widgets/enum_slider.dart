@@ -52,7 +52,7 @@ class EnumSliderState<T extends Enum> extends State<EnumSlider<T>> with Logger {
       return 0.0;
     }
 
-    return index / widget.values.length;
+    return index / (widget.values.length - 1);
   }
 
   T _toVariant(double value) {
