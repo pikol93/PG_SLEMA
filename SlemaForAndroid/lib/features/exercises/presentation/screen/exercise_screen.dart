@@ -95,6 +95,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 const SizedBox(height: 20.0),
                 ExerciseIntensityPicker(
                   onIntensityChanged: _onIntensityChanged,
+                  initialValue: _exerciseController.intensity,
                 ),
                 Expanded(child: Container()),
                 CustomSaveButton(
