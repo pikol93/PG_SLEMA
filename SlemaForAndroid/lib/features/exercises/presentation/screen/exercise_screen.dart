@@ -30,11 +30,6 @@ class ExerciseScreen extends StatefulWidget {
 class _ExerciseScreenState extends State<ExerciseScreen> {
   final _formKey = GlobalKey<FormState>();
   final _exerciseController = AddExerciseController();
-  final _dateController = DatePickerController(
-    allowedFirstDate: DateTime.now().subtract(const Duration(days: 365)),
-    allowedLastDate: DateTime.now(),
-    initialDate: DateTime.now(),
-  );
 
   late String _title;
 
@@ -43,8 +38,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
     super.initState();
 
     if (widget.exercise != null) {
-      _exerciseController.initFromExercise(widget.exercise!);
+      final exercise = widget.exercise!;
       _title = "Edytuj ćwiczenie";
+      _exerciseController.initFromExercise(exercise);
     } else {
       _title = "Dodaj ćwiczenie";
     }
@@ -65,6 +61,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   label: "Rodzaj aktywności",
                   icon: Icons.sports_gymnastics,
                   onChanged: _onNameChanged,
+                  initialValue: _exerciseController.name,
                 ),
                 const SizedBox(height: 20.0),
                 Row(
@@ -73,20 +70,32 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       child: DatePicker(
                         label: "Data ćwiczenia",
                         onDateSelected: _onDateChanged,
-                        controller: _dateController,
+                        controller: DatePickerController(
+                          allowedFirstDate: DateTime.now()
+                              .subtract(const Duration(days: 3650)),
+                          allowedLastDate: DateTime.now(),
+                          initialDate: _exerciseController.exerciseDate,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 6.0),
                     Expanded(
-                      child: TimeOfDayPicker(onTimeSelected: _onTimeChanged),
+                      child: TimeOfDayPicker(
+                        onTimeSelected: _onTimeChanged,
+                        initialValue: _exerciseController.exerciseTime,
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                ExerciseDurationPicker(onDurationChanged: _onDurationChanged),
+                ExerciseDurationPicker(
+                  onDurationChanged: _onDurationChanged,
+                  initialValue: _exerciseController.exerciseDuration,
+                ),
                 const SizedBox(height: 20.0),
                 ExerciseIntensityPicker(
-                    onIntensityChanged: _onIntensityChanged),
+                  onIntensityChanged: _onIntensityChanged,
+                ),
                 Expanded(child: Container()),
                 CustomSaveButton(
                   formKey: _formKey,
