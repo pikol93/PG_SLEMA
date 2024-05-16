@@ -16,6 +16,7 @@ import 'package:pg_slema/utils/widgets/unfocus_on_children_tap.dart';
 class EditMedicineScreen extends StatefulWidget {
   final ValueSetter<Medicine> onMedicineChanged;
   final Medicine medicine;
+
   const EditMedicineScreen(
       {super.key, required this.onMedicineChanged, required this.medicine});
 
@@ -149,12 +150,14 @@ class _EditMedicineScreen extends State<EditMedicineScreen> {
       children: [
         if (_controller.canDateBePicked) ...[
           DatePicker(
-              onDateSelected: (date) => _controller.intakeDate = date,
-              controller: DatePickerController(
-                  DateTime.now(),
-                  DateTime.now().add(const Duration(days: 365)),
-                  DateTime.now()),
-              label: "Data przyjęcia"),
+            label: "Data przyjęcia",
+            onDateSelected: (date) => _controller.intakeDate = date,
+            controller: DatePickerController(
+              allowedFirstDate: DateTime.now(),
+              allowedLastDate: DateTime.now().add(const Duration(days: 365)),
+              initialDate: DateTime.now(),
+            ),
+          ),
           const SizedBox(height: 20),
         ]
       ],

@@ -13,28 +13,44 @@ import 'package:pg_slema/utils/widgets/forms/text_input.dart';
 import 'package:pg_slema/utils/widgets/date_picker/date_picker.dart';
 import 'package:pg_slema/utils/widgets/time_of_day_picker/time_of_day_picker.dart';
 
-class AddExerciseScreen extends StatefulWidget {
-  final ValueChanged<Exercise> onExerciseAdded;
-  const AddExerciseScreen({super.key, required this.onExerciseAdded});
+class ExerciseScreen extends StatefulWidget {
+  final ValueChanged<Exercise> onExerciseSaved;
+  final Exercise? exercise;
+
+  const ExerciseScreen({
+    super.key,
+    required this.onExerciseSaved,
+    this.exercise,
+  });
 
   @override
-  State<StatefulWidget> createState() => _AddExerciseScreenState();
+  State<StatefulWidget> createState() => _ExerciseScreenState();
 }
 
-class _AddExerciseScreenState extends State<AddExerciseScreen> {
-  final _exerciseController = AddExerciseController();
-  final _dateController = DatePickerController(
-    DateTime.now().subtract(const Duration(days: 365)),
-    DateTime.now(),
-    DateTime.now(),
-  );
-
+class _ExerciseScreenState extends State<ExerciseScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _exerciseController = AddExerciseController();
+
+  late String _title;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.exercise != null) {
+      final exercise = widget.exercise!;
+      _title = "Edytuj ćwiczenie";
+      _exerciseController.initFromExercise(exercise);
+    } else {
+      _title = "Dodaj ćwiczenie";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const DefaultAppBar(title: "Dodaj ćwiczenie"),
+        DefaultAppBar(title: _title),
         DefaultBody(
           child: Form(
             key: _formKey,
@@ -45,6 +61,7 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                   label: "Rodzaj aktywności",
                   icon: Icons.sports_gymnastics,
                   onChanged: _onNameChanged,
+                  initialValue: _exerciseController.name,
                 ),
                 const SizedBox(height: 20.0),
                 Row(
@@ -53,20 +70,33 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
                       child: DatePicker(
                         label: "Data ćwiczenia",
                         onDateSelected: _onDateChanged,
-                        controller: _dateController,
+                        controller: DatePickerController(
+                          allowedFirstDate: DateTime.now()
+                              .subtract(const Duration(days: 3650)),
+                          allowedLastDate: DateTime.now(),
+                          initialDate: _exerciseController.exerciseDate,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 6.0),
                     Expanded(
-                      child: TimeOfDayPicker(onTimeSelected: _onTimeChanged),
+                      child: TimeOfDayPicker(
+                        onTimeSelected: _onTimeChanged,
+                        initialValue: _exerciseController.exerciseTime,
+                      ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20.0),
-                ExerciseDurationPicker(onDurationChanged: _onDurationChanged),
+                ExerciseDurationPicker(
+                  onDurationChanged: _onDurationChanged,
+                  initialValue: _exerciseController.exerciseDuration,
+                ),
                 const SizedBox(height: 20.0),
                 ExerciseIntensityPicker(
-                    onIntensityChanged: _onIntensityChanged),
+                  onIntensityChanged: _onIntensityChanged,
+                  initialValue: _exerciseController.intensity,
+                ),
                 Expanded(child: Container()),
                 CustomSaveButton(
                   formKey: _formKey,
@@ -103,6 +133,6 @@ class _AddExerciseScreenState extends State<AddExerciseScreen> {
 
   void _onSaveButtonClicked() {
     var exercise = _exerciseController.createExercise();
-    widget.onExerciseAdded(exercise);
+    widget.onExerciseSaved(exercise);
   }
 }

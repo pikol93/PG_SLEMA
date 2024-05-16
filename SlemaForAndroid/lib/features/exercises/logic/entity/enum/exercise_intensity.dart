@@ -70,7 +70,8 @@ extension ExerciseIntensityExtension on ExerciseIntensity {
     }
   }
 
-  Color? colorRepresentationLerp(double value) {
+  Color? colorRepresentationLerp() {
+    const value = 0.5;
     switch (this) {
       case ExerciseIntensity.veryGentle:
         return Color.lerp(ExerciseIntensityColors.green,
