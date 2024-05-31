@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
+import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
@@ -34,6 +36,7 @@ class MainScreenState extends State<MainScreen> {
         Provider.of<AssessmentsService>(context, listen: false);
     final exercisesService =
         Provider.of<ExerciseService>(context, listen: false);
+    final threadsService = Provider.of<ThreadsService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -85,7 +88,9 @@ class MainScreenState extends State<MainScreen> {
           service: assessmentsService,
           factory: assessmentFactory,
         ),
-        AllThreadsScreen(),
+        AllThreadsScreen(
+          threadsService: threadsService,
+        ),
         const SettingsScreen(),
       ][controller.currentIndex],
     );

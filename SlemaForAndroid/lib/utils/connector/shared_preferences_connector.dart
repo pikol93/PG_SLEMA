@@ -13,4 +13,14 @@ class SharedPreferencesConnector {
 
     prefs.setStringList(listKey, list);
   }
+
+  static Future<String> getString(String listKey, String defaultValue) {
+    return SharedPreferences.getInstance()
+        .then((preferences) => preferences.getString(listKey) ?? defaultValue);
+  }
+
+  static Future setString(String listKey, String value) {
+    return SharedPreferences.getInstance()
+        .then((preferences) => preferences.setString(listKey, value));
+  }
 }

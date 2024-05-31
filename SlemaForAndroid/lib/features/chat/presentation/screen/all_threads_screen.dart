@@ -8,9 +8,9 @@ import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository_impl.dart';
 
 class AllThreadsScreen extends StatelessWidget {
-  final ThreadsService threadsService =
-      ThreadsServiceImpl(ThreadsRepositoryImpl());
-  AllThreadsScreen({super.key});
+  final ThreadsService threadsService;
+
+  const AllThreadsScreen({super.key, required this.threadsService});
 
   @override
   Widget build(BuildContext context) {

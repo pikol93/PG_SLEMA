@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pg_slema/features/settings/presentation/widget/change_server_ip_server_text.dart';
 import 'package:pg_slema/features/settings/presentation/widget/remove_assessments_setting_button.dart';
 import 'package:pg_slema/features/settings/presentation/widget/remove_exercises_setting_button.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
@@ -27,6 +28,7 @@ class DeveloperSettingsScreenState extends State<DeveloperSettingsScreen>
               children: [
                 RemoveAssessmentsSettingButton(),
                 RemoveExercisesSettingButton(),
+                ChangeServerAddressSettingText(),
               ],
             ),
           ),
