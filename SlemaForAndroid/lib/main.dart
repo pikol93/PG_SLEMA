@@ -7,8 +7,10 @@ import 'package:pg_slema/features/chat/logic/service/threads/threads_service_imp
 import 'package:pg_slema/features/exercises/logic/converter/exercise_to_dto_converter.dart';
 import 'package:pg_slema/features/exercises/logic/repository/shared_preferences_exercise_repository.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
-import 'package:pg_slema/features/gallery/logic/repository/image_metadata_repository.dart';
-import 'package:pg_slema/features/gallery/logic/repository/shared_preferences_image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/repository/shared_preferences_stored_image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
+import 'package:pg_slema/features/gallery/logic/service/image_service_impl.dart';
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository_impl.dart';
@@ -39,7 +41,8 @@ Future<void> main() async {
   GlobalInitializer().initialize();
 
   final imageMetadataRepository =
-      await SharedPreferencesImageMetadataRepository.create();
+      await SharedPreferencesStoredImageMetadataRepository.create();
+  final imageService = ImageServiceImpl(repository: imageMetadataRepository);
 
   final assessmentsRepository =
       await SharedPreferencesAssessmentsRepository.create();
@@ -88,8 +91,9 @@ Future<void> main() async {
         Provider<ApplicationInfoRepository>(
             create: (_) => applicationInfoRepository),
         Provider<ThreadsService>(create: (_) => threadsService),
-        Provider<ImageMetadataRepository>(
+        Provider<StoredImageMetadataRepository>(
             create: (_) => imageMetadataRepository),
+        Provider<ImageService>(create: (_) => imageService),
       ],
       child: MaterialApp(
         theme: lightTheme,

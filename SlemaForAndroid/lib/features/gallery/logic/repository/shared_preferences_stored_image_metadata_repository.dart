@@ -1,38 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:mutex/mutex.dart';
-import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
-import 'package:pg_slema/features/gallery/logic/repository/image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/entity/stored_image_metadata.dart';
+import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
 import 'package:pg_slema/utils/change_notifier_impl.dart';
 import 'package:pg_slema/utils/connector/shared_preferences_connector.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class SharedPreferencesImageMetadataRepository
+class SharedPreferencesStoredImageMetadataRepository
     with Logger
-    implements ImageMetadataRepository {
+    implements StoredImageMetadataRepository {
   static const String _assessmentsSharedPreferencesKey = 'image_metadata';
 
   final rwLock = ReadWriteMutex();
   final changeNotifier = ChangeNotifierImpl();
   final sharedPreferencesConnector = SharedPreferencesConnector();
-  final items = List<ImageMetadata>.empty(growable: true);
+  final items = List<StoredImageMetadata>.empty(growable: true);
 
-  /// Do not use this ctor outside this class. If an instance of [SharedPreferencesImageMetadataRepository] is needed, then use the [create] method.
-  SharedPreferencesImageMetadataRepository._();
+  /// Do not use this ctor outside this class. If an instance of [SharedPreferencesStoredImageMetadataRepository] is needed, then use the [create] method.
+  SharedPreferencesStoredImageMetadataRepository._();
 
   /// Creates a new instance of [ApplicationInfoRepositoryImpl]. Serves as a workaround for dart not allowing async constructors.
-  static Future<SharedPreferencesImageMetadataRepository> create() async {
-    final self = SharedPreferencesImageMetadataRepository._();
+  static Future<SharedPreferencesStoredImageMetadataRepository> create() async {
+    final self = SharedPreferencesStoredImageMetadataRepository._();
     await self._load();
     return self;
   }
 
   @override
-  Future<List<ImageMetadata>> getAll() {
+  Future<List<StoredImageMetadata>> getAll() {
     return rwLock.protectRead(() async => items);
   }
 
   @override
-  Future save(ImageMetadata item) {
+  Future save(StoredImageMetadata item) {
+    logger.debug("Saving item: $item");
     rwLock.protectWrite(() async {
       items.removeWhere((itemInList) => itemInList.id == item.id);
       items.add(item);
@@ -43,6 +44,7 @@ class SharedPreferencesImageMetadataRepository
 
   @override
   Future delete(String id) {
+    logger.debug("Deleting item: $id");
     rwLock.protectWrite(() async {
       items.removeWhere((itemInList) => itemInList.id == id);
     });
@@ -63,7 +65,7 @@ class SharedPreferencesImageMetadataRepository
         .map(
           (json) {
             try {
-              return ImageMetadata.fromJson(json);
+              return StoredImageMetadata.fromJson(json);
             } catch (ex) {
               logger.debug(
                 "Could not convert map to assessment. JSON = $json, exception = $ex",
@@ -85,7 +87,7 @@ class SharedPreferencesImageMetadataRepository
   }
 
   Future _save() async {
-    List<ImageMetadata> assessments = await rwLock.protectRead(() async {
+    List<StoredImageMetadata> assessments = await rwLock.protectRead(() async {
       return List.from(items, growable: false);
     });
 

@@ -4,7 +4,8 @@ import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.da
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
-import 'package:pg_slema/features/gallery/logic/repository/image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
 import 'package:pg_slema/features/gallery/presentation/screen/gallery_screen.dart';
@@ -39,7 +40,8 @@ class MainScreenState extends State<MainScreen> {
         Provider.of<ExerciseService>(context, listen: false);
     final threadsService = Provider.of<ThreadsService>(context, listen: false);
     final imageMetadataRepository =
-        Provider.of<ImageMetadataRepository>(context, listen: false);
+        Provider.of<StoredImageMetadataRepository>(context, listen: false);
+    final imageService = Provider.of<ImageService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -88,6 +90,7 @@ class MainScreenState extends State<MainScreen> {
         ),
         GalleryScreen(
           repository: imageMetadataRepository,
+          service: imageService,
         ),
         AllAssessmentsScreen(
           service: assessmentsService,

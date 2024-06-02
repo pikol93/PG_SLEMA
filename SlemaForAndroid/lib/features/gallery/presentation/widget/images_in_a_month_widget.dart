@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
 import 'package:pg_slema/features/gallery/presentation/widget/single_image_widget.dart';
+import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class ImagesInAMonthWidget extends StatelessWidget {
+class ImagesInAMonthWidget extends StatelessWidget with Logger {
   final DateTime time;
   final List<ImageMetadata> images;
 
@@ -25,7 +26,7 @@ class ImagesInAMonthWidget extends StatelessWidget {
 
   Widget _buildSectionTitle(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    final dateFormat = DateFormat.yM(locale);
+    final dateFormat = DateFormat.yM(locale.toString());
 
     return Row(
       children: [

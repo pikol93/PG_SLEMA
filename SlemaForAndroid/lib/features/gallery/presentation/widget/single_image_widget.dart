@@ -12,8 +12,8 @@ class SingleImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-      width: 300,
-      height: 300,
+      width: 50,
+      height: 50,
       child: CircularProgressIndicator(),
     );
   }
