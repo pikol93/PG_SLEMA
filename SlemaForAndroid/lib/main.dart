@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pg_slema/features/chat/logic/repository/network_repository.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository_impl.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service_impl.dart';
