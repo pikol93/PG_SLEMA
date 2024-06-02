@@ -11,10 +11,13 @@ class SingleImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 50,
-      height: 50,
-      child: CircularProgressIndicator(),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 50,
+        height: 50,
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

@@ -31,7 +31,11 @@ class ImagesInAMonthWidget extends StatelessWidget with Logger {
     return Row(
       children: [
         Expanded(
-          child: Text(dateFormat.format(time)),
+          child: Text(
+            dateFormat.format(time),
+            style: Theme.of(context).textTheme.labelLarge,
+            softWrap: true,
+          ),
         )
       ],
     );
@@ -42,8 +46,14 @@ class ImagesInAMonthWidget extends StatelessWidget with Logger {
         .map((item) => SingleImageWidget(metadata: item))
         .toList(growable: false);
 
-    return Wrap(
-      children: widgets,
+    return Row(
+      children: [
+        Expanded(
+          child: Wrap(
+            children: widgets,
+          ),
+        )
+      ],
     );
   }
 }
