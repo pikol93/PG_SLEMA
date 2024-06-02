@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
-import 'package:pg_slema/features/gallery/logic/entity/stored_image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
 import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
 import 'package:pg_slema/features/gallery/presentation/widget/images_in_a_month_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body_with_multiple_floating_action_buttons.dart';
-import 'package:uuid/uuid.dart';
 
 class GalleryScreen extends StatefulWidget {
   final StoredImageMetadataRepository repository;
@@ -98,37 +95,11 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
 
   Future _onAddButtonPressed() async {
     logger.debug("Gallery screen add button pressed");
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile == null) {
-      logger.debug("Image not selected.");
-      return;
-    }
-
-    final metadata = StoredImageMetadata(
-      id: const Uuid().v4(),
-      filename: pickedFile.path,
-    );
-
-    await widget.repository.save(metadata);
+    widget.service.selectAndAddImageFromGallery();
   }
 
   Future _onCameraButtonPressed() async {
     logger.debug("Gallery screen camera button pressed");
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
-
-    if (pickedFile == null) {
-      logger.debug("Image not selected.");
-      return;
-    }
-
-    final metadata = StoredImageMetadata(
-      id: const Uuid().v4(),
-      filename: pickedFile.path,
-    );
-
-    await widget.repository.save(metadata);
+    widget.service.createAndAddImageViaCamera();
   }
 }

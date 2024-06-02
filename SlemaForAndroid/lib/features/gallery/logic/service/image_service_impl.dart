@@ -1,11 +1,16 @@
 import 'dart:io';
 
+import 'package:image_picker/image_picker.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
+import 'package:pg_slema/features/gallery/logic/entity/stored_image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
 import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
+import 'package:uuid/uuid.dart';
 
 class ImageServiceImpl with Logger implements ImageService {
+  final picker = ImagePicker();
+
   final StoredImageMetadataRepository repository;
 
   ImageServiceImpl({
@@ -35,5 +40,31 @@ class ImageServiceImpl with Logger implements ImageService {
         .where((item) => item != null)
         .map((item) => item!)
         .toList(growable: false);
+  }
+
+  @override
+  Future selectAndAddImageFromGallery() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    return _saveImage(pickedFile);
+  }
+
+  @override
+  Future createAndAddImageViaCamera() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+    return _saveImage(pickedFile);
+  }
+
+  Future _saveImage(XFile? pickedFile) async {
+    if (pickedFile == null) {
+      logger.debug("Image not selected.");
+      return;
+    }
+
+    final metadata = StoredImageMetadata(
+      id: const Uuid().v4(),
+      filename: pickedFile.path,
+    );
+
+    await repository.save(metadata);
   }
 }
