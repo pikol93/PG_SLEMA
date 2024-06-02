@@ -3,15 +3,16 @@ import 'package:pg_slema/features/chat/logic/converter/thread_dto_converter.dart
 import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread/thread_dto.dart';
-import 'package:pg_slema/features/chat/logic/repository/network_repository.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
-class ThreadsRepositoryImpl
-    with NetworkRepository, Logger
-    implements ThreadsRepository {
-  late final Dio dio;
-  ThreadsRepositoryImpl() {
-    dio = createDioInstance();
+class ThreadsRepositoryImpl with Logger implements ThreadsRepository {
+  final Dio dio;
+
+  ThreadsRepositoryImpl({
+    required this.dio,
+  }) {
+    logger.debug(
+        "Created threads repository with address: ${dio.options.baseUrl}");
   }
 
   @override
