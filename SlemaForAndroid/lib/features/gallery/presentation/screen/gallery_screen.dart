@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
@@ -71,10 +72,39 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
       return _buildNoImages();
     }
 
-    // TODO: Group by year and month
-    return ImagesInAMonthWidget(
-      time: DateTime(2023, 12),
-      images: images,
+    // Group by year and month
+    final list = List<((int, int), List<ImageMetadata>)>.empty(growable: true);
+    images
+        .groupListsBy((item) => (item.date.year, item.date.month))
+        .forEach((key, value) {
+      list.add((key, value));
+    });
+
+    list.sort((a, b) {
+      final yearCompare = b.$1.$1.compareTo(a.$1.$1);
+      if (yearCompare != 0) {
+        return yearCompare;
+      }
+
+      final monthCompare = b.$1.$2.compareTo(a.$1.$2);
+      return monthCompare;
+    });
+
+    final children = list
+        .map(
+          (item) => ImagesInAMonthWidget(
+            time: DateTime(
+              item.$1.$1,
+              item.$1.$2,
+            ),
+            images: item.$2,
+          ),
+        )
+        .toList(growable: false);
+
+    return ListView.builder(
+      itemCount: children.length,
+      itemBuilder: (context, index) => children[index],
     );
   }
 

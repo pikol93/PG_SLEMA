@@ -24,10 +24,12 @@ class ImageServiceImpl with Logger implements ImageService {
       try {
         final stat = await FileStat.stat(item.filename);
 
+        logger.debug(
+            "Reading stat for file \"${item.filename}\": date = ${stat.changed}");
         return ImageMetadata(
           id: item.id,
           filename: item.filename,
-          date: stat.modified,
+          date: stat.changed,
         );
       } catch (ex) {
         logger.warning("Could not stat file ${item.filename}");
