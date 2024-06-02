@@ -26,7 +26,7 @@ class ImagesInAMonthWidget extends StatelessWidget with Logger {
 
   Widget _buildSectionTitle(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    final dateFormat = DateFormat.yM(locale.toString());
+    final dateFormat = DateFormat.yMMMM(locale.toString());
 
     return Row(
       children: [
