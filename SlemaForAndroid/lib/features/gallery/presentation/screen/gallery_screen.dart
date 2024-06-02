@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/entity/stored_image_metadata.dart';
@@ -9,7 +7,7 @@ import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
 import 'package:pg_slema/features/gallery/presentation/widget/images_in_a_month_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/utils/widgets/appbars/white_app_bar.dart';
-import 'package:pg_slema/utils/widgets/default_body/default_body_with_floating_action_button.dart';
+import 'package:pg_slema/utils/widgets/default_body/default_body_with_multiple_floating_action_buttons.dart';
 import 'package:uuid/uuid.dart';
 
 class GalleryScreen extends StatefulWidget {
@@ -41,8 +39,11 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
     return Column(
       children: [
         const WhiteAppBar(titleText: "Galeria"),
-        DefaultBodyWithFloatingActionButton(
-          onFloatingButtonPressed: _onFloatingButtonPressed,
+        DefaultBodyWithMultipleFloatingActionButtons(
+          buttons: [
+            (_onAddButtonPressed, Icons.add),
+            (_onCameraButtonPressed, Icons.camera_alt),
+          ],
           child: _buildFuture(),
         ),
       ],
@@ -95,8 +96,26 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
     });
   }
 
-  Future _onFloatingButtonPressed() async {
-    logger.debug("Gallery screen floating button pressed");
+  Future _onAddButtonPressed() async {
+    logger.debug("Gallery screen add button pressed");
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile == null) {
+      logger.debug("Image not selected.");
+      return;
+    }
+
+    final metadata = StoredImageMetadata(
+      id: const Uuid().v4(),
+      filename: pickedFile.path,
+    );
+
+    await widget.repository.save(metadata);
+  }
+
+  Future _onCameraButtonPressed() async {
+    logger.debug("Gallery screen camera button pressed");
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
