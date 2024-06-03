@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
+import 'package:uuid/uuid.dart';
 
 class DefaultBodyWithMultipleFloatingActionButtons extends StatelessWidget {
   final Widget child;
@@ -34,6 +35,7 @@ class DefaultBodyWithMultipleFloatingActionButtons extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(8.0, 0.0, 0.0, 0.0),
                       child: FloatingActionButton(
                         onPressed: item.$1,
+                        heroTag: const Uuid().v4(),
                         child: Icon(item.$2),
                       ),
                     ),
