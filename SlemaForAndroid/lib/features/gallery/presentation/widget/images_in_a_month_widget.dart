@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
+import 'package:pg_slema/features/gallery/logic/service/thumbnail_service_impl.dart';
 import 'package:pg_slema/features/gallery/presentation/widget/single_image_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 
@@ -42,8 +43,12 @@ class ImagesInAMonthWidget extends StatelessWidget with Logger {
   }
 
   Widget _buildImages() {
+    final thumbnailService = ThumbnailServiceImpl();
     final widgets = images
-        .map((item) => SingleImageWidget(metadata: item))
+        .map((item) => SingleImageWidget(
+              metadata: item,
+              thumbnailService: thumbnailService,
+            ))
         .toList(growable: false);
 
     return Row(
