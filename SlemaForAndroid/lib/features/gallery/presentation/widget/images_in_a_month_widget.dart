@@ -55,6 +55,7 @@ class ImagesInAMonthWidget extends StatelessWidget with Logger {
       children: [
         Expanded(
           child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
             children: widgets,
           ),
         )
