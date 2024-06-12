@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/service/thumbnail_service.dart';
