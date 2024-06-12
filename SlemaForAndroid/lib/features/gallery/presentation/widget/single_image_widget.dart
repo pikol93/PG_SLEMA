@@ -27,7 +27,6 @@ class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
   @override
   void initState() {
     super.initState();
-    // TODO: Insert actual future
     thumbnailFuture = widget.thumbnailService.loadThumbnail(
       widget.metadata.id,
       widget.metadata.filename,
@@ -60,7 +59,7 @@ class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
 
     if (snapshot.data == null) {
       logger.error("Failed loading image: ${widget.metadata.filename}");
-      return const Text("error");
+      return const Text("Failed loading image.");
     }
 
     return snapshot.data!;
