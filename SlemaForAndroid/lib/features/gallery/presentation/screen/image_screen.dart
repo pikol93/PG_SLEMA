@@ -28,7 +28,7 @@ class ImageScreen extends StatelessWidget with Logger {
             future: future,
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return const Text("loading");
+                return const CircularProgressIndicator();
               }
               final data = snapshot.data!;
               logger.debug("Data: ${data.lengthInBytes}");
