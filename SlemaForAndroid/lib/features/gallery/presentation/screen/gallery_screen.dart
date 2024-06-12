@@ -60,6 +60,10 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
     return FutureBuilder(
       future: imageMetadataFuture,
       builder: (context, result) {
+        if (result.connectionState != ConnectionState.done) {
+          return const CircularProgressIndicator();
+        }
+        
         if (result.hasError) {
           logger.error("Returned result has an error: ${result.error}");
           return _buildError();
