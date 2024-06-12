@@ -24,6 +24,7 @@ class ImageScreen extends StatelessWidget with Logger {
       children: [
         const DefaultAppBar(title: "Zdjęcie"),
         DefaultBody(
+          mainWidgetsPaddingHorizontal: 0.0,
           child: FutureBuilder(
             future: future,
             builder: (context, snapshot) {
