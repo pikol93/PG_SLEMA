@@ -97,7 +97,9 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
               item.$1.$1,
               item.$1.$2,
             ),
-            images: item.$2,
+            images: item.$2.sorted(
+              (item1, item2) => item2.date.compareTo(item1.date),
+            ),
           ),
         )
         .toList(growable: false);
