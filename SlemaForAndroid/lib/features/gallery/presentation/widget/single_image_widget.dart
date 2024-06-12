@@ -19,7 +19,8 @@ class SingleImageWidget extends StatefulWidget {
 }
 
 class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
-  static const int imageWidth = 80;
+  static const int imageWidth = 60;
+  static const int imageHeight = 80;
 
   late Future<Image?> thumbnailFuture;
 
@@ -41,8 +42,8 @@ class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
       child: InkWell(
         onTap: () => _onTapped(context),
         child: SizedBox(
-          width: 60,
-          height: 80,
+          width: imageWidth.toDouble(),
+          height: imageHeight.toDouble(),
           child: FutureBuilder(
             future: thumbnailFuture,
             builder: _futureBuilder,
