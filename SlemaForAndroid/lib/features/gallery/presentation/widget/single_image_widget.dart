@@ -54,8 +54,6 @@ class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
   }
 
   Widget _futureBuilder(BuildContext context, AsyncSnapshot<Image?> snapshot) {
-    logger.debug(
-        "Redrawing future: ${snapshot.connectionState} ${snapshot.data}");
     if (snapshot.connectionState != ConnectionState.done) {
       return const CircularProgressIndicator();
     }

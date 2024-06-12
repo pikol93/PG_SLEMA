@@ -33,6 +33,14 @@ class GalleryScreenState extends State<GalleryScreen> with Logger {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    widget.repository
+        .getChangeNotifier()
+        .removeListener(_onImageMetadataChanged);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
