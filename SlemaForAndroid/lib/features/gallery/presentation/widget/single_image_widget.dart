@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/gallery/logic/entity/image_metadata.dart';
 import 'package:pg_slema/features/gallery/logic/service/thumbnail_service.dart';
@@ -19,14 +21,19 @@ class SingleImageWidget extends StatefulWidget {
 }
 
 class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
+  static const int imageWidth = 80;
+
   late Future<Image?> thumbnailFuture;
 
   @override
   void initState() {
     super.initState();
     // TODO: Insert actual future
-    thumbnailFuture =
-        widget.thumbnailService.loadThumbnail(widget.metadata.filename);
+    thumbnailFuture = widget.thumbnailService.loadThumbnail(
+      widget.metadata.id,
+      widget.metadata.filename,
+      imageWidth,
+    );
   }
 
   @override
@@ -48,12 +55,14 @@ class _SingleImageWidgetState extends State<SingleImageWidget> with Logger {
   }
 
   Widget _futureBuilder(BuildContext context, AsyncSnapshot<Image?> snapshot) {
+    logger.debug(
+        "Redrawing future: ${snapshot.connectionState} ${snapshot.data}");
     if (snapshot.connectionState != ConnectionState.done) {
       return const CircularProgressIndicator();
     }
 
     if (snapshot.data == null) {
-      logger.error("Could not load image: ${widget.metadata.filename}");
+      logger.error("Failed loading image: ${widget.metadata.filename}");
       return const Text("error");
     }
 
