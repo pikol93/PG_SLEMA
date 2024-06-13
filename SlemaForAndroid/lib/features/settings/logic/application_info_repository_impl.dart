@@ -24,7 +24,9 @@ class ApplicationInfoRepositoryImpl extends ApplicationInfoRepository {
   static Future<ApplicationInfoRepositoryImpl> create() async {
     final self = ApplicationInfoRepositoryImpl._();
     self.serverAddress = await SharedPreferencesConnector.getString(
-        serverAddressKey, "http://10.0.2.2:8081");
+      serverAddressKey,
+      "127.0.0.1",
+    );
     return self;
   }
 }

@@ -3,22 +3,27 @@ import 'dart:convert';
 import 'package:pg_slema/features/chat/logic/converter/chat_message_dto_converter.dart';
 import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message.dart';
 import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository.dart';
-import 'package:pg_slema/features/chat/logic/repository/websocket_repository.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
+import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/chat/logic/entity/chat_message/chat_message_dto.dart';
 
-class MessagesRepositoryImpl
-    with WebsocketRepository, Logger
-    implements MessagesRepository {
+class MessagesRepositoryImpl with Logger implements MessagesRepository {
+  final StompClientFactory stompClientFactory;
   final String threadID;
+
   late StreamController<List<ChatMessage>> _historyStreamController;
   late StreamController<ChatMessage> _messageStreamController;
+  late StompClient client;
 
-  MessagesRepositoryImpl(this.threadID) {
+  MessagesRepositoryImpl({
+    required this.stompClientFactory,
+    required this.threadID,
+  }) {
     _historyStreamController = StreamController<List<ChatMessage>>.broadcast();
     _messageStreamController = StreamController<ChatMessage>.broadcast();
-    client = createAndActivateStompClient(_onConnect);
+    client = stompClientFactory.createAndActivateStompClient(_onConnect);
   }
 
   void dispose() {

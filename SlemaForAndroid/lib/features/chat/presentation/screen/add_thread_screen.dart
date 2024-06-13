@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
@@ -11,11 +12,13 @@ import 'package:pg_slema/utils/widgets/forms/text_input.dart';
 import 'package:pg_slema/utils/widgets/unfocus_on_children_tap.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
+import 'package:provider/provider.dart';
 
 class AddThreadScreen extends StatefulWidget {
   final AddThreadController controller;
   final ThreadsService threadsService;
   final VoidCallback onThreadAdded;
+
   const AddThreadScreen(
       {super.key,
       required this.controller,
@@ -28,6 +31,7 @@ class AddThreadScreen extends StatefulWidget {
 
 class _AddThreadScreenState extends State<AddThreadScreen> with Logger {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return LoaderOverlay(
@@ -110,12 +114,21 @@ class _AddThreadScreenState extends State<AddThreadScreen> with Logger {
 
   void _moveToThreadChatScreen(String threadID, String threadTitle) {
     Navigator.pop(context);
+
+    final stompClientFactory = Provider.of<StompClientFactory>(
+      context,
+      listen: false,
+    );
+
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ThreadChatScreen(
-                  threadID: threadID,
-                  threadTitle: threadTitle,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ThreadChatScreen(
+          threadID: threadID,
+          threadTitle: threadTitle,
+          stompClientFactory: stompClientFactory,
+        ),
+      ),
+    );
   }
 }

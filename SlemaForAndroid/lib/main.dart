@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory_impl.dart';
 import 'package:pg_slema/features/chat/logic/repository/threads/threads_repository_impl.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service_impl.dart';
@@ -63,19 +65,22 @@ Future<void> main() async {
 
   final logger = Loggy<Logger>("main");
   final dio = Dio();
+  final address = applicationInfoRepository.getServerAddress();
+  final httpAddress = "http://$address";
   try {
-    dio.options.baseUrl = applicationInfoRepository.getServerAddress();
-    logger.debug(
-        "Correctly set base URL to ${applicationInfoRepository.getServerAddress()}");
+    dio.options.baseUrl = httpAddress;
+    logger.debug("Correctly set base URL to $httpAddress");
   } catch (ex) {
-    logger.error(
-        "Invalid base URL: \"${applicationInfoRepository.getServerAddress()}\"\n$ex}");
+    logger.error("Invalid base URL: \"$httpAddress\"\n$ex");
   }
   dio.options.connectTimeout = const Duration(seconds: 5);
   dio.options.receiveTimeout = const Duration(seconds: 3);
 
   final threadsRepository = ThreadsRepositoryImpl(dio: dio);
   final threadsService = ThreadsServiceImpl(threadsRepository);
+  final stompClientFactory = StompClientFactoryImpl(
+    applicationInfoRepository: applicationInfoRepository,
+  );
 
   runApp(
     MultiProvider(
@@ -94,6 +99,7 @@ Future<void> main() async {
         Provider<StoredImageMetadataRepository>(
             create: (_) => imageMetadataRepository),
         Provider<ImageService>(create: (_) => imageService),
+        Provider<StompClientFactory>(create: (_) => stompClientFactory),
       ],
       child: MaterialApp(
         theme: lightTheme,
