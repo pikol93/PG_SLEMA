@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
-import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
 import 'package:pg_slema/features/exercises/logic/service/exercise_service.dart';
 import 'package:pg_slema/features/exercises/presentation/screen/exercises_screen.dart';
+import 'package:pg_slema/features/gallery/logic/repository/stored_image_metadata_repository.dart';
+import 'package:pg_slema/features/gallery/logic/service/image_service.dart';
 import 'package:pg_slema/features/home/presentation/screen/home_screen.dart';
 import 'package:pg_slema/features/medicine/presentation/screen/all_medicines_screen.dart';
+import 'package:pg_slema/features/gallery/presentation/screen/gallery_screen.dart';
 import 'package:pg_slema/features/picture/presentation/screen/pictures_screen.dart';
 import 'package:pg_slema/features/settings/presentation/screen/settings_screen.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
@@ -37,6 +39,9 @@ class MainScreenState extends State<MainScreen> {
     final exercisesService =
         Provider.of<ExerciseService>(context, listen: false);
     final threadsService = Provider.of<ThreadsService>(context, listen: false);
+    final imageMetadataRepository =
+        Provider.of<StoredImageMetadataRepository>(context, listen: false);
+    final imageService = Provider.of<ImageService>(context, listen: false);
 
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
@@ -83,7 +88,10 @@ class MainScreenState extends State<MainScreen> {
         ExercisesScreen(
           service: exercisesService,
         ),
-        const PicturesScreen(),
+        GalleryScreen(
+          repository: imageMetadataRepository,
+          service: imageService,
+        ),
         AllAssessmentsScreen(
           service: assessmentsService,
           factory: assessmentFactory,
