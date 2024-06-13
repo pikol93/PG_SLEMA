@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pg_slema/features/chat/logic/repository/messages/messages_repository_impl.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
 import 'package:pg_slema/features/chat/logic/service/messages/messages_service_impl.dart';
 import 'package:pg_slema/utils/widgets/appbars/default_appbar.dart';
 import 'package:pg_slema/utils/widgets/default_body/default_body.dart';
@@ -13,15 +14,24 @@ import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_s
 import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_text_information.dart';
 
 class ThreadChatScreen extends StatefulWidget {
-  late final MessagesRepositoryImpl messagesRepository; //TODO sus
-  late final MessagesService messagesService; //TODO sus
-  final String threadID;
-  final String threadTitle;
   final String myID = "54c53da7-849a-4b93-8822-9006c494ca62"; //TODO
 
-  ThreadChatScreen(
-      {super.key, required this.threadID, required this.threadTitle}) {
-    messagesRepository = MessagesRepositoryImpl(threadID);
+  final String threadID;
+  final String threadTitle;
+
+  late final MessagesRepositoryImpl messagesRepository; //TODO sus
+  late final MessagesService messagesService; //TODO sus
+
+  ThreadChatScreen({
+    super.key,
+    required this.threadID,
+    required this.threadTitle,
+    required StompClientFactory stompClientFactory,
+  }) {
+    messagesRepository = MessagesRepositoryImpl(
+      stompClientFactory: stompClientFactory,
+      threadID: threadID,
+    );
     messagesService = MessagesServiceImpl(messagesRepository);
   }
 
@@ -34,6 +44,7 @@ class _ThreadChatScreenState extends State<ThreadChatScreen> {
   late StreamController<List<ChatMessage>> _historyMessagesStreamController;
   late StreamController<ChatMessage> _newMessageStreamController;
   List<ChatMessage> _allMessages = [];
+
   @override
   void initState() {
     super.initState();

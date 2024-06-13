@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
 import 'package:pg_slema/features/chat/presentation/controller/add_thread_controller.dart';
 import 'package:pg_slema/features/chat/presentation/screen/add_thread_screen.dart';
 import 'package:pg_slema/features/chat/presentation/widget/available_thread_overview.dart';
@@ -10,9 +11,11 @@ import 'package:pg_slema/features/chat/logic/entity/thread/thread.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_spinkit.dart';
 import 'package:pg_slema/utils/widgets/vertically_centered/vertically_centered_text_information.dart';
 import 'package:pg_slema/features/chat/presentation/screen/thread_chat_screen.dart';
+import 'package:provider/provider.dart';
 
 class AvailableThreads extends StatefulWidget {
   final ThreadsService threadsService;
+
   const AvailableThreads({super.key, required this.threadsService});
 
   @override
@@ -94,12 +97,20 @@ class _AvailableThreadsState extends State<AvailableThreads> {
   }
 
   void _onThreadPressed(String threadID, String threadTitle) {
+    final stompClientFactory = Provider.of<StompClientFactory>(
+      context,
+      listen: false,
+    );
+
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ThreadChatScreen(
-                  threadID: threadID,
-                  threadTitle: threadTitle,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ThreadChatScreen(
+          threadID: threadID,
+          threadTitle: threadTitle,
+          stompClientFactory: stompClientFactory,
+        ),
+      ),
+    );
   }
 }
