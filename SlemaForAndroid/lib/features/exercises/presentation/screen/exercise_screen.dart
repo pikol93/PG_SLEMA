@@ -54,56 +54,58 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         DefaultBody(
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                const SizedBox(height: 20.0),
-                CustomTextFormField(
-                  label: "Rodzaj aktywności",
-                  icon: Icons.sports_gymnastics,
-                  onChanged: _onNameChanged,
-                  initialValue: _exerciseController.name,
-                ),
-                const SizedBox(height: 20.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: DatePicker(
-                        label: "Data ćwiczenia",
-                        onDateSelected: _onDateChanged,
-                        controller: DatePickerController(
-                          allowedFirstDate: DateTime.now()
-                              .subtract(const Duration(days: 3650)),
-                          allowedLastDate: DateTime.now(),
-                          initialDate: _exerciseController.exerciseDate,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 20.0),
+                  CustomTextFormField(
+                    label: "Rodzaj aktywności",
+                    icon: Icons.sports_gymnastics,
+                    onChanged: _onNameChanged,
+                    initialValue: _exerciseController.name,
+                  ),
+                  const SizedBox(height: 20.0),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DatePicker(
+                          label: "Data ćwiczenia",
+                          onDateSelected: _onDateChanged,
+                          controller: DatePickerController(
+                            allowedFirstDate: DateTime.now()
+                                .subtract(const Duration(days: 3650)),
+                            allowedLastDate: DateTime.now(),
+                            initialDate: _exerciseController.exerciseDate,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(width: 6.0),
-                    Expanded(
-                      child: TimeOfDayPicker(
-                        onTimeSelected: _onTimeChanged,
-                        initialValue: _exerciseController.exerciseTime,
+                      const SizedBox(width: 6.0),
+                      Expanded(
+                        child: TimeOfDayPicker(
+                          onTimeSelected: _onTimeChanged,
+                          initialValue: _exerciseController.exerciseTime,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20.0),
-                ExerciseDurationPicker(
-                  onDurationChanged: _onDurationChanged,
-                  initialValue: _exerciseController.exerciseDuration,
-                ),
-                const SizedBox(height: 20.0),
-                ExerciseIntensityPicker(
-                  onIntensityChanged: _onIntensityChanged,
-                  initialValue: _exerciseController.intensity,
-                ),
-                const SizedBox(height: 20.0),
-                CustomSaveButton(
-                  formKey: _formKey,
-                  onSaved: _onSaveButtonClicked,
-                ),
-                const SizedBox(height: 20.0),
-              ],
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
+                  ExerciseDurationPicker(
+                    onDurationChanged: _onDurationChanged,
+                    initialValue: _exerciseController.exerciseDuration,
+                  ),
+                  const SizedBox(height: 20.0),
+                  ExerciseIntensityPicker(
+                    onIntensityChanged: _onIntensityChanged,
+                    initialValue: _exerciseController.intensity,
+                  ),
+                  const SizedBox(height: 20.0),
+                  CustomSaveButton(
+                    formKey: _formKey,
+                    onSaved: _onSaveButtonClicked,
+                  ),
+                  const SizedBox(height: 20.0),
+                ],
+              ),
             ),
           ),
         )
