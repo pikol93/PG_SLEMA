@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory.dart';
 import 'package:pg_slema/features/chat/logic/repository/stomp_client_factory_impl.dart';
@@ -43,6 +44,9 @@ Future<void> main() async {
   tz.setLocalLocation(tz.getLocation('Poland'));
   WidgetsFlutterBinding.ensureInitialized();
   GlobalInitializer().initialize();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 
   final imageMetadataRepository =
       await SharedPreferencesStoredImageMetadataRepository.create();
