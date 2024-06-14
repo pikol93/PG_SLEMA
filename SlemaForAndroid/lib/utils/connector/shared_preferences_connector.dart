@@ -23,4 +23,14 @@ class SharedPreferencesConnector {
     return SharedPreferences.getInstance()
         .then((preferences) => preferences.setString(listKey, value));
   }
+
+  static Future<bool> getBool(String listKey, bool defaultValue) {
+    return SharedPreferences.getInstance()
+        .then((preferences) => preferences.getBool(listKey) ?? defaultValue);
+  }
+
+  static Future setBool(String listKey, bool value) {
+    return SharedPreferences.getInstance()
+        .then((preferences) => preferences.setBool(listKey, value));
+  }
 }

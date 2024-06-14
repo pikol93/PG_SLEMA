@@ -16,6 +16,8 @@ import 'package:pg_slema/features/gallery/logic/service/image_service_impl.dart'
 import 'package:pg_slema/features/motivation/presentation/controller/motivation_screen_controller.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository_impl.dart';
+import 'package:pg_slema/features/settings/logic/application_info_service.dart';
+import 'package:pg_slema/features/settings/logic/application_info_service_impl.dart';
 import 'package:pg_slema/features/well_being/logic/entity/assessment_factory.dart';
 import 'package:pg_slema/features/well_being/logic/entity/enum/assessment_factory_impl.dart';
 import 'package:pg_slema/features/well_being/logic/repository/assessments_repository.dart';
@@ -60,6 +62,9 @@ Future<void> main() async {
 
   final applicationInfoRepository =
       await ApplicationInfoRepositoryImpl.create();
+  final applicationInfoService = ApplicationInfoServiceImpl(
+    applicationInfoRepository: applicationInfoRepository,
+  );
 
   // TODO: The address is only set at the start...
 
@@ -100,6 +105,7 @@ Future<void> main() async {
             create: (_) => imageMetadataRepository),
         Provider<ImageService>(create: (_) => imageService),
         Provider<StompClientFactory>(create: (_) => stompClientFactory),
+        Provider<ApplicationInfoService>(create: (_) => applicationInfoService),
       ],
       child: MaterialApp(
         theme: lightTheme,

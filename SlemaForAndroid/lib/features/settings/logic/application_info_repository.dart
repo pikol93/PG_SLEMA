@@ -6,4 +6,8 @@ abstract class ApplicationInfoRepository {
   String getVersion();
 
   String getBuildNumber();
+
+  bool isDeveloperMode();
+
+  void setDeveloperMode(bool value);
 }
