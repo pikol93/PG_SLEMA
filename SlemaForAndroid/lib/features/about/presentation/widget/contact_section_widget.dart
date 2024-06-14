@@ -2,8 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/about/presentation/widget/about_section_widget.dart';
 import 'package:pg_slema/features/about/presentation/widget/link_widget.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactSectionWidget extends StatelessWidget with Logger {
+  static const siteUrl = "https://toczenpolska.pl";
+  static const facebookUrl =
+      "https://www.facebook.com/profile.php?id=100092263937449";
+  static const instagramUrl = "https://www.instagram.com/lupuspolandfoundation";
+  static const mailAddress = "fundacja@toczenpolska.pl";
+
+  static final siteUri = Uri.parse(siteUrl);
+  static final facebookUri = Uri.parse(facebookUrl);
+  static final instagramUri = Uri.parse(instagramUrl);
+  static final mailUri = Uri(
+    scheme: "mailto",
+    path: mailAddress,
+  );
+
   const ContactSectionWidget({
     super.key,
   });
@@ -15,7 +30,7 @@ class ContactSectionWidget extends StatelessWidget with Logger {
       children: [
         LinkWidget(
           label: "Strona internetowa:",
-          buttonText: "https://toczenpolska.pl",
+          buttonText: siteUrl,
           onTap: _onSiteLinkTapped,
         ),
         LinkWidget(
@@ -37,19 +52,31 @@ class ContactSectionWidget extends StatelessWidget with Logger {
     );
   }
 
-  void _onSiteLinkTapped() {
+  Future _onSiteLinkTapped() async {
     logger.debug("Site link tapped");
+    if (!await launchUrl(siteUri)) {
+      logger.error("Could not open URI $siteUri");
+    }
   }
 
-  void _onFacebookLinkTapped() {
+  Future _onFacebookLinkTapped() async {
     logger.debug("Facebook link tapped");
+    if (!await launchUrl(facebookUri)) {
+      logger.error("Could not open URI $facebookUri");
+    }
   }
 
-  void _onInstagramLinkTapped() {
+  Future _onInstagramLinkTapped() async {
     logger.debug("Instagram link tapped");
+    if (!await launchUrl(instagramUri)) {
+      logger.error("Could not open URI $instagramUri");
+    }
   }
 
-  void _onEmailTapped() {
+  Future _onEmailTapped() async {
     logger.debug("E-mail address tapped");
+    if (!await launchUrl(mailUri)) {
+      logger.error("Could not open URI $mailUri");
+    }
   }
 }

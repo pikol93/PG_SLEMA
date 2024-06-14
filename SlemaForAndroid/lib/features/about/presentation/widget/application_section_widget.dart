@@ -4,8 +4,13 @@ import 'package:pg_slema/features/about/presentation/widget/link_widget.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ApplicationSectionWidget extends StatelessWidget with Logger {
+  static const repositoryUrl = "https://github.com/pikol93/PG_SLEMA";
+
+  static final repositoryUri = Uri.parse(repositoryUrl);
+
   const ApplicationSectionWidget({
     super.key,
   });
@@ -30,8 +35,8 @@ class ApplicationSectionWidget extends StatelessWidget with Logger {
               onTap: _onVersionClicked,
             ),
             LinkWidget(
-              label: "Facebook:",
-              buttonText: "https://github.com/pikol93/PG_SLEMA",
+              label: "GitHub:",
+              buttonText: repositoryUrl,
               onTap: _onRepositoryLinkClicked,
             ),
           ],
@@ -44,7 +49,10 @@ class ApplicationSectionWidget extends StatelessWidget with Logger {
     logger.debug("Version tapped");
   }
 
-  void _onRepositoryLinkClicked() {
+  Future _onRepositoryLinkClicked() async {
     logger.debug("Repository link tapped");
+    if (!await launchUrl(repositoryUri)) {
+      logger.error("Could not open URI $repositoryUri");
+    }
   }
 }
