@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pg_slema/features/about/presentation/widget/about_section_widget.dart';
 import 'package:pg_slema/features/about/presentation/widget/link_widget.dart';
 import 'package:pg_slema/features/settings/logic/application_info_repository.dart';
+import 'package:pg_slema/features/settings/logic/application_info_service.dart';
 import 'package:pg_slema/utils/log/logger_mixin.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +33,7 @@ class ApplicationSectionWidget extends StatelessWidget with Logger {
               label: "Wersja aplikacji:",
               buttonText:
                   "${applicationInfoRepository.getVersion()}-${applicationInfoRepository.getBuildNumber()}",
-              onTap: _onVersionClicked,
+              onTap: () => _onVersionClicked(context),
             ),
             LinkWidget(
               label: "GitHub:",
@@ -45,8 +46,10 @@ class ApplicationSectionWidget extends StatelessWidget with Logger {
     );
   }
 
-  void _onVersionClicked() {
+  void _onVersionClicked(BuildContext context) {
     logger.debug("Version tapped");
+    Provider.of<ApplicationInfoService>(context, listen: false)
+        .incrementDeveloperModeCounter();
   }
 
   Future _onRepositoryLinkClicked() async {
