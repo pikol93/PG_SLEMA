@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pg_slema/features/about/presentation/screen/about_screen.dart';
 import 'package:pg_slema/features/chat/logic/service/threads/threads_service.dart';
 import 'package:pg_slema/features/chat/presentation/screen/all_threads_screen.dart';
 import 'package:pg_slema/features/diet/presentation/screen/diet_screen.dart';
@@ -100,6 +101,7 @@ class MainScreenState extends State<MainScreen> {
           threadsService: threadsService,
         ),
         const SettingsScreen(),
+        const AboutScreen(),
       ][controller.currentIndex],
     );
   }

@@ -42,14 +42,23 @@ class MenuScreen extends StatelessWidget {
         ),
         MenuOptionDivider(),
         MenuScreenButton(
-            iconData: Icons.chat, label: "Konsultacje", destinationIndex: 8),
+          iconData: Icons.chat,
+          label: "Konsultacje",
+          destinationIndex: 8,
+        ),
         MenuOptionDivider(),
         MenuScreenButton(
           iconData: Icons.settings,
           label: "Ustawienia",
           destinationIndex: 9,
         ),
-        MenuOptionDivider()
+        MenuOptionDivider(),
+        MenuScreenButton(
+          iconData: Icons.info_outline,
+          label: "O aplikacji",
+          destinationIndex: 10,
+        ),
+        MenuOptionDivider(),
       ],
     );
   }
