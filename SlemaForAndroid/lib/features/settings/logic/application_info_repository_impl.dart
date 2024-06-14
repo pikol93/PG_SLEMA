@@ -39,7 +39,7 @@ class ApplicationInfoRepositoryImpl extends ApplicationInfoRepository
   }
 
   @override
-  bool getDeveloperMode() {
+  bool isDeveloperMode() {
     return developerMode;
   }
 

@@ -7,14 +7,16 @@ class CustomNavigationDestination extends StatefulWidget {
   final int currentSelectedIndex;
   final int destinationIndex;
   final void Function(int) onPressed;
-  const CustomNavigationDestination(
-      {super.key,
-      required this.icon,
-      required this.selectedIcon,
-      required this.label,
-      required this.onPressed,
-      required this.currentSelectedIndex,
-      required this.destinationIndex});
+
+  const CustomNavigationDestination({
+    super.key,
+    required this.icon,
+    required this.selectedIcon,
+    required this.label,
+    required this.onPressed,
+    required this.currentSelectedIndex,
+    required this.destinationIndex,
+  });
 
   @override
   CustomNavigationDestinationState createState() =>
